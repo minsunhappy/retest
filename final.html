@@ -227,39 +227,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="config.js"></script>
     <script>
-        const CHOICES = [
-            {
-                id: 'A',
-                title: '인터페이스 A',
-                desc: '영상 하단에 자동으로 댓글이 표시됩니다.',
-                media: 'preview/C.MP4'
-            },
-            {
-                id: 'B',
-                title: '인터페이스 B',
-                desc: '영상 오른쪽에서 댓글이 흐르듯 자동으로 표시됩니다.',
-                media: 'preview/C.MP4'
-            },
-            {
-                id: 'C',
-                title: '인터페이스 C',
-                desc: '영상 하단 고정 댓글 목록을 직접 스크롤하며 읽습니다.',
-                media: 'preview/C.MP4'
-            },
-            {
-                id: 'D',
-                title: '인터페이스 D',
-                desc: '영상 오른쪽에서 흘러나오는 다른 형태의 실시간 댓글입니다.',
-                media: 'preview/C.MP4'
-            },
-            {
-                id: 'E',
-                title: '인터페이스 E',
-                desc: '영상 하단에 댓글이 1개씩 표시되며, 스크롤로 넘겨 읽습니다.',
-                media: 'preview/C.MP4'
-            }
-        ];
-
         const questionSection = document.getElementById('questionSection');
         const form = document.getElementById('preferenceForm');
         const choiceList = document.getElementById('choiceList');
@@ -269,15 +236,16 @@
         const thankYouMessage = document.getElementById('thankYouMessage');
 
         let baseResultData = null;
+        let interfaceOptions = [];
         const SUPABASE_URL = 'https://qrochowykynmdhyikcjd.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFyb2Nob3d5a3lubWRoeWlrY2pkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwODM4ODAsImV4cCI6MjA3OTY1OTg4MH0.pdnjDMltF0kmSFOKiJL5wJIYTwtFLZWdaRUTUxhvaf4';
         const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         const QUESTION_LABELS = {
-            '[Mental Demand] 영상 시청 중 댓글을 읽는 과정의 정신적 부담 정도 (mental or cognitive demand)': 'Q1',
-            '[Physical Demand] 영상 시청 중 댓글을 읽는 과정의 신체적/물리적 노력 정도': 'Q2',
-            '[Temporal alignment] 현재 읽고 있는 댓글이 재생되고 있는 영상 내용과 어울리는 정도': 'Q3',
-            '[Overall Engagement] 영상 시청 중 댓글을 읽는 시청 과정의 전반적인 흥미 및 몰입 정도': 'Q4'
+            '[Mental Demand] 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 과정에 정신적으로 부담을 주었나요?': 'Q1',
+            '[Physical Demand] 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 과정에 신체적으로 부담을 주었나요?': 'Q2',
+            '[Contextual Alignment] 이 인터페이스에서 재생 중에 제시되는 댓글이 해당 장면과 잘 어울렸나요?': 'Q3',
+            '[Overall Engagement] 영상 내용과 상관 없이 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 경험에 즐거움/흥미/참여감(engagement) 측면에서 만족스러웠나요?': 'Q4'
         };
 
         function createMediaElement(path) {
@@ -304,7 +272,10 @@
         function renderChoices() {
             if (!choiceList) return;
 
-            CHOICES.forEach(choice => {
+            choiceList.innerHTML = '';
+            const options = interfaceOptions.length > 0 ? interfaceOptions : getDefaultInterfaceDescriptions();
+
+            options.forEach(choice => {
                 const label = document.createElement('label');
                 label.className = 'choice-card';
 
@@ -327,7 +298,7 @@
 
                 const desc = document.createElement('div');
                 desc.className = 'choice-desc';
-                desc.textContent = choice.desc;
+                desc.innerHTML = choice.description || choice.desc || '';
 
                 content.appendChild(title);
                 content.appendChild(desc);
@@ -386,7 +357,7 @@
                 (result.answers || []).forEach((answer, idx) => {
                     const idxFromData = typeof answer.questionIndex === 'number' ? answer.questionIndex : idx;
                     const fallbackLabel = `Q${idxFromData + 1}`;
-                    const label = QUESTION_LABELS[answer.questionText] || fallbackLabel;
+                    const label = answer.questionId || QUESTION_LABELS[answer.questionText] || fallbackLabel;
                     scoreMap[result.interface].scores[label] = answer.answer;
                 });
             });
@@ -476,6 +447,7 @@
         });
 
         document.addEventListener('DOMContentLoaded', async () => {
+            interfaceOptions = await loadInterfaceDescriptions();
             renderChoices();
             await prepareBaseResult();
         });

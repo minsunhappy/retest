@@ -36,6 +36,16 @@
             border-radius: 4px;
         }
 
+        .interface-description {
+            margin: 15px 0;
+            font-size: 16px;
+            color: #2c3e50;
+            padding: 12px 16px;
+            border-left: 4px solid #95c5ed;
+            background-color: #f6fbff;
+            border-radius: 6px;
+        }
+
         .interface-container {
             width: 100%;
             margin-bottom: 40px;
@@ -237,6 +247,8 @@
             다음 인터페이스에서 영상이 재생되는 동안 댓글을 함께 읽어주세요.
         </div>
 
+        <div class="interface-description" id="interfaceDescription"></div>
+
         <div class="interface-container">
             <div id="interfaceLoading" class="interface-loading" aria-live="polite">
                 인터페이스를 불러오는 중입니다...
@@ -263,6 +275,7 @@
         const nextBtn = document.getElementById('nextBtn');
         const interfaceFrame = document.getElementById('interfaceFrame');
         const interfaceLoading = document.getElementById('interfaceLoading');
+        const interfaceDescriptionEl = document.getElementById('interfaceDescription');
 
         const FRAME_MIN_HEIGHT = 720;
 
@@ -270,84 +283,16 @@
         let currentStep = getCurrentTestStep();
         let pairs = [];
         let frameResizeObserver = null;
+        let interfaceDescriptions = [];
+        let interfaceDescriptionMap = {};
 
         async function loadQuestions() {
             try {
-                const response = await fetch('questions.md', { cache: 'no-store' });
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-                const text = await response.text();
-                const parsed = parseQuestionsMarkdown(text);
-                questionsData = parsed && parsed.length > 0 ? parsed : getDefaultQuestions();
+                questionsData = await loadQuestionDefinitions();
             } catch (error) {
-                console.error('질문 파일을 불러올 수 없습니다:', error);
-                questionsData = getDefaultQuestions();
+                console.error('질문 데이터를 불러올 수 없습니다.', error);
+                questionsData = getDefaultQuestionDefinitions();
             }
-        }
-
-        function parseQuestionsMarkdown(text) {
-            const questions = [];
-            const sections = text.split(/## 질문 \d+:/);
-
-            for (let i = 1; i < sections.length; i++) {
-                const section = sections[i];
-                let questionText = '';
-                const questionStart = section.indexOf('**질문 텍스트:**');
-                const questionEnd = section.indexOf('**척도:**');
-
-                if (questionStart !== -1 && questionEnd !== -1) {
-                    questionText = section
-                        .substring(questionStart + '**질문 텍스트:**'.length, questionEnd)
-                        .replace(/\n/g, ' ')
-                        .replace(/\s+/g, ' ')
-                        .trim();
-                }
-
-                let scaleLeft = '';
-                let scaleRight = '';
-                const scaleMatch = section.match(/- 1: (.+?)\n- 7: (.+?)(?=\n|$)/s);
-
-                if (scaleMatch) {
-                    scaleLeft = scaleMatch[1].trim();
-                    scaleRight = scaleMatch[2].trim();
-                }
-
-                if (questionText && scaleLeft && scaleRight) {
-                    questions.push({
-                        text: questionText,
-                        scaleLeft,
-                        scaleRight
-                    });
-                }
-            }
-
-            return questions.length > 0 ? questions : null;
-        }
-
-        function getDefaultQuestions() {
-            return [
-                {
-                    text: '[Mental Demand] 영상 시청 중 댓글을 읽는 과정의 정신적 부담 정도 (mental or cognitive demand)',
-                    scaleLeft: '매우 적다 (very low)',
-                    scaleRight: '매우 높다 (very high)'
-                },
-                {
-                    text: '[Physical Demand] 영상 시청 중 댓글을 읽는 과정의 신체적/물리적 노력 정도',
-                    scaleLeft: '매우 적다 (very low)',
-                    scaleRight: '매우 높다 (very high)'
-                },
-                {
-                    text: '[Temporal alignment] 현재 읽고 있는 댓글이 재생되고 있는 영상 내용과 어울리는 정도',
-                    scaleLeft: '매우 안어울림',
-                    scaleRight: '매우 어울림'
-                },
-                {
-                    text: '[Overall Engagement] 영상 시청 중 댓글을 읽는 시청 과정의 전반적인 흥미 및 몰입 정도',
-                    scaleLeft: '매우 낮음',
-                    scaleRight: '매우 높음'
-                }
-            ];
         }
 
         function renderQuestions() {
@@ -562,6 +507,22 @@
             }
         }
 
+        function updateInterfaceDescription(pair) {
+            if (!interfaceDescriptionEl) {
+                return;
+            }
+            if (!pair || !pair.interface) {
+                interfaceDescriptionEl.textContent = '';
+                return;
+            }
+            const info = interfaceDescriptionMap[(pair.interface || '').toUpperCase()];
+            if (info) {
+                interfaceDescriptionEl.innerHTML = `<strong>${info.title}</strong><br>${info.description}`;
+            } else {
+                interfaceDescriptionEl.textContent = `인터페이스 ${pair.interface}`;
+            }
+        }
+
         function resolveInterfaceUrl(rawPath) {
             if (!rawPath) {
                 throw new Error('인터페이스 경로가 비어 있습니다.');
@@ -647,6 +608,8 @@
                 return;
             }
 
+            updateInterfaceDescription(currentPair);
+
             const resolvedUrl = resolveInterfaceUrl(currentPair.dataPath);
             setInterfaceStatus('인터페이스를 불러오는 중입니다...');
 
@@ -698,6 +661,7 @@
                 const selected = document.querySelector(`input[name="question-${index}"]:checked`);
                 if (selected) {
                     answers.push({
+                        questionId: question.id || `Q${index + 1}`,
                         questionIndex: index,
                         questionText: question.text,
                         answer: parseInt(selected.value, 10)
@@ -764,6 +728,13 @@
 
             try {
                 currentStep = getCurrentTestStep();
+                interfaceDescriptions = await loadInterfaceDescriptions();
+                interfaceDescriptionMap = {};
+                interfaceDescriptions.forEach(desc => {
+                    if (desc && desc.id) {
+                        interfaceDescriptionMap[desc.id.toUpperCase()] = desc;
+                    }
+                });
                 await loadQuestions();
                 renderQuestions();
                 await loadCurrentInterface();

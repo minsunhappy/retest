@@ -2,33 +2,33 @@
 
 ## 질문 1: Mental Demand
 **질문 텍스트:**
-[Mental Demand] 영상 시청 중 댓글을 읽는 과정의 정신적 부담 정도 (mental or cognitive demand)
+[Mental Demand] 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 과정에 정신적으로 부담을 주었나요?
 
 **척도:**
-- 1: 매우 적다 (very low)
-- 7: 매우 높다 (very high)
+- 1: 전혀 그렇지 않다
+- 7: 매우 그렇다
 
 ## 질문 2: Physical Demand
 **질문 텍스트:**
-[Physical Demand] 영상 시청 중 댓글을 읽는 과정의 신체적/물리적 노력 정도
+[Physical Demand] 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 과정에 신체적/물리적으로 부담을 주었나요?
 
 **척도:**
-- 1: 매우 적다 (very low)
-- 7: 매우 높다 (very high)
+- 1: 전혀 그렇지 않다
+- 7: 매우 그렇다
 
 ## 질문 3: Temporal Alignment
 **질문 텍스트:**
-[Temporal alignment] 현재 읽고 있는 댓글이 재생되고 있는 영상 내용과 어울리는 정도
+[Contextual Alignment] 이 인터페이스에서 재생 중에 제시되는 댓글이 해당 장면과 잘 어울렸나요?
 
 **척도:**
-- 1: 매우 안어울림
-- 7: 매우 어울림
+- 1: 전혀 어울리지 않는다
+- 7: 매우 잘 어울린다
 
 ## 질문 4: Overall Engagement
 **질문 텍스트:**
-[Overall Engagement] 영상 시청 중 댓글을 읽는 시청 과정의 전반적인 흥미 및 몰입 정도
+[Overall Engagement] 영상 내용과 상관 없이 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 경험에 즐거움/흥미/참여감(engagment) 측면에서 만족스러웠나요?
 
 **척도:**
-- 1: 매우 낮음
-- 7: 매우 높음
+- 1: 전혀 그렇지 않다
+- 7: 매우 그렇다
 

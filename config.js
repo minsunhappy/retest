@@ -54,7 +54,7 @@ async function loadDataFolders() {
 // 인터페이스-데이터 쌍 생성 함수
 // 모든 인터페이스를 경험하고, 데이터는 중복되지 않도록 함
 async function generateInterfaceDataPairs() {
-    const interfaces = ['C', 'Y', 'Y1', 'D', 'D1'];
+    const interfaces = ['C', 'D', 'D1', 'Y', 'Y1'];
     
     // 데이터 폴더 이름 로드
     const dataFolders = await loadDataFolders();
@@ -65,11 +65,11 @@ async function generateInterfaceDataPairs() {
     }
     
     // 인터페이스를 랜덤하게 섞기
-    const shuffledInterfaces = [...interfaces].sort(() => Math.random() - 0.5);
-    
+    const shuffledInterfaces = [...interfaces]; // 지정된 순서 유지
+
     // 데이터를 랜덤하게 섞기
     const shuffledData = [...dataFolders].sort(() => Math.random() - 0.5);
-    
+
     // 인터페이스와 데이터를 1:1로 매핑
     const pairs = shuffledInterfaces.map((interface, index) => ({
         interface: interface,
@@ -128,5 +128,212 @@ async function saveTestResult(step, answers) {
 // 모든 테스트 결과 가져오기
 function getAllTestResults() {
     return JSON.parse(localStorage.getItem('testResults') || '[]');
+}
+
+let interfaceDescriptionsCache = null;
+
+function getDefaultInterfaceDescriptions() {
+    return [
+        {
+            id: 'C',
+            title: '인터페이스 A',
+            media: 'preview/C.MP4',
+            description: '영상 <strong>하단</strong>에 자동으로 댓글이 표시됩니다.'
+        },
+        {
+            id: 'D',
+            title: '인터페이스 B',
+            media: 'preview/D.MP4',
+            description: '영상 <strong>하단</strong>에 댓글 목록이 고정되어 있으며, <strong>스크롤을 직접 조작</strong>하며 읽어 주시면 됩니다.'
+        },
+        {
+            id: 'D1',
+            title: '인터페이스 C',
+            media: 'preview/D1.MP4',
+            description: '영상의 <strong>오른쪽</strong>에서 댓글이 흘러나오는 또 다른 형태의 실시간 댓글 인터페이스입니다.'
+        },
+        {
+            id: 'Y',
+            title: '인터페이스 D',
+            media: 'preview/Y.MP4',
+            description: '영상 <strong>오른쪽</strong>에서 댓글이 흘러나오듯 자동으로 표시됩니다.'
+        },
+        {
+            id: 'Y1',
+            title: '인터페이스 E',
+            media: 'preview/Y1.MP4',
+            description: '영상 <strong>하단</strong>에 댓글이 1개씩 표시되고, <strong>스크롤</strong>로 조작하여 댓글을 넘길 수 있습니다.'
+        }
+    ];
+}
+
+function parseInterfaceDescriptionsMarkdown(text) {
+    const blocks = text.split(/\n(?=##\s*Interface\s+)/).filter(block => block.trim());
+    const parsed = [];
+
+    blocks.forEach(block => {
+        const idMatch = block.match(/##\s*Interface\s+([A-Za-z0-9]+)/i);
+        if (!idMatch) {
+            return;
+        }
+        const id = idMatch[1].trim();
+        const titleMatch = block.match(/\*\*Title:\*\*\s*(.+)/);
+        const mediaMatch = block.match(/\*\*Media:\*\*\s*(.+)/);
+        const descMatch = block.match(/\*\*Description:\*\*\s*([\s\S]+)/);
+
+        parsed.push({
+            id,
+            title: titleMatch ? titleMatch[1].trim() : `인터페이스 ${id}`,
+            media: mediaMatch ? mediaMatch[1].trim() : '',
+            description: descMatch ? descMatch[1].trim() : ''
+        });
+    });
+
+    return parsed;
+}
+
+async function loadInterfaceDescriptions() {
+    if (interfaceDescriptionsCache) {
+        return interfaceDescriptionsCache;
+    }
+
+    try {
+        const response = await fetch('interfaces.md', { cache: 'no-store' });
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+        const text = await response.text();
+        const parsed = parseInterfaceDescriptionsMarkdown(text);
+        if (!parsed || parsed.length === 0) {
+            throw new Error('인터페이스 설명을 파싱할 수 없습니다.');
+        }
+        const order = ['C', 'D', 'D1', 'Y', 'Y1'];
+        const map = {};
+        parsed.forEach(item => {
+            if (item && item.id) {
+                map[item.id.toUpperCase()] = item;
+            }
+        });
+        interfaceDescriptionsCache = order
+            .map(key => map[key] || getDefaultInterfaceDescriptions().find(def => def.id === key))
+            .filter(Boolean);
+    } catch (error) {
+        console.warn('interfaces.md를 불러오지 못했습니다. 기본 값을 사용합니다.', error);
+        interfaceDescriptionsCache = getDefaultInterfaceDescriptions();
+    }
+
+    return interfaceDescriptionsCache;
+}
+
+let questionDefinitionsCache = null;
+
+function getDefaultQuestionDefinitions() {
+    return [
+        {
+            id: 'Q1',
+            title: 'Mental Demand',
+            text: '[Mental Demand] 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 과정에 정신적으로 부담을 주었나요?',
+            scaleLeft: '전혀 그렇지 않다',
+            scaleRight: '매우 그렇다'
+        },
+        {
+            id: 'Q2',
+            title: 'Physical Demand',
+            text: '[Physical Demand] 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 과정에 신체적으로 부담을 주었나요?',
+            scaleLeft: '전혀 그렇지 않다',
+            scaleRight: '매우 그렇다'
+        },
+        {
+            id: 'Q3',
+            title: 'Temporal Alignment',
+            text: '[Contextual Alignment] 이 인터페이스에서 재생 중에 제시되는 댓글이 해당 장면과 잘 어울렸나요?',
+            scaleLeft: '전혀 어울리지 않는다',
+            scaleRight: '매우 잘 어울린다'
+        },
+        {
+            id: 'Q4',
+            title: 'Overall Engagement',
+            text: '[Overall Engagement] 영상 내용과 상관 없이 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 경험에 즐거움/흥미/참여감(engagement) 측면에서 만족스러웠나요?',
+            scaleLeft: '전혀 그렇지 않다',
+            scaleRight: '매우 그렇다'
+        }
+    ];
+}
+
+function parseQuestionDefinitionsMarkdown(text) {
+    const regex = /## 질문\s+(\d+):\s*([^\n]+)\s*\n([\s\S]*?)(?=## 질문|\Z)/g;
+    const results = [];
+    let match;
+
+    while ((match = regex.exec(text)) !== null) {
+        const idx = match[1].trim();
+        const title = match[2].trim();
+        const block = match[3];
+        const questionStart = block.indexOf('**질문 텍스트:**');
+        const scaleStart = block.indexOf('**척도:**');
+
+        let questionText = '';
+        if (questionStart !== -1 && scaleStart !== -1) {
+            questionText = block
+                .substring(questionStart + '**질문 텍스트:**'.length, scaleStart)
+                .replace(/\r?\n+/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        let scaleLeft = '';
+        let scaleRight = '';
+        if (scaleStart !== -1) {
+            const scaleBlock = block.substring(scaleStart + '**척도:**'.length);
+            const leftMatch = scaleBlock.match(/- 1:\s*(.+)/);
+            const rightMatch = scaleBlock.match(/- 7:\s*(.+)/);
+            scaleLeft = leftMatch ? leftMatch[1].trim() : '';
+            scaleRight = rightMatch ? rightMatch[1].trim() : '';
+        }
+
+        results.push({
+            id: `Q${idx}`,
+            title,
+            text: questionText || `[${title}] 항목`,
+            scaleLeft: scaleLeft || '전혀 그렇지 않다',
+            scaleRight: scaleRight || '매우 그렇다'
+        });
+    }
+
+    return results;
+}
+
+async function loadQuestionDefinitions() {
+    if (questionDefinitionsCache) {
+        return questionDefinitionsCache;
+    }
+
+    try {
+        const response = await fetch('questions.md', { cache: 'no-store' });
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+        const text = await response.text();
+        const parsed = parseQuestionDefinitionsMarkdown(text);
+        if (!parsed || parsed.length === 0) {
+            throw new Error('질문 데이터를 파싱할 수 없습니다.');
+        }
+        const defaults = getDefaultQuestionDefinitions();
+        const map = {};
+        parsed.forEach(item => {
+            if (item && item.id) {
+                map[item.id.toUpperCase()] = item;
+            }
+        });
+        questionDefinitionsCache = defaults.map(def => ({
+            ...def,
+            ...(map[def.id.toUpperCase()] || {})
+        }));
+    } catch (error) {
+        console.warn('questions.md를 불러오지 못했습니다. 기본 질문을 사용합니다.', error);
+        questionDefinitionsCache = getDefaultQuestionDefinitions();
+    }
+
+    return questionDefinitionsCache;
 }
 

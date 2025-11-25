@@ -51,11 +51,16 @@
             margin-bottom: 30px;
         }
 
-        video {
+        .interface-media {
             width: 500px;
             max-width: 100%;
             border: 1px solid #ddd;
             border-radius: 4px;
+            display: block;
+        }
+
+        .interface-media + .interface-media-caption {
+            margin-top: 8px;
         }
 
         ol, ul {
@@ -166,54 +171,11 @@
         <h2><span style="font-size:19px;"><strong>진행 방법</strong></span></h2>
         <p><span style="font-size:16px;">다섯 가지 방식의 인터페이스에서 <strong><u><span class="highlight">영상을 시청하며 동시에 댓글을 읽어 보시게 됩니다.</span></u></strong></span></p>
 
-        <div class="video-container">
-            <p><strong>인터페이스 A:</strong> 영상 <strong>하단</strong>에 자동으로 댓글이 표시됩니다.</p>
-            <video autoplay loop muted playsinline width="500">
-                <source src="preview/C.MP4" type="video/mp4">
-                브라우저가 비디오를 지원하지 않습니다.
-            </video>
-        </div>
-
-        <div class="video-container">
-            <p><strong>인터페이스 B:</strong> 영상 <strong>오른쪽</strong>에서 댓글이 흘러나오듯 자동으로 표시됩니다.</p>
-            <video autoplay loop muted playsinline width="500">
-                <source src="preview/Y.MP4" type="video/mp4">
-                브라우저가 비디오를 지원하지 않습니다.
-            </video>
-        </div>
-
-        <div class="video-container">
-            <p><strong>인터페이스 C:</strong> 영상 <strong>하단</strong>에 댓글 목록이 고정되어 있으며, <strong>스크롤을 직접 조작</strong>하며 읽어 주시면 됩니다.</p>
-            <video autoplay loop muted playsinline width="500">
-                <source src="preview/D.MP4" type="video/mp4">
-                브라우저가 비디오를 지원하지 않습니다.
-            </video>
-        </div>
-
-        <div class="video-container">
-            <p><strong>인터페이스 D:</strong> 영상이 <strong>오른쪽</strong>에 댓글이 흘러나오듯 자동으로 표시되는 또 다른 형태의 인터페이스입니다.</p>
-            <video autoplay loop muted playsinline width="500">
-                <source src="preview/D1.MP4" type="video/mp4">
-                브라우저가 비디오를 지원하지 않습니다.
-            </video>
-        </div>
-
-        <div class="video-container">
-            <p><strong>인터페이스 E:</strong> 영상 <strong>하단</strong>에 댓글이 1개씩 표시되고, 스크롤로 조작하여 댓글을 넘길 수 있습니다.</p>
-            <video autoplay loop muted playsinline width="500">
-                <source src="preview/Y1.MP4" type="video/mp4">
-                브라우저가 비디오를 지원하지 않습니다.
-            </video>
-        </div>
+        <div id="interfaceList"></div>
 
         <p>각 인터페이스에서 영상 시청을 마친 뒤, 다음 네 가지 문항에 답해주세요.</p>
 
-        <ol>
-            <li>영상 시청 중 댓글을 읽는 과정의 <u><strong>정신적 부담 정도 (mental or cognitive demand)</strong></u></li>
-            <li>영상 시청 중 댓글을 읽는 과정의 <b><u>신체적/물리적 노력 정도 (physical demand)</u></b></li>
-            <li><u><strong>현재 읽고 있는 댓글이 재생되고 있는 영상 내용과 어울리는 정도</strong></u></li>
-            <li>영상 시청 중 댓글 읽기 경험의 <u><b>전반적 <strong>만</strong></u>족 정도</strong></u></li>
-        </ol>
+        <ol id="questionList"></ol>
 
         <h2>유의사항</h2>
         <ul>
@@ -260,7 +222,87 @@
         </div>
     </div>
 
+    <script src="config.js"></script>
     <script>
+        const interfaceList = document.getElementById('interfaceList');
+        function createInterfaceMediaElement(mediaPath) {
+            if (!mediaPath) {
+                return null;
+            }
+
+            const lower = mediaPath.toLowerCase();
+            if (lower.endsWith('.mp4') || lower.endsWith('.webm')) {
+                const video = document.createElement('video');
+                video.className = 'interface-media';
+                video.autoplay = true;
+                video.loop = true;
+                video.muted = true;
+                video.playsInline = true;
+                const source = document.createElement('source');
+                source.src = mediaPath;
+                source.type = lower.endsWith('.webm') ? 'video/webm' : 'video/mp4';
+                video.appendChild(source);
+                video.innerHTML += '브라우저가 비디오를 지원하지 않습니다.';
+                return video;
+            }
+
+            const img = document.createElement('img');
+            img.className = 'interface-media';
+            img.src = mediaPath;
+            img.alt = '인터페이스 미리보기';
+            return img;
+        }
+
+        async function renderInterfaceList() {
+            if (!interfaceList) {
+                return;
+            }
+
+            try {
+                const descriptions = await loadInterfaceDescriptions();
+                interfaceList.innerHTML = '';
+                descriptions.forEach(item => {
+                    const block = document.createElement('div');
+                    block.className = 'video-container';
+
+                    const desc = document.createElement('p');
+                    desc.innerHTML = `<strong>${item.title}:</strong> ${item.description}`;
+                    block.appendChild(desc);
+
+                    const mediaEl = createInterfaceMediaElement(item.media);
+                    if (mediaEl) {
+                        block.appendChild(mediaEl);
+                    }
+
+                    interfaceList.appendChild(block);
+                });
+            } catch (error) {
+                console.error('인터페이스 목록을 불러오지 못했습니다.', error);
+                interfaceList.innerHTML = '<p>인터페이스 소개를 불러오지 못했습니다.</p>';
+            }
+        }
+
+        const questionList = document.getElementById('questionList');
+
+        renderInterfaceList();
+        renderQuestionList();
+
+        async function renderQuestionList() {
+            if (!questionList) return;
+            try {
+                const questions = await loadQuestionDefinitions();
+                questionList.innerHTML = '';
+                questions.forEach(question => {
+                    const li = document.createElement('li');
+                    li.innerHTML = question.text;
+                    questionList.appendChild(li);
+                });
+            } catch (error) {
+                console.error('질문 목록을 불러오지 못했습니다.', error);
+                questionList.innerHTML = '<li>질문 정보를 불러오지 못했습니다.</li>';
+            }
+        }
+
         const form = document.getElementById('participantForm');
         const nameInput = document.getElementById('name');
         const ageInput = document.getElementById('age');
