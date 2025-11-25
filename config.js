@@ -65,7 +65,7 @@ async function generateInterfaceDataPairs() {
     }
     
     // 인터페이스를 랜덤하게 섞기
-    const shuffledInterfaces = [...interfaces]; // 지정된 순서 유지
+    const shuffledInterfaces = [...interfaces].sort(() => Math.random() - 0.5);
 
     // 데이터를 랜덤하게 섞기
     const shuffledData = [...dataFolders].sort(() => Math.random() - 0.5);

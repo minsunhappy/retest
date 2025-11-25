@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>인터페이스 테스트</title>
     <style>
+        :root {
+            /* 인터페이스 HTML의 가로 크기를 조절하려면 아래 값을 변경하세요. (예: 90%) */
+            --interface-width: 100%;
+            /* 인터페이스 HTML의 축척을 조절하려면 아래 값을 변경하세요. (예: 0.85) */
+            --interface-scale: 0.9;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -37,13 +44,16 @@
         }
 
         .interface-description {
-            margin: 15px 0;
-            font-size: 16px;
-            color: #2c3e50;
-            padding: 12px 16px;
-            border-left: 4px solid #95c5ed;
-            background-color: #f6fbff;
-            border-radius: 6px;
+            margin: 15px 0 25px;
+            font-size: 19px;
+            color: #0f3f66;
+            padding: 16px 20px;
+            border-left: 5px solid #ffb347;
+            background: linear-gradient(135deg, #fff7ec, #fff1d6);
+            border-radius: 8px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.5;
         }
 
         .interface-container {
@@ -71,12 +81,14 @@
         }
 
         .interface-frame {
-            width: 100%;
+            width: min(calc(var(--interface-width) / var(--interface-scale)), 100%);
             min-height: 720px;
             height: auto;
             border: none;
             display: block;
             background-color: #000;
+            transform: scale(var(--interface-scale));
+            transform-origin: top center;
         }
 
         .interface-frame.hidden {
@@ -140,8 +152,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 5px;
+            gap: 14px;
             flex-shrink: 0;
+            padding: 0 8px;
         }
 
         .scale-option {
@@ -205,14 +218,15 @@
         }
 
         .btn-container {
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
             margin-top: 40px;
         }
 
-        .btn-next {
-            background-color: #3498db;
-            color: white;
-            padding: 12px 40px;
+        .btn-next,
+        .btn-prev {
+            padding: 12px 32px;
             font-size: 18px;
             border: none;
             border-radius: 4px;
@@ -220,12 +234,32 @@
             transition: background-color 0.3s;
         }
 
-        .btn-next:hover {
+        .btn-next {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .btn-next:hover:not(:disabled) {
             background-color: #2980b9;
         }
 
         .btn-next:disabled {
             background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .btn-prev {
+            background-color: #f0f2f5;
+            color: #2c3e50;
+            border: 1px solid #d5d9df;
+        }
+
+        .btn-prev:hover:not(:disabled) {
+            background-color: #e5e9f0;
+        }
+
+        .btn-prev:disabled {
+            opacity: 0.5;
             cursor: not-allowed;
         }
 
@@ -266,6 +300,7 @@
         </div>
 
         <div class="btn-container">
+            <button type="button" class="btn-prev" id="prevBtn" onclick="handlePrev()">이전</button>
             <button type="button" class="btn-next" id="nextBtn" onclick="handleNext()">다음</button>
         </div>
     </div>
@@ -273,6 +308,7 @@
     <script src="config.js"></script>
     <script>
         const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
         const interfaceFrame = document.getElementById('interfaceFrame');
         const interfaceLoading = document.getElementById('interfaceLoading');
         const interfaceDescriptionEl = document.getElementById('interfaceDescription');
@@ -285,6 +321,13 @@
         let frameResizeObserver = null;
         let interfaceDescriptions = [];
         let interfaceDescriptionMap = {};
+
+        function scrollToTopSmooth() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
 
         async function loadQuestions() {
             try {
@@ -305,6 +348,8 @@
             if (!questionsData || questionsData.length === 0) {
                 return;
             }
+
+            const savedAnswers = getStoredAnswers(currentStep);
 
             questionsData.forEach((question, index) => {
                 const questionGroup = document.createElement('div');
@@ -333,6 +378,11 @@
                 errorMsg.id = `error-${index}`;
                 errorMsg.textContent = '이 질문에 답해주세요.';
 
+                const existing = savedAnswers.find(ans =>
+                    (ans.questionId && question.id && ans.questionId === question.id) ||
+                    ans.questionIndex === index
+                );
+
                 for (let i = 1; i <= 7; i++) {
                     const option = document.createElement('div');
                     option.className = 'scale-option';
@@ -346,6 +396,10 @@
                     radio.addEventListener('change', () => {
                         errorMsg.style.display = 'none';
                     });
+
+                    if (existing && parseInt(existing.answer, 10) === i) {
+                        radio.checked = true;
+                    }
 
                     const label = document.createElement('label');
                     label.htmlFor = `q${index}-option${i}`;
@@ -382,6 +436,17 @@
             const total = pairs && pairs.length ? pairs.length : (CONFIG.numInterfaces || 5);
             const stepDisplay = Math.min(currentStep + 1, total);
             progressEl.textContent = `테스트 진행 중... (${stepDisplay}/${total})`;
+            updateNavigationButtons(total);
+        }
+
+        function updateNavigationButtons(totalCount) {
+            const total = totalCount || (pairs && pairs.length ? pairs.length : (CONFIG.numInterfaces || 5));
+            if (prevBtn) {
+                prevBtn.disabled = currentStep <= 0;
+            }
+            if (nextBtn) {
+                nextBtn.textContent = currentStep >= total - 1 ? '완료' : '다음';
+            }
         }
 
         function getPairByStep(stepIndex) {
@@ -618,7 +683,7 @@
                 await loadInterfaceIntoFrame(resolvedUrl);
                 hideInterfaceStatus();
                 observeFrameHeight();
-                document.querySelector('.interface-container')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                scrollToTopSmooth();
             } catch (error) {
                 console.error('인터페이스 로드 실패:', error);
                 setInterfaceStatus(
@@ -671,6 +736,11 @@
             return answers;
         }
 
+        function getStoredAnswers(stepIndex) {
+            const results = JSON.parse(localStorage.getItem('testResults') || '[]');
+            return results[stepIndex]?.answers || [];
+        }
+
         function requireParticipantData() {
             const stored = localStorage.getItem('participantData');
             if (!stored) {
@@ -700,6 +770,7 @@
                 const answers = collectAnswers();
                 storeCurrentResult(currentStep, answers);
 
+                alert('응답이 기록되었습니다.');
                 currentStep += 1;
                 setCurrentTestStep(currentStep);
 
@@ -711,6 +782,7 @@
 
                 renderQuestions();
                 await loadCurrentInterface();
+                scrollToTopSmooth();
             } catch (error) {
                 console.error('다음 단계로 이동 중 오류:', error);
                 alert('다음 단계로 이동하는 중 오류가 발생했습니다. 콘솔을 확인해주세요.');
@@ -718,6 +790,26 @@
                 if (nextBtn) {
                     nextBtn.disabled = false;
                 }
+                updateNavigationButtons();
+            }
+        }
+
+        async function handlePrev() {
+            if (currentStep === 0 || !prevBtn) {
+                return;
+            }
+
+            try {
+                currentStep = Math.max(0, currentStep - 1);
+                setCurrentTestStep(currentStep);
+                renderQuestions();
+                await loadCurrentInterface();
+                scrollToTopSmooth();
+            } catch (error) {
+                console.error('이전 단계로 이동 중 오류:', error);
+                alert('이전 단계로 이동하는 중 오류가 발생했습니다. 콘솔을 확인해주세요.');
+            } finally {
+                updateNavigationButtons();
             }
         }
 
@@ -738,6 +830,7 @@
                 await loadQuestions();
                 renderQuestions();
                 await loadCurrentInterface();
+                updateNavigationButtons();
             } catch (error) {
                 console.error('초기화 실패:', error);
                 setInterfaceStatus(`초기화 중 오류가 발생했습니다.\n${error.message}`, true);

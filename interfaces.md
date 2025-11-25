@@ -18,8 +18,7 @@
 ## Interface Y
 **Title:** 인터페이스 D
 **Media:** preview/Y.MP4
-**Description:** 영상 <**Description:** 영상 <strong>하단</strong>에 댓글 목록이 고정되어 있으며, <strong>스크롤을 직접 조작</strong>하며 읽어 주시면 됩니다.
->오른쪽</strong>에서 댓글이 흘러나오듯 자동으로 표시됩니다.
+**Description:** 영상 <strong>하단</strong>에 댓글 목록이 고정되어 있으며, <strong>스크롤을 직접 조작</strong>하며 읽어 주시면 됩니다. <strong>오른쪽</strong>에서 댓글이 흘러나오듯 자동으로 표시됩니다.
 
 ## Interface Y1
 **Title:** 인터페이스 E

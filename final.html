@@ -50,14 +50,15 @@
 
         .choice-card {
             display: flex;
-            align-items: center;
-            gap: 18px;
-            padding: 20px 24px;
+            flex-direction: column;
+            gap: 14px;
+            padding: 22px 26px;
             border: 1px solid #dfe6ec;
             border-radius: 16px;
             cursor: pointer;
             transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
             background-color: #fff;
+            text-align: center;
         }
 
         .choice-card:hover {
@@ -67,17 +68,18 @@
         }
 
         .choice-card input[type="radio"] {
-            margin-right: 4px;
-            transform: scale(1.2);
+            transform: scale(1.35);
+            margin: 0;
         }
 
         .choice-media-wrapper {
             flex-shrink: 0;
+            width: 100%;
         }
 
         .choice-media {
-            width: 200px;
-            height: 130px;
+            width: 100%;
+            height: auto;
             border-radius: 14px;
             object-fit: cover;
             background-color: #000;
@@ -88,6 +90,7 @@
             display: flex;
             flex-direction: column;
             gap: 4px;
+            width: 100%;
         }
 
         .choice-title {
@@ -100,6 +103,18 @@
             font-size: 15px;
             color: #555;
             line-height: 1.4;
+        }
+
+        .choice-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .choice-card-header .choice-title {
+            margin: 0;
         }
 
         .optional-question {
@@ -147,6 +162,27 @@
         .btn-primary:hover {
             background-color: #2980b9;
         }
+        .btn-back {
+            background-color: #f2f4f7;
+            color: #2c3e50;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 1px solid #c6d1e0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: #e0e6f0;
+        }
+
+        .nav-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
 
         .btn-primary:disabled {
             background-color: #bdc3c7;
@@ -194,6 +230,9 @@
 </head>
 <body>
     <div class="container">
+        <div class="nav-actions">
+            <button type="button" class="btn-back" onclick="handleBack()">이전으로 돌아가기</button>
+        </div>
         <div id="questionSection">
             <h1>마무리 질문</h1>
             <p class="intro-text">
@@ -269,6 +308,14 @@
             return img;
         }
 
+        function handleBack() {
+            if (document.referrer) {
+                history.back();
+            } else {
+                window.location.href = 'test.html';
+            }
+        }
+
         function renderChoices() {
             if (!choiceList) return;
 
@@ -284,28 +331,26 @@
                 radio.name = 'interfaceChoice';
                 radio.value = choice.id;
 
-                const mediaWrapper = document.createElement('div');
-                mediaWrapper.className = 'choice-media-wrapper';
-
-                mediaWrapper.appendChild(createMediaElement(choice.media));
-
-                const content = document.createElement('div');
-                content.className = 'choice-content';
+                const header = document.createElement('div');
+                header.className = 'choice-card-header';
+                header.appendChild(radio);
 
                 const title = document.createElement('div');
                 title.className = 'choice-title';
                 title.textContent = choice.title;
+                header.appendChild(title);
+
+                const mediaWrapper = document.createElement('div');
+                mediaWrapper.className = 'choice-media-wrapper';
+                mediaWrapper.appendChild(createMediaElement(choice.media));
 
                 const desc = document.createElement('div');
                 desc.className = 'choice-desc';
                 desc.innerHTML = choice.description || choice.desc || '';
 
-                content.appendChild(title);
-                content.appendChild(desc);
-
-                label.appendChild(radio);
+                label.appendChild(header);
                 label.appendChild(mediaWrapper);
-                label.appendChild(content);
+                label.appendChild(desc);
 
                 choiceList.appendChild(label);
             });
