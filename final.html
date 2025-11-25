@@ -273,6 +273,13 @@
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFyb2Nob3d5a3lubWRoeWlrY2pkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwODM4ODAsImV4cCI6MjA3OTY1OTg4MH0.pdnjDMltF0kmSFOKiJL5wJIYTwtFLZWdaRUTUxhvaf4';
         const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+        const QUESTION_LABELS = {
+            '[Mental Demand] 영상 시청 중 댓글을 읽는 과정의 정신적 부담 정도 (mental or cognitive demand)': 'Q1',
+            '[Physical Demand] 영상 시청 중 댓글을 읽는 과정의 신체적/물리적 노력 정도': 'Q2',
+            '[Temporal alignment] 현재 읽고 있는 댓글이 재생되고 있는 영상 내용과 어울리는 정도': 'Q3',
+            '[Overall Engagement] 영상 시청 중 댓글을 읽는 시청 과정의 전반적인 흥미 및 몰입 정도': 'Q4'
+        };
+
         function createMediaElement(path) {
             const lowerPath = (path || '').toLowerCase();
             if (lowerPath.endsWith('.mp4') || lowerPath.endsWith('.webm')) {
@@ -351,16 +358,39 @@
             };
         }
 
-        function buildQuestionScores(results) {
+        function buildQuestionScores(results, sequence) {
             const scoreMap = {};
+            const interfaceMeta = {};
+
+            (sequence || []).forEach(pair => {
+                if (!pair || !pair.interface) return;
+                interfaceMeta[pair.interface] = {
+                    dataFolder: pair.data || '',
+                    htmlFile: pair.htmlFile || '',
+                    dataPath: pair.dataPath || ''
+                };
+            });
+
             (results || []).forEach(result => {
-                if (!scoreMap[result.interface]) {
-                    scoreMap[result.interface] = {};
+                if (!result.interface) {
+                    return;
                 }
-                (result.answers || []).forEach(answer => {
-                    scoreMap[result.interface][answer.questionText || `Q${answer.questionIndex + 1}`] = answer.answer;
+                if (!scoreMap[result.interface]) {
+                    scoreMap[result.interface] = {
+                        dataFolder: interfaceMeta[result.interface]?.dataFolder || '',
+                        htmlFile: interfaceMeta[result.interface]?.htmlFile || '',
+                        dataPath: interfaceMeta[result.interface]?.dataPath || '',
+                        scores: {}
+                    };
+                }
+                (result.answers || []).forEach((answer, idx) => {
+                    const idxFromData = typeof answer.questionIndex === 'number' ? answer.questionIndex : idx;
+                    const fallbackLabel = `Q${idxFromData + 1}`;
+                    const label = QUESTION_LABELS[answer.questionText] || fallbackLabel;
+                    scoreMap[result.interface].scores[label] = answer.answer;
                 });
             });
+
             return scoreMap;
         }
 
@@ -388,8 +418,7 @@
                 name: finalData.participant?.name || '',
                 age: finalData.participant?.age ?? null,
                 gender: finalData.participant?.gender || '',
-                interface_sequence: finalData.testSequence || [],
-                question_scores: buildQuestionScores(finalData.results),
+                question_scores: buildQuestionScores(finalData.results, finalData.testSequence),
                 preferred_interface: finalData.preferredInterface || '',
                 preferred_reason: finalData.preferredReason || '',
                 created_at: finalData.completedAt
