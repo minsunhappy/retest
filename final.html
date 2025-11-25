@@ -224,6 +224,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="config.js"></script>
     <script>
         const CHOICES = [
@@ -268,6 +269,9 @@
         const thankYouMessage = document.getElementById('thankYouMessage');
 
         let baseResultData = null;
+        const SUPABASE_URL = 'https://qrochowykynmdhyikcjd.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFyb2Nob3d5a3lubWRoeWlrY2pkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwODM4ODAsImV4cCI6MjA3OTY1OTg4MH0.pdnjDMltF0kmSFOKiJL5wJIYTwtFLZWdaRUTUxhvaf4';
+        const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         function createMediaElement(path) {
             const lowerPath = (path || '').toLowerCase();
@@ -347,6 +351,19 @@
             };
         }
 
+        function buildQuestionScores(results) {
+            const scoreMap = {};
+            (results || []).forEach(result => {
+                if (!scoreMap[result.interface]) {
+                    scoreMap[result.interface] = {};
+                }
+                (result.answers || []).forEach(answer => {
+                    scoreMap[result.interface][answer.questionText || `Q${answer.questionIndex + 1}`] = answer.answer;
+                });
+            });
+            return scoreMap;
+        }
+
         function getSelectedChoice() {
             return document.querySelector('input[name="interfaceChoice"]:checked');
         }
@@ -358,6 +375,34 @@
             if (thankYouMessage) {
                 thankYouMessage.classList.remove('hidden');
             }
+        }
+
+        async function submitToSupabase(finalData) {
+            if (!supabaseClient) {
+                console.error('Supabase 클라이언트를 초기화할 수 없습니다.');
+                alert('응답 저장 시스템을 불러오지 못했습니다. 관리자에게 문의해주세요.');
+                return false;
+            }
+
+            const payload = {
+                name: finalData.participant?.name || '',
+                age: finalData.participant?.age ?? null,
+                gender: finalData.participant?.gender || '',
+                interface_sequence: finalData.testSequence || [],
+                question_scores: buildQuestionScores(finalData.results),
+                preferred_interface: finalData.preferredInterface || '',
+                preferred_reason: finalData.preferredReason || '',
+                created_at: finalData.completedAt
+            };
+
+            const { error } = await supabaseClient.from('survey_responses').insert(payload);
+
+            if (error) {
+                console.error('Supabase 저장 오류:', error);
+                alert('응답 저장 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+                return false;
+            }
+            return true;
         }
 
         form.addEventListener('submit', async (event) => {
@@ -388,6 +433,12 @@
                 preferredReason: reasonInput.value.trim(),
                 completedAt: new Date().toISOString()
             };
+
+            const saved = await submitToSupabase(finalData);
+            if (!saved) {
+                submitBtn.disabled = false;
+                return;
+            }
 
             localStorage.setItem('finalResults', JSON.stringify(finalData));
             console.log('최종 결과:', finalData);
