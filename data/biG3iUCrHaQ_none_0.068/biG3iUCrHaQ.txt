@@ -1,0 +1,389 @@
+#######################################
+Video ID: biG3iUCrHaQ
+Total Comments: 32
+Query Filter: <none>
+#######################################
+=======================================
+Start-End: 0 ~ 4
+Reward: 7.006509757878657
+Likes: 60 || 0.9174499512452705 
+Correlation:
+  Overall: 0.41708874411219693
+  Audio: 0.4 | Pay attention to me when I speak.
+  Video: 0.15 | A man in white walks towards the camera on a beach, with six people sitting on the sand facing him. As he approaches, text 'HOT SPIT' and 'REMBLE TED TALK DIRECTED BY @NICKMEDINA' appear on the screen. The man raises his arms and begins to speak, making various hand gestures. He continues to move closer to the camera, with a glowing effect around him. The man makes more expressive gestures and movements as he speaks.
+Text:
+  [[That's how I talk when I go for a job interview]]
+=======================================
+
+=======================================
+Start-End: 4 ~ 10
+Reward: 14.47574651844165
+Likes: 4400 || 0.9999067168417805 
+Correlation:
+  Overall: 0.7063588514492473
+  Audio: 0.7 | A Ted talk with a murderous rhyme scheme.
+  Video: 0.19 | A man in white walks towards the camera on a beach, with six people sitting on the sand facing him. As he approaches, text 'HOT SPIT' and 'REMBLE TED TALK DIRECTED BY @NICKMEDINA' appear on the screen. The man raises his arms and begins to speak, making various hand gestures. He continues to move closer to the camera, with a glowing effect around him. The man makes more expressive gestures and movements as he speaks.
+Text:
+  [["A Ted talk with a murderous rhyme scheme" pretty much applies to all his songs so far lol]]
+=======================================
+
+=======================================
+Start-End: 10 ~ 14
+Reward: 7.579756897943787
+Likes: 727 || 0.9864850727865746 
+Correlation:
+  Overall: 0.454227075849686
+  Audio: 0.46 | Think Steve Jobs with purchasing J-beats.
+  Video: 0.06 | A man in white walks towards the camera on a beach, with six people sitting on the sand facing him. As he approaches, text 'HOT SPIT' and 'REMBLE TED TALK DIRECTED BY @NICKMEDINA' appear on the screen. The man raises his arms and begins to speak, making various hand gestures. He continues to move closer to the camera, with a glowing effect around him. The man makes more expressive gestures and movements as he speaks.
+Text:
+  [[“Don’t cry no more momma, here look it’s a ten piece”]]
+=======================================
+
+=======================================
+Start-End: 14 ~ 19
+Reward: 11.774782380800184
+Likes: 367 || 0.9762829544088903 
+Correlation:
+  Overall: 0.6893367608755733
+  Audio: 0.7 | I just want flawless diamonds called Cajun like white people.
+  Video: 0.08 | A man wearing a white dress is walking on a sandy beach with the ocean and waves in the background. He places his hands on his chest and appears to be speaking. He then turns his head to look forward and spreads his hands apart. The man continues to walk backward while talking, occasionally looking around. He eventually stops, stands still, and then turns his body to the side.
+Text:
+  [["I just want flawless diamonds Caucasian like white people" is a bar]]
+=======================================
+
+=======================================
+Start-End: 19 ~ 20
+Reward: 0.6699025936116868
+Likes: 0 || 0.0 
+Correlation:
+  Overall: 0.3349512968058434
+  Audio: 0.06 | Always keep an extra glee for the times that you might need it.
+  Video: 0.34 | A man in a white dress walks along the shoreline with the ocean waves gently washing over his feet. He continues walking as the waves approach him, and he turns slightly to face the ocean. The man then raises his arms and spreads them out as he stands in the shallow water. He turns around and starts walking towards the camera, continuing to spread his arms.
+Text:
+  [[Beach Preachin]]
+=======================================
+
+=======================================
+Start-End: 20 ~ 23
+Reward: 5.788719110848038
+Likes: 1 || 0.0 
+Correlation:
+  Overall: 0.964786518474673
+  Audio: 0.98 | Always keep an extra glee for the times that you might need it.
+  Video: 0.03 | A man in a white dress walks along the shoreline with the ocean waves gently washing over his feet. He continues walking as the waves approach him, and he turns slightly to face the ocean. The man then raises his arms and spreads them out as he stands in the shallow water. He turns around and starts walking towards the camera, continuing to spread his arms.
+Text:
+  [[2021 is the year i see a million]]
+=======================================
+
+=======================================
+Start-End: 23 ~ 29
+Reward: 12.37732464012836
+Likes: 191 || 0.9618221041764694 
+Correlation:
+  Overall: 0.5505326679224621
+  Audio: 0.55 | 2021 is the year that I see a million.
+  Video: 0.13 | A man dressed in white stands on a sandy beach with the ocean and waves in the background, initially with his arms slightly raised. He then lowers his arms and begins to walk forward towards a group of people sitting on the sand. The group consists of individuals wearing various colored clothing, including black, red, and gray, and they are seated in a semi-circle facing the man in white. As the man in white continues to walk, he raises his hands.
+Text:
+  [[“I might just have some kids,to play with my brother’s children” that’s grown man shit!! 🔥🔥]]
+=======================================
+
+=======================================
+Start-End: 29 ~ 34
+Reward: 12.825906951637878
+Likes: 1200 || 0.9917385826066595 
+Correlation:
+  Overall: 0.786721403860458
+  Audio: 0.8 | Remember when I wasn't anything but a co-defendant?
+  Video: 0.04 | A man in a white sleeveless shirt stands on a beach with the ocean in the background, looking to the left. As the camera moves backward, two identical figures of the man appear, all facing left and singing. The camera continues to move backward, creating a motion blur effect, and the man starts walking towards the camera while singing and gesturing with his hands. He then turns his head to the left.
+Text:
+  [[“Remember when I wasn’t anything but a co defendant” felt that 😔]]
+=======================================
+
+=======================================
+Start-End: 34 ~ 38
+Reward: 9.134828345573167
+Likes: 284 || 0.9712604317296788 
+Correlation:
+  Overall: 0.6562233273318065
+  Audio: 0.66 | Folks yelling out, it's Rumble, they're so specific.
+  Video: 0.12 | A man dressed in white walks along the beach, gesturing with his hands and speaking as he moves closer to the camera. He then spreads his arms wide and continues to speak. The scene transitions to show three identical figures of the man in white dancing in sync on the beach, while two people sit on the sand watching them.
+Text:
+  [["ever since that drakeo co-sign he flows with rivers"]]
+=======================================
+
+=======================================
+Start-End: 38 ~ 43
+Reward: 12.635222136311395
+Likes: 35 || 0.8838594478331142 
+Correlation:
+  Overall: 0.8215924897145823
+  Audio: 0.82 | Michael Phelps in unison with controlled swimmers.
+  Video: 0.18 | A man dressed in white walks along the beach, gesturing with his hands and speaking as he moves closer to the camera. He then spreads his arms wide and continues to speak. The scene transitions to show three identical figures of the man in white dancing in sync on the beach, while two people sit on the sand watching them.
+Text:
+  [[Nobody:     Remble: Micheal phelps in Unison with controlled swimmers.]]
+=======================================
+
+=======================================
+Start-End: 43 ~ 47
+Reward: 7.575507772610408
+Likes: 21 || 0.8404616261733375 
+Correlation:
+  Overall: 0.5267076584896322
+  Audio: 0.54 | I've seen people rob that party as the cold distribers, but hold on, wait a minute.
+  Video: 0.0 | A man on a beach, wearing a white sleeveless shirt, holds a black mask in front of his face with both hands and turns to face the camera. The camera gradually moves away from him, and he lowers his hands, spreading them as if explaining something. He then turns his head to look at another man sitting on a chair, who is wearing a red shirt and a black mask.
+Text:
+  [[Hold on wait a minute.. THEY THOUGHT YOU WAS FINISHED⁉️]]
+=======================================
+
+=======================================
+Start-End: 47 ~ 50
+Reward: 5.897366414340199
+Likes: 247 || 0.968188583132076 
+Correlation:
+  Overall: 0.4988001108239952
+  Audio: 0.5 | Killin' any op and plus the ones that's hangin' with it.
+  Video: 0.12 | On a beach with the ocean in the background, a man dressed in white with black face paint and a man in black with a black cap stand facing each other in a fighting stance. The man in white raises his fists in a defensive posture, while the man in black maintains a similar stance. Both men begin to slowly raise their hands, with the man in white keeping his fists raised and the man in black gradually lifting his hands. The man in white starts to extend his right arm forward, while the man in black continues to raise his hands higher. The man in white fully extends his right arm, and the man in black has his
+Text:
+  [[ITS REMBLE BUT THATS BESIDES THE POINT]]
+=======================================
+
+=======================================
+Start-End: 50 ~ 53
+Reward: 4.153127280466581
+Likes: 0 || 0.0 
+Correlation:
+  Overall: 0.6921878800777636
+  Audio: 0.71 | A bakery of biscuits, caves and pistols with extensions.
+  Video: 0.03 | A man in a white dress is dancing on a beach, with the camera initially showing a close-up of his upper body and then zooming out to reveal him dancing in front of a group of people sitting on the sand. The man continues to dance, clapping his hands and moving his body rhythmically. The camera then shifts to an overhead view, showing the man dancing in the center of a circle formed by the seated individuals. Finally, the group stands up and starts dancing together on the beach, with the ocean and waves in the background.
+Text:
+  [[A BAKERY OF BISCUITS 🔊 🔊 love that part lol]]
+=======================================
+
+=======================================
+Start-End: 53 ~ 58
+Reward: 11.162550015930336
+Likes: 923 || 0.9891815650489174 
+Correlation:
+  Overall: 0.6216642190685748
+  Audio: 0.63 | You're about to witness Floyd Mayweather with good pinnmanship.
+  Video: 0.1 | A man in a white dress is standing on a beach with the ocean in the background. He begins to walk forward, gradually lowering his hands from his chest. As he continues walking, he starts to move his arms naturally by his sides. The scene then transitions to show multiple images of the man and other people superimposed together on the beach.
+Text:
+  [["your about to witness Floyd Mayweather wit good penmanship"😂😂]]
+=======================================
+
+=======================================
+Start-End: 58 ~ 62
+Reward: 7.223776191586394
+Likes: 0 || 0.0 
+Correlation:
+  Overall: 0.9029720239482992
+  Audio: 0.91 | If I get a Grammy, I'm Kanye West, I'll take a piss on it.
+  Video: 0.14 | A man in a white sleeveless shirt is on a beach with the ocean and a clear sky in the background. He starts by moving his arms in a forward motion, crossing them in front of his chest. He then lowers his arms and begins to step back while continuing to move his hands. The man raises his hands to his chest and then extends them outward as he continues to step back.
+Text:
+  [[“If I get Grammy I’m Kanye west I’ll take a piss on it”…..]]
+=======================================
+
+=======================================
+Start-End: 62 ~ 67
+Reward: 11.969328362647415
+Likes: 84 || 0.9335968112548289 
+Correlation:
+  Overall: 0.7301344306373271
+  Audio: 0.75 | I had a problem then bought a chop and put a stick on it.
+  Video: 0.01 | A man dressed in white stands on a sandy beach with the ocean and waves in the background, facing a group of five people who are sitting on the sand. He begins to move and dance, turning his body and gesturing with his hands. The man continues to dance, moving closer to the water, and spreads his arms wide as if emphasizing his movements. He then steps into the shallow water, continuing to dance and gesture with his hands.
+Text:
+  [[“I had a problem then bought a chop and put a stick on it” 🔥🔥🥇]]
+=======================================
+
+=======================================
+Start-End: 67 ~ 71
+Reward: 7.81391838194188
+Likes: 0 || 0.0 
+Correlation:
+  Overall: 0.976739797742735
+  Audio: 1.0 | Killing is common, it's just so sad his kids depend on him.
+  Video: 0.0 | A group of six people, including individuals with black face paint, are dancing on a beach with the ocean in the background. They are moving energetically, with some making hand gestures and others swaying their bodies. The group includes people wearing various outfits, such as a red hoodie, a white shirt, a black jacket, a white sleeveless shirt, and a gray jacket. The camera gradually moves away from the group, capturing their synchronized dance moves. The background shows a clear sky and waves crashing onto the shore.
+Text:
+  [[Killing is common it's just so sad his kids depend on him.]]
+=======================================
+
+=======================================
+Start-End: 71 ~ 73
+Reward: 3.4627939958074867
+Likes: 61 || 0.9183204060598157 
+Correlation:
+  Overall: 0.4065382959219639
+  Audio: 0.22 | We seen his chain and it was just swinging like a pendulum.
+  Video: 0.35 | On a sunny beach with waves in the background, a man dressed in white walks from the ocean towards three seated individuals. He turns to face the group and begins speaking, gesturing with his hands. The three seated individuals, wearing red, gray, and black clothing, listen attentively. The man continues to speak and gesture as he moves slightly to his right.
+Text:
+  [[His little dance goes hard 🤣🤣]]
+=======================================
+
+=======================================
+Start-End: 73 ~ 77
+Reward: 7.035298290907528
+Likes: 4 || 0.5632245893111304 
+Correlation:
+  Overall: 0.5977999917078758
+  Audio: 0.61 | I'm snatching his chain and I'm scaring people out there timberling.
+  Video: 0.05 | A man dressed in a white outfit is dancing on a sandy beach with the ocean and waves in the background. Two people are sitting on the sand, one in a red shirt and the other in a black hoodie, watching him. The man continues to dance, moving his arms and body rhythmically. As he dances, a small animated microphone icon appears in the bottom right corner of the screen.
+Text:
+  [[Striped him for everything, then mib his memories]]
+=======================================
+
+=======================================
+Start-End: 77 ~ 82
+Reward: 12.496745221952061
+Likes: 810 || 0.9877535277362304 
+Correlation:
+  Overall: 0.755797758327091
+  Audio: 0.75 | The way we just did him, his friends will wonder what he did to me.
+  Video: 0.19 | A group of people, some with black face paint, are on a beach with the ocean in the background. The man in white is talking to the man in black, gesturing with his hands. The man in white continues to talk and gesture, while the man in black responds with hand movements. The man in white turns slightly, and the man in black continues to gesture. The man in white and the man in black continue their conversation, with the man in white making more hand gestures. The man in white turns to face another man in black, who is standing nearby. The man in white continues to talk and gesture, while the
+Text:
+  [[The way we just did him his friends wondering what he did to me 🤣🤣]]
+=======================================
+
+=======================================
+Start-End: 82 ~ 87
+Reward: 10.039908326030552
+Likes: 73 || 0.9272491987562312 
+Correlation:
+  Overall: 0.5403662332249398
+  Audio: 0.55 | My obsternophan is like they don't even plan on killing me.
+  Video: 0.08 | On a sandy beach with the ocean and a pier in the background, a man dressed in a white robe and black face paint is dancing energetically. He moves his arms and body in various directions, occasionally turning his head and crossing his arms. Several people, also with black face paint, are sitting on the sand around him, watching his performance attentively.
+Text:
+  [["My opps turned to fans it's like they  don't even plan on killin me"]]
+=======================================
+
+=======================================
+Start-End: 87 ~ 93
+Reward: 7.379829302827337
+Likes: 5 || 0.6180598549762593 
+Correlation:
+  Overall: 0.30595584774748186
+  Audio: 0.3 | People may attack you, criticize you or ignore you.
+  Video: 0.08 | A man in a white dress stands on a beach, crossing his arms and then opening them wide. He then brings his hands together in a prayer-like gesture and bows his head. The camera moves down to reveal two people sitting on the sand. The scene transitions to a group of people standing in a line on the beach, looking upwards.
+Text:
+  [[The cosmic maturity it takes to tell the truth wholeheartedly and between the lines at once is remble superpower]]
+=======================================
+
+=======================================
+Start-End: 93 ~ 97
+Reward: 5.215399858640585
+Likes: 7 || 0.6882046385036525 
+Correlation:
+  Overall: 0.30782266307824685
+  Audio: 0.07 | They can crumple you up with their words, spit you out or even walk all over you.
+  Video: 0.31 | A man in a white sleeveless shirt stands on a beach, looking to his right. He extends his hand to shake hands with a man in a black shirt, who then turns and walks away. The man in white shakes hands with another man in a white t-shirt, who also turns and walks away. He then shakes hands with a man in a gray hoodie, who turns and walks away. The man in white extends his hand to a man in a black hoodie, who shakes hands with him and then walks away. Finally, the man in white shakes hands with another man in a black hoodie, who also turns and walks away.
+Text:
+  [[Shaking their hands as they thank him for the eulogy 🙏🙏🙏]]
+=======================================
+
+=======================================
+Start-End: 97 ~ 103
+Reward: 5.888254766478896
+Likes: 2 || 0.33850984689085983 
+Correlation:
+  Overall: 0.32143297376114477
+  Audio: 0.08 | They can crumple you up with their words, spit you out or even walk all over you.
+  Video: 0.32 | A man in a white sleeveless shirt stands on a beach, looking to his right. He extends his hand to shake hands with a man in a black shirt, who then turns and walks away. The man in white shakes hands with another man in a white t-shirt, who also turns and walks away. He then shakes hands with a man in a gray hoodie, who turns and walks away. The man in white extends his hand to a man in a black hoodie, who shakes hands with him and then walks away. Finally, the man in white shakes hands with another man in a black hoodie, who also turns and walks away.
+Text:
+  [[The surfer on the right vibing and got the rhythm and the one on the left look so confused like he don’t kno why he there😭😭]]
+=======================================
+
+=======================================
+Start-End: 103 ~ 105
+Reward: 2.196891201692568
+Likes: 0 || 0.0 
+Correlation:
+  Overall: 0.549222800423142
+  Audio: 0.56 | But remember, whatever they do or say, you will always keep your value.
+  Video: 0.05 | A man in a white sleeveless shirt stands on a beach, looking to his right. He extends his hand to shake hands with a man in a black shirt, who then turns and walks away. The man in white shakes hands with another man in a white t-shirt, who also turns and walks away. He then shakes hands with a man in a gray hoodie, who turns and walks away. The man in white extends his hand to a man in a black hoodie, who shakes hands with him and then walks away. Finally, the man in white shakes hands with another man in a black hoodie, who also turns and walks away.
+Text:
+  [[ALWAYS KNOW YOUR WORTH 🥇]]
+=======================================
+
+=======================================
+Start-End: 105 ~ 107
+Reward: 2.037265525618669
+Likes: 1 || 0.0 
+Correlation:
+  Overall: 0.5093163814046673
+  Audio: 0.52 | But remember, whatever they do or say, you will always keep your value.
+  Video: 0.01 | A man in a white sleeveless shirt stands on a beach, looking to his right. He extends his hand to shake hands with a man in a black shirt, who then turns and walks away. The man in white shakes hands with another man in a white t-shirt, who also turns and walks away. He then shakes hands with a man in a gray hoodie, who turns and walks away. The man in white extends his hand to a man in a black hoodie, who shakes hands with him and then walks away. Finally, the man in white shakes hands with another man in a black hoodie, who also turns and walks away.
+Text:
+  [[Keep Ur Value My Friends]]
+=======================================
+
+=======================================
+Start-End: 107 ~ 109
+Reward: 1.3092223861086074
+Likes: 0 || 0.0 
+Correlation:
+  Overall: 0.32730559652715185
+  Audio: 0.0 | But remember, whatever they do or say, you will always keep your value.
+  Video: 0.33 | A man in a white sleeveless shirt stands on a beach, looking to his right. He extends his hand to shake hands with a man in a black shirt, who then turns and walks away. The man in white shakes hands with another man in a white t-shirt, who also turns and walks away. He then shakes hands with a man in a gray hoodie, who turns and walks away. The man in white extends his hand to a man in a black hoodie, who shakes hands with him and then walks away. Finally, the man in white shakes hands with another man in a black hoodie, who also turns and walks away.
+Text:
+  [[The 2 random surfer dudes 💀]]
+=======================================
+
+=======================================
+Start-End: 109 ~ 110
+Reward: 1.2731535735799415
+Likes: 0 || 0.0 
+Correlation:
+  Overall: 0.6365767867899708
+  Audio: 0.65 | But remember, whatever they do or say, you will always keep your value.
+  Video: 0.03 | A man in a white sleeveless shirt stands on a beach, looking to his right. He extends his hand to shake hands with a man in a black shirt, who then turns and walks away. The man in white shakes hands with another man in a white t-shirt, who also turns and walks away. He then shakes hands with a man in a gray hoodie, who turns and walks away. The man in white extends his hand to a man in a black hoodie, who shakes hands with him and then walks away. Finally, the man in white shakes hands with another man in a black hoodie, who also turns and walks away.
+Text:
+  [[Thank you]]
+=======================================
+
+=======================================
+Start-End: 110 ~ 111
+Reward: 1.1794681584153164
+Likes: 4 || 0.5632245893111304 
+Correlation:
+  Overall: 0.30812178455209305
+  Audio: 0.3 | Thank you.
+  Video: 0.09 | A man in a white sleeveless shirt stands on a beach, looking to his right. He extends his hand to shake hands with a man in a black shirt, who then turns and walks away. The man in white shakes hands with another man in a white t-shirt, who also turns and walks away. He then shakes hands with a man in a gray hoodie, who turns and walks away. The man in white extends his hand to a man in a black hoodie, who shakes hands with him and then walks away. Finally, the man in white shakes hands with another man in a black hoodie, who also turns and walks away.
+Text:
+  [[Wow 🤣🤣😂☠]]
+=======================================
+
+=======================================
+Start-End: 111 ~ 113
+Reward: 1.7076294886662986
+Likes: 0 || 0.0 
+Correlation:
+  Overall: 0.42690737216657465
+  Audio: 0.18 | Thank you.
+  Video: 0.4 | On a beach with waves in the background, a group of seven individuals, all wearing black masks, are gathered around a person dressed in white. The person in white is being held by the arms by two individuals, while the others stand around them, some with their hands raised in a defensive or supportive manner. The text 'DIRECTED + SHOT + EDITED BY @NICKMEDINA' is prominently displayed in the center of the screen.
+Text:
+  [[The dance 🔥🔥🔥🔥🔥🔥]]
+=======================================
+
+=======================================
+Start-End: 113 ~ 119
+Reward: 8.993381240132635
+Likes: 30 || 0.8721142368019011 
+Correlation:
+  Overall: 0.313391318276769
+  Audio: 0.22 | Thank you.
+  Video: 0.23 | A group of seven individuals, all with black face paint, are dancing on a beach with a pier in the background. They are dressed in casual clothing, with some wearing white shirts and others in black or gray outfits. The group includes a person in a white dress and another in red shoes. The text 'SONG BY @ITSREMBLE' is displayed prominently in the center of the screen. The dancers move in sync, performing various dance moves and gestures.
+Text:
+  [[The “listening while scrolling down the comments” crew.  p.s remble next up!]]
+=======================================
+
+=======================================
+Start-End: 119 ~ 124
+Reward: 5.988944642867546
+Likes: 4 || 0.5632245893111304 
+Correlation:
+  Overall: 0.31728216963118944
+  Audio: 0.0 | 
+  Video: 0.32 | On a beach with palm trees and buildings in the background, a man in a white sleeveless shirt walks towards a group of four men. The group consists of three men dressed in black, one of whom is wearing a black mask, and one man in a gray jacket and white shirt. As the man in white approaches, he begins to raise his right hand. The man in white continues to walk forward and raises his right hand higher. The group of men, including the one in the gray jacket, watch him intently. The man in white fully extends his right arm, pointing towards the group.
+Text:
+  [[Lmao nobody gonna notice the surfer boys hitting that fighting dance]]
+=======================================
+

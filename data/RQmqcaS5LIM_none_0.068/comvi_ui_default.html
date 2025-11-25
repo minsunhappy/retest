@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>1988: Is this James Brown's strangest interview ever?</title>
+  <style>
+    /* 기본 스타일 */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background-color: #fff; /* 흰색 배경 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .video-title {
+      width: 800px;
+      margin-top: 40px;
+      margin-bottom: 5px;
+      text-align: left;
+      font-size: 20px;
+      font-weight: 600;
+      color: #000;
+      padding: 0;
+      line-height: 1.4;
+    }
+
+    .video-container {
+      width: 800px;
+      margin-top: 20px;
+      position: relative;
+      background-color: #000;
+      overflow: hidden;
+      border-radius: 20px; /* 유튜브 느낌의 둥근 모서리 */
+      transition: all 0.3s ease;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 12px; /* 비디오 둥근 모서리 */
+    }
+
+    /* 기본 비디오 컨트롤 완전히 숨기기 */
+    video::-webkit-media-controls-panel { display: none !important; }
+    video::-webkit-media-controls-play-button { display: none !important; }
+    video::-webkit-media-controls-start-playback-button { display: none !important; }
+    video::-moz-media-controls { display: none !important; }
+    video::--ms-media-controls { display: none !important; }
+
+    /* 커스텀 비디오 컨트롤 */
+    .custom-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.8);
+      padding: 4px 15px 4px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 4;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .video-container:hover .custom-controls { opacity: 1; }
+
+    /* 진행 바 컨테이너 */
+    .progress-container {
+      width: 100%;
+      height: 3px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      margin-bottom: 6px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    /* 진행 바 */
+    .progress-bar {
+      height: 100%;
+      background: #ff0000;
+      border-radius: 3px;
+      width: 0%;
+      position: relative;
+      transition: width 0.1s ease;
+    }
+
+    /* 진행 바 끝 동그라미 */
+    .progress-handle {
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background: #ff0000;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .progress-container:hover .progress-handle { opacity: 1; }
+
+    /* 컨트롤 버튼들 */
+    .controls-bottom {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .control-button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 3px;
+      transition: background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .control-button:hover { background-color: rgba(255,255,255,0.2); }
+
+    .control-button svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    /* 시간 표시 */
+    .time-display {
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* ===================== 댓글 오버레이 (A 스타일) ===================== */
+    .comments-overlay {
+      --overlay-h: 180;             /* JS에서 동적 조정 */
+      --controls-offset: 50px;        /* 컨트롤 보일 때 위로 올릴 거리 */
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      height: var(--overlay-h);
+      pointer-events: none;
+      z-index: 2;
+      background: linear-gradient(to top, rgba(0,0,0,0.80), rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.2) 90%,  rgba(0,0,0,0));
+      overflow: hidden;
+      transition: bottom 0.3s ease, height 0.15s ease;
+    }
+
+    /* 컨트롤이 보일 때 댓글 오버레이를 위로 이동 */
+    .video-container:hover .comments-overlay { bottom: var(--controls-offset); }
+
+    /* 실제 댓글 컨테이너에 mask-image 적용 (가변 stop) */
+    .comments-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      --mask-stop: 100%; /* JS에서 동적 변경 */
+      -webkit-mask-image: linear-gradient(to top, black var(--mask-stop), transparent 100%);
+      mask-image: linear-gradient(to top, black var(--mask-stop), transparent 100%);
+    }
+
+    /* 좋아요/하트를 별도 레이어로 분리하여 마스크 영향 제거 */
+    .likes-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .like-item {
+      position: absolute;
+      right: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      transition: opacity 0.3s ease;
+    }
+
+    /* 각 댓글 요소 */
+    .live-comment {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      transition: bottom 0.2s ease, opacity 0.3s ease-in-out;
+    }
+
+    /* 댓글 내용 레이아웃 */
+    .comment-content { display: flex; align-items: flex-start; width: 100%; }
+
+    .text-content { flex: 1; }
+
+    .user-info { display: flex; align-items: center; gap: 4px; margin-bottom: 2px; }
+
+    .username { font-weight: normal; font-size: 24px; }
+
+    .comment-text {
+      font-size: 34px;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      flex: 1;
+    }
+
+    .profile-icon { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; }
+    .profile-photo { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; }
+
+    .likes { display: flex; flex-direction: column; align-items: center; align-self: flex-start; gap: 2px; margin-left: 8px;}
+
+    .heart-icon { 
+      width: 28px; 
+      height: 28px; 
+      fill: #ff0000; 
+      opacity: 1;
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
+    }
+
+    .likes-number { 
+      color: #ff0000; 
+      font-size: 26px; 
+      opacity: 1;
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
+    }
+  </style>
+</head>
+  <body>
+    <!-- 제목을 영상 위에 배치 -->
+    <div class="video-title">1988: Is this James Brown's strangest interview ever?</div>
+    <div class="video-container">
+    <video id="video-player">
+      <source src="../video/RQmqcaS5LIM.mp4" type="video/mp4" />
+      브라우저가 video 태그를 지원하지 않습니다.
+    </video>
+
+    <!-- 커스텀 비디오 컨트롤 (A 스타일: 플레이/일시정지 + 진행바 + 시간만) -->
+    <div class="custom-controls">
+      <div class="progress-container" id="progress-container">
+        <div class="progress-bar" id="progress-bar">
+          <div class="progress-handle"></div>
+        </div>
+      </div>
+      <div class="controls-bottom">
+        <button class="control-button" id="play-pause-btn">
+          <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="pause-icon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <div class="time-display" id="time-display">0:00 / 0:00</div>
+      </div>
+    </div>
+
+    <!-- 댓글 오버레이 (A 스타일: 높이/마스크 동적) -->
+    <div class="comments-overlay" id="comments-overlay">
+      <div class="comments-container" id="comments-container"></div>
+      <div class="likes-overlay" id="likes-overlay"></div>
+    </div>
+  </div>
+
+  <script>
+    // 숫자 포맷: 1k 단위
+    function formatLikes(n){
+      if(n < 1000) return n.toString();
+      let f = (n/1000).toFixed(1);
+      if(f.endsWith('.0')) f = f.slice(0,-2);
+      return f + 'k';
+    }
+
+    // mm:ss
+    function formatTime(sec){
+      const m = Math.floor(sec/60);
+      const s = Math.floor(sec%60).toString().padStart(2,'0');
+      return `${m}:${s}`;
+    }
+
+    // 랜덤 사용자명/색상
+    function getRandomName(){
+      const names = ["Alice","Bob","Charlie","David","Eva","Frank","Grace","Helen","Ivy","Jack"];
+      return names[Math.floor(Math.random()*names.length)];
+    }
+    function getRandomColor(){
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for(let i=0;i<6;i++){ color += letters[Math.floor(Math.random()*16)]; }
+      return color;
+    }
+
+    // 서버에서 주입되는 최적 댓글 리스트
+    var optimalComments = [{"start": 0, "end": 6, "reading time": 6.0, "text": "News: \"James Brown assaulting his wife with a lead pipe and firing a gun at a car that she was in\" James Brown: \"Living in America!\"", "reward": 12.786345564842689, "correlation": "0.5847060002334132", "corr_A": "0.59", "corr_V": "0.0", "likes": 483.0, "norm_likes": 0.9616455936736217, "norm_likes_real": 0.9616455936736217, "photo": "https://yt3.ggpht.com/87CpDhwtRAavDAbazJkCG40GIlZblOKXsSc990paf2xfWuBiHufi6jPpq-P5qS8fXVrkG7oyQiE=s88-c-k-c0x00ffffff-no-rj", "author": "@aurazero0", "slot": 0}, {"start": 6, "end": 12, "reading time": 6.0, "text": "He was assaulting he's wife with a lead pipe and firing a gun in the garage.. James what do you say all about that? This is the man's world! 😆😆😆", "reward": 11.607148497644706, "correlation": "0.4811399477026857", "corr_A": "0.47", "corr_V": "0.09", "likes": 790.0, "norm_likes": 0.9722448542020797, "norm_likes_real": 0.9722448542020797, "photo": "https://yt3.ggpht.com/2aB-4OMdrLGW7kFZl5ueYAg8JOO9irXmUDDdNafbVRPQzo8VhtetK1u52_RUct0eKHSGsjVQ2g=s88-c-k-c0x00ffffff-no-rj", "author": "@TemeN4Tor1", "slot": 0}, {"start": 12, "end": 18, "reading time": 6.0, "text": "Interviewer: \"He joined us from Atlanta to discuss the charges\"  James: \"I FEEL GOOD\"", "reward": 12.758880330275467, "correlation": "0.6469094065019357", "corr_A": "0.62", "corr_V": "0.18", "likes": 35.0, "norm_likes": 0.83266124204204, "norm_likes_real": 0.83266124204204, "photo": "https://yt3.ggpht.com/uxPM2_P82kPfiMuo8j8dZzDWzxfphPjqReEqryipGgDV7cjwdUNIPqlImgsKI4RD_ReDftVAvCI=s88-c-k-c0x00ffffff-no-rj", "author": "@leotrovatomusic", "slot": 0}, {"start": 18, "end": 24, "reading time": 6.0, "text": "\"How did all this trouble begin?\" \"Living In America.\" Sounds about right. Lol.", "reward": 13.805334512478225, "correlation": "0.6518773065991624", "corr_A": "0.6", "corr_V": "0.25", "likes": 6300.0, "norm_likes": 0.9971344722147129, "norm_likes_real": 0.9971344722147129, "photo": "https://yt3.ggpht.com/ytc/AIdro_kXuApKvUsKYB3UC7vNMCBvZC0cc7hJMu2DY51bQwku0Q=s88-c-k-c0x00ffffff-no-rj", "author": "@savageblack735", "slot": 0}, {"start": 24, "end": 27, "reading time": 3.0, "text": "...... There's nothin' wrong...", "reward": 6.737888186034475, "correlation": "0.7269452614974263", "corr_A": "0.73", "corr_V": "0.06", "likes": 23.0, "norm_likes": 0.7920722056833054, "norm_likes_real": 0.7920722056833054, "photo": "https://yt3.ggpht.com/ytc/AIdro_kZuilMfxj5PImZM1A3I8BnU3xb8QbnaemgnBUQDMYq2DP9oL_IKvimuDh7U2oAw-yNMA=s88-c-k-c0x00ffffff-no-rj", "author": "@T--xk3hf", "slot": 0}, {"start": 27, "end": 29, "reading time": 2.0, "text": "Your out on bond? No imn not", "reward": 3.710971874956149, "correlation": "0.7827326778585232", "corr_A": "0.78", "corr_V": "0.0", "likes": 2.0, "norm_likes": 0.29002058176102813, "norm_likes_real": 0.29002058176102813, "photo": "https://yt3.ggpht.com/ytc/AIdro_lvhaShzynGZ-GnxdL3J9JCxzX6gRQF8awZAQsotaE=s88-c-k-c0x00ffffff-no-rj", "author": "@jamesdemetro9123", "slot": 0}, {"start": 29, "end": 32, "reading time": 3.0, "text": "\" I aint out on bond, I'm out on LOVE\" 😂", "reward": 5.512045573488194, "correlation": "0.44838206088906724", "corr_A": "0.42", "corr_V": "0.17", "likes": 234.0, "norm_likes": 0.9405844027179302, "norm_likes_real": 0.9405844027179302, "photo": "https://yt3.ggpht.com/ytc/AIdro_mQPiTZIs5ZuZ4VNCRBGwyn62ZqgrchzDGr38Be8gHFjA=s88-c-k-c0x00ffffff-no-rj", "author": "@dollahush", "slot": 0}, {"start": 32, "end": 37, "reading time": 5.0, "text": "Have all the charges been dropped?  “Yes I’m out on Love” 😂😂😂😂", "reward": 10.133551271497875, "correlation": "0.7649188866012991", "corr_A": "0.76", "corr_V": "0.05", "likes": 4.0, "norm_likes": 0.49687248109697707, "norm_likes_real": 0.49687248109697707, "photo": "https://yt3.ggpht.com/ytc/AIdro_lOLm-ghLUyNeR63dHQLSJT7oFA7-F0BvqAJOjYEsiDZh4OjaFpfbdHReaGhCF6aq9AXw=s88-c-k-c0x00ffffff-no-rj", "author": "@JenniferBender-x3g", "slot": 0}, {"start": 37, "end": 39, "reading time": 2.0, "text": "I'm out on love 😂😭😂😭😭", "reward": 4.63717737446751, "correlation": "0.7182507744298647", "corr_A": "0.72", "corr_V": "0.04", "likes": 68.0, "norm_likes": 0.8820871383740254, "norm_likes_real": 0.8820871383740254, "photo": "https://yt3.ggpht.com/ytc/AIdro_nViKj3m4FNhkXWvq5rUcSOQfqZcGGWJ6AK2RMb0nPXzw=s88-c-k-c0x00ffffff-no-rj", "author": "@moneybagshawty7086", "slot": 0}, {"start": 39, "end": 42, "reading time": 3.0, "text": "This NEVER gets old. I'm out on love.", "reward": 6.5978036955974275, "correlation": "0.6395696110014988", "corr_A": "0.63", "corr_V": "0.11", "likes": 139.0, "norm_likes": 0.920128676529478, "norm_likes_real": 0.920128676529478, "photo": "https://yt3.ggpht.com/ytc/AIdro_m_YuzxZUwxRyIxGJlX9pIIt7poZoK-z7ojElaEe28L3Lw=s88-c-k-c0x00ffffff-no-rj", "author": "@mistergone5156", "slot": 0}, {"start": 42, "end": 45, "reading time": 3.0, "text": "Alone from night to night you'll find me 🤣💀", "reward": 7.413548483983931, "correlation": "0.8445274913270625", "corr_A": "0.84", "corr_V": "0.05", "likes": 21.0, "norm_likes": 0.7821278453405188, "norm_likes_real": 0.7821278453405188, "photo": "https://yt3.ggpht.com/ytc/AIdro_lOm_tgS3_tpGBo8GAv5r5X589XhYUXym20FhdWbGE=s88-c-k-c0x00ffffff-no-rj", "author": "@aye_jay23", "slot": 0}, {"start": 45, "end": 51, "reading time": 6.0, "text": "Interviewer: \"I hear you're already starting divorce proceedings, does that mean you're now eligible?\"  James: \"I'm not... yeah I'm eligible, I'm single, I wanna mingle!\"  💀💀💀💀", "reward": 11.338806134926813, "correlation": "0.49719479036558173", "corr_A": "0.46", "corr_V": "0.2", "likes": 85.0, "norm_likes": 0.8954114417566387, "norm_likes_real": 0.8954114417566387, "photo": "https://yt3.ggpht.com/bkZoAx7OhBSfXVghjO4Lgz7xasecC78CXUJotFAL70lG8yIsxMy8-7GfWRaDHoboqA1GPI-vdw=s88-c-k-c0x00ffffff-no-rj", "author": "@timmy841212", "slot": 0}, {"start": 51, "end": 56, "reading time": 5.0, "text": "That's exactly it. That. Is. Exactly. It.   Let's talk about some music!", "reward": 12.361748808847821, "correlation": "0.7641111994865494", "corr_A": "0.75", "corr_V": "0.14", "likes": 260.0, "norm_likes": 0.9441273627964654, "norm_likes_real": 0.9441273627964654, "photo": "https://yt3.ggpht.com/09QQO4g5ygu_deBIS2Blt3WcfNWMqwZmwMdm4ik2C32IJxyqu-GiVopL5QFNPlZ0qYiLrUGH-A=s88-c-k-c0x00ffffff-no-rj", "author": "@carcar97", "slot": 0}, {"start": 56, "end": 62, "reading time": 6.0, "text": "Interviewer: Tell us what you’re going to be doing on your next tour   JB: HELLO TED!!!!!", "reward": 11.934523278668358, "correlation": "0.5808131018129692", "corr_A": "0.56", "corr_V": "0.16", "likes": 33.0, "norm_likes": 0.8274610094854546, "norm_likes_real": 0.8274610094854546, "photo": "https://yt3.ggpht.com/2uKnNV4o5vJQjzhk1YRYgno8FrCm6hyKImDRE4090svsvx_hGYnHOFwVr-KDMibZoYPibHB9qQ=s88-c-k-c0x00ffffff-no-rj", "author": "@justinroark88", "slot": 0}, {"start": 62, "end": 64, "reading time": 2.0, "text": "Rio de janeiro and São Paulo", "reward": 3.9432569740059753, "correlation": "0.9858142435014938", "corr_A": "0.98", "corr_V": "0.13", "likes": 0.0, "norm_likes": 0.0, "norm_likes_real": 0.0, "photo": "https://yt3.ggpht.com/ytc/AIdro_nUhZriz2KXkG-cLbVcFBhdTgMHILcMezFaVfB-PNIgzZA=s88-c-k-c0x00ffffff-no-rj", "author": "@kingninobrown6211", "slot": 0}, {"start": 64, "end": 66, "reading time": 2.0, "text": "Rio di Janeiro and SAN paulo", "reward": 3.877943538901008, "correlation": "0.969485884725252", "corr_A": "0.96", "corr_V": "0.13", "likes": 0.0, "norm_likes": 0.0, "norm_likes_real": 0.0, "photo": "https://yt3.ggpht.com/ytc/AIdro_kNpWaAlFicl2Y6mLF4u6vZ7WZ8YJAgsVLVI4vyMSEzHG0=s88-c-k-c0x00ffffff-no-rj", "author": "@RealEyesRealiseRealLies", "slot": 0}, {"start": 66, "end": 70, "reading time": 4.0, "text": "\"Don't leave us James, you stay right there.\" 🤣", "reward": 7.328730162276308, "correlation": "0.4634552903474218", "corr_A": "0.46", "corr_V": "0.04", "likes": 102.0, "norm_likes": 0.9052719598742334, "norm_likes_real": 0.9052719598742334, "photo": "https://yt3.ggpht.com/RP5uJW1lJeekyAIJL-Mc2Q38CWqyinvwmvrG6titksIDbZ7TKhMpcJ5CyiKLiBgWVl6Gu9fPsg=s88-c-k-c0x00ffffff-no-rj", "author": "@KiyaTheDon", "slot": 0}, {"start": 70, "end": 74, "reading time": 4.0, "text": "I concerned, because there is nothing wrong lol", "reward": 10.232444725623356, "correlation": "0.8560921132527248", "corr_A": "0.86", "corr_V": "0.0", "likes": 41.0, "norm_likes": 0.8459269549003895, "norm_likes_real": 0.8459269549003895, "photo": "https://yt3.ggpht.com/ytc/AIdro_mTghJsKTwYNengBNbS4k_5EJ66oKPTgpVfstL_rJ6cxw=s88-c-k-c0x00ffffff-no-rj", "author": "@lhowlett88", "slot": 0}, {"start": 74, "end": 78, "reading time": 4.0, "text": "\"I'm concerned cause thiers nothing wrong\" 😂😂😂", "reward": 9.289696527580354, "correlation": "0.6852418689385777", "corr_A": "0.68", "corr_V": "0.09", "likes": 335.0, "norm_likes": 0.9519403940179327, "norm_likes_real": 0.9519403940179327, "photo": "https://yt3.ggpht.com/ytc/AIdro_luyFxbdwpYwK1GNT3IhckI4s5k2jt-3gEnQGsWXQ=s88-c-k-c0x00ffffff-no-rj", "author": "@brentthomas4696", "slot": 0}, {"start": 78, "end": 84, "reading time": 6.0, "text": "What are you gonna say to your fans when they ask you some questions about it?  I'M GONNA SAY I FEEL GOOOOOOOOOOOOOOD!!!!!!!!!!!", "reward": 14.208588047144836, "correlation": "0.7408080126147116", "corr_A": "0.74", "corr_V": "0.08", "likes": 73.0, "norm_likes": 0.8864819826280496, "norm_likes_real": 0.8864819826280496, "photo": "https://yt3.ggpht.com/ytc/AIdro_kPIvojiB8PJzNYzdsoN_ubCUVUiqENajk26yyX3O91aQ=s88-c-k-c0x00ffffff-no-rj", "author": "@4251268", "slot": 0}, {"start": 84, "end": 86, "reading time": 2.0, "text": "Papa's got a brand new bag!", "reward": 5.279299580298495, "correlation": "0.9450092409271743", "corr_A": "0.94", "corr_V": "0.06", "likes": 16.0, "norm_likes": 0.7496313082948992, "norm_likes_real": 0.7496313082948992, "photo": "https://yt3.ggpht.com/atrxmhnA1R0do6Y6r00SutkVytSfvd6L-kMurRkMw-vNoPOMqx63iuCx6xzITTd7haUdi0f12w=s88-c-k-c0x00ffffff-no-rj", "author": "@blingviera7925", "slot": 0}, {"start": 86, "end": 91, "reading time": 5.0, "text": "\"This is a MANS World!!\"   'Yes, thank you for reminding us of that'", "reward": 10.898409633620997, "correlation": "0.6649790358066194", "corr_A": "0.65", "corr_V": "0.15", "likes": 43.0, "norm_likes": 0.8497238551109604, "norm_likes_real": 0.8497238551109604, "photo": "https://yt3.ggpht.com/ytc/AIdro_lK7iYF1lIH1iQzJpSO3kT40dDN_IY19IqrFuhjm34RoTaQ=s88-c-k-c0x00ffffff-no-rj", "author": "@davidarmstrong1862", "slot": 0}, {"start": 91, "end": 97, "reading time": 6.0, "text": "Interviewer: \"It sounds to me like you're not troubled by this at all\" James: \"This is a maaaan's world!\"   Dark.", "reward": 11.460065277024219, "correlation": "0.48013144951713055", "corr_A": "0.42", "corr_V": "0.23", "likes": 311.0, "norm_likes": 0.9497479804697753, "norm_likes_real": 0.9497479804697753, "photo": "https://yt3.ggpht.com/ytc/AIdro_mUwjDU8B23TU23xE5SWN_-NKJqtrl6VMlrNTVHjRkQ3NQ=s88-c-k-c0x00ffffff-no-rj", "author": "@hobossuck2", "slot": 0}, {"start": 97, "end": 102, "reading time": 5.0, "text": "This is the greatest interview of all time. LIVIN IN AMERICA! JAM!", "reward": 8.44515344334644, "correlation": "0.39714504683188895", "corr_A": "0.21", "corr_V": "0.34", "likes": 84.0, "norm_likes": 0.89474059500551, "norm_likes_real": 0.89474059500551, "photo": "https://yt3.ggpht.com/ytc/AIdro_kDvygGSGvly1hwjJ6o-7au9vaCbKwkwtKHSt2p5Gr4wsE=s88-c-k-c0x00ffffff-no-rj", "author": "@doomgloom8414", "slot": 0}, {"start": 102, "end": 105, "reading time": 3.0, "text": "Papas snorted an whole new bag", "reward": 5.81105440977225, "correlation": "0.4787821079564028", "corr_A": "0.48", "corr_V": "0.02", "likes": 1200.0, "norm_likes": 0.9794539206779445, "norm_likes_real": 0.9794539206779445, "photo": "https://yt3.ggpht.com/ytc/AIdro_k_iHRN_l0TsKsAqRXBnKvUhZMHXsLhXvCXgVIQHJzdJTRw7Wt_G9XEs4chamQySZQzjQ=s88-c-k-c0x00ffffff-no-rj", "author": "@tgl9466", "slot": 0}, {"start": 105, "end": 107, "reading time": 2.0, "text": "Sex Machineeeee", "reward": 3.7448530612664865, "correlation": "0.7912029744361075", "corr_A": "0.79", "corr_V": "0.1", "likes": 2.0, "norm_likes": 0.29002058176102813, "norm_likes_real": 0.29002058176102813, "photo": "https://yt3.ggpht.com/nZ_OPfAzdivL8-MIeuz-sOUDL74FrJSVddeOOkvY9c4njvO3TiomB8BDBCThNfDs37l2IDBE=s88-c-k-c0x00ffffff-no-rj", "author": "@Emwrwld", "slot": 0}, {"start": 107, "end": 110, "reading time": 3.0, "text": "I look good, I smell good, I FEEL GOOD", "reward": 6.4289783023835545, "correlation": "0.6388024626593566", "corr_A": "0.61", "corr_V": "0.2", "likes": 53.0, "norm_likes": 0.8653878421424718, "norm_likes_real": 0.8653878421424718, "photo": "https://yt3.ggpht.com/8fLiZleIvtg13kTa15y9-vb7P5YmVKsCn0jowTH3nmW__0mESXtgGeLTn8FGFaAO9bjMsbSI=s88-c-k-c0x00ffffff-no-rj", "author": "@honeylove777", "slot": 0}, {"start": 110, "end": 113, "reading time": 3.0, "text": "\"Hello TED!\" I almost died. \"JAM!\" lmao", "reward": 5.541279668260492, "correlation": "0.4929556497181944", "corr_A": "0.47", "corr_V": "0.16", "likes": 50.0, "norm_likes": 0.8611819233171083, "norm_likes_real": 0.8611819233171083, "photo": "https://yt3.ggpht.com/jbRKbgt1QiHxiHWzmIAcmVxdeTiSqmUzc1HEWi8phnZ4WdJxIuZ6GBdCP3Ax7DZ5K-O0IbivHw=s88-c-k-c0x00ffffff-no-rj", "author": "@TroubleinZION", "slot": 0}, {"start": 113, "end": 117, "reading time": 4.0, "text": "James was higher than the international space station", "reward": 7.637616203668589, "correlation": "0.45789586451531095", "corr_A": "0.46", "corr_V": "0.01", "likes": 4000.0, "norm_likes": 0.9936123218865254, "norm_likes_real": 0.9936123218865254, "photo": "https://yt3.ggpht.com/ytc/AIdro_kbwbJFK9QGtLzYWNPEEetOiflfVmBDd2I5rQ4OgfF9Dsc=s88-c-k-c0x00ffffff-no-rj", "author": "@AlexTheeGr8t", "slot": 0}, {"start": 117, "end": 122, "reading time": 5.0, "text": "I bet the cameraman was laughing his ass off recording James Brown", "reward": 8.851731742736833, "correlation": "0.3981526760122454", "corr_A": "0.02", "corr_V": "0.4", "likes": 870.0, "norm_likes": 0.9740409965228757, "norm_likes_real": 0.9740409965228757, "photo": "https://yt3.ggpht.com/ytc/AIdro_n7417ek-18wzJI3ZENBm0JLEsWrCcksbQ7WKdHv1tzFUdXjGULqP2rM3Knc8d3lEC4qw=s88-c-k-c0x00ffffff-no-rj", "author": "@truthtellerbelievethat1813", "slot": 0}, {"start": 122, "end": 127, "reading time": 5.0, "text": "I’m single and I wanna mingle 😂  Best celebrity interview ever", "reward": 10.78724021122158, "correlation": "0.6156360155729127", "corr_A": "0.57", "corr_V": "0.23", "likes": 160.0, "norm_likes": 0.9261760110984905, "norm_likes_real": 0.9261760110984905, "photo": "https://yt3.ggpht.com/Qx-wiVTXIRGlh6B-OL4AIPbxTyzEwa8Ysqpe_QSwPZ56SiM4r8wd76u9K3ZGr6JbCi-NwwUt=s88-c-k-c0x00ffffff-no-rj", "author": "@livininamerica76", "slot": 0}, {"start": 127, "end": 129, "reading time": 2.0, "text": "Yeah that's tragic", "reward": 3.013390468766251, "correlation": "0.3357983061266047", "corr_A": "0.34", "corr_V": "0.0", "likes": 36.0, "norm_likes": 0.8350986221299161, "norm_likes_real": 0.8350986221299161, "photo": "https://yt3.ggpht.com/0A5koj9I-zbrE5mc3oDJkaKyH2YaBNT7sO8L26fiMqgukcr4TG_SZr_5OGoleyfTEWiJMKfk4w=s88-c-k-c0x00ffffff-no-rj", "author": "@thisislaflaretv5250", "slot": 0}, {"start": 129, "end": 135, "reading time": 6.0, "text": "\"The women love you when you get out there, why is that?\" \"What'd you say\" \"The women love you when you get out there\" \"Why is that ladies\" \"Idk im asking you\" Lmao", "reward": 12.107337173380724, "correlation": "0.6106571569011635", "corr_A": "0.6", "corr_V": "0.13", "likes": 24.0, "norm_likes": 0.7965752150944605, "norm_likes_real": 0.7965752150944605, "photo": "https://yt3.ggpht.com/ytc/AIdro_nV6ELe6egiQx6EG71nmpMIOz27Kop4RY_G9dDonLY=s88-c-k-c0x00ffffff-no-rj", "author": "@dchill784", "slot": 0}, {"start": 135, "end": 136, "reading time": 1.0, "text": "Huh?", "reward": 1.9974579009099378, "correlation": "0.9987289504549689", "corr_A": "1.0", "corr_V": "0.02", "likes": 0.0, "norm_likes": 0.0, "norm_likes_real": 0.0, "photo": "https://yt3.ggpht.com/ytc/AIdro_mB0AEzuPBnHUnbJ05Kn6OFC0GWil99rk2mq0C8tMcOp8jSTPBxtIYFzdnOER1R9KYpvA=s88-c-k-c0x00ffffff-no-rj", "author": "@truebetold65", "slot": 0}, {"start": 136, "end": 141, "reading time": 5.0, "text": "Cause I look good, I smell good, I feel good and make love good!! XD", "reward": 11.004562201868797, "correlation": "0.7344432139802473", "corr_A": "0.73", "corr_V": "0.1", "likes": 14.0, "norm_likes": 0.7320260124132649, "norm_likes_real": 0.7320260124132649, "photo": "https://yt3.ggpht.com/trtvfg79monnhE3gXSKuhDFiWLXr2jo6BvKdpjdj92VFhTYqAmZFCd0Q2s37JSUaGf0RGvIO=s88-c-k-c0x00ffffff-no-rj", "author": "@shimizukebin", "slot": 0}, {"start": 141, "end": 143, "reading time": 2.0, "text": "And make love good 😂😂😂", "reward": 5.191756543754029, "correlation": "0.8740096225844529", "corr_A": "0.87", "corr_V": "0.07", "likes": 42.0, "norm_likes": 0.8478590267081088, "norm_likes_real": 0.8478590267081088, "photo": "https://yt3.ggpht.com/esTw35sjJjFgLZEACICaRhQRtNPV39hisetTSs0q9ZETRaM4NOtaSrLHIztXjn3Bafyu71To_w=s88-c-k-c0x00ffffff-no-rj", "author": "@dretheman123", "slot": 0}, {"start": 143, "end": 147, "reading time": 4.0, "text": "Not bizarre, he's genius. He controlled the interview.", "reward": 6.715169684331158, "correlation": "0.3517695800470505", "corr_A": "0.1", "corr_V": "0.34", "likes": 931.0, "norm_likes": 0.9752532609886887, "norm_likes_real": 0.9752532609886887, "photo": "https://yt3.ggpht.com/ytc/AIdro_lx7H0adtM27ELLUCY2kwQrLFcANtzYc4684QcSUEgPuyQ=s88-c-k-c0x00ffffff-no-rj", "author": "@tanzilwaqia", "slot": 0}, {"start": 147, "end": 151, "reading time": 4.0, "text": "This interview was sponsored by Pablo Escobar", "reward": 6.959887959447929, "correlation": "0.38025903459201893", "corr_A": "0.23", "corr_V": "0.3", "likes": 1200.0, "norm_likes": 0.9794539206779445, "norm_likes_real": 0.9794539206779445, "photo": "https://yt3.ggpht.com/ytc/AIdro_mWfR3Aiu12ovAEbcrDkxfd2GFM2IqX8-n-iCb9ymw=s88-c-k-c0x00ffffff-no-rj", "author": "@litpanda136", "slot": 0}, {"start": 151, "end": 155, "reading time": 4.0, "text": "Perfect timing on bringing up the gospel magazine", "reward": 8.590627861967011, "correlation": "0.6695480162758516", "corr_A": "0.65", "corr_V": "0.16", "likes": 27.0, "norm_likes": 0.8085609329400497, "norm_likes_real": 0.8085609329400497, "photo": "https://yt3.ggpht.com/ytc/AIdro_nK3efg5PJSzGzCJT6CWidCKh3BlAibnc3Nf43IaNk3v78=s88-c-k-c0x00ffffff-no-rj", "author": "@__________Troll__________", "slot": 0}, {"start": 155, "end": 158, "reading time": 3.0, "text": "Second coming.  What a commercial😂", "reward": 6.8278212358632135, "correlation": "0.7216395849561823", "corr_A": "0.72", "corr_V": "0.07", "likes": 35.0, "norm_likes": 0.83266124204204, "norm_likes_real": 0.83266124204204, "photo": "https://yt3.ggpht.com/ytc/AIdro_lm4tfYMnqQsg3tNWuVJR93JZYcTzIAV4_vhF1M22w=s88-c-k-c0x00ffffff-no-rj", "author": "@saminevalainen3554", "slot": 0}, {"start": 158, "end": 164, "reading time": 6.0, "text": "someone give that news anchor an award for being able to keep the interview  going.....\"every once in a while we forget\" we got that straight from the source\" just classic, had me laughing so much my sides hurt", "reward": 11.089816522269357, "correlation": "0.44227249863548623", "corr_A": "0.13", "corr_V": "0.42", "likes": 528.0, "norm_likes": 0.963757756440587, "norm_likes_real": 0.963757756440587, "photo": "https://yt3.ggpht.com/ytc/AIdro_lqRNO_EYL3uMRqqLTvN7J4rAs51LBebp4HjuLmmfDfM5s=s88-c-k-c0x00ffffff-no-rj", "author": "@jdouglas0182", "slot": 0}, {"start": 164, "end": 169, "reading time": 5.0, "text": "This interview is one of the main reasons why James Brown is the G.O.A.T.", "reward": 11.411087964274454, "correlation": "0.6640370917885366", "corr_A": "0.62", "corr_V": "0.24", "likes": 362.0, "norm_likes": 0.9541434092778176, "norm_likes_real": 0.9541434092778176, "photo": "https://yt3.ggpht.com/qxUAfjDMF9tjdSyKVCvCjmwz7o_thHpgvT9Hy_ahOGhhSjGxyIx2qpLzmZ06JmDOh1vfncO1VQ=s88-c-k-c0x00ffffff-no-rj", "author": "@BadAssMacmillan", "slot": 0}, {"start": 169, "end": 175, "reading time": 6.0, "text": "Eyes as wide as dinner plates:  \"Um, uh we got the pope, and uh, we got the Wil..the Williasmsr..brothers.....\"", "reward": 12.05356497735384, "correlation": "0.5584969276505061", "corr_A": "0.53", "corr_V": "0.18", "likes": 80.0, "norm_likes": 0.8919336409246278, "norm_likes_real": 0.8919336409246278, "photo": "https://yt3.ggpht.com/ytc/AIdro_l1YFuu7w3mynn9flJczjvzWOSgKjf5bIfhM4j_OfY=s88-c-k-c0x00ffffff-no-rj", "author": "@sgshumblecrumb6046", "slot": 0}, {"start": 175, "end": 179, "reading time": 4.0, "text": "Micheal Jackson and Prince's biggest idol ...", "reward": 8.085559768629913, "correlation": "0.5412431257447017", "corr_A": "0.49", "corr_V": "0.23", "likes": 223.0, "norm_likes": 0.9389036906680751, "norm_likes_real": 0.9389036906680751, "photo": "https://yt3.ggpht.com/ytc/AIdro_mBlfBc9NtKbTUgIQn3EnX3Wk5NuRsSyPbbEjsSz69VMlM=s88-c-k-c0x00ffffff-no-rj", "author": "@james12erby43", "slot": 0}, {"start": 179, "end": 185, "reading time": 6.0, "text": "He got himself together  REAL QUICK when they asked him about that gospel magazine lolol", "reward": 10.888789029114028, "correlation": "0.41266472359450296", "corr_A": "0.34", "corr_V": "0.23", "likes": 2600.0, "norm_likes": 0.9894687243299988, "norm_likes_real": 0.9894687243299988, "photo": "https://yt3.ggpht.com/ytc/AIdro_kVfxBemKTXVOvYzuHj3r_aqBBGDF_m8iUtvR9qB3klUkFKm43FfQihtLRU7-euWiffJg=s88-c-k-c0x00ffffff-no-rj", "author": "@95iamalex", "slot": 0}, {"start": 185, "end": 191, "reading time": 6.0, "text": "Until it got to \"hopefully we'll get Brother Ted Turner on the cover\", that is! 😂😁", "reward": 15.310038911751871, "correlation": "0.808930312256948", "corr_A": "0.78", "corr_V": "0.2", "likes": 194.0, "norm_likes": 0.9338125274447494, "norm_likes_real": 0.9338125274447494, "photo": "https://yt3.ggpht.com/bkZoAx7OhBSfXVghjO4Lgz7xasecC78CXUJotFAL70lG8yIsxMy8-7GfWRaDHoboqA1GPI-vdw=s88-c-k-c0x00ffffff-no-rj", "author": "@timmy841212", "slot": 0}, {"start": 191, "end": 197, "reading time": 6.0, "text": "If I'm having a bad day or feel depressed I can watch this interview and instantly feel better. Thanks James Brown. You were truly awesome and most definitely one of a kind.", "reward": 12.104741463500861, "correlation": "0.548824947376256", "corr_A": "0.47", "corr_V": "0.29", "likes": 138.0, "norm_likes": 0.9198070158309649, "norm_likes_real": 0.9198070158309649, "photo": "https://yt3.ggpht.com/ytc/AIdro_n5tFtB5QAkxwOOFzylaIiW1wQCWWt_x-ObBvNz_Og=s88-c-k-c0x00ffffff-no-rj", "author": "@christopherreeves7807", "slot": 0}, {"start": 197, "end": 200, "reading time": 3.0, "text": "1988: A man's world 2018: A trans world 😕", "reward": 5.1967613611502586, "correlation": "0.38396753761521135", "corr_A": "0.13", "corr_V": "0.36", "likes": 541.0, "norm_likes": 0.9643187118196633, "norm_likes_real": 0.9643187118196633, "photo": "https://yt3.ggpht.com/ytc/AIdro_mYFWNYTzFEYE8eyZRL_Y3-gP6bHn9U20uozy8KbwQ=s88-c-k-c0x00ffffff-no-rj", "author": "@KangenKrazy", "slot": 0}, {"start": 200, "end": 206, "reading time": 6.0, "text": "Reporter: How did all of this trouble begin?  James Brown: Living in America ... Ain't that the truth", "reward": 10.839194854405996, "correlation": "0.4097320797163066", "corr_A": "0.23", "corr_V": "0.34", "likes": 2100.0, "norm_likes": 0.9870683163017195, "norm_likes_real": 0.9870683163017195, "photo": "https://yt3.ggpht.com/ytc/AIdro_k56d52RnXrDqfJU_HHfjjjYOmgAl8oKTNHP95FdRq-ZnQ=s88-c-k-c0x00ffffff-no-rj", "author": "@KBplay", "slot": 0}, {"start": 206, "end": 207, "reading time": 1.0, "text": "I FEEL GOOD", "reward": 2.515864986224832, "correlation": "0.9480714946134355", "corr_A": "0.95", "corr_V": "0.07", "likes": 7.0, "norm_likes": 0.6197219969979613, "norm_likes_real": 0.6197219969979613, "photo": "https://yt3.ggpht.com/ytc/AIdro_mIzxvlJQXdYXiMLMkSG3BtnxlFzZYfPuuWuSw4Eyhgpj4=s88-c-k-c0x00ffffff-no-rj", "author": "@davidelithorpe6696", "slot": 0}, {"start": 207, "end": 209, "reading time": 2.0, "text": "I wanna be that happy.", "reward": 3.781735666778462, "correlation": "0.44885223998733603", "corr_A": "0.44", "corr_V": "0.07", "likes": 3800.0, "norm_likes": 0.9931633534145589, "norm_likes_real": 0.9931633534145589, "photo": "https://yt3.ggpht.com/yloM_cXAvRhXd09VqPpu34teVHXogKa9oc70aHg7tUobb8zd6bKSuY6EBBVTqVSx2vqEa0hJ=s88-c-k-c0x00ffffff-no-rj", "author": "@DavidDiMuzio", "slot": 0}, {"start": 209, "end": 215, "reading time": 6.0, "text": "\"It sounds to me you're not troubled by any of this.\" \"This is a maaaaaan's world!\"  LMAO", "reward": 11.702557127326251, "correlation": "0.4826262402709628", "corr_A": "0.48", "corr_V": "0.0", "likes": 1800.0, "norm_likes": 0.9851737073457829, "norm_likes_real": 0.9851737073457829, "photo": "https://yt3.ggpht.com/ytc/AIdro_kd5QLSPvtfiBA0binHlA5pkePDJP6SqHA_6FybuskmZQ=s88-c-k-c0x00ffffff-no-rj", "author": "@PabloCruise91", "slot": 0}, {"start": 215, "end": 218, "reading time": 3.0, "text": "\"Every once in a while we forget\" 😳😆", "reward": 6.274397987524738, "correlation": "0.7972967573723012", "corr_A": "0.8", "corr_V": "0.0", "likes": 4.0, "norm_likes": 0.49687248109697707, "norm_likes_real": 0.49687248109697707, "photo": "https://yt3.ggpht.com/CPAyY8zqa4G7ZSjhj0-EuI-SMcCtFnra7i4Jg8-82IyahFnaUX7aCqRJCcLgWdNkzWhLkqK2cik=s88-c-k-c0x00ffffff-no-rj", "author": "@Austin_Bergen", "slot": 0}, {"start": 218, "end": 224, "reading time": 6.0, "text": "Yes, but I love the bit at the end... \"Thank you for reminding us of that....every now and then we almost forget...\" LOL!!", "reward": 11.153186338282877, "correlation": "0.45606361442401655", "corr_A": "0.46", "corr_V": "0.0", "likes": 282.0, "norm_likes": 0.9467371608657799, "norm_likes_real": 0.9467371608657799, "photo": "https://yt3.ggpht.com/ytc/AIdro_lD2KDIhw-__bes4TlMfB8-BqICiAuu1osbp-nlLz0=s88-c-k-c0x00ffffff-no-rj", "author": "@systemsoversymptomsvisionw9806", "slot": 0}];
+
+    // 요소 참조
+    var video=null, commentsContainer=null, commentsOverlay=null, likesOverlay=null;
+    var playPauseBtn=null, playIcon=null, pauseIcon=null;
+    var progressContainer=null, progressBar=null;
+    var timeDisplay=null;
+
+    var isDragging=false;
+
+    document.addEventListener('DOMContentLoaded', function(){
+      video = document.getElementById('video-player');
+      commentsContainer = document.getElementById('comments-container');
+      commentsOverlay = document.getElementById('comments-overlay');
+      likesOverlay = document.getElementById('likes-overlay');
+      playPauseBtn = document.getElementById('play-pause-btn');
+      playIcon = document.getElementById('play-icon');
+      pauseIcon = document.getElementById('pause-icon');
+      progressContainer = document.getElementById('progress-container');
+      progressBar = document.getElementById('progress-bar');
+      timeDisplay = document.getElementById('time-display');
+
+      // start 기준 정렬
+      optimalComments.sort((a,b)=>a.start-b.start);
+
+      // 이벤트 바인딩
+      video.addEventListener('timeupdate', onTimeUpdate);
+      video.addEventListener('loadedmetadata', ()=>{ updateTimeDisplay(); recalcOverlayByComments(); });
+      video.addEventListener('play', updatePlayPauseButton);
+      video.addEventListener('pause', updatePlayPauseButton);
+
+      playPauseBtn.addEventListener('click', togglePlayPause);
+      progressContainer.addEventListener('click', seekVideo);
+      progressContainer.addEventListener('mousedown', startDrag);
+      document.addEventListener('mousemove', doDrag);
+      document.addEventListener('mouseup', endDrag);
+
+      window.addEventListener('resize', recalcOverlayByComments);
+
+      // 초기 상태
+      updatePlayPauseButton();
+    });
+
+    function togglePlayPause(){ if(video.paused) video.play(); else video.pause(); }
+    function updatePlayPauseButton(){
+      if(video.paused){ playIcon.style.display='block'; pauseIcon.style.display='none'; }
+      else { playIcon.style.display='none'; pauseIcon.style.display='block'; }
+    }
+
+    function updateTimeDisplay(){
+      if(!video.duration) return;
+      const cur = formatTime(video.currentTime);
+      const tot = formatTime(video.duration);
+      timeDisplay.textContent = `${cur} / ${tot}`;
+    }
+
+    function onTimeUpdate(){
+      const t = video.currentTime;
+      // 진행바
+      if(video.duration){ progressBar.style.width = ((t/video.duration)*100) + '%'; }
+      updateTimeDisplay();
+
+      // 댓글 표시/제거
+      optimalComments.forEach(function(cmt, idx){
+        var el = document.getElementById('comment-'+idx);
+        if(cmt.start <= t && t < cmt.end){
+          if(!el) addLiveComment(cmt, idx);
+        } else if(el && t >= cmt.end){
+          // 페이드 아웃 후 제거, likes도 함께 제거
+          el.style.opacity = '0';
+          var likeEl = document.getElementById('like-'+idx);
+          if(likeEl) likeEl.style.opacity = '0';
+          setTimeout(()=>{
+            if(el && el.parentNode) el.remove();
+            if(likeEl && likeEl.parentNode) likeEl.remove();
+            recalcOverlayByComments();
+          }, 300);
+        }
+      });
+      // 위치 동기화
+      syncLikesPositions();
+    }
+
+    function startDrag(e){ isDragging=true; e.preventDefault(); updateVideoTime(e); }
+    function doDrag(e){ if(!isDragging) return; e.preventDefault(); updateVideoTime(e); }
+    function endDrag(){ isDragging=false; }
+    function seekVideo(e){ if(e.type==='click'){ setTimeout(()=>{ if(!isDragging) updateVideoTime(e); },10); } }
+    function updateVideoTime(e){
+      const rect = progressContainer.getBoundingClientRect();
+      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left)/rect.width));
+      video.currentTime = pos * video.duration;
+    }
+
+    function addLiveComment(cmt, idx){
+      var div = document.createElement('div');
+      div.className = 'live-comment';
+      div.id = 'comment-' + idx;
+
+      var user = cmt.author || cmt.user || getRandomName();
+      var txt = cmt.text || '';
+      var likes = (cmt.likes !== undefined) ? cmt.likes : 0;
+      var profileColor = getRandomColor();
+      var photo = cmt.photo;
+
+      div.innerHTML = `
+        <div class="comment-content">
+          <div class="text-content">
+            <div class="user-info">
+              ${photo ? `<img class="profile-photo" src="${photo}" alt="Profile" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />` : ''}
+              <div class="profile-icon" style="background-color:${profileColor}; display:${photo ? 'none' : 'block'};"></div>
+              <span class="username">${user}</span>
+            </div>
+            <span class="comment-text">${txt}</span>
+          </div>
+        </div>`;
+
+      // 등장 애니메이션 기본값
+      div.style.bottom = '10px';
+      div.style.opacity = '0';
+      commentsContainer.appendChild(div);
+      // 좋아요/하트는 별도 오버레이 레이어에 렌더링(마스크 비적용)
+      var like = document.createElement('div');
+      like.className = 'like-item';
+      like.id = 'like-' + idx;
+      like.style.bottom = '10px';
+      like.style.opacity = '0';
+      like.innerHTML = `
+        <svg class="heart-icon" viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <span class="likes-number">${formatLikes(likes)}</span>`;
+      likesOverlay.appendChild(like);
+
+      // 생성 직후 위치/여백 계산을 먼저 수행해 점프 방지
+      placeLikeForComment(div, like);
+      reserveTextSpace(div, like);
+
+      setTimeout(()=>{ div.style.opacity='1'; like.style.opacity='1'; recalcOverlayByComments(); }, 50);
+    }
+
+    // ===== A 스타일: 댓글 길이에 따라 오버레이 높이와 마스크 가변 =====
+    const OVERLAY_PADDING = 15; // 하단 여백
+    const OVERLAY_MIN = 68;     // 최소 높이
+    const OVERLAY_MAX_RATIO = 0.55; // 비디오 높이 대비 최대 비율
+    const USERINFO_EXTRA = 16;  // user-info 라인 여유치
+
+    function clampOverlayHeight(px){
+      const vc = document.querySelector('.video-container');
+      const vh = vc?.getBoundingClientRect().height || 0;
+      const maxH = vh ? Math.floor(vh * OVERLAY_MAX_RATIO) : 260;
+      return Math.max(OVERLAY_MIN, Math.min(px, maxH));
+    }
+
+    function recalcOverlayByComments(){
+      const visibles = Array.from(commentsContainer.querySelectorAll('.live-comment'));
+      if(visibles.length === 0){
+        const h = clampOverlayHeight(OVERLAY_MIN);
+        commentsOverlay.style.setProperty('--overlay-h', h + 'px');
+        commentsContainer.style.setProperty('--mask-stop', '35%');
+        return;
+      }
+
+      let maxCardH = 0;
+      visibles.forEach(el=>{ const r = el.getBoundingClientRect(); maxCardH = Math.max(maxCardH, r.height); });
+
+      const desired = clampOverlayHeight(Math.ceil(maxCardH + OVERLAY_PADDING + USERINFO_EXTRA));
+      commentsOverlay.style.setProperty('--overlay-h', desired + 'px');
+
+      let maskStop = 45;
+      if(desired > 120) maskStop = 55;
+      if(desired > 160) maskStop = 65;
+      if(desired > 200) maskStop = 72;
+      commentsContainer.style.setProperty('--mask-stop', maskStop + '%');
+      // 좋아요 위치 재계산
+      syncLikesPositions();
+    }
+    
+    function syncLikesPositions(){
+      if(!commentsOverlay || !commentsContainer || !likesOverlay) return;
+      const overlayRect = commentsOverlay.getBoundingClientRect();
+      const comments = Array.from(commentsContainer.querySelectorAll('.live-comment'));
+      comments.forEach(el=>{
+        const id = el.id || '';
+        const idx = id.split('-')[1];
+        if(idx === undefined) return;
+        const likeEl = document.getElementById('like-'+idx);
+        if(!likeEl) return;
+        placeLikeForComment(el, likeEl, overlayRect);
+        likeEl.style.opacity = getComputedStyle(el).opacity;
+        reserveTextSpace(el, likeEl);
+      });
+    }
+    
+    function placeLikeForComment(commentEl, likeEl, overlayRectOpt){
+      if(!commentsOverlay) return;
+      const overlayRect = overlayRectOpt || commentsOverlay.getBoundingClientRect();
+      const userInfo = commentEl.querySelector('.user-info');
+      const targetRect = (userInfo ? userInfo.getBoundingClientRect() : commentEl.getBoundingClientRect());
+      const likeH = Math.round(likeEl.getBoundingClientRect().height || 0);
+      const bottomPx = Math.max(0, Math.round(overlayRect.bottom - targetRect.top - likeH));
+      likeEl.style.bottom = bottomPx + 'px';
+    }
+    
+    function reserveTextSpace(commentEl, likeEl){
+      const textContainer = commentEl.querySelector('.text-content') || commentEl;
+      const likeRect = likeEl.getBoundingClientRect();
+      const reserve = Math.max(28, Math.round(likeRect.width) + 8);
+      textContainer.style.paddingRight = reserve + 'px';
+    }
+  </script>
+</body>
+</html>

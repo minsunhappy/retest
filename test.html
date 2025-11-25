@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인터페이스 테스트</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .instruction {
+            font-size: 16px;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+        }
+
+        .interface-container {
+            width: 100%;
+            margin-bottom: 40px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .interface-loading {
+            padding: 30px;
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+            border-bottom: 1px solid #eee;
+            background-color: #fafafa;
+            white-space: pre-line;
+        }
+
+        .interface-loading.error {
+            color: #c0392b;
+            background-color: #fff4f4;
+        }
+
+        .interface-frame {
+            width: 100%;
+            min-height: 720px;
+            height: auto;
+            border: none;
+            display: block;
+            background-color: #000;
+        }
+
+        .interface-frame.hidden {
+            visibility: hidden;
+        }
+
+        .questions-section {
+            margin-top: 40px;
+        }
+
+        .question-group {
+            margin-bottom: 10px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .question-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .question-title u {
+            text-decoration: underline;
+        }
+
+        .scale-container {
+            display: flex;
+            flex-direction: column;
+            margin: 10px 0;
+            padding: 0 10px;
+        }
+
+        .scale-options-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .scale-label-left,
+        .scale-label-right {
+            font-size: 12px;
+            font-weight: bold;
+            color: #e74c3c;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .scale-label-left {
+            margin-right: 8px;
+        }
+
+        .scale-label-right {
+            margin-left: 8px;
+        }
+
+        .scale-options {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .scale-option {
+            flex: 0 0 auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 0;
+        }
+
+        .scale-option input[type="radio"] {
+            display: none;
+        }
+
+        .scale-option label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 3px;
+            margin-left: -1px;
+            margin-right: -1px;
+        }
+        
+        .scale-option:first-child label {
+            margin-left: 0;
+        }
+        
+        .scale-option:last-child label {
+            margin-right: 0;
+        }
+
+        .scale-option label:hover {
+            background-color: #e8f4f8;
+            border-color: #3498db;
+        }
+
+        .scale-option input[type="radio"]:checked + label {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn-next {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-next:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-next:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .progress-indicator {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="progress-indicator" id="progressIndicator">
+            테스트 진행 중... (1/5)
+        </div>
+
+        <div class="instruction">
+            다음 인터페이스에서 영상이 재생되는 동안 댓글을 함께 읽어주세요.
+        </div>
+
+        <div class="interface-container">
+            <div id="interfaceLoading" class="interface-loading" aria-live="polite">
+                인터페이스를 불러오는 중입니다...
+            </div>
+            <iframe
+                id="interfaceFrame"
+                class="interface-frame hidden"
+                title="테스트 인터페이스 영역"
+                allow="autoplay; fullscreen"
+            ></iframe>
+        </div>
+
+        <div class="questions-section" id="questionsSection">
+            <!-- 질문들이 동적으로 추가됩니다 -->
+        </div>
+
+        <div class="btn-container">
+            <button type="button" class="btn-next" id="nextBtn" onclick="handleNext()">다음</button>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        const nextBtn = document.getElementById('nextBtn');
+        const interfaceFrame = document.getElementById('interfaceFrame');
+        const interfaceLoading = document.getElementById('interfaceLoading');
+
+        const FRAME_MIN_HEIGHT = 720;
+
+        let questionsData = [];
+        let currentStep = getCurrentTestStep();
+        let pairs = [];
+        let frameResizeObserver = null;
+
+        async function loadQuestions() {
+            try {
+                const response = await fetch('questions.md', { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                const text = await response.text();
+                const parsed = parseQuestionsMarkdown(text);
+                questionsData = parsed && parsed.length > 0 ? parsed : getDefaultQuestions();
+            } catch (error) {
+                console.error('질문 파일을 불러올 수 없습니다:', error);
+                questionsData = getDefaultQuestions();
+            }
+        }
+
+        function parseQuestionsMarkdown(text) {
+            const questions = [];
+            const sections = text.split(/## 질문 \d+:/);
+
+            for (let i = 1; i < sections.length; i++) {
+                const section = sections[i];
+                let questionText = '';
+                const questionStart = section.indexOf('**질문 텍스트:**');
+                const questionEnd = section.indexOf('**척도:**');
+
+                if (questionStart !== -1 && questionEnd !== -1) {
+                    questionText = section
+                        .substring(questionStart + '**질문 텍스트:**'.length, questionEnd)
+                        .replace(/\n/g, ' ')
+                        .replace(/\s+/g, ' ')
+                        .trim();
+                }
+
+                let scaleLeft = '';
+                let scaleRight = '';
+                const scaleMatch = section.match(/- 1: (.+?)\n- 7: (.+?)(?=\n|$)/s);
+
+                if (scaleMatch) {
+                    scaleLeft = scaleMatch[1].trim();
+                    scaleRight = scaleMatch[2].trim();
+                }
+
+                if (questionText && scaleLeft && scaleRight) {
+                    questions.push({
+                        text: questionText,
+                        scaleLeft,
+                        scaleRight
+                    });
+                }
+            }
+
+            return questions.length > 0 ? questions : null;
+        }
+
+        function getDefaultQuestions() {
+            return [
+                {
+                    text: '[Mental Demand] 영상 시청 중 댓글을 읽는 과정의 정신적 부담 정도 (mental or cognitive demand)',
+                    scaleLeft: '매우 적다 (very low)',
+                    scaleRight: '매우 높다 (very high)'
+                },
+                {
+                    text: '[Physical Demand] 영상 시청 중 댓글을 읽는 과정의 신체적/물리적 노력 정도',
+                    scaleLeft: '매우 적다 (very low)',
+                    scaleRight: '매우 높다 (very high)'
+                },
+                {
+                    text: '[Temporal alignment] 현재 읽고 있는 댓글이 재생되고 있는 영상 내용과 어울리는 정도',
+                    scaleLeft: '매우 안어울림',
+                    scaleRight: '매우 어울림'
+                },
+                {
+                    text: '[Overall Engagement] 영상 시청 중 댓글을 읽는 시청 과정의 전반적인 흥미 및 몰입 정도',
+                    scaleLeft: '매우 낮음',
+                    scaleRight: '매우 높음'
+                }
+            ];
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questionsSection');
+            if (!container) {
+                return;
+            }
+            container.innerHTML = '';
+
+            if (!questionsData || questionsData.length === 0) {
+                return;
+            }
+
+            questionsData.forEach((question, index) => {
+                const questionGroup = document.createElement('div');
+                questionGroup.className = 'question-group';
+                questionGroup.id = `question-${index}`;
+
+                const title = document.createElement('div');
+                title.className = 'question-title';
+                title.innerHTML = `<strong><span style="font-size:16px;">${question.text}</span></strong>`;
+
+                const scaleContainer = document.createElement('div');
+                scaleContainer.className = 'scale-container';
+
+                const optionsWrapper = document.createElement('div');
+                optionsWrapper.className = 'scale-options-wrapper';
+
+                const leftLabel = document.createElement('div');
+                leftLabel.className = 'scale-label-left';
+                leftLabel.textContent = question.scaleLeft;
+
+                const options = document.createElement('div');
+                options.className = 'scale-options';
+
+                const errorMsg = document.createElement('div');
+                errorMsg.className = 'error-message';
+                errorMsg.id = `error-${index}`;
+                errorMsg.textContent = '이 질문에 답해주세요.';
+
+                for (let i = 1; i <= 7; i++) {
+                    const option = document.createElement('div');
+                    option.className = 'scale-option';
+
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = `question-${index}`;
+                    radio.id = `q${index}-option${i}`;
+                    radio.value = i;
+                    radio.required = true;
+                    radio.addEventListener('change', () => {
+                        errorMsg.style.display = 'none';
+                    });
+
+                    const label = document.createElement('label');
+                    label.htmlFor = `q${index}-option${i}`;
+                    label.textContent = i;
+
+                    option.appendChild(radio);
+                    option.appendChild(label);
+                    options.appendChild(option);
+                }
+
+                const rightLabel = document.createElement('div');
+                rightLabel.className = 'scale-label-right';
+                rightLabel.textContent = question.scaleRight;
+
+                optionsWrapper.appendChild(leftLabel);
+                optionsWrapper.appendChild(options);
+                optionsWrapper.appendChild(rightLabel);
+
+                scaleContainer.appendChild(optionsWrapper);
+
+                questionGroup.appendChild(title);
+                questionGroup.appendChild(scaleContainer);
+                questionGroup.appendChild(errorMsg);
+
+                container.appendChild(questionGroup);
+            });
+        }
+
+        function updateProgress() {
+            const progressEl = document.getElementById('progressIndicator');
+            if (!progressEl) {
+                return;
+            }
+            const total = pairs && pairs.length ? pairs.length : (CONFIG.numInterfaces || 5);
+            const stepDisplay = Math.min(currentStep + 1, total);
+            progressEl.textContent = `테스트 진행 중... (${stepDisplay}/${total})`;
+        }
+
+        function getPairByStep(stepIndex) {
+            if (pairs && pairs[stepIndex]) {
+                return pairs[stepIndex];
+            }
+
+            try {
+                const stored = JSON.parse(localStorage.getItem('interfaceDataPairs') || '[]');
+                return stored[stepIndex];
+            } catch (error) {
+                console.error('interfaceDataPairs 파싱 실패:', error);
+                return null;
+            }
+        }
+
+        function storeCurrentResult(stepIndex, answers) {
+            const pairSnapshot = getPairByStep(stepIndex);
+            if (!pairSnapshot) {
+                console.error('결과 저장 실패: pairSnapshot 없음', { stepIndex, pairs });
+                return;
+            }
+
+            const results = JSON.parse(localStorage.getItem('testResults') || '[]');
+            results[stepIndex] = {
+                interface: pairSnapshot.interface,
+                data: pairSnapshot.data,
+                answers,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('testResults', JSON.stringify(results));
+        }
+
+        function cleanupFrameResizeObserver() {
+            if (frameResizeObserver) {
+                frameResizeObserver.disconnect();
+                frameResizeObserver = null;
+            }
+        }
+
+        function getFrameDocument() {
+            if (!interfaceFrame) {
+                return null;
+            }
+            try {
+                return interfaceFrame.contentDocument || interfaceFrame.contentWindow?.document || null;
+            } catch (error) {
+                console.warn('iframe 문서를 확인할 수 없습니다:', error);
+                return null;
+            }
+        }
+
+        function updateFrameHeight() {
+            if (!interfaceFrame) {
+                return;
+            }
+            const doc = getFrameDocument();
+            if (!doc) {
+                return;
+            }
+
+            const body = doc.body;
+            const html = doc.documentElement;
+
+            const measured = Math.max(
+                body?.scrollHeight || 0,
+                body?.offsetHeight || 0,
+                html?.scrollHeight || 0,
+                html?.offsetHeight || 0,
+                FRAME_MIN_HEIGHT
+            );
+
+            interfaceFrame.style.height = `${measured}px`;
+        }
+
+        function observeFrameHeight() {
+            cleanupFrameResizeObserver();
+            const doc = getFrameDocument();
+            if (!doc) {
+                // 문서가 아직 준비되지 않았으면 약간 후에 다시 시도
+                setTimeout(observeFrameHeight, 200);
+                return;
+            }
+
+            updateFrameHeight();
+
+            if (typeof ResizeObserver === 'function') {
+                try {
+                    frameResizeObserver = new ResizeObserver(() => updateFrameHeight());
+                    if (doc.body) {
+                        frameResizeObserver.observe(doc.body);
+                    }
+                    if (doc.documentElement && doc.documentElement !== doc.body) {
+                        frameResizeObserver.observe(doc.documentElement);
+                    }
+                } catch (error) {
+                    console.warn('ResizeObserver 초기화 실패:', error);
+                    [0, 200, 500, 1000, 2000].forEach(delay => setTimeout(updateFrameHeight, delay));
+                }
+            } else {
+                [0, 200, 500, 1000, 2000].forEach(delay => setTimeout(updateFrameHeight, delay));
+            }
+        }
+
+        function setInterfaceStatus(message, isError = false) {
+            if (!interfaceLoading) {
+                return;
+            }
+            interfaceLoading.textContent = message;
+            interfaceLoading.classList.toggle('error', isError);
+            interfaceLoading.style.display = 'block';
+            if (interfaceFrame) {
+                interfaceFrame.classList.add('hidden');
+            }
+        }
+
+        function hideInterfaceStatus() {
+            if (interfaceLoading) {
+                interfaceLoading.style.display = 'none';
+            }
+            if (interfaceFrame) {
+                interfaceFrame.classList.remove('hidden');
+            }
+        }
+
+        function resolveInterfaceUrl(rawPath) {
+            if (!rawPath) {
+                throw new Error('인터페이스 경로가 비어 있습니다.');
+            }
+            if (/^https?:\/\//i.test(rawPath) || rawPath.startsWith('/')) {
+                return rawPath;
+            }
+            return new URL(rawPath, window.location.href).href;
+        }
+
+        function addCacheBuster(url) {
+            const separator = url.includes('?') ? '&' : '?';
+            return `${url}${separator}_cb=${Date.now()}`;
+        }
+
+        async function ensureInterfaceReachable(url) {
+            if (window.location.protocol === 'file:') {
+                return;
+            }
+
+            try {
+                const response = await fetch(url, { method: 'HEAD', cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (error) {
+                console.warn('HEAD 요청 실패, GET으로 재시도합니다.', error);
+                const retry = await fetch(url, { method: 'GET', cache: 'no-store' });
+                if (!retry.ok) {
+                    throw new Error(`HTTP ${retry.status}`);
+                }
+            }
+        }
+
+        function loadInterfaceIntoFrame(url) {
+            return new Promise((resolve, reject) => {
+                if (!interfaceFrame) {
+                    reject(new Error('인터페이스 프레임을 찾을 수 없습니다.'));
+                    return;
+                }
+
+                const finalUrl = addCacheBuster(url);
+
+                const cleanup = () => {
+                    interfaceFrame.removeEventListener('load', handleLoad);
+                    interfaceFrame.removeEventListener('error', handleError);
+                };
+
+                const handleLoad = () => {
+                    cleanup();
+                    resolve();
+                };
+
+                const handleError = () => {
+                    cleanup();
+                    reject(new Error('iframe 로드 실패'));
+                };
+
+                interfaceFrame.classList.add('hidden');
+                cleanupFrameResizeObserver();
+                interfaceFrame.addEventListener('load', handleLoad, { once: true });
+                interfaceFrame.addEventListener('error', handleError, { once: true });
+                interfaceFrame.src = finalUrl;
+            });
+        }
+
+        async function loadCurrentInterface() {
+            pairs = await getOrCreateInterfaceDataPairs();
+
+            if (!pairs || pairs.length === 0) {
+                setInterfaceStatus('인터페이스 목록을 불러오지 못했습니다.\nconfig.js 설정을 확인해주세요.', true);
+                return;
+            }
+
+            if (currentStep >= pairs.length) {
+                window.location.href = 'final.html';
+                return;
+            }
+
+            const currentPair = pairs[currentStep];
+            if (!currentPair) {
+                setInterfaceStatus('현재 단계를 불러올 수 없습니다. 페이지를 새로고침 해주세요.', true);
+                return;
+            }
+
+            const resolvedUrl = resolveInterfaceUrl(currentPair.dataPath);
+            setInterfaceStatus('인터페이스를 불러오는 중입니다...');
+
+            try {
+                await ensureInterfaceReachable(resolvedUrl);
+                await loadInterfaceIntoFrame(resolvedUrl);
+                hideInterfaceStatus();
+                observeFrameHeight();
+                document.querySelector('.interface-container')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } catch (error) {
+                console.error('인터페이스 로드 실패:', error);
+                setInterfaceStatus(
+                    `인터페이스를 불러오지 못했습니다.\n경로: ${currentPair.dataPath}\n오류: ${error.message}\n\nretest 폴더에서 로컬 서버를 실행했는지 확인해주세요.`,
+                    true
+                );
+                return;
+            }
+
+            updateProgress();
+        }
+
+        function validateForm() {
+            if (!questionsData || questionsData.length === 0) {
+                return false;
+            }
+
+            let isValid = true;
+
+            questionsData.forEach((question, index) => {
+                const checked = document.querySelectorAll(`input[name="question-${index}"]:checked`);
+                const errorMsg = document.getElementById(`error-${index}`);
+
+                if (checked.length === 0) {
+                    if (errorMsg) {
+                        errorMsg.style.display = 'block';
+                    }
+                    isValid = false;
+                } else if (errorMsg) {
+                    errorMsg.style.display = 'none';
+                }
+            });
+
+            return isValid;
+        }
+
+        function collectAnswers() {
+            const answers = [];
+            questionsData.forEach((question, index) => {
+                const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+                if (selected) {
+                    answers.push({
+                        questionIndex: index,
+                        questionText: question.text,
+                        answer: parseInt(selected.value, 10)
+                    });
+                }
+            });
+            return answers;
+        }
+
+        function requireParticipantData() {
+            const stored = localStorage.getItem('participantData');
+            if (!stored) {
+                alert('참가자 정보를 먼저 입력해주세요.');
+                window.location.href = 'index.html';
+                return false;
+            }
+            return true;
+        }
+
+        async function handleNext() {
+            if (nextBtn) {
+                nextBtn.disabled = true;
+            }
+
+            try {
+                if (!questionsData || questionsData.length === 0) {
+                    alert('질문을 불러오지 못했습니다. 페이지를 새로고침 해주세요.');
+                    return;
+                }
+
+                if (!validateForm()) {
+                    alert('모든 질문에 답해주세요.');
+                    return;
+                }
+
+                const answers = collectAnswers();
+                storeCurrentResult(currentStep, answers);
+
+                currentStep += 1;
+                setCurrentTestStep(currentStep);
+
+                pairs = await getOrCreateInterfaceDataPairs();
+                if (currentStep >= pairs.length) {
+                    window.location.href = 'final.html';
+                    return;
+                }
+
+                renderQuestions();
+                await loadCurrentInterface();
+            } catch (error) {
+                console.error('다음 단계로 이동 중 오류:', error);
+                alert('다음 단계로 이동하는 중 오류가 발생했습니다. 콘솔을 확인해주세요.');
+            } finally {
+                if (nextBtn) {
+                    nextBtn.disabled = false;
+                }
+            }
+        }
+
+        async function init() {
+            if (!requireParticipantData()) {
+                return;
+            }
+
+            try {
+                currentStep = getCurrentTestStep();
+                await loadQuestions();
+                renderQuestions();
+                await loadCurrentInterface();
+            } catch (error) {
+                console.error('초기화 실패:', error);
+                setInterfaceStatus(`초기화 중 오류가 발생했습니다.\n${error.message}`, true);
+            }
+        }
+
+        window.addEventListener('load', init);
+        window.addEventListener('resize', () => {
+            requestAnimationFrame(() => updateFrameHeight());
+        });
+    </script>
+</body>
+</html>
+

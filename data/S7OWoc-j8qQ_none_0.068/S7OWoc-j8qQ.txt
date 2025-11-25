@@ -1,0 +1,413 @@
+#######################################
+Video ID: S7OWoc-j8qQ
+Total Comments: 34
+Query Filter: <none>
+#######################################
+=======================================
+Start-End: 0 ~ 2
+Reward: 3.5464702127154477
+Likes: 15 || 0.7517536220131449 
+Correlation:
+  Overall: 0.5107407421722895
+  Audio: 0.0 | 
+  Video: 0.51 | The scene is set in a room decorated for Christmas, with a Christmas tree adorned with colorful lights and ornaments, and various toys scattered on the floor. The room has floral wallpaper, a round table, and a fireplace with a mirror. A white curtain partially covers a window. The curtain is gradually pulled aside, revealing a man in a dark coat. The man begins to lower himself through the window, first placing one leg inside. He continues to descend, holding onto the curtain for support. Finally, the man is seen halfway through the window, looking into the room.
+Text:
+  [[Best movie when Christmas]]
+=======================================
+
+=======================================
+Start-End: 2 ~ 5
+Reward: 5.663100509374276
+Likes: 1200 || 0.9923406441908437 
+Correlation:
+  Overall: 0.4476797628002909
+  Audio: 0.0 | 
+  Video: 0.45 | The scene is set in a room decorated for Christmas, with a Christmas tree adorned with colorful lights and ornaments, and various toys scattered on the floor. The room has floral wallpaper, a round table, and a fireplace with a mirror. A white curtain partially covers a window. The curtain is gradually pulled aside, revealing a man in a dark coat. The man begins to lower himself through the window, first placing one leg inside. He continues to descend, holding onto the curtain for support. Finally, the man is seen halfway through the window, looking into the room.
+Text:
+  [[Never gets old..The best Christmas movie ♥]]
+=======================================
+
+=======================================
+Start-End: 5 ~ 8
+Reward: 5.552052964975165
+Likes: 132 || 0.9301982130324971 
+Correlation:
+  Overall: 0.46024305431294565
+  Audio: 0.0 | 
+  Video: 0.46 | The scene is set in a room decorated for Christmas, with a Christmas tree adorned with colorful lights and ornaments, and various toys scattered on the floor. The room has floral wallpaper, a round table, and a fireplace with a mirror. A white curtain partially covers a window. The curtain is gradually pulled aside, revealing a man in a dark coat. The man begins to lower himself through the window, first placing one leg inside. He continues to descend, holding onto the curtain for support. Finally, the man is seen halfway through the window, looking into the room.
+Text:
+  [[I love this every christmas year lol]]
+=======================================
+
+=======================================
+Start-End: 8 ~ 14
+Reward: 10.898016844231464
+Likes: 163 || 0.9394228362837703 
+Correlation:
+  Overall: 0.43845665221073676
+  Audio: 0.0 | 
+  Video: 0.44 | The scene is set in a room decorated for Christmas, with a Christmas tree adorned with colorful lights and ornaments, and various toys scattered on the floor. The room has floral wallpaper, a round table, and a fireplace with a mirror. A white curtain partially covers a window. The curtain is gradually pulled aside, revealing a man in a dark coat. The man begins to lower himself through the window, first placing one leg inside. He continues to descend, holding onto the curtain for support. Finally, the man is seen halfway through the window, looking into the room.
+Text:
+  [[This is my all-time favorite Christmas movie, the burglars getting hurt from Kevin's traps never gets old.]]
+=======================================
+
+=======================================
+Start-End: 14 ~ 20
+Reward: 10.188473830732253
+Likes: 101 || 0.9170363795122642 
+Correlation:
+  Overall: 0.39052129613822234
+  Audio: 0.0 | 
+  Video: 0.39 | A person, initially seated on a step, begins to lower their feet towards the floor, surrounded by scattered Christmas ornaments and a lit Christmas tree. The person continues to descend, placing their feet on the floor amidst the ornaments. The person then stands up, fully placing their feet on the floor, and starts to move forward.
+Text:
+  [[0:14 🤣🤣🤣🤣🤣🤣Every year I still laugh at this funny trap on Marv 🤣🤣🤣My favourite Christmas film ever]]
+=======================================
+
+=======================================
+Start-End: 20 ~ 25
+Reward: 10.004733684430821
+Likes: 13 || 0.7320017273038295 
+Correlation:
+  Overall: 0.6344725047911673
+  Audio: 0.62 | I'm gonna kill that kid!
+  Video: 0.13 | A man, dressed in a dark suit, is seen holding a cane and standing next to a decorated Christmas tree in a room with floral wallpaper and green curtains. He suddenly falls backward onto the floor, landing near the Christmas tree. The man, now seated on the floor, appears to be in pain or discomfort as he clutches his side. He then begins to push himself up from the floor, using the cane for support. Finally, he manages to stand up, still holding the cane, and starts to move away from the Christmas tree.
+Text:
+  [[DAAAAAAAAAAAAAAAH AAH GAAH I'M GONNA KILL THAT KID (pop) OOW!!]]
+=======================================
+
+=======================================
+Start-End: 25 ~ 28
+Reward: 5.105078680553698
+Likes: 501 || 0.9752948020926512 
+Correlation:
+  Overall: 0.36319904571262396
+  Audio: 0.0 | 
+  Video: 0.37 | A man, dressed in a dark suit, is seen holding a cane and standing next to a decorated Christmas tree in a room with floral wallpaper and green curtains. He suddenly falls backward onto the floor, landing near the Christmas tree. The man, now seated on the floor, appears to be in pain or discomfort as he clutches his side. He then begins to push himself up from the floor, using the cane for support. Finally, he manages to stand up, still holding the cane, and starts to move away from the Christmas tree.
+Text:
+  [[Th glass ornaments gets me every time. ouch!]]
+=======================================
+
+=======================================
+Start-End: 28 ~ 34
+Reward: 10.793213402522683
+Likes: 12 || 0.7203359166120031 
+Correlation:
+  Overall: 0.539266491904222
+  Audio: 0.0 | 
+  Video: 0.54 | A person is seen walking barefoot on a floor scattered with Christmas ornaments, including colorful baubles and tinsel, near a decorated Christmas tree with multicolored lights. The person steps carefully, moving their feet around the scattered items to avoid tripping. They continue to walk forward, navigating through the mess of ornaments and tinsel on the floor. The person then steps off the rug and onto a different surface, still moving cautiously to avoid any obstacles.
+Text:
+  [[Lol, the ornaments on the floor is always hilarious. Especially when he steps on the yellow one walking away]]
+=======================================
+
+=======================================
+Start-End: 34 ~ 36
+Reward: 3.0809091603249597
+Likes: 69 || 0.8950669840269914 
+Correlation:
+  Overall: 0.3226937980677443
+  Audio: 0.0 | 
+  Video: 0.33 | The scene is set in a cozy living room with floral wallpaper, a green sofa, and a painting of a landscape above a side table with two lamps. The side table is adorned with various items including a nutcracker, a lamp, and framed photos. A Christmas tree with lights and ornaments is visible in the background. A man, wearing a dark coat, walks from the right side of the room towards the center, smiling. He continues walking until he stops in front of the camera, then his expression changes to a more serious one.
+Text:
+  [[That ornament popping, lol.]]
+=======================================
+
+=======================================
+Start-End: 36 ~ 37
+Reward: 2.163494560221853
+Likes: 14 || 0.7424030966519776 
+Correlation:
+  Overall: 0.7105457317849376
+  Audio: 0.69 | - Marv! - Harry?
+  Video: 0.2 | In a room with red walls, a chandelier, and a cabinet filled with glassware, a man wearing a dark coat and a hat with white feathers shakes off snow from his clothes. He continues to shake off the snow, moving his arms and body vigorously. After ensuring the snow is mostly off, he stops and begins to speak, looking forward.
+Text:
+  [[Harry!]]
+=======================================
+
+=======================================
+Start-End: 37 ~ 43
+Reward: 13.598112178467648
+Likes: 105 || 0.9190545811201773 
+Correlation:
+  Overall: 0.6736487243122155
+  Audio: 0.67 | - Marv! - Harry?
+  Video: 0.12 | In a room with red walls, a chandelier, and a cabinet filled with glassware, a man wearing a dark coat and a hat with white feathers shakes off snow from his clothes. He continues to shake off the snow, moving his arms and body vigorously. After ensuring the snow is mostly off, he stops and begins to speak, looking forward.
+Text:
+  [[“Marv? Harry? Why the hell did you take your shoes off? Why the hell are you dressed like a chicken?”  LMAO 😂]]
+=======================================
+
+=======================================
+Start-End: 43 ~ 47
+Reward: 10.325809387591521
+Likes: 8 || 0.6536908626016669 
+Correlation:
+  Overall: 0.9638807421481067
+  Audio: 0.94 | Why the hell you dressed like a chicken?
+  Video: 0.23 | The man is standing in a room with patterned wallpaper and a framed painting on the wall behind him. He is wearing a dark coat with a fur collar and a white shirt underneath. The man looks forward and gradually frowns, showing a change in his facial expression.
+Text:
+  [[Why the hell you dressed like a chicken. 🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣]]
+=======================================
+
+=======================================
+Start-End: 47 ~ 50
+Reward: 5.821225060952066
+Likes: 0 || 0.0 
+Correlation:
+  Overall: 0.9702041768253443
+  Audio: 0.98 | I'm up here, you morons! Come and get me.
+  Video: 0.03 | A boy is sitting on a red carpeted staircase with his knees up and hands cupped around his mouth, as if he is shouting or calling out. He is wearing a red sweater, green pants with rolled-up cuffs, and brown shoes. Behind him, there is a table with a potted plant and a basket of red flowers, and a window with white panes. The boy then lowers his hands and appears to be speaking.
+Text:
+  [[I'm up here you morons, come and get me]]
+=======================================
+
+=======================================
+Start-End: 50 ~ 52
+Reward: 2.7484761494182877
+Likes: 5 || 0.5579507964003458 
+Correlation:
+  Overall: 0.40814363915439894
+  Audio: 0.0 | 
+  Video: 0.41 | In a well-decorated living room with a Christmas tree in the background, two men are seen in mid-air, falling from a height. They crash onto the wooden floor, scattering toys and debris around them. The men lie on the floor, motionless, with their limbs spread out.
+Text:
+  [[Best Christmas movie ever]]
+=======================================
+
+=======================================
+Start-End: 52 ~ 55
+Reward: 6.982176233777006
+Likes: 6 || 0.5977210001582093 
+Correlation:
+  Overall: 0.8648355388837297
+  Audio: 0.86 | You guys give up, or ya thirsty for more?
+  Video: 0.11 | A boy wearing a red sweater and green pants is sitting in a room with a window and a potted plant with red flowers in the background. He is talking and making hand gestures while sitting on a chair. The boy continues to talk and gesture with his hands, occasionally moving his hands closer to his chest. He then starts to rise from the chair, using his hands for support. The boy stands up from the chair, moving his body upwards.
+Text:
+  [[You Guys Give Up Or Thirsty For More]]
+=======================================
+
+=======================================
+Start-End: 55 ~ 59
+Reward: 9.022689033302276
+Likes: 2 || 0.2944054090229877 
+Correlation:
+  Overall: 0.9806334246512907
+  Audio: 0.98 | You guys give up, or ya thirsty for more?
+  Video: 0.11 | A boy wearing a red sweater and green pants is sitting in a room with a window and a potted plant with red flowers in the background. He is talking and making hand gestures while sitting on a chair. The boy continues to talk and gesture with his hands, occasionally moving his hands closer to his chest. He then starts to rise from the chair, using his hands for support. The boy stands up from the chair, moving his body upwards.
+Text:
+  [[You guys give up, or are you thirsty for more?]]
+=======================================
+
+=======================================
+Start-End: 59 ~ 65
+Reward: 7.776657176786639
+Likes: 9 || 0.6744297218962328 
+Correlation:
+  Overall: 0.3108399037841034
+  Audio: 0.0 | 
+  Video: 0.31 | Two men are on the floor near a staircase, surrounded by scattered debris, with one man in a gray coat pinning the other man in a black suit. The man in the gray coat begins to rise, still holding the other man down. He then turns and starts to climb the stairs, dragging the man in the black suit along with him. The man in the black suit sits up as the man in the gray coat continues to pull him up the stairs. The man in the gray coat stumbles and struggles to maintain his balance while pulling the other man.
+Text:
+  [[I love how he just slams his feet on the the ornaments instead of continuing staying quiet like he was going through the window.]]
+=======================================
+
+=======================================
+Start-End: 65 ~ 69
+Reward: 6.494378284721714
+Likes: 60 || 0.8859257453003021 
+Correlation:
+  Overall: 0.36883441294006325
+  Audio: 0.25 | - Heads up! - Huh?
+  Video: 0.28 | A man wearing a hat and a coat covered in snow stumbles backward in a hallway adorned with framed pictures and floral wallpaper. A paint can is seen falling from above, swinging towards the man. The man in the hat continues to retreat as another man, dressed in a dark coat, appears and looks up. The paint can continues to swing down the stairs. The man in the dark coat is hit by the paint can and falls down the stairs. The man in the hat turns his head to look at the man who fell.
+Text:
+  [[1:05 Harry: heads up  Marv: gets hit by the can🤣😂🤣😂🤣😂🤣😂]]
+=======================================
+
+=======================================
+Start-End: 69 ~ 72
+Reward: 7.0087883937944415
+Likes: 7 || 0.6286885328640186 
+Correlation:
+  Overall: 0.853787132533731
+  Audio: 0.86 | Don't worry, Marv. I'll get him for ya.
+  Video: 0.03 | The scene is set in a well-decorated room with floral wallpaper, a potted plant on a stand, and a piano in the background. A man in a black suit is seen falling from the right side of the frame, landing on the floor amidst scattered toy cars. He continues to fall, with his body flipping over and his legs in the air. The man lands on his back, with his legs and arms spread out, and remains motionless on the floor.
+Text:
+  [[Don’t worry, Marv. I’ll get ‘im for ya.]]
+=======================================
+
+=======================================
+Start-End: 72 ~ 76
+Reward: 6.830394493506993
+Likes: 7 || 0.6286885328640186 
+Correlation:
+  Overall: 0.5394550452563648
+  Audio: 0.0 | 
+  Video: 0.54 | In a room with wooden floors and patterned wallpaper, a man with a bald spot on his head and wearing a dark hat and a coat turns his head to look at another man sitting on the floor amidst scattered small objects. The man on the floor appears to be in a relaxed state, with his legs crossed and hands resting on his lap. The man in the hat then turns his body and head to face forward, looking upwards with a surprised expression.
+Text:
+  [[OMG this is so funny because he had the paint can Lol XD]]
+=======================================
+
+=======================================
+Start-End: 76 ~ 77
+Reward: 2.0407096466509644
+Likes: 5 || 0.5579507964003458 
+Correlation:
+  Overall: 0.7413794251253094
+  Audio: 0.75 | Yes!
+  Video: 0.03 | In a room with floral wallpaper, a potted plant, and various pieces of furniture, a man in a dark suit is lying on the floor surrounded by small toy cars. Another man, dressed in a gray suit, jumps onto the man in the dark suit, landing on top of him. The man in the gray suit adjusts his position, settling on top of the man in the dark suit, and remains in this position.
+Text:
+  [[Yes!!!]]
+=======================================
+
+=======================================
+Start-End: 77 ~ 83
+Reward: 9.622685573202542
+Likes: 1300 || 0.9935686674659531 
+Correlation:
+  Overall: 0.30510613070056863
+  Audio: 0.17 | Yes!
+  Video: 0.26 | A boy stands on a balcony holding a toy axe in his right hand, gripping the railing with his left hand. He appears to be crying and struggles to hold onto the railing. The boy then turns to his left, still holding the toy axe, and begins to move away from the railing. He continues to move to the left, eventually letting go of the railing and walking away. The background shows a green wall, a white door, and a potted plant.
+Text:
+  [[My God Daniel Stern does NOT get enough credit for his screams in this movie. Between the nail, the ornaments, and the spider, his screams were absolutely spot-on. They all had a different tonal quality too.]]
+=======================================
+
+=======================================
+Start-End: 83 ~ 87
+Reward: 9.974384508590106
+Likes: 631 || 0.9805258092082412 
+Correlation:
+  Overall: 0.7565351589696427
+  Audio: 0.75 | He's only a kid, Harry. We can take him.
+  Video: 0.14 | In a room with floral wallpaper and a potted plant on a stand, two men are lying on the floor, with one man wearing a black cap and a gray jacket, and the other man in a brown jacket and gray pants. The man in the black cap is on top of the other man, and they appear to be in a close embrace. Scattered toy cars are visible on the floor around them.
+Text:
+  [[He's only a kid, Harry... Aww shaddup! 😂😂😂😂😂😂]]
+=======================================
+
+=======================================
+Start-End: 87 ~ 89
+Reward: 4.30981566945502
+Likes: 118 || 0.9248942351501883 
+Correlation:
+  Overall: 0.6150067997886608
+  Audio: 0.61 | - What is it? - You're missin' some teeth.
+  Video: 0.12 | A man wearing a black beanie with a white feather and a thick, textured sweater leans over another man who is lying down and appears to be unconscious or unresponsive. The man in the beanie speaks to the man on the ground, placing his hand on the man's chest. He then pinches his own cheek, showing a pained or concerned expression, and continues to look at the man on the ground. The background shows an indoor setting with a table and some objects in the distance.
+Text:
+  [[You're missing some teeth.]]
+=======================================
+
+=======================================
+Start-End: 89 ~ 90
+Reward: 1.1650496347639447
+Likes: 4 || 0.5041960057544428 
+Correlation:
+  Overall: 0.330426814504751
+  Audio: 0.31 | - What is it? - You're missin' some teeth.
+  Video: 0.11 | A man wearing a black beanie with a white feather and a thick, textured sweater leans over another man who is lying down and appears to be unconscious or unresponsive. The man in the beanie speaks to the man on the ground, placing his hand on the man's chest. He then pinches his own cheek, showing a pained or concerned expression, and continues to look at the man on the ground. The background shows an indoor setting with a table and some objects in the distance.
+Text:
+  [[What is it?]]
+=======================================
+
+=======================================
+Start-End: 90 ~ 95
+Reward: 12.358400729686043
+Likes: 11 || 0.7071257718530035 
+Correlation:
+  Overall: 0.8822771870421026
+  Audio: 0.88 | - What is it? - You're missin' some teeth.
+  Video: 0.13 | A man wearing a black beanie with a white feather and a thick, textured sweater leans over another man who is lying down and appears to be unconscious or unresponsive. The man in the beanie speaks to the man on the ground, placing his hand on the man's chest. He then pinches his own cheek, showing a pained or concerned expression, and continues to look at the man on the ground. The background shows an indoor setting with a table and some objects in the distance.
+Text:
+  [[That was my gold tooth....my gold tooth. I'll kill him! I'll kill him!]]
+=======================================
+
+=======================================
+Start-End: 95 ~ 98
+Reward: 5.738724064588317
+Likes: 13 || 0.7320017273038295 
+Correlation:
+  Overall: 0.5904531471128048
+  Audio: 0.58 | Where? It's my gold tooth. My gold tooth. I'll kill him. I'll kill him!
+  Video: 0.12 | In a room with wooden floors, floral wallpaper, and several framed pictures on the wall, two men are seen on the floor amidst scattered debris. They begin to get up, with one man in a gray coat and the other in a black coat. The man in the gray coat starts to move towards the stairs, using the wall for support, while the man in the black coat follows closely behind. Both men continue to ascend the stairs, with the man in the gray coat leading and the man in the black coat following.
+Text:
+  [[ScalyBond 03 did I? where's my golden tooth?]]
+=======================================
+
+=======================================
+Start-End: 98 ~ 104
+Reward: 16.329627794561134
+Likes: 40 || 0.8555816965316659 
+Correlation:
+  Overall: 0.9330114679475947
+  Audio: 0.94 | You bomb me with one more can, kid, and I'll snap off your cojones and boil them in motor oil!
+  Video: 0.0 | In a room with wooden floors, floral wallpaper, and several framed pictures on the wall, two men are seen on the floor amidst scattered debris. They begin to get up, with one man in a gray coat and the other in a black coat. The man in the gray coat starts to move towards the stairs, using the wall for support, while the man in the black coat follows closely behind. Both men continue to ascend the stairs, with the man in the gray coat leading and the man in the black coat following.
+Text:
+  [[You bop me with ONE MORE can, kid and I'll SNAP your cojones and throw em in my motor oil!!]]
+=======================================
+
+=======================================
+Start-End: 104 ~ 110
+Reward: 14.760757750213841
+Likes: 311 || 0.962419901827749 
+Correlation:
+  Overall: 0.748853194937279
+  Audio: 0.75 | You bomb me with one more can, kid, and I'll snap off your cojones and boil them in motor oil!
+  Video: 0.03 | In a room with wooden floors, floral wallpaper, and several framed pictures on the wall, two men are seen on the floor amidst scattered debris. They begin to get up, with one man in a gray coat and the other in a black coat. The man in the gray coat starts to move towards the stairs, using the wall for support, while the man in the black coat follows closely behind. Both men continue to ascend the stairs, with the man in the gray coat leading and the man in the black coat following.
+Text:
+  [[“You bomb me with one more can, kid, and I’ll snap off your cojones and boil them in motor oil!!”  Harry you crack me up!]]
+=======================================
+
+=======================================
+Start-End: 110 ~ 116
+Reward: 12.185935179230047
+Likes: 12 || 0.7203359166120031 
+Correlation:
+  Overall: 0.6553266399631691
+  Audio: 0.5 | - 911. Emergency. - Hello. My house is being robbed.
+  Video: 0.44 | A boy in a red sweater is dialing a phone with his right hand while holding the receiver to his ear with his left hand, standing in a room with floral wallpaper, a red couch, and black lamps. He then turns to his right, still holding the phone to his ear, and places the receiver back on the phone. The scene transitions to a screen showing various clips from 'Home Alone,' including a boy reacting to a spider, a person falling, and a house exterior.
+Text:
+  [[Of course, the kid could have told the police that the house was going to be robbed.  And the phones are working...plot hole.]]
+=======================================
+
+=======================================
+Start-End: 116 ~ 122
+Reward: 10.858800202424487
+Likes: 126 || 0.928032701189451 
+Correlation:
+  Overall: 0.44088366627398173
+  Audio: 0.04 | My address is 656 Lincoln Boulevard. My name's Murphy.
+  Video: 0.44 | A boy in a red sweater is dialing a phone with his right hand while holding the receiver to his ear with his left hand, standing in a room with floral wallpaper, a red couch, and black lamps. He then turns to his right, still holding the phone to his ear, and places the receiver back on the phone. The scene transitions to a screen showing various clips from 'Home Alone,' including a boy reacting to a spider, a person falling, and a house exterior.
+Text:
+  [[Old school Christmas movie that will never get old, and way better than Home Alone 3 and the super god awful Home Alone 4 Taking Back the House.]]
+=======================================
+
+=======================================
+Start-End: 122 ~ 128
+Reward: 9.592745772951442
+Likes: 42 || 0.8595592326431323 
+Correlation:
+  Overall: 0.36961586475772074
+  Audio: 0.0 | 
+  Video: 0.37 | A boy in a red sweater is dialing a phone with his right hand while holding the receiver to his ear with his left hand, standing in a room with floral wallpaper, a red couch, and black lamps. He then turns to his right, still holding the phone to his ear, and places the receiver back on the phone. The scene transitions to a screen showing various clips from 'Home Alone,' including a boy reacting to a spider, a person falling, and a house exterior.
+Text:
+  [[Home Alone will always be a christmas classic. Its one of those movies that you have to watch when its christmas]]
+=======================================
+
+=======================================
+Start-End: 128 ~ 134
+Reward: 9.55016896392571
+Likes: 570 || 0.9782930266322883 
+Correlation:
+  Overall: 0.3067009003443317
+  Audio: 0.0 | 
+  Video: 0.31 | The video begins with a collage of scenes from the movie 'Home Alone,' including a poster, a dark hallway, the exterior of a house, a close-up of a light, and a man with a shocked expression. The scene transitions to a series of movie clips, starting with a man lying in bed, followed by a scene with a creature, a woman, and a group of people with a robot. The next set of clips shows a man on a tank, a close-up of a person, and a woman. The video ends with a collage of images featuring the actors Billy Barty and Ashley Judd.
+Text:
+  [["You guys give up, or are you thirsty for more?" Macaulay Culkin improvised that line.]]
+=======================================
+
+=======================================
+Start-End: 134 ~ 140
+Reward: 10.551252824482344
+Likes: 14 || 0.7424030966519776 
+Correlation:
+  Overall: 0.5080695203808732
+  Audio: 0.0 | 
+  Video: 0.51 | The video begins with two movie clips displayed, one featuring Billy Barty and the other Ashley Judd, with a 'Subscribe' button and a 'Click above to watch more clips' prompt at the bottom. The clip for Billy Barty changes to show a different scene, while Ashley Judd's clip remains the same. The director's clip, featuring Chris Columbus, appears next to Ashley Judd's clip. The clips for Billy Barty and Ashley Judd change to show different scenes, while Chris Columbus's clip remains the same. The clips for Billy Barty and Ashley Judd continue to change, while Chris Columbus's clip remains
+Text:
+  [[I watch this every year, this movie is very funny and the pranks on the first film and the second film are just funny and the pranks are the same and a little different]]
+=======================================
+

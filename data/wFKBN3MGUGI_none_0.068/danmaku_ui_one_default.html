@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>82-Year-Old Man Covers DROWNING POOLS "Bodies" on Americas Got Talent!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* 기본 스타일 */
+    :root {
+      --bg: #ffffff;
+      --video-bg: #000;
+      --accent: #ff0000;
+      --text: #fff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background-color: #fff; /* 흰색 배경 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .video-title {
+      width: 800px;
+      margin-top: 40px;
+      margin-bottom: 5px;
+      text-align: left;
+      font-size: 20px;
+      font-weight: 600;
+      color: #000;
+      padding: 0;
+      line-height: 1.4;
+    }
+
+    .video-container {
+      width: 800px;
+      margin-top: 20px;
+      position: relative;
+      background-color: #000;
+      overflow: hidden;
+      border-radius: 20px; /* 유튜브 느낌의 둥근 모서리 */
+      transition: all 0.3s ease;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 12px; /* 비디오 둥근 모서리 */
+    }
+
+    /* 기본 비디오 컨트롤 완전히 숨기기 */
+    video::-webkit-media-controls-panel { display: none !important; }
+    video::-webkit-media-controls-play-button { display: none !important; }
+    video::-webkit-media-controls-start-playback-button { display: none !important; }
+    video::-moz-media-controls { display: none !important; }
+    video::--ms-media-controls { display: none !important; }
+
+    /* 커스텀 비디오 컨트롤 */
+    .custom-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.8);
+      padding: 4px 15px 4px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 4;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .video-container:hover .custom-controls { opacity: 1; }
+
+    .progress-container {
+      width: 100%;
+      height: 3px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      margin-bottom: 6px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #ff0000;
+      border-radius: 3px;
+      width: 0%;
+      position: relative;
+      transition: width 0.1s ease;
+    }
+
+    .progress-handle {
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background: #ff0000;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .progress-container:hover .progress-handle { opacity: 1; }
+
+    .controls-bottom {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .control-button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 3px;
+      transition: background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .control-button:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    .control-button svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    .time-display {
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* 단무쿠 댓글 */
+    .danmaku-comment {
+      position: absolute;
+      color: white;
+      font-size: 18px;
+      font-weight: normal;
+      white-space: nowrap;
+      z-index: 10;
+      pointer-events: none;
+      text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+    }
+
+    .comment-text {
+      font-size: 18px;
+      color: white;
+      font-weight: normal;
+    }
+
+
+  </style>
+</head>
+  <body>
+    <!-- 제목을 영상 위에 배치 -->
+    <div class="video-container" id="video-container">
+    <video id="video-player" preload="metadata">
+      <!-- 템플릿 엔진이 주입하거나 아래 src로 대체하세요 -->
+      <source src="../video/wFKBN3MGUGI.mp4" type="video/mp4" />
+      브라우저가 video 태그를 지원하지 않습니다.
+    </video>
+
+    <!-- 커스텀 비디오 컨트롤 -->
+    <div class="custom-controls">
+      <div class="progress-container" id="progress-container" aria-label="progress">
+        <div class="progress-bar" id="progress-bar">
+          <div class="progress-handle"></div>
+        </div>
+      </div>
+      <div class="controls-bottom">
+        <button class="control-button" id="play-pause-btn" aria-label="play/pause">
+          <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="pause-icon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <div class="time-display" id="time-display">0:00 / 0:00</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== 유틸 =====
+    function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
+    function formatTime(sec){ const m = Math.floor(sec/60); const s = Math.floor(sec%60).toString().padStart(2,'0'); return m + ':' + s; }
+    
+    // 문자열을 해시값으로 변환 (일관된 랜덤 위치 생성용)
+    function hashString(str) {
+      let hash = 0;
+      if (str.length === 0) return hash;
+      for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // 32bit 정수로 변환
+      }
+      return Math.abs(hash);
+    }
+
+    // 서버에서 주입되는 단무쿠 댓글 리스트 예: [{ start: 1.2, text: "하이" }, ...]
+    // 템플릿이 없다면 아래 fallback 사용
+    var danmakuComments = (typeof [{"start": 0, "text": "youtube rise for your national anthem sung by john hetlinger", "correlation": 0.35070351904937197}, {"start": 1, "text": "I love how Heidi just sits there as a prestige attachment to the Jury. Because she clearly has now ability to judge about the artistic stuff going on on the stage. You can see by her facial expression alone.", "correlation": 0.6167778089774942}, {"start": 3, "text": "Chuck Norris clapped once", "correlation": 0.46871771785659533}, {"start": 4, "text": "The capricious shoemaker controversly examine because print muhly concern notwithstanding a impolite rock. classy, outgoing parallelogram", "correlation": 0.30475986338043565}, {"start": 6, "text": "Hi y’all, hi y’all", "correlation": 0.9553564994814204}, {"start": 8, "text": "hi     like          Americans     got     talent", "correlation": 0.5934294283900899}, {"start": 11, "text": "SIR, HELLO", "correlation": 0.7399543801964819}, {"start": 12, "text": "John HITLingER", "correlation": 0.9794379893449217}, {"start": 13, "text": "John", "correlation": 0.6875505250658707}, {"start": 14, "text": "I'm from Broomfield co, small world", "correlation": 0.9177205613377089}, {"start": 15, "text": "I live in Broomfield", "correlation": 0.6170324430805201}, {"start": 17, "text": "John passed away 2yrs ago", "correlation": 0.6047369710895276}, {"start": 18, "text": "0:18 You're the oldest person ever", "correlation": 0.3612593498928815}, {"start": 19, "text": "I hope this is me when I’m 82", "correlation": 0.503230530393593}, {"start": 20, "text": "me at 82yrs old", "correlation": 0.6769177716126281}, {"start": 21, "text": "He's not", "correlation": 0.5308310383542761}, {"start": 22, "text": "No he's not", "correlation": 0.5935374560385867}, {"start": 24, "text": "The crowd is older", "correlation": 0.5069014951042844}, {"start": 25, "text": "Retire old man", "correlation": 0.5530816318020028}, {"start": 27, "text": "wish did dude was my grandpa", "correlation": 0.4211066613640136}, {"start": 30, "text": "Oh that was karaoke for sure", "correlation": 0.6555154306821835}, {"start": 33, "text": "I know what I want to do when I retire.🎉", "correlation": 0.5691639895722697}, {"start": 35, "text": "Aerospace Engineering! That's what I'm studying!", "correlation": 0.6487323960663012}, {"start": 38, "text": "A daddy", "correlation": 0.43840525602220376}, {"start": 39, "text": "Damn", "correlation": 0.5289475796038124}, {"start": 40, "text": "Holy smokes. This man helped repair the Hubble telescope and ROCKS SO HARD!", "correlation": 0.5035374357302308}, {"start": 41, "text": "He didn't just help; he was the program manager!", "correlation": 0.47802416782120366}, {"start": 47, "text": "Just remember everyone..... This guy worked on the Hubble Telescope.....", "correlation": 0.7311548021434592}, {"start": 48, "text": "That's incredible.", "correlation": 1.0}, {"start": 49, "text": "Man can hold a note", "correlation": 0.5317292734835392}, {"start": 50, "text": "I was an aerospace program manager....Did you go into space?", "correlation": 0.7370090010999464}, {"start": 52, "text": "Did you go into space? I didn't say I was a astronaut..", "correlation": 0.8335842412081704}, {"start": 54, "text": "Did you go to space? What a moron", "correlation": 0.8084012435155584}, {"start": 55, "text": "0:55 He was an ASTRONAUT dude  he's the best 1:44 I lauthed", "correlation": 0.31114370236444816}, {"start": 56, "text": "navy pilot, space engineer ... wooow!!!", "correlation": 0.5553016871132326}, {"start": 58, "text": "One time a pilot accidentally went into space", "correlation": 0.6321641065751229}, {"start": 60, "text": "Awe", "correlation": 0.6948378195345618}, {"start": 62, "text": "This makes me want to go on the show", "correlation": 0.591737081517564}, {"start": 64, "text": "I love how this old man is just having so much fun on stage", "correlation": 0.6105300443194299}, {"start": 65, "text": "Judges=??   Audience==!", "correlation": 0.7050324553646108}, {"start": 67, "text": "Why did you decide to come on the show? To fucking rock your socks off 🤘🏼🤘🏼", "correlation": 0.7126787091151572}, {"start": 68, "text": "the highpoint of your life? heck man, given that biography, you already are a fricking legend!", "correlation": 0.5377941276145821}, {"start": 69, "text": "I would love to be this old lady in the nursing home", "correlation": 0.5352060578444099}, {"start": 72, "text": "The only thing wrong with this is the judges", "correlation": 0.5316600268543086}, {"start": 74, "text": "I now know who I want to be when I grow up", "correlation": 0.47544313012618517}, {"start": 76, "text": "\"This is a highpoint in all my careers\" Don't give them that, please. Take it back, sir.", "correlation": 0.5289823713054803}, {"start": 78, "text": "More important than the Hubble telescope? Don’t try to flatter yourself, Simon", "correlation": 0.7919919264714077}, {"start": 80, "text": "This was a higher point in his life than repairing the hubble.", "correlation": 0.5298375253771157}, {"start": 83, "text": "Yes", "correlation": 0.9155911239191445}, {"start": 84, "text": "Great voice this guy have !", "correlation": 0.34961639399865646}, {"start": 85, "text": "THANK YOU", "correlation": 0.6518040860638845}, {"start": 86, "text": "Blonde judge: uhhh what’s he singing….? I don’t know what good music is….", "correlation": 0.5106488549293424}, {"start": 87, "text": "Great", "correlation": 0.581516029346864}, {"start": 88, "text": "Ok", "correlation": 0.8285580538027517}, {"start": 90, "text": "\"America's Got Talent\" is an overstatement. lol", "correlation": 0.46909322416880483}, {"start": 92, "text": "😂😂😂😂 I swear I could see him in the middle of a mosh pit 🤣🤣🤣", "correlation": 0.3457894046191165}, {"start": 97, "text": "If this guy would've had a heart attack on stage... Let the body hit the floor", "correlation": 0.6636854233244471}, {"start": 99, "text": "Screw the bodies het the floor my chin just hit the floor", "correlation": 0.6369697108125429}, {"start": 102, "text": "Let the bodies  HIT THE FLOOR", "correlation": 0.99594381500031}, {"start": 103, "text": "LET THE BODIES HIT THE", "correlation": 0.9546682848854676}, {"start": 104, "text": "1:44 LET THE BODIES HIT THE FLOOR", "correlation": 0.6948748202603492}, {"start": 105, "text": "Ya man!Yeah! :)", "correlation": 0.6024492800243378}, {"start": 106, "text": "1:46 that man in the audience 😂😂😂", "correlation": 0.4427167698265722}, {"start": 107, "text": "Its amazing how you can see all kind of people in the audience like the cool guys at 1:47 , 1:50 or that bitch at 1:53", "correlation": 0.466145379546948}, {"start": 108, "text": "Yeeeeeeeees!", "correlation": 0.571058710228904}, {"start": 110, "text": "man got a standing ovation", "correlation": 0.5784520503607254}, {"start": 112, "text": "That blonde had the lamest reaction, get out of there grandma.", "correlation": 0.3549542171675763}, {"start": 113, "text": "1:53 great actress you put in the crowd", "correlation": 0.3397108813080788}, {"start": 114, "text": "Respect to the judges for not pressing X.", "correlation": 0.5071129406370949}, {"start": 116, "text": "Are the audience all actors??? looks so fake", "correlation": 0.5584950980388}, {"start": 117, "text": "When you’re beaten why for", "correlation": 0.7537372314130448}, {"start": 119, "text": "Beaten why for? Can't take his voice! :D", "correlation": 0.7242558693220499}, {"start": 120, "text": "Not a soul cares about what you think, no one was harmed except your feelings. Get over yourself.", "correlation": 0.35688452566904805}, {"start": 122, "text": "Beaten, what for", "correlation": 0.8626225637781579}, {"start": 123, "text": "HE'S HAD ENOUGH", "correlation": 0.4084653983267502}, {"start": 125, "text": "Performing what?!?", "correlation": 0.5077130800371826}, {"start": 128, "text": "2:08 the way he says moreeee is fucking nuts", "correlation": 0.3267274212582703}, {"start": 129, "text": "Can't take much more!", "correlation": 0.9138548585333013}, {"start": 130, "text": "Is there a behind the scenes for this, was it a dare or did he really decide to just do this himself? Incredibly awesome!", "correlation": 0.3404904676531479}, {"start": 131, "text": "Everything wrong with me , Everything wrong with me EVERYTHING WRONG WITH ME", "correlation": 0.7979349222377902}, {"start": 132, "text": "NOTHING'S WRONG WITH HIM NOTHING'S WRONG WITH HIM", "correlation": 0.7085407338534017}, {"start": 133, "text": "At 2:13 he kept saying \"Nothing's wrong with me!\"? Well... I'm not so sure about that=))))", "correlation": 0.4948033373542099}, {"start": 134, "text": "\"NOTHIN WRONG WITH ME\" I'm sure there's plenty wrong about an 82 year man shouting song lyrics at thousands of people but I'll just leave it at that", "correlation": 0.6611352171229854}, {"start": 135, "text": "2:15 \"Nothing wrong with me\"  2:20 sOmthIngs gottA give", "correlation": 0.5963494860983293}, {"start": 136, "text": "'Nothing wrong with me... Nothing wrong with me... Nothing wrong with me...'  Sure, man.", "correlation": 0.8467727857523972}, {"start": 137, "text": "I love how the audience reacted at 2:17", "correlation": 0.42300494031668945}, {"start": 138, "text": "Nothing wrong with me! NOTHING WRONG WITH ME!", "correlation": 0.8653299387344267}, {"start": 139, "text": "“ I like it “ something got give “  “ something got to give “  “ ya “", "correlation": 0.6140775458377022}, {"start": 140, "text": "somethings gotta give somethings gotta give and then he has a heart attack", "correlation": 0.7302481918951171}, {"start": 142, "text": "1 somethings gotta 2 somethings gotta give 82 I wiìììiìn", "correlation": 0.6970659635937043}, {"start": 144, "text": "SOMETHINGS GOT TO GIVE!", "correlation": 0.7786973958517869}, {"start": 145, "text": "Someone teach this man how to use sound cloud", "correlation": 0.38722412716947363}, {"start": 146, "text": "Best singer on AGT ever.", "correlation": 0.36394681352053476}, {"start": 147, "text": "America's Got Talent hit the floor", "correlation": 0.6094744323958471}, {"start": 149, "text": "The audience was jumping", "correlation": 0.7165931710229091}, {"start": 150, "text": "LET THE ELDERS HIT THE FLOOR!!!!", "correlation": 0.6973274990972457}, {"start": 153, "text": "LET THE BODIES HIT FLOOR!", "correlation": 0.9292302029312933}, {"start": 154, "text": "Heidi looks like she's seen a burger.", "correlation": 0.3063277849679403}, {"start": 156, "text": "he came to let the bodies hit the floor.", "correlation": 0.6669648268111784}, {"start": 157, "text": "I think HIS body could have hit the floor after that.", "correlation": 0.5055663519267144}, {"start": 161, "text": "Lets the old man hit the floor let the old man hit the floor 🤟🥳", "correlation": 0.6620496550635931}, {"start": 167, "text": "The STARK contrast between judges reaction and crowd is pure gold.", "correlation": 0.5590075796243757}, {"start": 169, "text": "Gold button", "correlation": 0.3078306156572542}, {"start": 171, "text": "Best agt video ever", "correlation": 0.517270064928005}, {"start": 173, "text": "@maksphoto78  not chest, diaphragm. Should learn first how to use your head voice/falsetto for the high screams, because its very useful for understanding intensity of the sound", "correlation": 0.331178649264802}, {"start": 174, "text": "dies on stage", "correlation": 0.5137929407678163}, {"start": 176, "text": "Me trying to sleep at 3am sees this video…", "correlation": 0.3972872260608697}] !== 'undefined' ? [{"start": 0, "text": "youtube rise for your national anthem sung by john hetlinger", "correlation": 0.35070351904937197}, {"start": 1, "text": "I love how Heidi just sits there as a prestige attachment to the Jury. Because she clearly has now ability to judge about the artistic stuff going on on the stage. You can see by her facial expression alone.", "correlation": 0.6167778089774942}, {"start": 3, "text": "Chuck Norris clapped once", "correlation": 0.46871771785659533}, {"start": 4, "text": "The capricious shoemaker controversly examine because print muhly concern notwithstanding a impolite rock. classy, outgoing parallelogram", "correlation": 0.30475986338043565}, {"start": 6, "text": "Hi y’all, hi y’all", "correlation": 0.9553564994814204}, {"start": 8, "text": "hi     like          Americans     got     talent", "correlation": 0.5934294283900899}, {"start": 11, "text": "SIR, HELLO", "correlation": 0.7399543801964819}, {"start": 12, "text": "John HITLingER", "correlation": 0.9794379893449217}, {"start": 13, "text": "John", "correlation": 0.6875505250658707}, {"start": 14, "text": "I'm from Broomfield co, small world", "correlation": 0.9177205613377089}, {"start": 15, "text": "I live in Broomfield", "correlation": 0.6170324430805201}, {"start": 17, "text": "John passed away 2yrs ago", "correlation": 0.6047369710895276}, {"start": 18, "text": "0:18 You're the oldest person ever", "correlation": 0.3612593498928815}, {"start": 19, "text": "I hope this is me when I’m 82", "correlation": 0.503230530393593}, {"start": 20, "text": "me at 82yrs old", "correlation": 0.6769177716126281}, {"start": 21, "text": "He's not", "correlation": 0.5308310383542761}, {"start": 22, "text": "No he's not", "correlation": 0.5935374560385867}, {"start": 24, "text": "The crowd is older", "correlation": 0.5069014951042844}, {"start": 25, "text": "Retire old man", "correlation": 0.5530816318020028}, {"start": 27, "text": "wish did dude was my grandpa", "correlation": 0.4211066613640136}, {"start": 30, "text": "Oh that was karaoke for sure", "correlation": 0.6555154306821835}, {"start": 33, "text": "I know what I want to do when I retire.🎉", "correlation": 0.5691639895722697}, {"start": 35, "text": "Aerospace Engineering! That's what I'm studying!", "correlation": 0.6487323960663012}, {"start": 38, "text": "A daddy", "correlation": 0.43840525602220376}, {"start": 39, "text": "Damn", "correlation": 0.5289475796038124}, {"start": 40, "text": "Holy smokes. This man helped repair the Hubble telescope and ROCKS SO HARD!", "correlation": 0.5035374357302308}, {"start": 41, "text": "He didn't just help; he was the program manager!", "correlation": 0.47802416782120366}, {"start": 47, "text": "Just remember everyone..... This guy worked on the Hubble Telescope.....", "correlation": 0.7311548021434592}, {"start": 48, "text": "That's incredible.", "correlation": 1.0}, {"start": 49, "text": "Man can hold a note", "correlation": 0.5317292734835392}, {"start": 50, "text": "I was an aerospace program manager....Did you go into space?", "correlation": 0.7370090010999464}, {"start": 52, "text": "Did you go into space? I didn't say I was a astronaut..", "correlation": 0.8335842412081704}, {"start": 54, "text": "Did you go to space? What a moron", "correlation": 0.8084012435155584}, {"start": 55, "text": "0:55 He was an ASTRONAUT dude  he's the best 1:44 I lauthed", "correlation": 0.31114370236444816}, {"start": 56, "text": "navy pilot, space engineer ... wooow!!!", "correlation": 0.5553016871132326}, {"start": 58, "text": "One time a pilot accidentally went into space", "correlation": 0.6321641065751229}, {"start": 60, "text": "Awe", "correlation": 0.6948378195345618}, {"start": 62, "text": "This makes me want to go on the show", "correlation": 0.591737081517564}, {"start": 64, "text": "I love how this old man is just having so much fun on stage", "correlation": 0.6105300443194299}, {"start": 65, "text": "Judges=??   Audience==!", "correlation": 0.7050324553646108}, {"start": 67, "text": "Why did you decide to come on the show? To fucking rock your socks off 🤘🏼🤘🏼", "correlation": 0.7126787091151572}, {"start": 68, "text": "the highpoint of your life? heck man, given that biography, you already are a fricking legend!", "correlation": 0.5377941276145821}, {"start": 69, "text": "I would love to be this old lady in the nursing home", "correlation": 0.5352060578444099}, {"start": 72, "text": "The only thing wrong with this is the judges", "correlation": 0.5316600268543086}, {"start": 74, "text": "I now know who I want to be when I grow up", "correlation": 0.47544313012618517}, {"start": 76, "text": "\"This is a highpoint in all my careers\" Don't give them that, please. Take it back, sir.", "correlation": 0.5289823713054803}, {"start": 78, "text": "More important than the Hubble telescope? Don’t try to flatter yourself, Simon", "correlation": 0.7919919264714077}, {"start": 80, "text": "This was a higher point in his life than repairing the hubble.", "correlation": 0.5298375253771157}, {"start": 83, "text": "Yes", "correlation": 0.9155911239191445}, {"start": 84, "text": "Great voice this guy have !", "correlation": 0.34961639399865646}, {"start": 85, "text": "THANK YOU", "correlation": 0.6518040860638845}, {"start": 86, "text": "Blonde judge: uhhh what’s he singing….? I don’t know what good music is….", "correlation": 0.5106488549293424}, {"start": 87, "text": "Great", "correlation": 0.581516029346864}, {"start": 88, "text": "Ok", "correlation": 0.8285580538027517}, {"start": 90, "text": "\"America's Got Talent\" is an overstatement. lol", "correlation": 0.46909322416880483}, {"start": 92, "text": "😂😂😂😂 I swear I could see him in the middle of a mosh pit 🤣🤣🤣", "correlation": 0.3457894046191165}, {"start": 97, "text": "If this guy would've had a heart attack on stage... Let the body hit the floor", "correlation": 0.6636854233244471}, {"start": 99, "text": "Screw the bodies het the floor my chin just hit the floor", "correlation": 0.6369697108125429}, {"start": 102, "text": "Let the bodies  HIT THE FLOOR", "correlation": 0.99594381500031}, {"start": 103, "text": "LET THE BODIES HIT THE", "correlation": 0.9546682848854676}, {"start": 104, "text": "1:44 LET THE BODIES HIT THE FLOOR", "correlation": 0.6948748202603492}, {"start": 105, "text": "Ya man!Yeah! :)", "correlation": 0.6024492800243378}, {"start": 106, "text": "1:46 that man in the audience 😂😂😂", "correlation": 0.4427167698265722}, {"start": 107, "text": "Its amazing how you can see all kind of people in the audience like the cool guys at 1:47 , 1:50 or that bitch at 1:53", "correlation": 0.466145379546948}, {"start": 108, "text": "Yeeeeeeeees!", "correlation": 0.571058710228904}, {"start": 110, "text": "man got a standing ovation", "correlation": 0.5784520503607254}, {"start": 112, "text": "That blonde had the lamest reaction, get out of there grandma.", "correlation": 0.3549542171675763}, {"start": 113, "text": "1:53 great actress you put in the crowd", "correlation": 0.3397108813080788}, {"start": 114, "text": "Respect to the judges for not pressing X.", "correlation": 0.5071129406370949}, {"start": 116, "text": "Are the audience all actors??? looks so fake", "correlation": 0.5584950980388}, {"start": 117, "text": "When you’re beaten why for", "correlation": 0.7537372314130448}, {"start": 119, "text": "Beaten why for? Can't take his voice! :D", "correlation": 0.7242558693220499}, {"start": 120, "text": "Not a soul cares about what you think, no one was harmed except your feelings. Get over yourself.", "correlation": 0.35688452566904805}, {"start": 122, "text": "Beaten, what for", "correlation": 0.8626225637781579}, {"start": 123, "text": "HE'S HAD ENOUGH", "correlation": 0.4084653983267502}, {"start": 125, "text": "Performing what?!?", "correlation": 0.5077130800371826}, {"start": 128, "text": "2:08 the way he says moreeee is fucking nuts", "correlation": 0.3267274212582703}, {"start": 129, "text": "Can't take much more!", "correlation": 0.9138548585333013}, {"start": 130, "text": "Is there a behind the scenes for this, was it a dare or did he really decide to just do this himself? Incredibly awesome!", "correlation": 0.3404904676531479}, {"start": 131, "text": "Everything wrong with me , Everything wrong with me EVERYTHING WRONG WITH ME", "correlation": 0.7979349222377902}, {"start": 132, "text": "NOTHING'S WRONG WITH HIM NOTHING'S WRONG WITH HIM", "correlation": 0.7085407338534017}, {"start": 133, "text": "At 2:13 he kept saying \"Nothing's wrong with me!\"? Well... I'm not so sure about that=))))", "correlation": 0.4948033373542099}, {"start": 134, "text": "\"NOTHIN WRONG WITH ME\" I'm sure there's plenty wrong about an 82 year man shouting song lyrics at thousands of people but I'll just leave it at that", "correlation": 0.6611352171229854}, {"start": 135, "text": "2:15 \"Nothing wrong with me\"  2:20 sOmthIngs gottA give", "correlation": 0.5963494860983293}, {"start": 136, "text": "'Nothing wrong with me... Nothing wrong with me... Nothing wrong with me...'  Sure, man.", "correlation": 0.8467727857523972}, {"start": 137, "text": "I love how the audience reacted at 2:17", "correlation": 0.42300494031668945}, {"start": 138, "text": "Nothing wrong with me! NOTHING WRONG WITH ME!", "correlation": 0.8653299387344267}, {"start": 139, "text": "“ I like it “ something got give “  “ something got to give “  “ ya “", "correlation": 0.6140775458377022}, {"start": 140, "text": "somethings gotta give somethings gotta give and then he has a heart attack", "correlation": 0.7302481918951171}, {"start": 142, "text": "1 somethings gotta 2 somethings gotta give 82 I wiìììiìn", "correlation": 0.6970659635937043}, {"start": 144, "text": "SOMETHINGS GOT TO GIVE!", "correlation": 0.7786973958517869}, {"start": 145, "text": "Someone teach this man how to use sound cloud", "correlation": 0.38722412716947363}, {"start": 146, "text": "Best singer on AGT ever.", "correlation": 0.36394681352053476}, {"start": 147, "text": "America's Got Talent hit the floor", "correlation": 0.6094744323958471}, {"start": 149, "text": "The audience was jumping", "correlation": 0.7165931710229091}, {"start": 150, "text": "LET THE ELDERS HIT THE FLOOR!!!!", "correlation": 0.6973274990972457}, {"start": 153, "text": "LET THE BODIES HIT FLOOR!", "correlation": 0.9292302029312933}, {"start": 154, "text": "Heidi looks like she's seen a burger.", "correlation": 0.3063277849679403}, {"start": 156, "text": "he came to let the bodies hit the floor.", "correlation": 0.6669648268111784}, {"start": 157, "text": "I think HIS body could have hit the floor after that.", "correlation": 0.5055663519267144}, {"start": 161, "text": "Lets the old man hit the floor let the old man hit the floor 🤟🥳", "correlation": 0.6620496550635931}, {"start": 167, "text": "The STARK contrast between judges reaction and crowd is pure gold.", "correlation": 0.5590075796243757}, {"start": 169, "text": "Gold button", "correlation": 0.3078306156572542}, {"start": 171, "text": "Best agt video ever", "correlation": 0.517270064928005}, {"start": 173, "text": "@maksphoto78  not chest, diaphragm. Should learn first how to use your head voice/falsetto for the high screams, because its very useful for understanding intensity of the sound", "correlation": 0.331178649264802}, {"start": 174, "text": "dies on stage", "correlation": 0.5137929407678163}, {"start": 176, "text": "Me trying to sleep at 3am sees this video…", "correlation": 0.3972872260608697}] : null);
+    if(!Array.isArray(danmakuComments)){
+      danmakuComments = [
+        { start: 0.5, text: "첫 댓글!" },
+        { start: 1.5, text: "오른쪽에서 등장합니다" },
+        { start: 3.0, text: "왼쪽으로 사라져요" },
+        { start: 5.0, text: "시킹해도 잘 동작" },
+      ];
+    }
+
+    // ===== 요소 참조 / 전역 상태 =====
+    var video = null;
+    var videoContainer = null;
+    var playPauseBtn = null, playIcon = null, pauseIcon = null;
+    var progressContainer = null, progressBar = null;
+    var timeDisplay = null;
+
+    var isDragging = false;          // 진행바 드래그
+    var activeDanmaku = new Map();   // idx -> { element, currentX, width, y, speed }
+    var animationId = null;
+    var isPaused = false;            // 비디오 정지 동기화
+    var lastRafTime = 0;             // requestAnimationFrame 시간
+    var lastVideoTime = 0;           // 직전 timeupdate의 비디오 시간 (시킹 대비)
+    
+    // danmaku one 전용: 다음에 표시할 댓글 인덱스
+    var nextCommentIndex = 0;
+    var displayedComments = new Set();  // 이미 표시된 댓글 인덱스 추적
+    
+    // 댓글별 고유 속도 계산 함수 (픽셀 단위로 네 개 중 하나)
+    function getDanmakuSpeed(commentText) {
+      const textHash = hashString(commentText || '');
+      const speedOptions = [-140, -180, -220, -260]; // px/s (음수=왼쪽)
+      return speedOptions[textHash % speedOptions.length];
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      video = document.getElementById('video-player');
+      videoContainer = document.getElementById('video-container');
+      playPauseBtn = document.getElementById('play-pause-btn');
+      playIcon = document.getElementById('play-icon');
+      pauseIcon = document.getElementById('pause-icon');
+      progressContainer = document.getElementById('progress-container');
+      progressBar = document.getElementById('progress-bar');
+      timeDisplay = document.getElementById('time-display');
+
+      // start 기준 정렬
+      danmakuComments.sort((a,b) => a.start - b.start);
+
+      // 이벤트 바인딩
+      video.addEventListener('timeupdate', onTimeUpdate);
+      video.addEventListener('loadedmetadata', updateTimeDisplay);
+      video.addEventListener('play', () => { updatePlayPauseButton(); lastVideoTime = video.currentTime || 0; resumeAllDanmaku(); });
+      video.addEventListener('pause', () => { updatePlayPauseButton(); pauseAllDanmaku(); });
+      video.addEventListener('seeking', resetDanmakuForSeek);
+
+      playPauseBtn.addEventListener('click', togglePlayPause);
+      progressContainer.addEventListener('mousedown', startDrag);
+      document.addEventListener('mousemove', doDrag);
+      document.addEventListener('mouseup', endDrag);
+      progressContainer.addEventListener('click', (e)=>{ if(!isDragging) seekVideo(e); });
+
+      // 리사이즈 시 현재 떠있는 단무쿠 위치/퇴장 판정 보정
+      window.addEventListener('resize', () => {
+        // 큰 레이아웃 변화에서는 간단히 리셋
+        resetDanmakuForSeek();
+      });
+
+      // 초기 상태
+      updatePlayPauseButton();
+    });
+
+    function togglePlayPause(){ if(video.paused) video.play(); else video.pause(); }
+
+    function updatePlayPauseButton(){
+      if(!video) return;
+      if(video.paused){
+        playIcon.style.display='block';
+        pauseIcon.style.display='none';
+      } else {
+        playIcon.style.display='none';
+        pauseIcon.style.display='block';
+      }
+    }
+
+    function updateTimeDisplay(){
+      if(!video || !video.duration) return;
+      const cur = formatTime(video.currentTime || 0);
+      const tot = formatTime(video.duration);
+      timeDisplay.textContent = cur + ' / ' + tot;
+    }
+
+    function onTimeUpdate(){
+      if(!video) return;
+      const t = video.currentTime || 0;
+
+      // 진행바
+      if(video.duration){
+        progressBar.style.width = ((t / video.duration) * 100) + '%';
+      }
+      updateTimeDisplay();
+
+      // danmaku one: 첫 번째 댓글만 onTimeUpdate에서 표시 (활성 댓글이 없고 첫 번째 댓글일 때만)
+      // 이후 댓글들은 updateDanmakuPositions에서 이전 댓글이 완전히 사라진 후에만 표시됨
+      if(activeDanmaku.size === 0 && nextCommentIndex === 0 && !displayedComments.has(0) && nextCommentIndex < danmakuComments.length){
+        const firstComment = danmakuComments[0];
+        if(firstComment && t >= firstComment.start){
+          addDanmakuComment(firstComment, 0);
+          displayedComments.add(0);
+          nextCommentIndex = 1;
+          if (!animationId) startAnimationLoop();
+        }
+      }
+
+      lastVideoTime = t;
+    }
+
+    // ===== 진행바 제어 =====
+    function startDrag(e){ isDragging = true; e.preventDefault(); updateVideoTime(e); }
+    function doDrag(e){ if(!isDragging) return; e.preventDefault(); updateVideoTime(e); }
+    function endDrag(){ if(!isDragging) return; isDragging = false; }
+    function seekVideo(e){ updateVideoTime(e); }
+
+    function updateVideoTime(e){
+      const rect = progressContainer.getBoundingClientRect();
+      const pos = clamp((e.clientX - rect.left)/rect.width, 0, 1);
+      if (video.duration) {
+        video.currentTime = pos * video.duration;
+        // 시킹 처리: 떠있는 단무쿠 초기화 & 타임 마커 갱신
+        resetDanmakuForSeek();
+      }
+    }
+
+    // ===== 단무쿠 생성 / 애니메이션 =====
+    function addDanmakuComment(cmt, idx){
+      const div = document.createElement('div');
+      div.className = 'danmaku-comment';
+      div.id = 'danmaku-' + idx;
+
+      const txt = (cmt.text ?? '') + '';
+      div.innerHTML = '<div class="comment-text"></div>';
+      div.querySelector('.comment-text').textContent = txt; // XSS 안전
+
+      // 세로 위치: 댓글 텍스트 기반 결정적 위치 (하단 여백 10px)
+      const containerRect = videoContainer.getBoundingClientRect();
+      // 댓글 텍스트를 해시값으로 변환하여 일관된 위치 생성
+      const textHash = hashString(cmt.text || '');
+      const maxHeight = containerRect.height - 20; // 하단 10px 여백
+      const randomY = textHash % maxHeight; // 상단부터 시작
+
+      // 먼저 붙여서 실제 너비를 잰다
+      div.style.top = randomY + 'px';
+      div.style.left = '0px';
+      div.style.transform = 'translateX(0px)';
+      div.style.transition = 'none';
+      videoContainer.appendChild(div);
+
+      const elWidth = div.getBoundingClientRect().width;
+
+      // 시작 X: 컨테이너 오른쪽 바깥
+      const startX = containerRect.width; // +10 버퍼
+      div.style.transform = `translateX(${startX}px)`;
+
+      // 댓글별 고유 속도 계산
+      const danmakuSpeed = getDanmakuSpeed(cmt.text);
+
+      // 상태 저장
+      activeDanmaku.set(idx, {
+        element: div,
+        currentX: startX,
+        width: elWidth,
+        y: randomY,
+        speed: danmakuSpeed
+      });
+
+      // 애니메이션 루프 가동
+      if (!animationId) startAnimationLoop();
+    }
+
+    function startAnimationLoop() {
+      function animate(ts) {
+        if (!lastRafTime) lastRafTime = ts;
+        const deltaTime = (ts - lastRafTime) / 1000; // 초
+        lastRafTime = ts;
+
+        if (!isPaused) {
+          updateDanmakuPositions(deltaTime);
+        }
+
+        // 루프 유지: 활성 단무쿠가 없고 비디오도 일시정지면 멈출 수 있음
+        if (activeDanmaku.size === 0 && video?.paused) {
+          animationId = null;
+          lastRafTime = 0;
+          return; // 루프 종료
+        }
+        animationId = requestAnimationFrame(animate);
+      }
+      if (!animationId) animationId = requestAnimationFrame(animate);
+    }
+
+    function updateDanmakuPositions(deltaTime) {
+      // 각 댓글별 고유 속도로 왼쪽 이동
+      var commentJustDisappeared = false;
+      
+      activeDanmaku.forEach((danmaku, idx) => {
+        if (!danmaku || !danmaku.element) return;
+        danmaku.currentX += danmaku.speed * deltaTime;
+
+        // 완전 퇴장: 요소의 오른쪽 끝이 화면 왼쪽 밖으로 나가면 제거
+        if (danmaku.currentX + danmaku.width < 0) {
+          danmaku.element.parentNode?.removeChild(danmaku.element);
+          activeDanmaku.delete(idx);
+          commentJustDisappeared = true;
+        } else {
+          danmaku.element.style.transform = `translateX(${danmaku.currentX}px)`;
+        }
+      });
+      
+      // danmaku one: 댓글이 완전히 사라진 직후, 그 시점 이후의 댓글 중 가장 가까운 댓글 표시
+      if (commentJustDisappeared && activeDanmaku.size === 0) {
+        const t = video?.currentTime || 0;
+        
+        // 현재 시간 이후의 댓글 중 가장 가까운 댓글 찾기 (아직 표시되지 않은 댓글만)
+        var nextComment = null;
+        var nextCommentIdx = -1;
+        
+        for (let i = 0; i < danmakuComments.length; i++) {
+          // 아직 표시되지 않았고, 시작 시간이 현재 시간 이후인 댓글 찾기
+          if (!displayedComments.has(i) && danmakuComments[i].start >= t) {
+            nextComment = danmakuComments[i];
+            nextCommentIdx = i;
+            break;
+          }
+        }
+        
+        // 찾은 댓글이 있으면 표시
+        if (nextComment && nextCommentIdx >= 0) {
+          addDanmakuComment(nextComment, nextCommentIdx);
+          displayedComments.add(nextCommentIdx);
+          nextCommentIndex = nextCommentIdx + 1;
+        }
+      }
+    }
+
+    // ===== 시킹/재생 동기화 =====
+    function pauseAllDanmaku() { isPaused = true; }
+    function resumeAllDanmaku() { isPaused = false; if (!animationId) startAnimationLoop(); }
+
+    function resetDanmakuForSeek(){
+      // 떠있던 것들 제거
+      activeDanmaku.forEach((d)=>{ d.element?.parentNode?.removeChild(d.element); });
+      activeDanmaku.clear();
+      // 다음 프레임 기준으로 새로 트리거
+      lastVideoTime = video?.currentTime || 0;
+      // 애니메이션 타임라인 초기화
+      lastRafTime = 0;
+      // danmaku one: 다음 댓글 인덱스 재계산 (현재 시간 이후의 첫 번째 댓글 찾기)
+      displayedComments.clear();  // 시킹 시 표시된 댓글 추적 초기화
+      nextCommentIndex = 0;
+      for(let i = 0; i < danmakuComments.length; i++){
+        if(danmakuComments[i].start > lastVideoTime){
+          nextCommentIndex = i;
+          break;
+        }
+      }
+    }
+  </script>
+</body>
+</html>

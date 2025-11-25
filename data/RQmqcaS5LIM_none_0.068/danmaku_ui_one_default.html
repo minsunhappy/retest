@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>1988: Is this James Brown's strangest interview ever?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* 기본 스타일 */
+    :root {
+      --bg: #ffffff;
+      --video-bg: #000;
+      --accent: #ff0000;
+      --text: #fff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background-color: #fff; /* 흰색 배경 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .video-title {
+      width: 800px;
+      margin-top: 40px;
+      margin-bottom: 5px;
+      text-align: left;
+      font-size: 20px;
+      font-weight: 600;
+      color: #000;
+      padding: 0;
+      line-height: 1.4;
+    }
+
+    .video-container {
+      width: 800px;
+      margin-top: 20px;
+      position: relative;
+      background-color: #000;
+      overflow: hidden;
+      border-radius: 20px; /* 유튜브 느낌의 둥근 모서리 */
+      transition: all 0.3s ease;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 12px; /* 비디오 둥근 모서리 */
+    }
+
+    /* 기본 비디오 컨트롤 완전히 숨기기 */
+    video::-webkit-media-controls-panel { display: none !important; }
+    video::-webkit-media-controls-play-button { display: none !important; }
+    video::-webkit-media-controls-start-playback-button { display: none !important; }
+    video::-moz-media-controls { display: none !important; }
+    video::--ms-media-controls { display: none !important; }
+
+    /* 커스텀 비디오 컨트롤 */
+    .custom-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.8);
+      padding: 4px 15px 4px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 4;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .video-container:hover .custom-controls { opacity: 1; }
+
+    .progress-container {
+      width: 100%;
+      height: 3px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      margin-bottom: 6px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #ff0000;
+      border-radius: 3px;
+      width: 0%;
+      position: relative;
+      transition: width 0.1s ease;
+    }
+
+    .progress-handle {
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background: #ff0000;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .progress-container:hover .progress-handle { opacity: 1; }
+
+    .controls-bottom {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .control-button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 3px;
+      transition: background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .control-button:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    .control-button svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    .time-display {
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* 단무쿠 댓글 */
+    .danmaku-comment {
+      position: absolute;
+      color: white;
+      font-size: 18px;
+      font-weight: normal;
+      white-space: nowrap;
+      z-index: 10;
+      pointer-events: none;
+      text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+    }
+
+    .comment-text {
+      font-size: 18px;
+      color: white;
+      font-weight: normal;
+    }
+
+
+  </style>
+</head>
+  <body>
+    <!-- 제목을 영상 위에 배치 -->
+    <div class="video-container" id="video-container">
+    <video id="video-player" preload="metadata">
+      <!-- 템플릿 엔진이 주입하거나 아래 src로 대체하세요 -->
+      <source src="../video/RQmqcaS5LIM.mp4" type="video/mp4" />
+      브라우저가 video 태그를 지원하지 않습니다.
+    </video>
+
+    <!-- 커스텀 비디오 컨트롤 -->
+    <div class="custom-controls">
+      <div class="progress-container" id="progress-container" aria-label="progress">
+        <div class="progress-bar" id="progress-bar">
+          <div class="progress-handle"></div>
+        </div>
+      </div>
+      <div class="controls-bottom">
+        <button class="control-button" id="play-pause-btn" aria-label="play/pause">
+          <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="pause-icon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <div class="time-display" id="time-display">0:00 / 0:00</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== 유틸 =====
+    function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
+    function formatTime(sec){ const m = Math.floor(sec/60); const s = Math.floor(sec%60).toString().padStart(2,'0'); return m + ':' + s; }
+    
+    // 문자열을 해시값으로 변환 (일관된 랜덤 위치 생성용)
+    function hashString(str) {
+      let hash = 0;
+      if (str.length === 0) return hash;
+      for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // 32bit 정수로 변환
+      }
+      return Math.abs(hash);
+    }
+
+    // 서버에서 주입되는 단무쿠 댓글 리스트 예: [{ start: 1.2, text: "하이" }, ...]
+    // 템플릿이 없다면 아래 fallback 사용
+    var danmakuComments = (typeof [{"start": 0, "text": "“It resulted as matter of a fact with brown assaulting his wife with a lead pipe and firing a gun at a car she was in” meanwhile as they’re saying this they show him smiling and waving  at the camera as he walks out of jail🤣🤣🤣💀 this interview had me dead not even 5 seconds in", "correlation": 0.730366355199436}, {"start": 3, "text": "Literally drunk talked is way out of a murder accusation, she never asked again.", "correlation": 0.46784620638497076}, {"start": 5, "text": "0:05 It was Mr. Brown with a lead pipe in the conservatory", "correlation": 0.33271274134543877}, {"start": 6, "text": "FIRING A GUN AT A CAR SHE WAS IN.", "correlation": 0.7903944962000062}, {"start": 7, "text": "People say this was a weird interview, that James is coked up or crazy, but they're all missing the point. James Brown clearly did not want to discuss the charges, he wanted to remind the interviewer that, more importantly, he is James Brown. How does he do that? He quotes his song titles. He knew exactly what he was doing here.", "correlation": 0.5183273841392675}, {"start": 9, "text": "released on 15k bond?  nah he was lifted out of the jail by a cloud of cocaine", "correlation": 0.6850282167502134}, {"start": 12, "text": "Interviewer: \"He joined us from Atlanta to discuss the charges\"  James: \"I FEEL GOOD\"", "correlation": 0.6469094065019357}, {"start": 15, "text": "James we wanna thank you for having you here... James Brown: \"Wait a minute, I just got here!\" 😂😂😂", "correlation": 0.6934690205853199}, {"start": 17, "text": "When you are like this in the mist of trouble, even your enemies are confused and that trouble will bow.", "correlation": 0.4472703730816988}, {"start": 18, "text": "How did all of this trouble begin?  🎶 Living in America…… 😂", "correlation": 0.8099027945807111}, {"start": 19, "text": "Livin' in Americaaaa!", "correlation": 0.8494233341122078}, {"start": 20, "text": "0:20 “Livin’ in America!!!” 🎵   “He-he-he-heh!” 😎", "correlation": 0.5501408396230354}, {"start": 23, "text": "0:23 I love the expressions her face goes through \"...oh, it's going to be THAT kind of interview?\"", "correlation": 0.3597430840917764}, {"start": 24, "text": "NOTHIN’S WRONG", "correlation": 0.8366624593637394}, {"start": 25, "text": "0:25 that’s where all the 5150 sound clips come from", "correlation": 0.368918379208058}, {"start": 26, "text": "...... There's nothin' wrong...", "correlation": 0.7302762090763538}, {"start": 27, "text": "Your not in any difficulty but your out on bond...  NO IM NOT", "correlation": 0.8759640816273362}, {"start": 30, "text": "No im not 😂😂", "correlation": 0.6762624408226152}, {"start": 32, "text": "Have all the charges been dropped?  “Yes I’m out on Love” 😂😂😂😂", "correlation": 0.7649188866012991}, {"start": 34, "text": "I never did like him", "correlation": 0.443465651125228}, {"start": 36, "text": "I'm out on love lol", "correlation": 0.7487264826549094}, {"start": 37, "text": "0:37 - \"Are you out on love or out OF love\" haha, this interviewer was savage!", "correlation": 0.5208390010882161}, {"start": 40, "text": "The only correct answer!", "correlation": 0.3999555074466276}, {"start": 41, "text": "Prisoner of love", "correlation": 0.4253907334929071}, {"start": 42, "text": "Alone from night to night you'll find meeee", "correlation": 0.9123951235171595}, {"start": 43, "text": "What song is he singing at 0:43?", "correlation": 0.3348057429000968}, {"start": 44, "text": "What's the song @ 0:44", "correlation": 0.3496946843446137}, {"start": 45, "text": "So you assaulted your wife. Clear off James Brown😤", "correlation": 0.6816420384292281}, {"start": 49, "text": "I admire the fact that you cannot trick him out of his position. Happiness and memories are the only things we take with us.💯", "correlation": 0.3880288812047312}, {"start": 51, "text": "Let's talk about some music!", "correlation": 0.9310125195253799}, {"start": 52, "text": "Well he told her he wanted to talk about music. Not his personal life.", "correlation": 0.668564539169199}, {"start": 54, "text": "Sometimes I say \"not at all\" (with the head turn)  just like James at 0:54 because of this video", "correlation": 0.3102654812015526}, {"start": 55, "text": "Naww its all over 😂", "correlation": 0.7518051381129587}, {"start": 56, "text": "Jeez straight from domestic violence with a lead pipe and gun to \"tell us about your tour\"", "correlation": 0.5606853652304719}, {"start": 57, "text": "0:57 -   Interviewer: \"so let's talk about your tour\"  Brown: \"we leave TOMORROW\"  Interviewer: \"so where are you going\"  Brown: \"we're going to Rio de Janerio and São Paulo, Brazil\"  Me: I bet you are James and when you get there, Papas going to get a brand new bag alright!!!!", "correlation": 0.39154352392253067}, {"start": 58, "text": "When are you leaving???😂😂😂😂😂", "correlation": 0.8877537339459838}, {"start": 59, "text": "we leaving tomorrow", "correlation": 0.8910807061839646}, {"start": 60, "text": "and where are you going?", "correlation": 1.0}, {"start": 61, "text": "1:01 \"And where are you going?\" Madlib - Sacrifice (Beat-A-Holic Thoughts)", "correlation": 0.3198364298747906}, {"start": 62, "text": "Rio de janeiro and São Paulo", "correlation": 0.9858142435014938}, {"start": 64, "text": "1:04..San Paolo 😉", "correlation": 0.49916407119146156}, {"start": 65, "text": "Sam Paulo, Brazil. Haha", "correlation": 0.5795223409015899}, {"start": 66, "text": "This is how you handle the media. Bravo James!", "correlation": 0.617467151721677}, {"start": 68, "text": "1:08 - White woman: 'Aren't you concerned about that?' -James Brown: 'Muchas gracias senor.. te quiero mucho. Danke Schön'  James Brown. Going from Spanish to German in one sentence at complete random.", "correlation": 0.33431426568469563}, {"start": 69, "text": "What does he say right there?? 1:09 if someone can answer please is for a project", "correlation": 0.36956438064638086}, {"start": 70, "text": "im concerned because there's nothing wrong xD", "correlation": 0.7989678520017692}, {"start": 71, "text": "I concerned, because there is nothing wrong lol", "correlation": 0.8563218951030862}, {"start": 72, "text": "Wtf did he say in 1:09 to 1:12 was he talking backwards or sending out some sort of subtle message", "correlation": 0.3617631575026509}, {"start": 73, "text": "wtf did he say@1:13?", "correlation": 0.35774899528344517}, {"start": 74, "text": "I'm concerned because there is nothing wrong,lol 1:14", "correlation": 0.6846685420502949}, {"start": 76, "text": "Angel dust.. cocaine and pcp in powder form. Right when he says \"I'm concerned cause theirs nothing wrong\"'at 1:16 watch him clinch his jaw. Actually just pay attention to his mouth the whole video and how much he's fucking with his lips, tongue and teeth..", "correlation": 0.30781439983350845}, {"start": 77, "text": "What are you gonna say to your fans when they ask you some questions about it?  I'M GONNA SAY I FEEL GOOOOOOOOOOOOOOD!!!!!!!!!!!", "correlation": 0.7408080126147116}, {"start": 78, "text": "1:18 He’s trying so hard not to grind his teeth together", "correlation": 0.30427336009639744}, {"start": 79, "text": "And what are you going to say when your fans ask you about it?.. I’m gonna say I FEEL GUD!", "correlation": 0.7233002012454394}, {"start": 80, "text": "1:16 - 1:20 Coke", "correlation": 0.30756894398793166}, {"start": 81, "text": "Im gonna say “I feel GOOD!”", "correlation": 0.7633972352247024}, {"start": 83, "text": "im gonna say i feel good, papas got a brand new bag", "correlation": 0.7779966202249828}, {"start": 84, "text": "Papa's got a brand new bag!", "correlation": 0.9450092409271743}, {"start": 85, "text": "It's a man's World 😂", "correlation": 0.8787637811239101}, {"start": 87, "text": "\"Now that's the 2nd time we heard that in 2 days\" 😂", "correlation": 0.7199860177618838}, {"start": 90, "text": "Great observation.", "correlation": 0.4572266728961547}, {"start": 91, "text": "\"Don't leave us James, you stay right there.\" 🤣", "correlation": 0.7472556590131332}, {"start": 92, "text": "Stay on the scene! Like a sex machine!", "correlation": 0.4491963724259896}, {"start": 93, "text": "The gloves and the Safety goggles. I am done.  Before the interview, he either came from his carpentry shop, 7th grade science fair, or piloting the Star Trek Enterprise.", "correlation": 0.40017999190873177}, {"start": 94, "text": "His reading something on screen", "correlation": 0.47663813986547615}, {"start": 95, "text": "Interviewer: Tell us what you’re going to be doing on your next tour   JB: HELLO TED!!!!!", "correlation": 0.6170623420968036}, {"start": 96, "text": "1:36 \"Hello Ted\". I assume he's talking about Ted Turner, who owned CNN. It's great he's bringing him into this mess", "correlation": 0.42311440991724186}, {"start": 97, "text": "1:37 is he saying \"hello Ted!\" He jumped to the Ted Turner stuff way before she did lol", "correlation": 0.403906043815695}, {"start": 98, "text": "What you going to be doing on tour? \"COCAINE\"", "correlation": 0.7380737522134807}, {"start": 102, "text": "Kilos in my bag:)", "correlation": 0.348347049564343}, {"start": 104, "text": "Lol I...live ...in...America ❤🎉😅😊", "correlation": 0.6963152973988329}, {"start": 105, "text": "Sex Machine", "correlation": 0.799632652283544}, {"start": 106, "text": "Sex Machine, Get up of that thang!!!", "correlation": 0.9095933987274524}, {"start": 107, "text": "I FEEL GOOD", "correlation": 0.9507977296634521}, {"start": 108, "text": "1:48 “i feel good! JAM.”", "correlation": 0.4419941697327641}, {"start": 109, "text": "JAM lol", "correlation": 0.8395675120426256}, {"start": 110, "text": "1:50 JAAAAMMMM", "correlation": 0.3648796226348471}, {"start": 111, "text": "***** okay.....", "correlation": 0.3606247367397351}, {"start": 113, "text": "Hello James.", "correlation": 0.6345871353050352}, {"start": 115, "text": "Just Seems happy that he was getting divorced", "correlation": 0.3867191860384626}, {"start": 116, "text": "Why is there no delay on t.v... In 1988... They're talking like they're in the same room. This is better than any newscast connecting a conversation from the studio to it's own neighborhood in 2019. There's a delay on the news when they try to talk to the guy outside the local bodega. Thats the strangest part of the video to me.", "correlation": 0.6256397244581575}, {"start": 117, "text": "Funniest video on the internet", "correlation": 0.3825007265145165}, {"start": 119, "text": "people in the background trying to keep it together you can hear them bursting out laughing i know its bad to laugh but it was funny", "correlation": 0.4622693599618228}, {"start": 120, "text": "2:00-2:35 prob the funniest 30 seconds ever the interviewer said “oh” 😂😂😂", "correlation": 0.41690098952357324}, {"start": 121, "text": "Are you single though", "correlation": 0.7611236393566808}, {"start": 122, "text": "i wanna mingle lol", "correlation": 0.8610143084362089}, {"start": 123, "text": "….mingle......", "correlation": 0.7406128872768972}, {"start": 124, "text": "Yeah", "correlation": 0.9343281239248922}, {"start": 125, "text": "Wow, that's the most straight forward burn ever lol \"The women love you when you get out there...why do you think that is?\" Lol 😆", "correlation": 0.8276547582483981}, {"start": 127, "text": "Same opinion with me", "correlation": 0.3963609347446671}, {"start": 128, "text": "What the fuck did he say last", "correlation": 0.4818749994206293}, {"start": 129, "text": "The women love you when you get out there, why is that? (Say it again bitch) \"what you say?\"", "correlation": 0.8070627039017827}, {"start": 131, "text": "Why's that ladies?", "correlation": 0.8902418584183432}, {"start": 133, "text": "I'm confused", "correlation": 0.3516668165199336}, {"start": 135, "text": "Huh?", "correlation": 0.9987289504549689}, {"start": 136, "text": "Cause I look good, I smell good, I feel good!", "correlation": 0.7834221121621799}, {"start": 137, "text": "Very gorgeous you are . Wow", "correlation": 0.5316141756285936}, {"start": 138, "text": "i smell good", "correlation": 0.9666615348250993}, {"start": 139, "text": "I think that he feels good", "correlation": 0.5721081592822345}, {"start": 140, "text": "And i make love good 😂😂😂", "correlation": 0.6068139153805897}, {"start": 141, "text": "And make love good. Haaaaaaaa!", "correlation": 0.8832630330567462}, {"start": 142, "text": "AH- HAAAAAAAAAAA😂😂😂😂😂", "correlation": 0.4243929258041592}, {"start": 143, "text": "Well, shit...", "correlation": 0.36784853135602846}, {"start": 144, "text": "Hi! just now saw this in 2023. Who's the beautiful News Announcer? She is a very patient & understanding Woman I might add. James and I knew she had an orgasmic pause at frames 2:24 though. The Hollywood Sign in her background window brought this whole timeless classic video together.", "correlation": 0.33547957939187667}, {"start": 145, "text": "We dont have to ask anybody else we got that from the source....hahhhhhhhhhhhhhhhhhhhhhhhhhhhh!!!!! Best interview ever", "correlation": 0.5598278049016606}, {"start": 146, "text": "When my man squints his eyes at 2:26 after saying \" I MAKE LOVE GOOD !! \"  if you did this kinda interview in 2022 your career would ABSOLUTELY be OVER am I lying ??? 🥶🥶🥶🥶🥶", "correlation": 0.3547486432338506}, {"start": 147, "text": "We got that from the source.  HAAAAAAAAAAAAAAAAAA!", "correlation": 0.7829434955399858}, {"start": 148, "text": "This is the only like I’ll ever leave on a video from CNN", "correlation": 0.4641010836170412}, {"start": 149, "text": "2:29 \"AHAAAAAAAAAAA!\" Lmao this interview was hilarious", "correlation": 0.39444629537485615}, {"start": 150, "text": "A... gospel, magazine?", "correlation": 0.7412796220762439}, {"start": 152, "text": "2:25 - 2:32 when hes says \"HAAAAAAAA\"", "correlation": 0.3456370798443071}, {"start": 153, "text": "How CNN has changed", "correlation": 0.4918606698166476}, {"start": 155, "text": "The second coming tho 😂😮😮😅😅", "correlation": 0.6929428553292436}, {"start": 157, "text": "It's out of augusta georgia s.....ankle???", "correlation": 0.917860087697003}, {"start": 158, "text": "He got serious real quick when she asked about that magazine for the community 💯 2:38 Gotta get sober when you talk about 'tha Lawd' \"How did all of this trouble begin?\" \"Living in America!\" he damn right lol", "correlation": 0.3331224281366885}, {"start": 162, "text": "Wow! That segue to James’ magazine (and it’s title) could not have been timed more unfortunately.", "correlation": 0.5721082086028382}, {"start": 164, "text": "“And James Brown as one of the advisors” 😅", "correlation": 0.862856854173768}, {"start": 166, "text": "The anchor handled this like a pro.", "correlation": 0.3724606365293686}, {"start": 168, "text": "The 2nd coming..", "correlation": 0.9083621840664714}, {"start": 169, "text": "On this week we have the Pope, I think...", "correlation": 0.8143767216913371}, {"start": 171, "text": "2:51 on this week, I think we have the Pope", "correlation": 0.7162675436532943}, {"start": 172, "text": "The Williams, Williams brothers ...", "correlation": 0.8641492311372281}, {"start": 175, "text": "2:55 who? Lol", "correlation": 0.3776478018925098}, {"start": 177, "text": "This whole clip is gold, gold, gold! But it's particularly hilarious towards the end when he starts talking about his Christian magazine, while at the same time being high as a fucking kite :)", "correlation": 0.4652513081299844}, {"start": 181, "text": "April 4 1988, so back then when a reporter and the interviewee is In two different locations I thought there was some delay until the other person can hear the question or response like now a days in 2018! I think they are sitting across from each other! TV even back them was lying- Tells Lies Visually = Television!", "correlation": 0.6357247057666904}, {"start": 183, "text": "\"We'll be doing a la-la-lotta good things...\"", "correlation": 0.6288280801198377}, {"start": 185, "text": "Until it got to \"hopefully we'll get Brother Ted Turner on the cover\", that is! 😂😁", "correlation": 0.808930312256948}, {"start": 187, "text": "3:07 when he flexxes that he knows TED TURNER hes basically telling that lady I KNOW YOUR BOSS BITCH WE OWN THIS NETWORK lolol holy shit i just got that  THIS IS A MANS WORLD he says then hahahahahah", "correlation": 0.5086103843973158}, {"start": 189, "text": "TED WHERE YOU AT?!?!?!?!?!?!", "correlation": 0.8979856781278712}, {"start": 190, "text": "3:10 “TED WYA” 🗣️", "correlation": 0.5775504193879472}, {"start": 191, "text": "William Salters Well, James, we'd like to thank you for being with us today, and---", "correlation": 0.8192964023676876}, {"start": 192, "text": "\"James we want to thank you and for having you today\"  \"WAIT A MINUTE I JUST GOT HERE\"  😭😂😂😂", "correlation": 0.6125841382868038}, {"start": 193, "text": "I've watched this twice already this morning, and I'm smiling ear to ear. She did a great job. He is truly one and only.", "correlation": 0.4496495325095618}, {"start": 194, "text": "3:14 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  We ❤ you !!!!!!!!!!!!!!!!!!  Thank you James Brown !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  🇺🇸", "correlation": 0.30844005519316386}, {"start": 195, "text": "It's 1987", "correlation": 0.46034309402650386}, {"start": 196, "text": "LMAO 🤣 you got me", "correlation": 0.3892359198638157}, {"start": 197, "text": "Who is the cute white lady conducting the interview", "correlation": 0.43455743242453054}, {"start": 198, "text": "The King🐐", "correlation": 0.48201068374163814}, {"start": 200, "text": "This was the last time cnn reported real news", "correlation": 0.481720686523791}, {"start": 201, "text": "Bitch you lying....if you understood than yo ass needs to be in a psych ward", "correlation": 0.5456914650452235}, {"start": 203, "text": "I want somebody to watch any interview clip with Charles Manson and compare it to this one and tell me they don't act the exact same!", "correlation": 0.36647876116156997}, {"start": 204, "text": "I feel good ,we love you too.", "correlation": 0.6187454402047435}, {"start": 206, "text": "One of the greatest interviews of all time.   I feel good.", "correlation": 0.6454947638161604}, {"start": 208, "text": "It sounds like you’re not troubled by any of this at all interupts with singing THIS IS A MANS WORLD", "correlation": 0.6316620218478654}, {"start": 211, "text": "this man is a prophet.", "correlation": 0.5230844006508191}, {"start": 213, "text": "Thanx for reminding us of that lol.", "correlation": 0.8018002258680128}, {"start": 215, "text": "\"Every once in a while we forget\" 😳😆", "correlation": 0.7972967573723012}, {"start": 217, "text": "Because we don't remember him for what he did  to his wives we remember him for his amazing legacy", "correlation": 0.44056873198775237}, {"start": 219, "text": "Fucking legend more power to you!", "correlation": 0.3252048469634556}, {"start": 221, "text": "We never left", "correlation": 0.4946691261403855}, {"start": 222, "text": "LMAO! Deep breathe! fewwww!", "correlation": 0.31873633354356345}] !== 'undefined' ? [{"start": 0, "text": "“It resulted as matter of a fact with brown assaulting his wife with a lead pipe and firing a gun at a car she was in” meanwhile as they’re saying this they show him smiling and waving  at the camera as he walks out of jail🤣🤣🤣💀 this interview had me dead not even 5 seconds in", "correlation": 0.730366355199436}, {"start": 3, "text": "Literally drunk talked is way out of a murder accusation, she never asked again.", "correlation": 0.46784620638497076}, {"start": 5, "text": "0:05 It was Mr. Brown with a lead pipe in the conservatory", "correlation": 0.33271274134543877}, {"start": 6, "text": "FIRING A GUN AT A CAR SHE WAS IN.", "correlation": 0.7903944962000062}, {"start": 7, "text": "People say this was a weird interview, that James is coked up or crazy, but they're all missing the point. James Brown clearly did not want to discuss the charges, he wanted to remind the interviewer that, more importantly, he is James Brown. How does he do that? He quotes his song titles. He knew exactly what he was doing here.", "correlation": 0.5183273841392675}, {"start": 9, "text": "released on 15k bond?  nah he was lifted out of the jail by a cloud of cocaine", "correlation": 0.6850282167502134}, {"start": 12, "text": "Interviewer: \"He joined us from Atlanta to discuss the charges\"  James: \"I FEEL GOOD\"", "correlation": 0.6469094065019357}, {"start": 15, "text": "James we wanna thank you for having you here... James Brown: \"Wait a minute, I just got here!\" 😂😂😂", "correlation": 0.6934690205853199}, {"start": 17, "text": "When you are like this in the mist of trouble, even your enemies are confused and that trouble will bow.", "correlation": 0.4472703730816988}, {"start": 18, "text": "How did all of this trouble begin?  🎶 Living in America…… 😂", "correlation": 0.8099027945807111}, {"start": 19, "text": "Livin' in Americaaaa!", "correlation": 0.8494233341122078}, {"start": 20, "text": "0:20 “Livin’ in America!!!” 🎵   “He-he-he-heh!” 😎", "correlation": 0.5501408396230354}, {"start": 23, "text": "0:23 I love the expressions her face goes through \"...oh, it's going to be THAT kind of interview?\"", "correlation": 0.3597430840917764}, {"start": 24, "text": "NOTHIN’S WRONG", "correlation": 0.8366624593637394}, {"start": 25, "text": "0:25 that’s where all the 5150 sound clips come from", "correlation": 0.368918379208058}, {"start": 26, "text": "...... There's nothin' wrong...", "correlation": 0.7302762090763538}, {"start": 27, "text": "Your not in any difficulty but your out on bond...  NO IM NOT", "correlation": 0.8759640816273362}, {"start": 30, "text": "No im not 😂😂", "correlation": 0.6762624408226152}, {"start": 32, "text": "Have all the charges been dropped?  “Yes I’m out on Love” 😂😂😂😂", "correlation": 0.7649188866012991}, {"start": 34, "text": "I never did like him", "correlation": 0.443465651125228}, {"start": 36, "text": "I'm out on love lol", "correlation": 0.7487264826549094}, {"start": 37, "text": "0:37 - \"Are you out on love or out OF love\" haha, this interviewer was savage!", "correlation": 0.5208390010882161}, {"start": 40, "text": "The only correct answer!", "correlation": 0.3999555074466276}, {"start": 41, "text": "Prisoner of love", "correlation": 0.4253907334929071}, {"start": 42, "text": "Alone from night to night you'll find meeee", "correlation": 0.9123951235171595}, {"start": 43, "text": "What song is he singing at 0:43?", "correlation": 0.3348057429000968}, {"start": 44, "text": "What's the song @ 0:44", "correlation": 0.3496946843446137}, {"start": 45, "text": "So you assaulted your wife. Clear off James Brown😤", "correlation": 0.6816420384292281}, {"start": 49, "text": "I admire the fact that you cannot trick him out of his position. Happiness and memories are the only things we take with us.💯", "correlation": 0.3880288812047312}, {"start": 51, "text": "Let's talk about some music!", "correlation": 0.9310125195253799}, {"start": 52, "text": "Well he told her he wanted to talk about music. Not his personal life.", "correlation": 0.668564539169199}, {"start": 54, "text": "Sometimes I say \"not at all\" (with the head turn)  just like James at 0:54 because of this video", "correlation": 0.3102654812015526}, {"start": 55, "text": "Naww its all over 😂", "correlation": 0.7518051381129587}, {"start": 56, "text": "Jeez straight from domestic violence with a lead pipe and gun to \"tell us about your tour\"", "correlation": 0.5606853652304719}, {"start": 57, "text": "0:57 -   Interviewer: \"so let's talk about your tour\"  Brown: \"we leave TOMORROW\"  Interviewer: \"so where are you going\"  Brown: \"we're going to Rio de Janerio and São Paulo, Brazil\"  Me: I bet you are James and when you get there, Papas going to get a brand new bag alright!!!!", "correlation": 0.39154352392253067}, {"start": 58, "text": "When are you leaving???😂😂😂😂😂", "correlation": 0.8877537339459838}, {"start": 59, "text": "we leaving tomorrow", "correlation": 0.8910807061839646}, {"start": 60, "text": "and where are you going?", "correlation": 1.0}, {"start": 61, "text": "1:01 \"And where are you going?\" Madlib - Sacrifice (Beat-A-Holic Thoughts)", "correlation": 0.3198364298747906}, {"start": 62, "text": "Rio de janeiro and São Paulo", "correlation": 0.9858142435014938}, {"start": 64, "text": "1:04..San Paolo 😉", "correlation": 0.49916407119146156}, {"start": 65, "text": "Sam Paulo, Brazil. Haha", "correlation": 0.5795223409015899}, {"start": 66, "text": "This is how you handle the media. Bravo James!", "correlation": 0.617467151721677}, {"start": 68, "text": "1:08 - White woman: 'Aren't you concerned about that?' -James Brown: 'Muchas gracias senor.. te quiero mucho. Danke Schön'  James Brown. Going from Spanish to German in one sentence at complete random.", "correlation": 0.33431426568469563}, {"start": 69, "text": "What does he say right there?? 1:09 if someone can answer please is for a project", "correlation": 0.36956438064638086}, {"start": 70, "text": "im concerned because there's nothing wrong xD", "correlation": 0.7989678520017692}, {"start": 71, "text": "I concerned, because there is nothing wrong lol", "correlation": 0.8563218951030862}, {"start": 72, "text": "Wtf did he say in 1:09 to 1:12 was he talking backwards or sending out some sort of subtle message", "correlation": 0.3617631575026509}, {"start": 73, "text": "wtf did he say@1:13?", "correlation": 0.35774899528344517}, {"start": 74, "text": "I'm concerned because there is nothing wrong,lol 1:14", "correlation": 0.6846685420502949}, {"start": 76, "text": "Angel dust.. cocaine and pcp in powder form. Right when he says \"I'm concerned cause theirs nothing wrong\"'at 1:16 watch him clinch his jaw. Actually just pay attention to his mouth the whole video and how much he's fucking with his lips, tongue and teeth..", "correlation": 0.30781439983350845}, {"start": 77, "text": "What are you gonna say to your fans when they ask you some questions about it?  I'M GONNA SAY I FEEL GOOOOOOOOOOOOOOD!!!!!!!!!!!", "correlation": 0.7408080126147116}, {"start": 78, "text": "1:18 He’s trying so hard not to grind his teeth together", "correlation": 0.30427336009639744}, {"start": 79, "text": "And what are you going to say when your fans ask you about it?.. I’m gonna say I FEEL GUD!", "correlation": 0.7233002012454394}, {"start": 80, "text": "1:16 - 1:20 Coke", "correlation": 0.30756894398793166}, {"start": 81, "text": "Im gonna say “I feel GOOD!”", "correlation": 0.7633972352247024}, {"start": 83, "text": "im gonna say i feel good, papas got a brand new bag", "correlation": 0.7779966202249828}, {"start": 84, "text": "Papa's got a brand new bag!", "correlation": 0.9450092409271743}, {"start": 85, "text": "It's a man's World 😂", "correlation": 0.8787637811239101}, {"start": 87, "text": "\"Now that's the 2nd time we heard that in 2 days\" 😂", "correlation": 0.7199860177618838}, {"start": 90, "text": "Great observation.", "correlation": 0.4572266728961547}, {"start": 91, "text": "\"Don't leave us James, you stay right there.\" 🤣", "correlation": 0.7472556590131332}, {"start": 92, "text": "Stay on the scene! Like a sex machine!", "correlation": 0.4491963724259896}, {"start": 93, "text": "The gloves and the Safety goggles. I am done.  Before the interview, he either came from his carpentry shop, 7th grade science fair, or piloting the Star Trek Enterprise.", "correlation": 0.40017999190873177}, {"start": 94, "text": "His reading something on screen", "correlation": 0.47663813986547615}, {"start": 95, "text": "Interviewer: Tell us what you’re going to be doing on your next tour   JB: HELLO TED!!!!!", "correlation": 0.6170623420968036}, {"start": 96, "text": "1:36 \"Hello Ted\". I assume he's talking about Ted Turner, who owned CNN. It's great he's bringing him into this mess", "correlation": 0.42311440991724186}, {"start": 97, "text": "1:37 is he saying \"hello Ted!\" He jumped to the Ted Turner stuff way before she did lol", "correlation": 0.403906043815695}, {"start": 98, "text": "What you going to be doing on tour? \"COCAINE\"", "correlation": 0.7380737522134807}, {"start": 102, "text": "Kilos in my bag:)", "correlation": 0.348347049564343}, {"start": 104, "text": "Lol I...live ...in...America ❤🎉😅😊", "correlation": 0.6963152973988329}, {"start": 105, "text": "Sex Machine", "correlation": 0.799632652283544}, {"start": 106, "text": "Sex Machine, Get up of that thang!!!", "correlation": 0.9095933987274524}, {"start": 107, "text": "I FEEL GOOD", "correlation": 0.9507977296634521}, {"start": 108, "text": "1:48 “i feel good! JAM.”", "correlation": 0.4419941697327641}, {"start": 109, "text": "JAM lol", "correlation": 0.8395675120426256}, {"start": 110, "text": "1:50 JAAAAMMMM", "correlation": 0.3648796226348471}, {"start": 111, "text": "***** okay.....", "correlation": 0.3606247367397351}, {"start": 113, "text": "Hello James.", "correlation": 0.6345871353050352}, {"start": 115, "text": "Just Seems happy that he was getting divorced", "correlation": 0.3867191860384626}, {"start": 116, "text": "Why is there no delay on t.v... In 1988... They're talking like they're in the same room. This is better than any newscast connecting a conversation from the studio to it's own neighborhood in 2019. There's a delay on the news when they try to talk to the guy outside the local bodega. Thats the strangest part of the video to me.", "correlation": 0.6256397244581575}, {"start": 117, "text": "Funniest video on the internet", "correlation": 0.3825007265145165}, {"start": 119, "text": "people in the background trying to keep it together you can hear them bursting out laughing i know its bad to laugh but it was funny", "correlation": 0.4622693599618228}, {"start": 120, "text": "2:00-2:35 prob the funniest 30 seconds ever the interviewer said “oh” 😂😂😂", "correlation": 0.41690098952357324}, {"start": 121, "text": "Are you single though", "correlation": 0.7611236393566808}, {"start": 122, "text": "i wanna mingle lol", "correlation": 0.8610143084362089}, {"start": 123, "text": "….mingle......", "correlation": 0.7406128872768972}, {"start": 124, "text": "Yeah", "correlation": 0.9343281239248922}, {"start": 125, "text": "Wow, that's the most straight forward burn ever lol \"The women love you when you get out there...why do you think that is?\" Lol 😆", "correlation": 0.8276547582483981}, {"start": 127, "text": "Same opinion with me", "correlation": 0.3963609347446671}, {"start": 128, "text": "What the fuck did he say last", "correlation": 0.4818749994206293}, {"start": 129, "text": "The women love you when you get out there, why is that? (Say it again bitch) \"what you say?\"", "correlation": 0.8070627039017827}, {"start": 131, "text": "Why's that ladies?", "correlation": 0.8902418584183432}, {"start": 133, "text": "I'm confused", "correlation": 0.3516668165199336}, {"start": 135, "text": "Huh?", "correlation": 0.9987289504549689}, {"start": 136, "text": "Cause I look good, I smell good, I feel good!", "correlation": 0.7834221121621799}, {"start": 137, "text": "Very gorgeous you are . Wow", "correlation": 0.5316141756285936}, {"start": 138, "text": "i smell good", "correlation": 0.9666615348250993}, {"start": 139, "text": "I think that he feels good", "correlation": 0.5721081592822345}, {"start": 140, "text": "And i make love good 😂😂😂", "correlation": 0.6068139153805897}, {"start": 141, "text": "And make love good. Haaaaaaaa!", "correlation": 0.8832630330567462}, {"start": 142, "text": "AH- HAAAAAAAAAAA😂😂😂😂😂", "correlation": 0.4243929258041592}, {"start": 143, "text": "Well, shit...", "correlation": 0.36784853135602846}, {"start": 144, "text": "Hi! just now saw this in 2023. Who's the beautiful News Announcer? She is a very patient & understanding Woman I might add. James and I knew she had an orgasmic pause at frames 2:24 though. The Hollywood Sign in her background window brought this whole timeless classic video together.", "correlation": 0.33547957939187667}, {"start": 145, "text": "We dont have to ask anybody else we got that from the source....hahhhhhhhhhhhhhhhhhhhhhhhhhhhh!!!!! Best interview ever", "correlation": 0.5598278049016606}, {"start": 146, "text": "When my man squints his eyes at 2:26 after saying \" I MAKE LOVE GOOD !! \"  if you did this kinda interview in 2022 your career would ABSOLUTELY be OVER am I lying ??? 🥶🥶🥶🥶🥶", "correlation": 0.3547486432338506}, {"start": 147, "text": "We got that from the source.  HAAAAAAAAAAAAAAAAAA!", "correlation": 0.7829434955399858}, {"start": 148, "text": "This is the only like I’ll ever leave on a video from CNN", "correlation": 0.4641010836170412}, {"start": 149, "text": "2:29 \"AHAAAAAAAAAAA!\" Lmao this interview was hilarious", "correlation": 0.39444629537485615}, {"start": 150, "text": "A... gospel, magazine?", "correlation": 0.7412796220762439}, {"start": 152, "text": "2:25 - 2:32 when hes says \"HAAAAAAAA\"", "correlation": 0.3456370798443071}, {"start": 153, "text": "How CNN has changed", "correlation": 0.4918606698166476}, {"start": 155, "text": "The second coming tho 😂😮😮😅😅", "correlation": 0.6929428553292436}, {"start": 157, "text": "It's out of augusta georgia s.....ankle???", "correlation": 0.917860087697003}, {"start": 158, "text": "He got serious real quick when she asked about that magazine for the community 💯 2:38 Gotta get sober when you talk about 'tha Lawd' \"How did all of this trouble begin?\" \"Living in America!\" he damn right lol", "correlation": 0.3331224281366885}, {"start": 162, "text": "Wow! That segue to James’ magazine (and it’s title) could not have been timed more unfortunately.", "correlation": 0.5721082086028382}, {"start": 164, "text": "“And James Brown as one of the advisors” 😅", "correlation": 0.862856854173768}, {"start": 166, "text": "The anchor handled this like a pro.", "correlation": 0.3724606365293686}, {"start": 168, "text": "The 2nd coming..", "correlation": 0.9083621840664714}, {"start": 169, "text": "On this week we have the Pope, I think...", "correlation": 0.8143767216913371}, {"start": 171, "text": "2:51 on this week, I think we have the Pope", "correlation": 0.7162675436532943}, {"start": 172, "text": "The Williams, Williams brothers ...", "correlation": 0.8641492311372281}, {"start": 175, "text": "2:55 who? Lol", "correlation": 0.3776478018925098}, {"start": 177, "text": "This whole clip is gold, gold, gold! But it's particularly hilarious towards the end when he starts talking about his Christian magazine, while at the same time being high as a fucking kite :)", "correlation": 0.4652513081299844}, {"start": 181, "text": "April 4 1988, so back then when a reporter and the interviewee is In two different locations I thought there was some delay until the other person can hear the question or response like now a days in 2018! I think they are sitting across from each other! TV even back them was lying- Tells Lies Visually = Television!", "correlation": 0.6357247057666904}, {"start": 183, "text": "\"We'll be doing a la-la-lotta good things...\"", "correlation": 0.6288280801198377}, {"start": 185, "text": "Until it got to \"hopefully we'll get Brother Ted Turner on the cover\", that is! 😂😁", "correlation": 0.808930312256948}, {"start": 187, "text": "3:07 when he flexxes that he knows TED TURNER hes basically telling that lady I KNOW YOUR BOSS BITCH WE OWN THIS NETWORK lolol holy shit i just got that  THIS IS A MANS WORLD he says then hahahahahah", "correlation": 0.5086103843973158}, {"start": 189, "text": "TED WHERE YOU AT?!?!?!?!?!?!", "correlation": 0.8979856781278712}, {"start": 190, "text": "3:10 “TED WYA” 🗣️", "correlation": 0.5775504193879472}, {"start": 191, "text": "William Salters Well, James, we'd like to thank you for being with us today, and---", "correlation": 0.8192964023676876}, {"start": 192, "text": "\"James we want to thank you and for having you today\"  \"WAIT A MINUTE I JUST GOT HERE\"  😭😂😂😂", "correlation": 0.6125841382868038}, {"start": 193, "text": "I've watched this twice already this morning, and I'm smiling ear to ear. She did a great job. He is truly one and only.", "correlation": 0.4496495325095618}, {"start": 194, "text": "3:14 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  We ❤ you !!!!!!!!!!!!!!!!!!  Thank you James Brown !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  🇺🇸", "correlation": 0.30844005519316386}, {"start": 195, "text": "It's 1987", "correlation": 0.46034309402650386}, {"start": 196, "text": "LMAO 🤣 you got me", "correlation": 0.3892359198638157}, {"start": 197, "text": "Who is the cute white lady conducting the interview", "correlation": 0.43455743242453054}, {"start": 198, "text": "The King🐐", "correlation": 0.48201068374163814}, {"start": 200, "text": "This was the last time cnn reported real news", "correlation": 0.481720686523791}, {"start": 201, "text": "Bitch you lying....if you understood than yo ass needs to be in a psych ward", "correlation": 0.5456914650452235}, {"start": 203, "text": "I want somebody to watch any interview clip with Charles Manson and compare it to this one and tell me they don't act the exact same!", "correlation": 0.36647876116156997}, {"start": 204, "text": "I feel good ,we love you too.", "correlation": 0.6187454402047435}, {"start": 206, "text": "One of the greatest interviews of all time.   I feel good.", "correlation": 0.6454947638161604}, {"start": 208, "text": "It sounds like you’re not troubled by any of this at all interupts with singing THIS IS A MANS WORLD", "correlation": 0.6316620218478654}, {"start": 211, "text": "this man is a prophet.", "correlation": 0.5230844006508191}, {"start": 213, "text": "Thanx for reminding us of that lol.", "correlation": 0.8018002258680128}, {"start": 215, "text": "\"Every once in a while we forget\" 😳😆", "correlation": 0.7972967573723012}, {"start": 217, "text": "Because we don't remember him for what he did  to his wives we remember him for his amazing legacy", "correlation": 0.44056873198775237}, {"start": 219, "text": "Fucking legend more power to you!", "correlation": 0.3252048469634556}, {"start": 221, "text": "We never left", "correlation": 0.4946691261403855}, {"start": 222, "text": "LMAO! Deep breathe! fewwww!", "correlation": 0.31873633354356345}] : null);
+    if(!Array.isArray(danmakuComments)){
+      danmakuComments = [
+        { start: 0.5, text: "첫 댓글!" },
+        { start: 1.5, text: "오른쪽에서 등장합니다" },
+        { start: 3.0, text: "왼쪽으로 사라져요" },
+        { start: 5.0, text: "시킹해도 잘 동작" },
+      ];
+    }
+
+    // ===== 요소 참조 / 전역 상태 =====
+    var video = null;
+    var videoContainer = null;
+    var playPauseBtn = null, playIcon = null, pauseIcon = null;
+    var progressContainer = null, progressBar = null;
+    var timeDisplay = null;
+
+    var isDragging = false;          // 진행바 드래그
+    var activeDanmaku = new Map();   // idx -> { element, currentX, width, y, speed }
+    var animationId = null;
+    var isPaused = false;            // 비디오 정지 동기화
+    var lastRafTime = 0;             // requestAnimationFrame 시간
+    var lastVideoTime = 0;           // 직전 timeupdate의 비디오 시간 (시킹 대비)
+    
+    // danmaku one 전용: 다음에 표시할 댓글 인덱스
+    var nextCommentIndex = 0;
+    var displayedComments = new Set();  // 이미 표시된 댓글 인덱스 추적
+    
+    // 댓글별 고유 속도 계산 함수 (픽셀 단위로 네 개 중 하나)
+    function getDanmakuSpeed(commentText) {
+      const textHash = hashString(commentText || '');
+      const speedOptions = [-140, -180, -220, -260]; // px/s (음수=왼쪽)
+      return speedOptions[textHash % speedOptions.length];
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      video = document.getElementById('video-player');
+      videoContainer = document.getElementById('video-container');
+      playPauseBtn = document.getElementById('play-pause-btn');
+      playIcon = document.getElementById('play-icon');
+      pauseIcon = document.getElementById('pause-icon');
+      progressContainer = document.getElementById('progress-container');
+      progressBar = document.getElementById('progress-bar');
+      timeDisplay = document.getElementById('time-display');
+
+      // start 기준 정렬
+      danmakuComments.sort((a,b) => a.start - b.start);
+
+      // 이벤트 바인딩
+      video.addEventListener('timeupdate', onTimeUpdate);
+      video.addEventListener('loadedmetadata', updateTimeDisplay);
+      video.addEventListener('play', () => { updatePlayPauseButton(); lastVideoTime = video.currentTime || 0; resumeAllDanmaku(); });
+      video.addEventListener('pause', () => { updatePlayPauseButton(); pauseAllDanmaku(); });
+      video.addEventListener('seeking', resetDanmakuForSeek);
+
+      playPauseBtn.addEventListener('click', togglePlayPause);
+      progressContainer.addEventListener('mousedown', startDrag);
+      document.addEventListener('mousemove', doDrag);
+      document.addEventListener('mouseup', endDrag);
+      progressContainer.addEventListener('click', (e)=>{ if(!isDragging) seekVideo(e); });
+
+      // 리사이즈 시 현재 떠있는 단무쿠 위치/퇴장 판정 보정
+      window.addEventListener('resize', () => {
+        // 큰 레이아웃 변화에서는 간단히 리셋
+        resetDanmakuForSeek();
+      });
+
+      // 초기 상태
+      updatePlayPauseButton();
+    });
+
+    function togglePlayPause(){ if(video.paused) video.play(); else video.pause(); }
+
+    function updatePlayPauseButton(){
+      if(!video) return;
+      if(video.paused){
+        playIcon.style.display='block';
+        pauseIcon.style.display='none';
+      } else {
+        playIcon.style.display='none';
+        pauseIcon.style.display='block';
+      }
+    }
+
+    function updateTimeDisplay(){
+      if(!video || !video.duration) return;
+      const cur = formatTime(video.currentTime || 0);
+      const tot = formatTime(video.duration);
+      timeDisplay.textContent = cur + ' / ' + tot;
+    }
+
+    function onTimeUpdate(){
+      if(!video) return;
+      const t = video.currentTime || 0;
+
+      // 진행바
+      if(video.duration){
+        progressBar.style.width = ((t / video.duration) * 100) + '%';
+      }
+      updateTimeDisplay();
+
+      // danmaku one: 첫 번째 댓글만 onTimeUpdate에서 표시 (활성 댓글이 없고 첫 번째 댓글일 때만)
+      // 이후 댓글들은 updateDanmakuPositions에서 이전 댓글이 완전히 사라진 후에만 표시됨
+      if(activeDanmaku.size === 0 && nextCommentIndex === 0 && !displayedComments.has(0) && nextCommentIndex < danmakuComments.length){
+        const firstComment = danmakuComments[0];
+        if(firstComment && t >= firstComment.start){
+          addDanmakuComment(firstComment, 0);
+          displayedComments.add(0);
+          nextCommentIndex = 1;
+          if (!animationId) startAnimationLoop();
+        }
+      }
+
+      lastVideoTime = t;
+    }
+
+    // ===== 진행바 제어 =====
+    function startDrag(e){ isDragging = true; e.preventDefault(); updateVideoTime(e); }
+    function doDrag(e){ if(!isDragging) return; e.preventDefault(); updateVideoTime(e); }
+    function endDrag(){ if(!isDragging) return; isDragging = false; }
+    function seekVideo(e){ updateVideoTime(e); }
+
+    function updateVideoTime(e){
+      const rect = progressContainer.getBoundingClientRect();
+      const pos = clamp((e.clientX - rect.left)/rect.width, 0, 1);
+      if (video.duration) {
+        video.currentTime = pos * video.duration;
+        // 시킹 처리: 떠있는 단무쿠 초기화 & 타임 마커 갱신
+        resetDanmakuForSeek();
+      }
+    }
+
+    // ===== 단무쿠 생성 / 애니메이션 =====
+    function addDanmakuComment(cmt, idx){
+      const div = document.createElement('div');
+      div.className = 'danmaku-comment';
+      div.id = 'danmaku-' + idx;
+
+      const txt = (cmt.text ?? '') + '';
+      div.innerHTML = '<div class="comment-text"></div>';
+      div.querySelector('.comment-text').textContent = txt; // XSS 안전
+
+      // 세로 위치: 댓글 텍스트 기반 결정적 위치 (하단 여백 10px)
+      const containerRect = videoContainer.getBoundingClientRect();
+      // 댓글 텍스트를 해시값으로 변환하여 일관된 위치 생성
+      const textHash = hashString(cmt.text || '');
+      const maxHeight = containerRect.height - 20; // 하단 10px 여백
+      const randomY = textHash % maxHeight; // 상단부터 시작
+
+      // 먼저 붙여서 실제 너비를 잰다
+      div.style.top = randomY + 'px';
+      div.style.left = '0px';
+      div.style.transform = 'translateX(0px)';
+      div.style.transition = 'none';
+      videoContainer.appendChild(div);
+
+      const elWidth = div.getBoundingClientRect().width;
+
+      // 시작 X: 컨테이너 오른쪽 바깥
+      const startX = containerRect.width; // +10 버퍼
+      div.style.transform = `translateX(${startX}px)`;
+
+      // 댓글별 고유 속도 계산
+      const danmakuSpeed = getDanmakuSpeed(cmt.text);
+
+      // 상태 저장
+      activeDanmaku.set(idx, {
+        element: div,
+        currentX: startX,
+        width: elWidth,
+        y: randomY,
+        speed: danmakuSpeed
+      });
+
+      // 애니메이션 루프 가동
+      if (!animationId) startAnimationLoop();
+    }
+
+    function startAnimationLoop() {
+      function animate(ts) {
+        if (!lastRafTime) lastRafTime = ts;
+        const deltaTime = (ts - lastRafTime) / 1000; // 초
+        lastRafTime = ts;
+
+        if (!isPaused) {
+          updateDanmakuPositions(deltaTime);
+        }
+
+        // 루프 유지: 활성 단무쿠가 없고 비디오도 일시정지면 멈출 수 있음
+        if (activeDanmaku.size === 0 && video?.paused) {
+          animationId = null;
+          lastRafTime = 0;
+          return; // 루프 종료
+        }
+        animationId = requestAnimationFrame(animate);
+      }
+      if (!animationId) animationId = requestAnimationFrame(animate);
+    }
+
+    function updateDanmakuPositions(deltaTime) {
+      // 각 댓글별 고유 속도로 왼쪽 이동
+      var commentJustDisappeared = false;
+      
+      activeDanmaku.forEach((danmaku, idx) => {
+        if (!danmaku || !danmaku.element) return;
+        danmaku.currentX += danmaku.speed * deltaTime;
+
+        // 완전 퇴장: 요소의 오른쪽 끝이 화면 왼쪽 밖으로 나가면 제거
+        if (danmaku.currentX + danmaku.width < 0) {
+          danmaku.element.parentNode?.removeChild(danmaku.element);
+          activeDanmaku.delete(idx);
+          commentJustDisappeared = true;
+        } else {
+          danmaku.element.style.transform = `translateX(${danmaku.currentX}px)`;
+        }
+      });
+      
+      // danmaku one: 댓글이 완전히 사라진 직후, 그 시점 이후의 댓글 중 가장 가까운 댓글 표시
+      if (commentJustDisappeared && activeDanmaku.size === 0) {
+        const t = video?.currentTime || 0;
+        
+        // 현재 시간 이후의 댓글 중 가장 가까운 댓글 찾기 (아직 표시되지 않은 댓글만)
+        var nextComment = null;
+        var nextCommentIdx = -1;
+        
+        for (let i = 0; i < danmakuComments.length; i++) {
+          // 아직 표시되지 않았고, 시작 시간이 현재 시간 이후인 댓글 찾기
+          if (!displayedComments.has(i) && danmakuComments[i].start >= t) {
+            nextComment = danmakuComments[i];
+            nextCommentIdx = i;
+            break;
+          }
+        }
+        
+        // 찾은 댓글이 있으면 표시
+        if (nextComment && nextCommentIdx >= 0) {
+          addDanmakuComment(nextComment, nextCommentIdx);
+          displayedComments.add(nextCommentIdx);
+          nextCommentIndex = nextCommentIdx + 1;
+        }
+      }
+    }
+
+    // ===== 시킹/재생 동기화 =====
+    function pauseAllDanmaku() { isPaused = true; }
+    function resumeAllDanmaku() { isPaused = false; if (!animationId) startAnimationLoop(); }
+
+    function resetDanmakuForSeek(){
+      // 떠있던 것들 제거
+      activeDanmaku.forEach((d)=>{ d.element?.parentNode?.removeChild(d.element); });
+      activeDanmaku.clear();
+      // 다음 프레임 기준으로 새로 트리거
+      lastVideoTime = video?.currentTime || 0;
+      // 애니메이션 타임라인 초기화
+      lastRafTime = 0;
+      // danmaku one: 다음 댓글 인덱스 재계산 (현재 시간 이후의 첫 번째 댓글 찾기)
+      displayedComments.clear();  // 시킹 시 표시된 댓글 추적 초기화
+      nextCommentIndex = 0;
+      for(let i = 0; i < danmakuComments.length; i++){
+        if(danmakuComments[i].start > lastVideoTime){
+          nextCommentIndex = i;
+          break;
+        }
+      }
+    }
+  </script>
+</body>
+</html>

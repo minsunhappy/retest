@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>설문 완료</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .intro-text {
+            font-size: 18px;
+            color: #444;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .choice-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .choice-card {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 20px 24px;
+            border: 1px solid #dfe6ec;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+            background-color: #fff;
+        }
+
+        .choice-card:hover {
+            border-color: #3498db;
+            box-shadow: 0 12px 24px rgba(52,152,219,0.15);
+            transform: translateY(-2px);
+        }
+
+        .choice-card input[type="radio"] {
+            margin-right: 4px;
+            transform: scale(1.2);
+        }
+
+        .choice-media-wrapper {
+            flex-shrink: 0;
+        }
+
+        .choice-media {
+            width: 200px;
+            height: 130px;
+            border-radius: 14px;
+            object-fit: cover;
+            background-color: #000;
+            border: 1px solid #ccd6dd;
+        }
+
+        .choice-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .choice-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .choice-desc {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .optional-question {
+            margin-top: 10px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            border: 1px solid #eee;
+        }
+
+        .optional-question textarea {
+            width: 100%;
+            min-height: 140px;
+            margin-top: 12px;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .optional-question textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 4px rgba(52,152,219,0.3);
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 48px;
+            font-size: 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-primary:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 15px;
+            display: none;
+        }
+
+        .thank-you {
+            margin-top: 30px;
+            text-align: center;
+            padding: 25px;
+            border-radius: 10px;
+            background-color: #ecf9f1;
+            border: 1px solid #b7e4c7;
+        }
+
+        .thank-you h2 {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 640px) {
+            .choice-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .choice-media {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="questionSection">
+            <h1>마무리 질문</h1>
+            <p class="intro-text">
+                <span style="font-size:22px;"><u><strong>영상을 보면서 댓글을 읽는 데 </strong></u>가장 만족스러웠던 인터페이스를 선택해 주세요.</span>
+            </p>
+
+            <form id="preferenceForm">
+                <div class="choice-list" id="choiceList">
+                    <!-- 인터페이스 카드가 동적으로 추가됩니다 -->
+                </div>
+                <div class="error-message" id="choiceError">하나의 인터페이스를 선택해 주세요.</div>
+
+                <div class="optional-question">
+                    <span style="font-size:22px;">(선택 사항) 위에서 가장 만족스럽다고 고른 인터페이스에 대해, 그 <u><strong>이유</strong></u>를 자유롭게 작성해 주세요.</span><br>
+                    <span style="font-size:19px;"><br>*어떤 점이 마음에 들었는지, 구체적인 사례나 느낀 점을 포함해 설명해 주시면 좋습니다.</span><br>
+                    <textarea id="preferenceReason" placeholder="자유롭게 작성해 주세요. (선택 사항)"></textarea>
+                </div>
+
+                <div class="btn-container">
+                    <button type="submit" class="btn-primary" id="submitBtn">제출하기</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="thank-you hidden" id="thankYouMessage">
+            <h2>참여해 주셔서 감사합니다!</h2>
+            <p>응답이 저장되었습니다. 추가로 궁금한 사항이 있으시면 언제든지 연락 주세요.</p>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        const CHOICES = [
+            {
+                id: 'A',
+                title: '인터페이스 A',
+                desc: '영상 하단에 자동으로 댓글이 표시됩니다.',
+                media: 'preview/C.MP4'
+            },
+            {
+                id: 'B',
+                title: '인터페이스 B',
+                desc: '영상 오른쪽에서 댓글이 흐르듯 자동으로 표시됩니다.',
+                media: 'preview/C.MP4'
+            },
+            {
+                id: 'C',
+                title: '인터페이스 C',
+                desc: '영상 하단 고정 댓글 목록을 직접 스크롤하며 읽습니다.',
+                media: 'preview/C.MP4'
+            },
+            {
+                id: 'D',
+                title: '인터페이스 D',
+                desc: '영상 오른쪽에서 흘러나오는 다른 형태의 실시간 댓글입니다.',
+                media: 'preview/C.MP4'
+            },
+            {
+                id: 'E',
+                title: '인터페이스 E',
+                desc: '영상 하단에 댓글이 1개씩 표시되며, 스크롤로 넘겨 읽습니다.',
+                media: 'preview/C.MP4'
+            }
+        ];
+
+        const questionSection = document.getElementById('questionSection');
+        const form = document.getElementById('preferenceForm');
+        const choiceList = document.getElementById('choiceList');
+        const choiceError = document.getElementById('choiceError');
+        const reasonInput = document.getElementById('preferenceReason');
+        const submitBtn = document.getElementById('submitBtn');
+        const thankYouMessage = document.getElementById('thankYouMessage');
+
+        let baseResultData = null;
+
+        function createMediaElement(path) {
+            const lowerPath = (path || '').toLowerCase();
+            if (lowerPath.endsWith('.mp4') || lowerPath.endsWith('.webm')) {
+                const video = document.createElement('video');
+                video.className = 'choice-media';
+                video.src = path;
+                video.autoplay = true;
+                video.loop = true;
+                video.muted = true;
+                video.playsInline = true;
+                video.setAttribute('aria-hidden', 'true');
+                return video;
+            }
+
+            const img = document.createElement('img');
+            img.className = 'choice-media';
+            img.src = path;
+            img.alt = '인터페이스 미리보기';
+            return img;
+        }
+
+        function renderChoices() {
+            if (!choiceList) return;
+
+            CHOICES.forEach(choice => {
+                const label = document.createElement('label');
+                label.className = 'choice-card';
+
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'interfaceChoice';
+                radio.value = choice.id;
+
+                const mediaWrapper = document.createElement('div');
+                mediaWrapper.className = 'choice-media-wrapper';
+
+                mediaWrapper.appendChild(createMediaElement(choice.media));
+
+                const content = document.createElement('div');
+                content.className = 'choice-content';
+
+                const title = document.createElement('div');
+                title.className = 'choice-title';
+                title.textContent = choice.title;
+
+                const desc = document.createElement('div');
+                desc.className = 'choice-desc';
+                desc.textContent = choice.desc;
+
+                content.appendChild(title);
+                content.appendChild(desc);
+
+                label.appendChild(radio);
+                label.appendChild(mediaWrapper);
+                label.appendChild(content);
+
+                choiceList.appendChild(label);
+            });
+        }
+
+        async function prepareBaseResult() {
+            const participantData = JSON.parse(localStorage.getItem('participantData') || 'null');
+            if (!participantData) {
+                alert('참가자 정보를 찾을 수 없습니다. 처음 페이지로 이동합니다.');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const testResults = getAllTestResults();
+            const testSequence = await getOrCreateInterfaceDataPairs();
+
+            baseResultData = {
+                participant: participantData,
+                testSequence,
+                results: testResults
+            };
+        }
+
+        function getSelectedChoice() {
+            return document.querySelector('input[name="interfaceChoice"]:checked');
+        }
+
+        function showThankYouOnly() {
+            if (questionSection) {
+                questionSection.classList.add('hidden');
+            }
+            if (thankYouMessage) {
+                thankYouMessage.classList.remove('hidden');
+            }
+        }
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            if (!submitBtn) return;
+
+            const selected = getSelectedChoice();
+            if (!selected) {
+                choiceError.style.display = 'block';
+                window.scrollTo({ top: choiceList.offsetTop - 20, behavior: 'smooth' });
+                return;
+            }
+            choiceError.style.display = 'none';
+
+            submitBtn.disabled = true;
+
+            if (!baseResultData) {
+                await prepareBaseResult();
+                if (!baseResultData) {
+                    submitBtn.disabled = false;
+                    return;
+                }
+            }
+
+            const finalData = {
+                ...baseResultData,
+                preferredInterface: selected.value,
+                preferredReason: reasonInput.value.trim(),
+                completedAt: new Date().toISOString()
+            };
+
+            localStorage.setItem('finalResults', JSON.stringify(finalData));
+            console.log('최종 결과:', finalData);
+
+            showThankYouOnly();
+        });
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            renderChoices();
+            await prepareBaseResult();
+        });
+    </script>
+</body>
+</html>
+

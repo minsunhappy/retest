@@ -1,0 +1,305 @@
+#######################################
+Video ID: W86cTIoMv2U
+Total Comments: 25
+Query Filter: <none>
+#######################################
+=======================================
+Start-End: 0 ~ 2
+Reward: 2.8759748423987457
+Likes: 30 || 0.8313517213679825 
+Correlation:
+  Overall: 0.3033178499156952
+  Audio: 0.0 | 
+  Video: 0.36 | The video starts with a solid red background. A white line appears and begins to form an arc. The arc continues to complete a spiral shape. The spiral shape becomes more defined, and the word 'one' starts to appear within the spiral. The word 'one' is fully formed within the spiral. The word 'one' remains on the screen, and the spiral starts to form the letter 'n'. The letter 'n' is completed, and the word 'one' is now 'one n'. The word 'one' is further extended with the letter 'e'. The word 'one' is now 'one ne'. The
+Text:
+  [[You noobs it's a hologram.]]
+=======================================
+
+=======================================
+Start-End: 2 ~ 4
+Reward: 3.555495563885319
+Likes: 225 || 0.9422032692296326 
+Correlation:
+  Overall: 0.41777225635651344
+  Audio: 0.0 | 
+  Video: 0.49 | The video starts with a solid red background. A white line appears and begins to form an arc. The arc continues to complete a spiral shape. The spiral shape becomes more defined, and the word 'one' starts to appear within the spiral. The word 'one' is fully formed within the spiral. The word 'one' remains on the screen, and the spiral starts to form the letter 'n'. The letter 'n' is completed, and the word 'one' is now 'one n'. The word 'one' is further extended with the letter 'e'. The word 'one' is now 'one ne'. The
+Text:
+  [[Just a more kitteny kitten.]]
+=======================================
+
+=======================================
+Start-End: 4 ~ 7
+Reward: 7.215531945815281
+Likes: 29 || 0.8283140808274668 
+Correlation:
+  Overall: 0.7884316172221467
+  Audio: 0.85 | The smallest feline in the world
+  Video: 0.39 | The scene is set in a natural environment with green leaves and dry, brown leaves scattered on the ground. A small kitten's head gradually emerges from behind the dry leaves, revealing its eyes and part of its face. The kitten continues to move forward, fully revealing its head and upper body. The kitten then turns its head to the left, looking around. After a brief moment, the kitten turns its head back to face forward, appearing curious and alert.
+Text:
+  [[World's smallest Beautiful Baby Cat.]]
+=======================================
+
+=======================================
+Start-End: 7 ~ 11
+Reward: 10.074720478297309
+Likes: 1400 || 0.978907573375557 
+Correlation:
+  Overall: 0.7698862730993852
+  Audio: 0.82 | The smallest feline in the world
+  Video: 0.39 | In a forested area with green foliage and dry leaves on the ground, a small kitten gradually emerges from behind a large, brown leaf. The kitten's eyes become visible as it cautiously steps forward, revealing more of its body. Text appears on the screen, identifying the kitten as a 'Rusty Spotted Cat' (Prionailurus rubiginosus). The kitten continues to move forward, and the text remains on the screen for a few moments before disappearing. The kitten then fully emerges from behind the leaf, looking around its surroundings.
+Text:
+  [[World's smallest cat, more like world's cutest cat.]]
+=======================================
+
+=======================================
+Start-End: 11 ~ 17
+Reward: 15.275065934300505
+Likes: 4800 || 0.9898389616562612 
+Correlation:
+  Overall: 0.7780026803635782
+  Audio: 0.69 | A rusty spotted cat
+  Video: 0.61 | In a forested area with green foliage and dry leaves on the ground, a small kitten gradually emerges from behind a large, brown leaf. The kitten's eyes become visible as it cautiously steps forward, revealing more of its body. Text appears on the screen, identifying the kitten as a 'Rusty Spotted Cat' (Prionailurus rubiginosus). The kitten continues to move forward, and the text remains on the screen for a few moments before disappearing. The kitten then fully emerges from behind the leaf, looking around its surroundings.
+Text:
+  [[If this is how small an adult rusty spotted cat is, imagine a newborn one-]]
+=======================================
+
+=======================================
+Start-End: 17 ~ 23
+Reward: 15.550141937801243
+Likes: 973 || 0.974093307697467 
+Correlation:
+  Overall: 0.8087985076347035
+  Audio: 0.78 | He may look like a kitten
+  Video: 0.56 | The video shows a close-up of a cat's face, with the cat's eyes and whiskers clearly visible. The cat gradually raises its head, and its eyes shift slightly to the side. The cat then opens its mouth and appears to meow. After meowing, the cat's mouth closes, and it maintains its gaze in the same direction.
+Text:
+  [[He may look like a kitten   Cat:*proceeds to meow the tiniest meow*  Everyone else: Are you sure about that]]
+=======================================
+
+=======================================
+Start-End: 23 ~ 28
+Reward: 11.333890869482651
+Likes: 2600 || 0.9852679403879181 
+Correlation:
+  Overall: 0.6407551167543063
+  Audio: 0.76 | He’d still fit in the palm of your hand
+  Video: 0.05 | The scene is set in a forest floor covered with dry leaves and green plants. A small animal, partially hidden by the leaves and foliage, gradually moves forward, becoming more visible as it progresses.
+Text:
+  [[Speaker: he'd still fit in the palm of your hand. Me: looks at my palm]]
+=======================================
+
+=======================================
+Start-End: 28 ~ 34
+Reward: 14.663120635215115
+Likes: 12000 || 0.9944514529686421 
+Correlation:
+  Overall: 0.7247009931169385
+  Audio: 0.68 | But this little male is very nearly fully grown
+  Video: 0.53 | A small kitten with striped fur is nestled among dry leaves and twigs, peering out with wide, alert eyes. The kitten remains mostly still, maintaining its gaze forward, while the surrounding foliage slightly rustles, indicating a gentle movement.
+Text:
+  [[Narrator: But this little male is very nearly fully grown The little cat: *exits from under a leaf*]]
+=======================================
+
+=======================================
+Start-End: 34 ~ 40
+Reward: 13.935421831916688
+Likes: 1300 || 0.977999513425642 
+Correlation:
+  Overall: 0.6722853959469031
+  Audio: 0.79 | He'll soon be setting off on a solitary life
+  Video: 0.1 | In a forested area with green foliage in the background, a pile of dry leaves is shown. The leaves begin to move slightly, revealing a small cat's eyes peeking out. The cat continues to emerge, revealing more of its face and body. The cat, with striped fur, fully emerges from the leaves and looks around. The cat then starts to move forward, leaving the leaves behind.
+Text:
+  [["he'll soon be setting off on a solitary life, fending entirely for him self" Can relate]]
+=======================================
+
+=======================================
+Start-End: 40 ~ 46
+Reward: 11.06555373226299
+Likes: 2600 || 0.9852679403879181 
+Correlation:
+  Overall: 0.42949550749462345
+  Audio: 0.0 | 
+  Video: 0.51 | In a forest setting, a small animal with striped fur approaches a rock where a dry leaf is placed on top of a plastic shell. The animal cautiously moves closer to the leaf, sniffing and inspecting it. It then begins to walk around the leaf, continuing to sniff and explore the area. Finally, the animal turns and walks away from the rock, leaving the leaf and plastic shell behind.
+Text:
+  [[This cat is so polite, it didn’t disturb the leaf and just gently jumped over it.]]
+=======================================
+
+=======================================
+Start-End: 46 ~ 50
+Reward: 8.743021641527701
+Likes: 6700 || 0.9917766733274372 
+Correlation:
+  Overall: 0.596989368527244
+  Audio: 0.7 | What he lacks in size,
+  Video: 0.06 | The video begins with a close-up view of a tree's thick, moss-covered roots in a dense forest. The camera slowly pans to the right, revealing more of the tree's roots and the surrounding forest floor, which is covered with leaves and small plants. As the camera continues to move, the tree trunk remains in view, and the background shows a lush, green forest with various trees and undergrowth. The camera movement is smooth and steady, maintaining focus on the tree and the forest environment.
+Text:
+  [[what he lacks in size... he makes up for... in cuteness]]
+=======================================
+
+=======================================
+Start-End: 50 ~ 56
+Reward: 12.738970370756856
+Likes: 4900 || 0.9899687674078962 
+Correlation:
+  Overall: 0.5665964805257899
+  Audio: 0.44 | in daring
+  Video: 0.51 | The video begins with a close-up view of a tree's thick, moss-covered roots in a dense forest. The camera slowly pans to the right, revealing more of the tree's roots and the surrounding forest floor, which is covered with leaves and small plants. As the camera continues to move, the tree trunk remains in view, and the background shows a lush, green forest with various trees and undergrowth. The camera movement is smooth and steady, maintaining focus on the tree and the forest environment.
+Text:
+  [["what he lacks in size, he makes up in daring "  puts paw gently in the water  Extremely daring 💕💕😩]]
+=======================================
+
+=======================================
+Start-End: 56 ~ 61
+Reward: 8.814207415241038
+Likes: 1400 || 0.978907573375557 
+Correlation:
+  Overall: 0.3919669548363252
+  Audio: 0.0 | 
+  Video: 0.46 | In a forest setting with moss-covered rocks and fallen leaves, a small animal jumps onto a mossy rock near a stream. The animal sniffs the rock and then the water, appearing curious. It continues to explore the rock, moving around and sniffing the water. The animal then steps into the water, lowering itself and begins to swim. It swims through the stream, moving past the rocks and leaves.
+Text:
+  [[Narrator: they are daring Tiny cat: waddles through a tiny puddle]]
+=======================================
+
+=======================================
+Start-End: 61 ~ 67
+Reward: 11.157492929974136
+Likes: 1800 || 0.9817387850427737 
+Correlation:
+  Overall: 0.43892168497645784
+  Audio: 0.0 | 
+  Video: 0.52 | In a forest setting with moss-covered rocks and fallen leaves, a small animal jumps onto a mossy rock near a stream. The animal sniffs the rock and then the water, appearing curious. It continues to explore the rock, moving around and sniffing the water. The animal then steps into the water, lowering itself and begins to swim. It swims through the stream, moving past the rocks and leaves.
+Text:
+  [["What he lacks in size he makes up for in daring" touches water, instantly pulls paw back]]
+=======================================
+
+=======================================
+Start-End: 67 ~ 73
+Reward: 14.265314644638384
+Likes: 75 || 0.8960759538861516 
+Correlation:
+  Overall: 0.7407382434434561
+  Audio: 0.87 | Young cats are born curious
+  Video: 0.13 | In a forest setting with moss-covered rocks and fallen leaves, a small animal jumps onto a mossy rock near a stream. The animal sniffs the rock and then the water, appearing curious. It continues to explore the rock, moving around and sniffing the water. The animal then steps into the water, lowering itself and begins to swim. It swims through the stream, moving past the rocks and leaves.
+Text:
+  [[Young cats are curious...that's how they learn about the world  P A R K O U R]]
+=======================================
+
+=======================================
+Start-End: 73 ~ 77
+Reward: 8.209126832408387
+Likes: 2200 || 0.9837480909322786 
+Correlation:
+  Overall: 0.534266808584909
+  Audio: 0.59 | it's how they learn about their world
+  Video: 0.23 | The video shows a small stream flowing through a dense forest, with lush green foliage and scattered leaves on the ground. The water in the stream is clear and moves gently downstream. Suddenly, a fish jumps out of the water, creating a small splash.
+Text:
+  [["It's how they learn about the world."  Cat: big jump]]
+=======================================
+
+=======================================
+Start-End: 77 ~ 78
+Reward: 1.1226419205825318
+Likes: 3 || 0.4363463517338342 
+Correlation:
+  Overall: 0.34314778442434873
+  Audio: 0.0 | 
+  Video: 0.41 | The video begins with a dense forest scene, showing various green leaves and branches. Gradually, a small animal with a striped pattern starts to become visible as it moves through the foliage. The animal continues to move forward, becoming more distinct and revealing its face and body. The animal then turns and begins to walk away, moving deeper into the forest. The animal eventually disappears into the dense vegetation, leaving the scene as it was initially.
+Text:
+  [[It is Animated]]
+=======================================
+
+=======================================
+Start-End: 78 ~ 82
+Reward: 8.510406649812055
+Likes: 865 || 0.9723310901669365 
+Correlation:
+  Overall: 0.5776352861430386
+  Audio: 0.68 | Even if it can get them into trouble
+  Video: 0.06 | The video begins with a dense forest scene, showing various green leaves and branches. Gradually, a small animal with a striped pattern starts to become visible as it moves through the foliage. The animal continues to move forward, becoming more distinct and revealing its face and body. The animal then turns and begins to walk away, moving deeper into the forest. The animal eventually disappears into the dense vegetation, leaving the scene as it was initially.
+Text:
+  [[“Even if it can get them into trouble”  “MEEEOWWWW”]]
+=======================================
+
+=======================================
+Start-End: 82 ~ 88
+Reward: 11.024472802131669
+Likes: 161 || 0.930824895941342 
+Correlation:
+  Overall: 0.4532936188736346
+  Audio: 0.0 | 
+  Video: 0.54 | The video begins with a dense forest scene, showing various green leaves and branches. Gradually, a small animal with a striped pattern starts to become visible as it moves through the foliage. The animal continues to move forward, becoming more distinct and revealing its face and body. The animal then turns and begins to walk away, moving deeper into the forest. The animal eventually disappears into the dense vegetation, leaving the scene as it was initially.
+Text:
+  [[I wonder how much of this is set up. Are the leaves placed there to make the cat look smaller. Is it just another fake session like the Polar Bear den footage, or the fake tree houses of native peoples that have been exposed. I struggle to believe BBC footage these days because they have been caught out in so many cheats.]]
+=======================================
+
+=======================================
+Start-End: 88 ~ 93
+Reward: 11.198471423646856
+Likes: 78 || 0.8982161964791396 
+Correlation:
+  Overall: 0.6707390441251159
+  Audio: 0.78 | Straight away he puts his super senses through their paces
+  Video: 0.15 | In a forested background with green foliage, a log lies horizontally. A small animal, likely a young ocelot, appears from the left side of the log and begins to walk along it. The animal continues to move forward, its body becoming more visible as it progresses. It then stops and looks ahead, maintaining its balance on the log.
+Text:
+  [["Straight away he puts his super senses through their paces" Act cute]]
+=======================================
+
+=======================================
+Start-End: 93 ~ 96
+Reward: 5.092631484489576
+Likes: 3100 || 0.9867316117065065 
+Correlation:
+  Overall: 0.3554061082283428
+  Audio: 0.0 | 
+  Video: 0.42 | The scene is set in a dense forest with various green plants, rocks, and fallen leaves scattered on the ground. A small animal, possibly a monkey, appears from the left side of the frame, moving quickly through the foliage. The animal continues to move swiftly, navigating through the branches and rocks. It then jumps across a gap, disappearing from the frame to the right.
+Text:
+  [[Video title : world's biggest leaves]]
+=======================================
+
+=======================================
+Start-End: 96 ~ 101
+Reward: 9.770696889260522
+Likes: 2500 || 0.9849228898083893 
+Correlation:
+  Overall: 0.4846082440218575
+  Audio: 0.0 | 
+  Video: 0.57 | In a dense forest with various green plants and trees, a leopard is seen resting on a large rock. The leopard begins to move slowly, shifting its position on the rock. It continues to move, gradually lowering itself down from the rock. The leopard's movement is subtle and cautious, blending into the natural surroundings.
+Text:
+  [[Plot twist: The cat is normal size this is just a gigantic forest.]]
+=======================================
+
+=======================================
+Start-End: 101 ~ 106
+Reward: 12.103200959381532
+Likes: 472 || 0.9613352457875719 
+Correlation:
+  Overall: 0.7296524730443672
+  Audio: 0.85 | His eyes are six times more powerful than our own
+  Video: 0.12 | In a forested area with scattered leaves and rocks, a small, spotted kitten is seen crouching on a rock. The kitten begins to move forward, lifting its front paw and placing it down on the rock. The kitten continues to shift its weight and gradually turns its body to face the camera. The kitten's ears are perked up, and it appears alert and focused as it completes its turn.
+Text:
+  [[“His eyes are 6 times more powerful than our own”  I feel blind now]]
+=======================================
+
+=======================================
+Start-End: 106 ~ 109
+Reward: 6.082057810546903
+Likes: 7600 || 0.9924257775143327 
+Correlation:
+  Overall: 0.5174634130006508
+  Audio: 0.29 | and sensitive to the slightest movement
+  Video: 0.54 | A small cat with a spotted and striped coat is seen in a close-up shot, standing in a natural environment with a blurred background. The cat's eyes are wide open, and it appears to be alert and focused. Gradually, the cat begins to turn its head to the right, maintaining its alert posture. The cat's head continues to turn until it is looking directly to the right, still with a focused expression.
+Text:
+  [["He may look like a kitten" Cat: M A E W]]
+=======================================
+
+=======================================
+Start-End: 109 ~ 115
+Reward: 12.90547478753017
+Likes: 90 || 0.905664847897235 
+Correlation:
+  Overall: 0.6226238083455634
+  Audio: 0.71 | and sensitive to the slightest movement
+  Video: 0.2 | A small cat with a spotted and striped coat is seen in a close-up shot, standing in a natural environment with a blurred background. The cat's eyes are wide open, and it appears to be alert and focused. Gradually, the cat begins to turn its head to the right, maintaining its alert posture. The cat's head continues to turn until it is looking directly to the right, still with a focused expression.
+Text:
+  [["....and sensitive to the slightest movements" And you never wondered why the video ended right then n there.]]
+=======================================
+

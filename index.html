@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비디오 시청 중 댓글 읽기 지원 연구 – 테스트</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 19px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        p, span {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .video-container {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        video {
+            width: 500px;
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        ol, ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .form-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: normal;
+        }
+
+        .form-group label .required {
+            color: #e74c3c;
+            margin-right: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        .form-group input.error {
+            border-color: #e74c3c;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn-next {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-next:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-next:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        u {
+            text-decoration: underline;
+        }
+
+        .highlight {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>비디오 시청 중 댓글 읽기 지원 연구 – 테스트 A</h1>
+        
+        <p><span style="font-size:16px;">안녕하세요, 연구에 참여해 주셔서 감사합니다.<br>
+        본 연구는 <strong>비디오 시청 중 댓글 읽기 경험</strong>을 지원하는 인터페이스를 평가하기 위한 사용자 테스트입니다.</span></p>
+
+        <h2><span style="font-size:19px;"><strong>진행 방법</strong></span></h2>
+        <p><span style="font-size:16px;">다섯 가지 방식의 인터페이스에서 <strong><u><span class="highlight">영상을 시청하며 동시에 댓글을 읽어 보시게 됩니다.</span></u></strong></span></p>
+
+        <div class="video-container">
+            <p><strong>인터페이스 A:</strong> 영상 <strong>하단</strong>에 자동으로 댓글이 표시됩니다.</p>
+            <video autoplay loop muted playsinline width="500">
+                <source src="preview/C.MP4" type="video/mp4">
+                브라우저가 비디오를 지원하지 않습니다.
+            </video>
+        </div>
+
+        <div class="video-container">
+            <p><strong>인터페이스 B:</strong> 영상 <strong>오른쪽</strong>에서 댓글이 흘러나오듯 자동으로 표시됩니다.</p>
+            <video autoplay loop muted playsinline width="500">
+                <source src="preview/Y.MP4" type="video/mp4">
+                브라우저가 비디오를 지원하지 않습니다.
+            </video>
+        </div>
+
+        <div class="video-container">
+            <p><strong>인터페이스 C:</strong> 영상 <strong>하단</strong>에 댓글 목록이 고정되어 있으며, <strong>스크롤을 직접 조작</strong>하며 읽어 주시면 됩니다.</p>
+            <video autoplay loop muted playsinline width="500">
+                <source src="preview/D.MP4" type="video/mp4">
+                브라우저가 비디오를 지원하지 않습니다.
+            </video>
+        </div>
+
+        <div class="video-container">
+            <p><strong>인터페이스 D:</strong> 영상이 <strong>오른쪽</strong>에 댓글이 흘러나오듯 자동으로 표시되는 또 다른 형태의 인터페이스입니다.</p>
+            <video autoplay loop muted playsinline width="500">
+                <source src="preview/D1.MP4" type="video/mp4">
+                브라우저가 비디오를 지원하지 않습니다.
+            </video>
+        </div>
+
+        <div class="video-container">
+            <p><strong>인터페이스 E:</strong> 영상 <strong>하단</strong>에 댓글이 1개씩 표시되고, 스크롤로 조작하여 댓글을 넘길 수 있습니다.</p>
+            <video autoplay loop muted playsinline width="500">
+                <source src="preview/Y1.MP4" type="video/mp4">
+                브라우저가 비디오를 지원하지 않습니다.
+            </video>
+        </div>
+
+        <p>각 인터페이스에서 영상 시청을 마친 뒤, 다음 네 가지 문항에 답해주세요.</p>
+
+        <ol>
+            <li>영상 시청 중 댓글을 읽는 과정의 <u><strong>정신적 부담 정도 (mental or cognitive demand)</strong></u></li>
+            <li>영상 시청 중 댓글을 읽는 과정의 <b><u>신체적/물리적 노력 정도 (physical demand)</u></b></li>
+            <li><u><strong>현재 읽고 있는 댓글이 재생되고 있는 영상 내용과 어울리는 정도</strong></u></li>
+            <li>영상 시청 중 댓글 읽기 경험의 <u><b>전반적 <strong>만</strong></u>족 정도</strong></u></li>
+        </ol>
+
+        <h2>유의사항</h2>
+        <ul>
+            <li><u><strong>PC 환경</strong></u>에서 진행해 주세요.</li>
+            <li>반드시 <b>소리를 켠 상태</b>에서 시청해 주세요.</li>
+            <li><b>각 영상을 처음부터 끝까지, 스킵 없이 시청하시며 댓글을 읽어나가 주세요.</b></li>
+            <li>문의사항은 010-3610-8659 (김민선) 으로 부탁드립니다 : )</li>
+        </ul>
+
+        <p>⏱ 예상 소요 시간은 약 10분 이내입니다.</p>
+
+        <div class="form-section">
+            <p style="font-size: 16px; margin-bottom: 20px;">아래 참가자 기본 정보 항목을 모두 작성해 주세요.</p>
+            
+            <form id="participantForm">
+                <div class="form-group">
+                    <label for="name">
+                        <span class="required">*</span>성명
+                    </label>
+                    <input type="text" id="name" name="name" required>
+                    <div class="error-message" id="nameError">성명을 입력해주세요.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">
+                        <span class="required">*</span>만 나이
+                    </label>
+                    <input type="number" id="age" name="age" min="1" max="150" required>
+                    <div class="error-message" id="ageError">만 나이를 입력해주세요.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">
+                        <span class="required">*</span>성별(남/여)
+                    </label>
+                    <input type="text" id="gender" name="gender" placeholder="남 또는 여" required>
+                    <div class="error-message" id="genderError">성별을 입력해주세요. (남 또는 여)</div>
+                </div>
+
+                <div class="btn-container">
+                    <button type="submit" class="btn-next" id="nextBtn">다음</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('participantForm');
+        const nameInput = document.getElementById('name');
+        const ageInput = document.getElementById('age');
+        const genderInput = document.getElementById('gender');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // 실시간 유효성 검사
+        function validateForm() {
+            let isValid = true;
+
+            // 이름 검증
+            if (nameInput.value.trim() === '') {
+                nameInput.classList.add('error');
+                document.getElementById('nameError').style.display = 'block';
+                isValid = false;
+            } else {
+                nameInput.classList.remove('error');
+                document.getElementById('nameError').style.display = 'none';
+            }
+
+            // 나이 검증
+            const age = parseInt(ageInput.value);
+            if (!ageInput.value || isNaN(age) || age < 1 || age > 150) {
+                ageInput.classList.add('error');
+                document.getElementById('ageError').style.display = 'block';
+                isValid = false;
+            } else {
+                ageInput.classList.remove('error');
+                document.getElementById('ageError').style.display = 'none';
+            }
+
+            // 성별 검증
+            const gender = genderInput.value.trim().toLowerCase();
+            if (gender !== '남' && gender !== '여' && gender !== 'male' && gender !== 'female') {
+                genderInput.classList.add('error');
+                document.getElementById('genderError').style.display = 'block';
+                isValid = false;
+            } else {
+                genderInput.classList.remove('error');
+                document.getElementById('genderError').style.display = 'none';
+            }
+
+            return isValid;
+        }
+
+        // 입력 필드 변경 시 실시간 검증
+        nameInput.addEventListener('input', validateForm);
+        ageInput.addEventListener('input', validateForm);
+        genderInput.addEventListener('input', validateForm);
+
+        // 폼 제출 처리
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validateForm()) {
+                // 참가자 정보를 localStorage에 저장
+                const participantData = {
+                    name: nameInput.value.trim(),
+                    age: parseInt(ageInput.value),
+                    gender: genderInput.value.trim(),
+                    timestamp: new Date().toISOString()
+                };
+                
+                localStorage.setItem('participantData', JSON.stringify(participantData));
+                
+                // 테스트 단계 초기화
+                localStorage.setItem('currentTestStep', '0');
+                localStorage.removeItem('testResults');
+                localStorage.removeItem('interfaceDataPairs');
+                
+                // 다음 페이지로 이동
+                window.location.href = 'test.html';
+            }
+        });
+
+        // 초기 버튼 상태 설정
+        validateForm();
+    </script>
+</body>
+</html>
+

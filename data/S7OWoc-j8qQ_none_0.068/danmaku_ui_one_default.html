@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Home Alone (1990) - Thirsty for More? Scene (4/5) | Movieclips</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* 기본 스타일 */
+    :root {
+      --bg: #ffffff;
+      --video-bg: #000;
+      --accent: #ff0000;
+      --text: #fff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background-color: #fff; /* 흰색 배경 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .video-title {
+      width: 800px;
+      margin-top: 40px;
+      margin-bottom: 5px;
+      text-align: left;
+      font-size: 20px;
+      font-weight: 600;
+      color: #000;
+      padding: 0;
+      line-height: 1.4;
+    }
+
+    .video-container {
+      width: 800px;
+      margin-top: 20px;
+      position: relative;
+      background-color: #000;
+      overflow: hidden;
+      border-radius: 20px; /* 유튜브 느낌의 둥근 모서리 */
+      transition: all 0.3s ease;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 12px; /* 비디오 둥근 모서리 */
+    }
+
+    /* 기본 비디오 컨트롤 완전히 숨기기 */
+    video::-webkit-media-controls-panel { display: none !important; }
+    video::-webkit-media-controls-play-button { display: none !important; }
+    video::-webkit-media-controls-start-playback-button { display: none !important; }
+    video::-moz-media-controls { display: none !important; }
+    video::--ms-media-controls { display: none !important; }
+
+    /* 커스텀 비디오 컨트롤 */
+    .custom-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.8);
+      padding: 4px 15px 4px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 4;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .video-container:hover .custom-controls { opacity: 1; }
+
+    .progress-container {
+      width: 100%;
+      height: 3px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      margin-bottom: 6px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #ff0000;
+      border-radius: 3px;
+      width: 0%;
+      position: relative;
+      transition: width 0.1s ease;
+    }
+
+    .progress-handle {
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background: #ff0000;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .progress-container:hover .progress-handle { opacity: 1; }
+
+    .controls-bottom {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .control-button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 3px;
+      transition: background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .control-button:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    .control-button svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    .time-display {
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* 단무쿠 댓글 */
+    .danmaku-comment {
+      position: absolute;
+      color: white;
+      font-size: 18px;
+      font-weight: normal;
+      white-space: nowrap;
+      z-index: 10;
+      pointer-events: none;
+      text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+    }
+
+    .comment-text {
+      font-size: 18px;
+      color: white;
+      font-weight: normal;
+    }
+
+
+  </style>
+</head>
+  <body>
+    <!-- 제목을 영상 위에 배치 -->
+    <div class="video-container" id="video-container">
+    <video id="video-player" preload="metadata">
+      <!-- 템플릿 엔진이 주입하거나 아래 src로 대체하세요 -->
+      <source src="../video/S7OWoc-j8qQ.mp4" type="video/mp4" />
+      브라우저가 video 태그를 지원하지 않습니다.
+    </video>
+
+    <!-- 커스텀 비디오 컨트롤 -->
+    <div class="custom-controls">
+      <div class="progress-container" id="progress-container" aria-label="progress">
+        <div class="progress-bar" id="progress-bar">
+          <div class="progress-handle"></div>
+        </div>
+      </div>
+      <div class="controls-bottom">
+        <button class="control-button" id="play-pause-btn" aria-label="play/pause">
+          <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="pause-icon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <div class="time-display" id="time-display">0:00 / 0:00</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== 유틸 =====
+    function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
+    function formatTime(sec){ const m = Math.floor(sec/60); const s = Math.floor(sec%60).toString().padStart(2,'0'); return m + ':' + s; }
+    
+    // 문자열을 해시값으로 변환 (일관된 랜덤 위치 생성용)
+    function hashString(str) {
+      let hash = 0;
+      if (str.length === 0) return hash;
+      for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // 32bit 정수로 변환
+      }
+      return Math.abs(hash);
+    }
+
+    // 서버에서 주입되는 단무쿠 댓글 리스트 예: [{ start: 1.2, text: "하이" }, ...]
+    // 템플릿이 없다면 아래 fallback 사용
+    var danmakuComments = (typeof [{"start": 0, "text": "Woah .. lol.. hilarious scene.. my old time favorite Christmas movie since I was 8 years old:)", "correlation": 0.5627563821357832}, {"start": 10, "text": "especally id theres a Christmas tree   tree", "correlation": 0.429608133886351}, {"start": 13, "text": "So Kevin put ornaments on the floor, knowing that his glue stairs trap would have someone's shoes removed for it to work?", "correlation": 0.5136483804039826}, {"start": 14, "text": "0:14 🤣🤣🤣🤣🤣🤣Every year I still laugh at this funny trap on Marv 🤣🤣🤣My favourite Christmas film ever", "correlation": 0.39052129613822234}, {"start": 15, "text": "@0:11 He's smiling.😀😀😀 @0:15 He's in Pain 😫😫😫", "correlation": 0.31159506380504776}, {"start": 19, "text": "IM GOING TO KILL THAT KID", "correlation": 0.905297603894565}, {"start": 25, "text": "Lol, the ornaments on the floor is always hilarious. Especially when he steps on the yellow one walking away", "correlation": 0.539266491904222}, {"start": 29, "text": "@Love_That_3Mix  he did walk through all the snow", "correlation": 0.3796584458463426}, {"start": 33, "text": "Even for this film being 30 now, it’s still a decent holiday movie.", "correlation": 0.3019559170773488}, {"start": 36, "text": "Marv and Harry", "correlation": 0.8123241994259245}, {"start": 37, "text": "Harry!! He’s in the living room!!", "correlation": 0.6964781114719084}, {"start": 39, "text": "0:39 Why'd the hell you take your shoes?", "correlation": 0.8179229617093079}, {"start": 41, "text": "why the hell you dressed like a chicken 0:41", "correlation": 0.8874448153510192}, {"start": 42, "text": "0:42 “why the hell are you dressed like a chicken” 😂😂😂😂😂", "correlation": 0.7099813064283084}, {"start": 43, "text": "Why the hell you dressed like a chicken. 🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣", "correlation": 0.9638807421481067}, {"start": 45, "text": "I'm up here you morons, come and get me", "correlation": 0.9743451066686784}, {"start": 47, "text": "Well, it’s almost that time of the year once again, so here I am.", "correlation": 0.3873609296074008}, {"start": 49, "text": "I love the way they both fall down on the toy cars😂😂", "correlation": 0.4087652676674091}, {"start": 52, "text": "Kevin:guys give up or your thirsty for more?", "correlation": 0.7631824532744004}, {"start": 53, "text": "@JoshuaSmith-c8m  0:53 you guys give up or ya thirsty for more? 😏", "correlation": 0.6673068049286639}, {"start": 55, "text": "You guys give up, or are you thirsty for more?", "correlation": 0.9806334246512907}, {"start": 65, "text": "Heads up! Huh?", "correlation": 0.7569872472822472}, {"start": 66, "text": "1:06 Headshot! 1:13 Headshot Number 2!", "correlation": 0.3506635499865579}, {"start": 68, "text": "Right!? Another one Second film: Gets hit by brick dies", "correlation": 0.3929116994527183}, {"start": 69, "text": "@TravonJamelGreen  Don’t worry, Marv. I’ll get him for ya!", "correlation": 0.6537359256901426}, {"start": 70, "text": "Don’t worry, Marv. I’ll get ‘im for ya.", "correlation": 0.8545333763084771}, {"start": 71, "text": "1:11 the amount of fear in Marv's \"Harry!\" 😂😂😂", "correlation": 0.3920765067488125}, {"start": 72, "text": "1:12 the first paint is a different paint can", "correlation": 0.48649998125710137}, {"start": 73, "text": "Ow!", "correlation": 1.0}, {"start": 74, "text": "I like the part where they both slipped on those toy cars.", "correlation": 0.4085830152038774}, {"start": 76, "text": "Yes hahahahah 😂😂😂😂😀😀😀", "correlation": 0.43988106132231297}, {"start": 78, "text": "Yes!!!", "correlation": 0.7413974503189418}, {"start": 82, "text": "He's only a kid,harry. We can take him.", "correlation": 0.9941763858986216}, {"start": 85, "text": "Aw shut up will you!", "correlation": 0.8299038189919288}, {"start": 86, "text": "You're missing some teeth.", "correlation": 0.6150067997886608}, {"start": 88, "text": "1:28 You're missing some teeth.", "correlation": 0.49172291452987665}, {"start": 90, "text": "\"where? It's my gold tooth. My gold tooth. I'll kill him! I'll kill him!\"", "correlation": 0.9155431411168076}, {"start": 91, "text": "1:31 Where? It’s my gold tooth.", "correlation": 0.5651937838383153}, {"start": 92, "text": "At 1:32 or 1:33, speaking of the gold tooth that was knocked out of Harry's mouth-it was later found and picked up by Peter at the end of the film, however,  I wonder what Peter had done to the gold tooth.🦷🔍", "correlation": 0.5548169616751248}, {"start": 94, "text": "@anthonyvega-fujioka4464  What? Where's my gold tooth? - My gold tooth - I'll kill him - I'll kill him gets up and starts up the stairs \"YOU BOMBARD ME WITH ONE MORE PAINT CAN, AND I'LL SNAP OFF YOUR CAJONES AND PUT 'EM IN MOTOR OIL!\"", "correlation": 0.7906392879668419}, {"start": 98, "text": "1:38 - You bomb me with one more can, kid, and I'll snap off your cajones, and boil them in motor oil!", "correlation": 0.7832251071187457}, {"start": 100, "text": "If you bomb me with one more can kid I’ll snap all of your cojones burn em in motor oil 1:40  😂😂", "correlation": 0.8552955915869165}, {"start": 105, "text": "You bop me with ONE MORE can, kid and I'll SNAP your cojones and throw em in my motor oil!!", "correlation": 0.9345323055484658}, {"start": 107, "text": "1:47 and only at this point in the movie he decides to call the cops!? 😂", "correlation": 0.31267437940063597}, {"start": 108, "text": "Hello, my house is being robbed", "correlation": 0.733762020274888}, {"start": 111, "text": "Help! My house is being robbed. My address is 656 Lincoln Boulevard. My name’s Murphy.", "correlation": 0.6363986679643985}, {"start": 123, "text": "I love this movie home alone", "correlation": 0.6413106549694532}, {"start": 129, "text": "The movie should be the whole movie", "correlation": 0.39767330759951036}, {"start": 134, "text": "I watch this every year, this movie is very funny and the pranks on the first film and the second film are just funny and the pranks are the same and a little different", "correlation": 0.5080695203808732}] !== 'undefined' ? [{"start": 0, "text": "Woah .. lol.. hilarious scene.. my old time favorite Christmas movie since I was 8 years old:)", "correlation": 0.5627563821357832}, {"start": 10, "text": "especally id theres a Christmas tree   tree", "correlation": 0.429608133886351}, {"start": 13, "text": "So Kevin put ornaments on the floor, knowing that his glue stairs trap would have someone's shoes removed for it to work?", "correlation": 0.5136483804039826}, {"start": 14, "text": "0:14 🤣🤣🤣🤣🤣🤣Every year I still laugh at this funny trap on Marv 🤣🤣🤣My favourite Christmas film ever", "correlation": 0.39052129613822234}, {"start": 15, "text": "@0:11 He's smiling.😀😀😀 @0:15 He's in Pain 😫😫😫", "correlation": 0.31159506380504776}, {"start": 19, "text": "IM GOING TO KILL THAT KID", "correlation": 0.905297603894565}, {"start": 25, "text": "Lol, the ornaments on the floor is always hilarious. Especially when he steps on the yellow one walking away", "correlation": 0.539266491904222}, {"start": 29, "text": "@Love_That_3Mix  he did walk through all the snow", "correlation": 0.3796584458463426}, {"start": 33, "text": "Even for this film being 30 now, it’s still a decent holiday movie.", "correlation": 0.3019559170773488}, {"start": 36, "text": "Marv and Harry", "correlation": 0.8123241994259245}, {"start": 37, "text": "Harry!! He’s in the living room!!", "correlation": 0.6964781114719084}, {"start": 39, "text": "0:39 Why'd the hell you take your shoes?", "correlation": 0.8179229617093079}, {"start": 41, "text": "why the hell you dressed like a chicken 0:41", "correlation": 0.8874448153510192}, {"start": 42, "text": "0:42 “why the hell are you dressed like a chicken” 😂😂😂😂😂", "correlation": 0.7099813064283084}, {"start": 43, "text": "Why the hell you dressed like a chicken. 🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣", "correlation": 0.9638807421481067}, {"start": 45, "text": "I'm up here you morons, come and get me", "correlation": 0.9743451066686784}, {"start": 47, "text": "Well, it’s almost that time of the year once again, so here I am.", "correlation": 0.3873609296074008}, {"start": 49, "text": "I love the way they both fall down on the toy cars😂😂", "correlation": 0.4087652676674091}, {"start": 52, "text": "Kevin:guys give up or your thirsty for more?", "correlation": 0.7631824532744004}, {"start": 53, "text": "@JoshuaSmith-c8m  0:53 you guys give up or ya thirsty for more? 😏", "correlation": 0.6673068049286639}, {"start": 55, "text": "You guys give up, or are you thirsty for more?", "correlation": 0.9806334246512907}, {"start": 65, "text": "Heads up! Huh?", "correlation": 0.7569872472822472}, {"start": 66, "text": "1:06 Headshot! 1:13 Headshot Number 2!", "correlation": 0.3506635499865579}, {"start": 68, "text": "Right!? Another one Second film: Gets hit by brick dies", "correlation": 0.3929116994527183}, {"start": 69, "text": "@TravonJamelGreen  Don’t worry, Marv. I’ll get him for ya!", "correlation": 0.6537359256901426}, {"start": 70, "text": "Don’t worry, Marv. I’ll get ‘im for ya.", "correlation": 0.8545333763084771}, {"start": 71, "text": "1:11 the amount of fear in Marv's \"Harry!\" 😂😂😂", "correlation": 0.3920765067488125}, {"start": 72, "text": "1:12 the first paint is a different paint can", "correlation": 0.48649998125710137}, {"start": 73, "text": "Ow!", "correlation": 1.0}, {"start": 74, "text": "I like the part where they both slipped on those toy cars.", "correlation": 0.4085830152038774}, {"start": 76, "text": "Yes hahahahah 😂😂😂😂😀😀😀", "correlation": 0.43988106132231297}, {"start": 78, "text": "Yes!!!", "correlation": 0.7413974503189418}, {"start": 82, "text": "He's only a kid,harry. We can take him.", "correlation": 0.9941763858986216}, {"start": 85, "text": "Aw shut up will you!", "correlation": 0.8299038189919288}, {"start": 86, "text": "You're missing some teeth.", "correlation": 0.6150067997886608}, {"start": 88, "text": "1:28 You're missing some teeth.", "correlation": 0.49172291452987665}, {"start": 90, "text": "\"where? It's my gold tooth. My gold tooth. I'll kill him! I'll kill him!\"", "correlation": 0.9155431411168076}, {"start": 91, "text": "1:31 Where? It’s my gold tooth.", "correlation": 0.5651937838383153}, {"start": 92, "text": "At 1:32 or 1:33, speaking of the gold tooth that was knocked out of Harry's mouth-it was later found and picked up by Peter at the end of the film, however,  I wonder what Peter had done to the gold tooth.🦷🔍", "correlation": 0.5548169616751248}, {"start": 94, "text": "@anthonyvega-fujioka4464  What? Where's my gold tooth? - My gold tooth - I'll kill him - I'll kill him gets up and starts up the stairs \"YOU BOMBARD ME WITH ONE MORE PAINT CAN, AND I'LL SNAP OFF YOUR CAJONES AND PUT 'EM IN MOTOR OIL!\"", "correlation": 0.7906392879668419}, {"start": 98, "text": "1:38 - You bomb me with one more can, kid, and I'll snap off your cajones, and boil them in motor oil!", "correlation": 0.7832251071187457}, {"start": 100, "text": "If you bomb me with one more can kid I’ll snap all of your cojones burn em in motor oil 1:40  😂😂", "correlation": 0.8552955915869165}, {"start": 105, "text": "You bop me with ONE MORE can, kid and I'll SNAP your cojones and throw em in my motor oil!!", "correlation": 0.9345323055484658}, {"start": 107, "text": "1:47 and only at this point in the movie he decides to call the cops!? 😂", "correlation": 0.31267437940063597}, {"start": 108, "text": "Hello, my house is being robbed", "correlation": 0.733762020274888}, {"start": 111, "text": "Help! My house is being robbed. My address is 656 Lincoln Boulevard. My name’s Murphy.", "correlation": 0.6363986679643985}, {"start": 123, "text": "I love this movie home alone", "correlation": 0.6413106549694532}, {"start": 129, "text": "The movie should be the whole movie", "correlation": 0.39767330759951036}, {"start": 134, "text": "I watch this every year, this movie is very funny and the pranks on the first film and the second film are just funny and the pranks are the same and a little different", "correlation": 0.5080695203808732}] : null);
+    if(!Array.isArray(danmakuComments)){
+      danmakuComments = [
+        { start: 0.5, text: "첫 댓글!" },
+        { start: 1.5, text: "오른쪽에서 등장합니다" },
+        { start: 3.0, text: "왼쪽으로 사라져요" },
+        { start: 5.0, text: "시킹해도 잘 동작" },
+      ];
+    }
+
+    // ===== 요소 참조 / 전역 상태 =====
+    var video = null;
+    var videoContainer = null;
+    var playPauseBtn = null, playIcon = null, pauseIcon = null;
+    var progressContainer = null, progressBar = null;
+    var timeDisplay = null;
+
+    var isDragging = false;          // 진행바 드래그
+    var activeDanmaku = new Map();   // idx -> { element, currentX, width, y, speed }
+    var animationId = null;
+    var isPaused = false;            // 비디오 정지 동기화
+    var lastRafTime = 0;             // requestAnimationFrame 시간
+    var lastVideoTime = 0;           // 직전 timeupdate의 비디오 시간 (시킹 대비)
+    
+    // danmaku one 전용: 다음에 표시할 댓글 인덱스
+    var nextCommentIndex = 0;
+    var displayedComments = new Set();  // 이미 표시된 댓글 인덱스 추적
+    
+    // 댓글별 고유 속도 계산 함수 (픽셀 단위로 네 개 중 하나)
+    function getDanmakuSpeed(commentText) {
+      const textHash = hashString(commentText || '');
+      const speedOptions = [-140, -180, -220, -260]; // px/s (음수=왼쪽)
+      return speedOptions[textHash % speedOptions.length];
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      video = document.getElementById('video-player');
+      videoContainer = document.getElementById('video-container');
+      playPauseBtn = document.getElementById('play-pause-btn');
+      playIcon = document.getElementById('play-icon');
+      pauseIcon = document.getElementById('pause-icon');
+      progressContainer = document.getElementById('progress-container');
+      progressBar = document.getElementById('progress-bar');
+      timeDisplay = document.getElementById('time-display');
+
+      // start 기준 정렬
+      danmakuComments.sort((a,b) => a.start - b.start);
+
+      // 이벤트 바인딩
+      video.addEventListener('timeupdate', onTimeUpdate);
+      video.addEventListener('loadedmetadata', updateTimeDisplay);
+      video.addEventListener('play', () => { updatePlayPauseButton(); lastVideoTime = video.currentTime || 0; resumeAllDanmaku(); });
+      video.addEventListener('pause', () => { updatePlayPauseButton(); pauseAllDanmaku(); });
+      video.addEventListener('seeking', resetDanmakuForSeek);
+
+      playPauseBtn.addEventListener('click', togglePlayPause);
+      progressContainer.addEventListener('mousedown', startDrag);
+      document.addEventListener('mousemove', doDrag);
+      document.addEventListener('mouseup', endDrag);
+      progressContainer.addEventListener('click', (e)=>{ if(!isDragging) seekVideo(e); });
+
+      // 리사이즈 시 현재 떠있는 단무쿠 위치/퇴장 판정 보정
+      window.addEventListener('resize', () => {
+        // 큰 레이아웃 변화에서는 간단히 리셋
+        resetDanmakuForSeek();
+      });
+
+      // 초기 상태
+      updatePlayPauseButton();
+    });
+
+    function togglePlayPause(){ if(video.paused) video.play(); else video.pause(); }
+
+    function updatePlayPauseButton(){
+      if(!video) return;
+      if(video.paused){
+        playIcon.style.display='block';
+        pauseIcon.style.display='none';
+      } else {
+        playIcon.style.display='none';
+        pauseIcon.style.display='block';
+      }
+    }
+
+    function updateTimeDisplay(){
+      if(!video || !video.duration) return;
+      const cur = formatTime(video.currentTime || 0);
+      const tot = formatTime(video.duration);
+      timeDisplay.textContent = cur + ' / ' + tot;
+    }
+
+    function onTimeUpdate(){
+      if(!video) return;
+      const t = video.currentTime || 0;
+
+      // 진행바
+      if(video.duration){
+        progressBar.style.width = ((t / video.duration) * 100) + '%';
+      }
+      updateTimeDisplay();
+
+      // danmaku one: 첫 번째 댓글만 onTimeUpdate에서 표시 (활성 댓글이 없고 첫 번째 댓글일 때만)
+      // 이후 댓글들은 updateDanmakuPositions에서 이전 댓글이 완전히 사라진 후에만 표시됨
+      if(activeDanmaku.size === 0 && nextCommentIndex === 0 && !displayedComments.has(0) && nextCommentIndex < danmakuComments.length){
+        const firstComment = danmakuComments[0];
+        if(firstComment && t >= firstComment.start){
+          addDanmakuComment(firstComment, 0);
+          displayedComments.add(0);
+          nextCommentIndex = 1;
+          if (!animationId) startAnimationLoop();
+        }
+      }
+
+      lastVideoTime = t;
+    }
+
+    // ===== 진행바 제어 =====
+    function startDrag(e){ isDragging = true; e.preventDefault(); updateVideoTime(e); }
+    function doDrag(e){ if(!isDragging) return; e.preventDefault(); updateVideoTime(e); }
+    function endDrag(){ if(!isDragging) return; isDragging = false; }
+    function seekVideo(e){ updateVideoTime(e); }
+
+    function updateVideoTime(e){
+      const rect = progressContainer.getBoundingClientRect();
+      const pos = clamp((e.clientX - rect.left)/rect.width, 0, 1);
+      if (video.duration) {
+        video.currentTime = pos * video.duration;
+        // 시킹 처리: 떠있는 단무쿠 초기화 & 타임 마커 갱신
+        resetDanmakuForSeek();
+      }
+    }
+
+    // ===== 단무쿠 생성 / 애니메이션 =====
+    function addDanmakuComment(cmt, idx){
+      const div = document.createElement('div');
+      div.className = 'danmaku-comment';
+      div.id = 'danmaku-' + idx;
+
+      const txt = (cmt.text ?? '') + '';
+      div.innerHTML = '<div class="comment-text"></div>';
+      div.querySelector('.comment-text').textContent = txt; // XSS 안전
+
+      // 세로 위치: 댓글 텍스트 기반 결정적 위치 (하단 여백 10px)
+      const containerRect = videoContainer.getBoundingClientRect();
+      // 댓글 텍스트를 해시값으로 변환하여 일관된 위치 생성
+      const textHash = hashString(cmt.text || '');
+      const maxHeight = containerRect.height - 20; // 하단 10px 여백
+      const randomY = textHash % maxHeight; // 상단부터 시작
+
+      // 먼저 붙여서 실제 너비를 잰다
+      div.style.top = randomY + 'px';
+      div.style.left = '0px';
+      div.style.transform = 'translateX(0px)';
+      div.style.transition = 'none';
+      videoContainer.appendChild(div);
+
+      const elWidth = div.getBoundingClientRect().width;
+
+      // 시작 X: 컨테이너 오른쪽 바깥
+      const startX = containerRect.width; // +10 버퍼
+      div.style.transform = `translateX(${startX}px)`;
+
+      // 댓글별 고유 속도 계산
+      const danmakuSpeed = getDanmakuSpeed(cmt.text);
+
+      // 상태 저장
+      activeDanmaku.set(idx, {
+        element: div,
+        currentX: startX,
+        width: elWidth,
+        y: randomY,
+        speed: danmakuSpeed
+      });
+
+      // 애니메이션 루프 가동
+      if (!animationId) startAnimationLoop();
+    }
+
+    function startAnimationLoop() {
+      function animate(ts) {
+        if (!lastRafTime) lastRafTime = ts;
+        const deltaTime = (ts - lastRafTime) / 1000; // 초
+        lastRafTime = ts;
+
+        if (!isPaused) {
+          updateDanmakuPositions(deltaTime);
+        }
+
+        // 루프 유지: 활성 단무쿠가 없고 비디오도 일시정지면 멈출 수 있음
+        if (activeDanmaku.size === 0 && video?.paused) {
+          animationId = null;
+          lastRafTime = 0;
+          return; // 루프 종료
+        }
+        animationId = requestAnimationFrame(animate);
+      }
+      if (!animationId) animationId = requestAnimationFrame(animate);
+    }
+
+    function updateDanmakuPositions(deltaTime) {
+      // 각 댓글별 고유 속도로 왼쪽 이동
+      var commentJustDisappeared = false;
+      
+      activeDanmaku.forEach((danmaku, idx) => {
+        if (!danmaku || !danmaku.element) return;
+        danmaku.currentX += danmaku.speed * deltaTime;
+
+        // 완전 퇴장: 요소의 오른쪽 끝이 화면 왼쪽 밖으로 나가면 제거
+        if (danmaku.currentX + danmaku.width < 0) {
+          danmaku.element.parentNode?.removeChild(danmaku.element);
+          activeDanmaku.delete(idx);
+          commentJustDisappeared = true;
+        } else {
+          danmaku.element.style.transform = `translateX(${danmaku.currentX}px)`;
+        }
+      });
+      
+      // danmaku one: 댓글이 완전히 사라진 직후, 그 시점 이후의 댓글 중 가장 가까운 댓글 표시
+      if (commentJustDisappeared && activeDanmaku.size === 0) {
+        const t = video?.currentTime || 0;
+        
+        // 현재 시간 이후의 댓글 중 가장 가까운 댓글 찾기 (아직 표시되지 않은 댓글만)
+        var nextComment = null;
+        var nextCommentIdx = -1;
+        
+        for (let i = 0; i < danmakuComments.length; i++) {
+          // 아직 표시되지 않았고, 시작 시간이 현재 시간 이후인 댓글 찾기
+          if (!displayedComments.has(i) && danmakuComments[i].start >= t) {
+            nextComment = danmakuComments[i];
+            nextCommentIdx = i;
+            break;
+          }
+        }
+        
+        // 찾은 댓글이 있으면 표시
+        if (nextComment && nextCommentIdx >= 0) {
+          addDanmakuComment(nextComment, nextCommentIdx);
+          displayedComments.add(nextCommentIdx);
+          nextCommentIndex = nextCommentIdx + 1;
+        }
+      }
+    }
+
+    // ===== 시킹/재생 동기화 =====
+    function pauseAllDanmaku() { isPaused = true; }
+    function resumeAllDanmaku() { isPaused = false; if (!animationId) startAnimationLoop(); }
+
+    function resetDanmakuForSeek(){
+      // 떠있던 것들 제거
+      activeDanmaku.forEach((d)=>{ d.element?.parentNode?.removeChild(d.element); });
+      activeDanmaku.clear();
+      // 다음 프레임 기준으로 새로 트리거
+      lastVideoTime = video?.currentTime || 0;
+      // 애니메이션 타임라인 초기화
+      lastRafTime = 0;
+      // danmaku one: 다음 댓글 인덱스 재계산 (현재 시간 이후의 첫 번째 댓글 찾기)
+      displayedComments.clear();  // 시킹 시 표시된 댓글 추적 초기화
+      nextCommentIndex = 0;
+      for(let i = 0; i < danmakuComments.length; i++){
+        if(danmakuComments[i].start > lastVideoTime){
+          nextCommentIndex = i;
+          break;
+        }
+      }
+    }
+  </script>
+</body>
+</html>

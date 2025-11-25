@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>REMBLE - "TED TALK" (OFFICIAL MUSIC VIDEO)</title>
+  <style>
+    /* 기본 스타일 */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background-color: #fff; /* 흰색 배경 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .video-title {
+      width: 800px;
+      margin-top: 40px;
+      margin-bottom: 5px;
+      text-align: left;
+      font-size: 20px;
+      font-weight: 600;
+      color: #000;
+      padding: 0;
+      line-height: 1.4;
+    }
+
+    .video-container {
+      width: 800px;
+      margin-top: 20px;
+      position: relative;
+      background-color: #000;
+      overflow: hidden;
+      border-radius: 20px; /* 유튜브 느낌의 둥근 모서리 */
+      transition: all 0.3s ease;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 12px; /* 비디오 둥근 모서리 */
+    }
+
+    /* 기본 비디오 컨트롤 완전히 숨기기 */
+    video::-webkit-media-controls-panel { display: none !important; }
+    video::-webkit-media-controls-play-button { display: none !important; }
+    video::-webkit-media-controls-start-playback-button { display: none !important; }
+    video::-moz-media-controls { display: none !important; }
+    video::--ms-media-controls { display: none !important; }
+
+    /* 커스텀 비디오 컨트롤 */
+    .custom-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.8);
+      padding: 4px 15px 4px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 4;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .video-container:hover .custom-controls { opacity: 1; }
+
+    /* 진행 바 컨테이너 */
+    .progress-container {
+      width: 100%;
+      height: 3px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      margin-bottom: 6px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    /* 진행 바 */
+    .progress-bar {
+      height: 100%;
+      background: #ff0000;
+      border-radius: 3px;
+      width: 0%;
+      position: relative;
+      transition: width 0.1s ease;
+    }
+
+    /* 진행 바 끝 동그라미 */
+    .progress-handle {
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background: #ff0000;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .progress-container:hover .progress-handle { opacity: 1; }
+
+    /* 컨트롤 버튼들 */
+    .controls-bottom {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .control-button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 3px;
+      transition: background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .control-button:hover { background-color: rgba(255,255,255,0.2); }
+
+    .control-button svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    /* 시간 표시 */
+    .time-display {
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* ===================== 댓글 오버레이 (A 스타일) ===================== */
+    .comments-overlay {
+      --overlay-h: 180;             /* JS에서 동적 조정 */
+      --controls-offset: 50px;        /* 컨트롤 보일 때 위로 올릴 거리 */
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      height: var(--overlay-h);
+      pointer-events: none;
+      z-index: 2;
+      background: linear-gradient(to top, rgba(0,0,0,0.80), rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.2) 90%,  rgba(0,0,0,0));
+      overflow: hidden;
+      transition: bottom 0.3s ease, height 0.15s ease;
+    }
+
+    /* 컨트롤이 보일 때 댓글 오버레이를 위로 이동 */
+    .video-container:hover .comments-overlay { bottom: var(--controls-offset); }
+
+    /* 실제 댓글 컨테이너에 mask-image 적용 (가변 stop) */
+    .comments-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      --mask-stop: 100%; /* JS에서 동적 변경 */
+      -webkit-mask-image: linear-gradient(to top, black var(--mask-stop), transparent 100%);
+      mask-image: linear-gradient(to top, black var(--mask-stop), transparent 100%);
+    }
+
+    /* 좋아요/하트를 별도 레이어로 분리하여 마스크 영향 제거 */
+    .likes-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .like-item {
+      position: absolute;
+      right: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      transition: opacity 0.3s ease;
+    }
+
+    /* 각 댓글 요소 */
+    .live-comment {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      transition: bottom 0.2s ease, opacity 0.3s ease-in-out;
+    }
+
+    /* 댓글 내용 레이아웃 */
+    .comment-content { display: flex; align-items: flex-start; width: 100%; }
+
+    .text-content { flex: 1; }
+
+    .user-info { display: flex; align-items: center; gap: 4px; margin-bottom: 2px; }
+
+    .username { font-weight: normal; font-size: 24px; }
+
+    .comment-text {
+      font-size: 34px;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      flex: 1;
+    }
+
+    .profile-icon { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; }
+    .profile-photo { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; }
+
+    .likes { display: flex; flex-direction: column; align-items: center; align-self: flex-start; gap: 2px; margin-left: 8px;}
+
+    .heart-icon { 
+      width: 28px; 
+      height: 28px; 
+      fill: #ff0000; 
+      opacity: 1;
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
+    }
+
+    .likes-number { 
+      color: #ff0000; 
+      font-size: 26px; 
+      opacity: 1;
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
+    }
+  </style>
+</head>
+  <body>
+    <!-- 제목을 영상 위에 배치 -->
+    <div class="video-title">REMBLE - "TED TALK" (OFFICIAL MUSIC VIDEO)</div>
+    <div class="video-container">
+    <video id="video-player">
+      <source src="../video/biG3iUCrHaQ.mp4" type="video/mp4" />
+      브라우저가 video 태그를 지원하지 않습니다.
+    </video>
+
+    <!-- 커스텀 비디오 컨트롤 (A 스타일: 플레이/일시정지 + 진행바 + 시간만) -->
+    <div class="custom-controls">
+      <div class="progress-container" id="progress-container">
+        <div class="progress-bar" id="progress-bar">
+          <div class="progress-handle"></div>
+        </div>
+      </div>
+      <div class="controls-bottom">
+        <button class="control-button" id="play-pause-btn">
+          <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="pause-icon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <div class="time-display" id="time-display">0:00 / 0:00</div>
+      </div>
+    </div>
+
+    <!-- 댓글 오버레이 (A 스타일: 높이/마스크 동적) -->
+    <div class="comments-overlay" id="comments-overlay">
+      <div class="comments-container" id="comments-container"></div>
+      <div class="likes-overlay" id="likes-overlay"></div>
+    </div>
+  </div>
+
+  <script>
+    // 숫자 포맷: 1k 단위
+    function formatLikes(n){
+      if(n < 1000) return n.toString();
+      let f = (n/1000).toFixed(1);
+      if(f.endsWith('.0')) f = f.slice(0,-2);
+      return f + 'k';
+    }
+
+    // mm:ss
+    function formatTime(sec){
+      const m = Math.floor(sec/60);
+      const s = Math.floor(sec%60).toString().padStart(2,'0');
+      return `${m}:${s}`;
+    }
+
+    // 랜덤 사용자명/색상
+    function getRandomName(){
+      const names = ["Alice","Bob","Charlie","David","Eva","Frank","Grace","Helen","Ivy","Jack"];
+      return names[Math.floor(Math.random()*names.length)];
+    }
+    function getRandomColor(){
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for(let i=0;i<6;i++){ color += letters[Math.floor(Math.random()*16)]; }
+      return color;
+    }
+
+    // 서버에서 주입되는 최적 댓글 리스트
+    var optimalComments = [{"start": 0, "end": 4, "reading time": 4.0, "text": "That's how I talk when I go for a job interview", "reward": 7.006509757878657, "correlation": "0.41708874411219693", "corr_A": "0.4", "corr_V": "0.15", "likes": 60.0, "norm_likes": 0.9174499512452705, "norm_likes_real": 0.9174499512452705, "photo": "https://yt3.ggpht.com/ytc/AIdro_kREbptRpI2iR9p8BdpIOmLmeWUPEJCBGoP7JnuidlM5L78=s88-c-k-c0x00ffffff-no-rj", "author": "@zeekosuave6812", "slot": 0}, {"start": 4, "end": 10, "reading time": 6.0, "text": "\"A Ted talk with a murderous rhyme scheme\" pretty much applies to all his songs so far lol", "reward": 14.47574651844165, "correlation": "0.7063588514492473", "corr_A": "0.7", "corr_V": "0.19", "likes": 4400.0, "norm_likes": 0.9999067168417805, "norm_likes_real": 0.9999067168417805, "photo": "https://yt3.ggpht.com/nnh3sc5SmmHSc1emgB2mV7d03USPLMQPQUvxLmuJlrTb-ywJEy41M0UlGNL7j70nSrMQAWXyWDc=s88-c-k-c0x00ffffff-no-rj", "author": "@101mylo", "slot": 0}, {"start": 10, "end": 14, "reading time": 4.0, "text": "“Don’t cry no more momma, here look it’s a ten piece”", "reward": 7.579756897943787, "correlation": "0.454227075849686", "corr_A": "0.46", "corr_V": "0.06", "likes": 727.0, "norm_likes": 0.9864850727865746, "norm_likes_real": 0.9864850727865746, "photo": "https://yt3.ggpht.com/SRRaV4tVRViLT8RP2KzGWKi76eUsjA-88CavA7G-g-InLQfvCq8CpKQaPLpWolkvbKqIYrKXyw=s88-c-k-c0x00ffffff-no-rj", "author": "@Ekdrink88", "slot": 0}, {"start": 14, "end": 19, "reading time": 5.0, "text": "\"I just want flawless diamonds Caucasian like white people\" is a bar", "reward": 11.774782380800184, "correlation": "0.6893367608755733", "corr_A": "0.7", "corr_V": "0.08", "likes": 367.0, "norm_likes": 0.9762829544088903, "norm_likes_real": 0.9762829544088903, "photo": "https://yt3.ggpht.com/ytc/AIdro_n5brY2HPEFMYOCIQs15woQ5r2s8DndTPC07cbcCfO6R4Rg=s88-c-k-c0x00ffffff-no-rj", "author": "@direisdead1750", "slot": 0}, {"start": 19, "end": 20, "reading time": 1.0, "text": "Beach Preachin", "reward": 0.6699025936116868, "correlation": "0.3349512968058434", "corr_A": "0.06", "corr_V": "0.34", "likes": 0.0, "norm_likes": 0.0, "norm_likes_real": 0.0, "photo": "https://yt3.ggpht.com/ytc/AIdro_l3IpSsAN18-sWND7iQz5dy_wf3zWJLjfXDvrW5VkI=s88-c-k-c0x00ffffff-no-rj", "author": "@KevlarWagon", "slot": 0}, {"start": 20, "end": 23, "reading time": 3.0, "text": "2021 is the year i see a million", "reward": 5.788719110848038, "correlation": "0.964786518474673", "corr_A": "0.98", "corr_V": "0.03", "likes": 1.0, "norm_likes": 0.0, "norm_likes_real": 0.0, "photo": "https://yt3.ggpht.com/ytc/AIdro_mThK6m70mwBzqsVKXtx-bpFchQ7qOV4mo8NoAHC45u1Lg=s88-c-k-c0x00ffffff-no-rj", "author": "@yungsplashhh1941", "slot": 0}, {"start": 23, "end": 29, "reading time": 6.0, "text": "“I might just have some kids,to play with my brother’s children” that’s grown man shit!! 🔥🔥", "reward": 12.37732464012836, "correlation": "0.5505326679224621", "corr_A": "0.55", "corr_V": "0.13", "likes": 191.0, "norm_likes": 0.9618221041764694, "norm_likes_real": 0.9618221041764694, "photo": "https://yt3.ggpht.com/XF8FFtRGStSskRcw7D-cqLV4bO7vJUz4PVwG_sAVvFgo2872HQUpwihLf682pbs5uL0qZuLC520=s88-c-k-c0x00ffffff-no-rj", "author": "@Risky_crew", "slot": 0}, {"start": 29, "end": 34, "reading time": 5.0, "text": "“Remember when I wasn’t anything but a co defendant” felt that 😔", "reward": 12.825906951637878, "correlation": "0.786721403860458", "corr_A": "0.8", "corr_V": "0.04", "likes": 1200.0, "norm_likes": 0.9917385826066595, "norm_likes_real": 0.9917385826066595, "photo": "https://yt3.ggpht.com/XB_xEDpdJZAV91i8vIk0aDeEnnCXT9RB5BvKStB5gL6_MvEH-dj34CNAWo1R62vXl_PewOdLCQ=s88-c-k-c0x00ffffff-no-rj", "author": "@streetsweeper6600", "slot": 0}, {"start": 34, "end": 38, "reading time": 4.0, "text": "\"ever since that drakeo co-sign he flows with rivers\"", "reward": 9.134828345573167, "correlation": "0.6562233273318065", "corr_A": "0.66", "corr_V": "0.12", "likes": 284.0, "norm_likes": 0.9712604317296788, "norm_likes_real": 0.9712604317296788, "photo": "https://yt3.ggpht.com/u_1NQUJETPGdUMAlx-He5uj-Thutp9dBdwj7mmooh3coBxVRt19ZNx4bz92Ex3fR5N5V_jeDxas=s88-c-k-c0x00ffffff-no-rj", "author": "@8CLN4", "slot": 0}, {"start": 38, "end": 43, "reading time": 5.0, "text": "Nobody:     Remble: Micheal phelps in Unison with controlled swimmers.", "reward": 12.635222136311395, "correlation": "0.8215924897145823", "corr_A": "0.82", "corr_V": "0.18", "likes": 35.0, "norm_likes": 0.8838594478331142, "norm_likes_real": 0.8838594478331142, "photo": "https://yt3.ggpht.com/f-wXErlQyLpPVVPMAM2tDo1vYbC407BRYzBxDu0VD4vOvVTJl20JLhUTtelswSf4NvSDwBIG=s88-c-k-c0x00ffffff-no-rj", "author": "@littsociety", "slot": 0}, {"start": 43, "end": 47, "reading time": 4.0, "text": "Hold on wait a minute.. THEY THOUGHT YOU WAS FINISHED⁉️", "reward": 7.575507772610408, "correlation": "0.5267076584896322", "corr_A": "0.54", "corr_V": "0.0", "likes": 21.0, "norm_likes": 0.8404616261733375, "norm_likes_real": 0.8404616261733375, "photo": "https://yt3.ggpht.com/ytc/AIdro_nbg1TaisiQnjgKklohgoUT2ufoSrF88r0ySuKRUKc=s88-c-k-c0x00ffffff-no-rj", "author": "@omarromero984", "slot": 0}, {"start": 47, "end": 50, "reading time": 3.0, "text": "ITS REMBLE BUT THATS BESIDES THE POINT", "reward": 5.897366414340199, "correlation": "0.4988001108239952", "corr_A": "0.5", "corr_V": "0.12", "likes": 247.0, "norm_likes": 0.968188583132076, "norm_likes_real": 0.968188583132076, "photo": "https://yt3.ggpht.com/pkZvFAudsrtbkyXolMLWUcsQxj7zc31UA5p2xfYz042LyEJ6s6rkkNvTmTvTLrYOSJ1uO0So=s88-c-k-c0x00ffffff-no-rj", "author": "@ApoIogy", "slot": 0}, {"start": 50, "end": 53, "reading time": 3.0, "text": "A BAKERY OF BISCUITS 🔊 🔊 love that part lol", "reward": 4.153127280466581, "correlation": "0.6921878800777636", "corr_A": "0.71", "corr_V": "0.03", "likes": 0.0, "norm_likes": 0.0, "norm_likes_real": 0.0, "photo": "https://yt3.ggpht.com/zMx1dhciUcpLYUvYM25nhtFrLPYvYKux2p4ttKdC75ibXua2lKB-HRBC6RhPBflYk-KZ4T7o=s88-c-k-c0x00ffffff-no-rj", "author": "@ababydeity", "slot": 0}, {"start": 53, "end": 58, "reading time": 5.0, "text": "\"your about to witness Floyd Mayweather wit good penmanship\"😂😂", "reward": 11.162550015930336, "correlation": "0.6216642190685748", "corr_A": "0.63", "corr_V": "0.1", "likes": 923.0, "norm_likes": 0.9891815650489174, "norm_likes_real": 0.9891815650489174, "photo": "https://yt3.ggpht.com/RHAvXW7q8nfQbiBUnSEST5R4qFe72uYl8xcIkMFGLgn-3oU14PIWyRxA4bHrpdANFgxJm3qLUQ=s88-c-k-c0x00ffffff-no-rj", "author": "@Rackiblez", "slot": 0}, {"start": 58, "end": 62, "reading time": 4.0, "text": "“If I get Grammy I’m Kanye west I’ll take a piss on it”…..", "reward": 7.223776191586394, "correlation": "0.9029720239482992", "corr_A": "0.91", "corr_V": "0.14", "likes": 0.0, "norm_likes": 0.0, "norm_likes_real": 0.0, "photo": "https://yt3.ggpht.com/ytc/AIdro_ln1AsYKjAB5LzXlmPxnI_H-4gaaY3oURxEGy1FOV8=s88-c-k-c0x00ffffff-no-rj", "author": "@p0ps209", "slot": 0}, {"start": 62, "end": 67, "reading time": 5.0, "text": "“I had a problem then bought a chop and put a stick on it” 🔥🔥🥇", "reward": 11.969328362647415, "correlation": "0.7301344306373271", "corr_A": "0.75", "corr_V": "0.01", "likes": 84.0, "norm_likes": 0.9335968112548289, "norm_likes_real": 0.9335968112548289, "photo": "https://yt3.ggpht.com/uFMLQhA5vEHf_yylR0MZYy93ELT1f5I42UFk3Q3bgSHOdzb2Al1y6IMhgcgPU1XmvFsvsEsj=s88-c-k-c0x00ffffff-no-rj", "author": "@SMRaxs", "slot": 0}, {"start": 67, "end": 71, "reading time": 4.0, "text": "Killing is common it's just so sad his kids depend on him.", "reward": 7.81391838194188, "correlation": "0.976739797742735", "corr_A": "1.0", "corr_V": "0.0", "likes": 0.0, "norm_likes": 0.0, "norm_likes_real": 0.0, "photo": "https://yt3.ggpht.com/uYNn1JERAvW2wTAYT3lLxcd5oT3S04np_HMAL14cCAOsvp67rj1tTreMeBNGzD0CFtgrsjwT=s88-c-k-c0x00ffffff-no-rj", "author": "@botdavid323", "slot": 0}, {"start": 71, "end": 73, "reading time": 2.0, "text": "His little dance goes hard 🤣🤣", "reward": 3.4627939958074867, "correlation": "0.4065382959219639", "corr_A": "0.22", "corr_V": "0.35", "likes": 61.0, "norm_likes": 0.9183204060598157, "norm_likes_real": 0.9183204060598157, "photo": "https://yt3.ggpht.com/ytc/AIdro_mrA3p6SVaC7cwQzveqn41HrSMlSaVAD_zQvRBX60w=s88-c-k-c0x00ffffff-no-rj", "author": "@lexielopez3683", "slot": 0}, {"start": 73, "end": 77, "reading time": 4.0, "text": "Striped him for everything, then mib his memories", "reward": 7.035298290907528, "correlation": "0.5977999917078758", "corr_A": "0.61", "corr_V": "0.05", "likes": 4.0, "norm_likes": 0.5632245893111304, "norm_likes_real": 0.5632245893111304, "photo": "https://yt3.ggpht.com/MswBo1LumRWzo4rxR44Rp_AdfTnOmLDJMiNAcaGW1gcPYLPJsllU_2OoaKtvopdhTl8XvLNr=s88-c-k-c0x00ffffff-no-rj", "author": "@Jason-iq2fy", "slot": 0}, {"start": 77, "end": 82, "reading time": 5.0, "text": "The way we just did him his friends wondering what he did to me 🤣🤣", "reward": 12.496745221952061, "correlation": "0.755797758327091", "corr_A": "0.75", "corr_V": "0.19", "likes": 810.0, "norm_likes": 0.9877535277362304, "norm_likes_real": 0.9877535277362304, "photo": "https://yt3.ggpht.com/xkHwoPo3mq9xKAZjY2hzsjOck4j1qrDwuXj0pw7VXacjrxkBon6RQnK4IRHoE2aP61tkyy-h=s88-c-k-c0x00ffffff-no-rj", "author": "@paymogarcia5872", "slot": 0}, {"start": 82, "end": 87, "reading time": 5.0, "text": "\"My opps turned to fans it's like they  don't even plan on killin me\"", "reward": 10.039908326030552, "correlation": "0.5403662332249398", "corr_A": "0.55", "corr_V": "0.08", "likes": 73.0, "norm_likes": 0.9272491987562312, "norm_likes_real": 0.9272491987562312, "photo": "https://yt3.ggpht.com/ytc/AIdro_kVdhQYoB8QUe_Esk7l1cJeXncX95a045Xl1c-VEOgNfFE=s88-c-k-c0x00ffffff-no-rj", "author": "@bradshaw123", "slot": 0}, {"start": 87, "end": 93, "reading time": 6.0, "text": "The cosmic maturity it takes to tell the truth wholeheartedly and between the lines at once is remble superpower", "reward": 7.379829302827337, "correlation": "0.30595584774748186", "corr_A": "0.3", "corr_V": "0.08", "likes": 5.0, "norm_likes": 0.6180598549762593, "norm_likes_real": 0.6180598549762593, "photo": "https://yt3.ggpht.com/ytc/AIdro_mHiSKjlhkBiR8UhJtYjCIzsueNIHN17K3EWIrsEiE=s88-c-k-c0x00ffffff-no-rj", "author": "@jaya2812", "slot": 0}, {"start": 93, "end": 97, "reading time": 4.0, "text": "Shaking their hands as they thank him for the eulogy 🙏🙏🙏", "reward": 5.215399858640585, "correlation": "0.30782266307824685", "corr_A": "0.07", "corr_V": "0.31", "likes": 7.0, "norm_likes": 0.6882046385036525, "norm_likes_real": 0.6882046385036525, "photo": "https://yt3.ggpht.com/ytc/AIdro_mtpUToWk_corto4PM7oaNaCyc81XpN3HdmDnesgGQ4Dyg=s88-c-k-c0x00ffffff-no-rj", "author": "@richardpoor", "slot": 0}, {"start": 97, "end": 103, "reading time": 6.0, "text": "The surfer on the right vibing and got the rhythm and the one on the left look so confused like he don’t kno why he there😭😭", "reward": 5.888254766478896, "correlation": "0.32143297376114477", "corr_A": "0.08", "corr_V": "0.32", "likes": 2.0, "norm_likes": 0.33850984689085983, "norm_likes_real": 0.33850984689085983, "photo": "https://yt3.ggpht.com/UVogMZeBwgfNJGYIZ422s4SwQi9qklYhrLy57qWcRNzl57QwCpPhtN_40INgfXxOIPFuz8LxshA=s88-c-k-c0x00ffffff-no-rj", "author": "@smerkishh4", "slot": 0}, {"start": 103, "end": 105, "reading time": 2.0, "text": "ALWAYS KNOW YOUR WORTH 🥇", "reward": 2.196891201692568, "correlation": "0.549222800423142", "corr_A": "0.56", "corr_V": "0.05", "likes": 0.0, "norm_likes": 0.0, "norm_likes_real": 0.0, "photo": "https://yt3.ggpht.com/ytc/AIdro_mdnanGedO21vJ0GKH-FtayRdj9TnZfWo0rT995Nsgwbg=s88-c-k-c0x00ffffff-no-rj", "author": "@ttvnelson3102", "slot": 0}, {"start": 105, "end": 107, "reading time": 2.0, "text": "Keep Ur Value My Friends", "reward": 2.037265525618669, "correlation": "0.5093163814046673", "corr_A": "0.52", "corr_V": "0.01", "likes": 1.0, "norm_likes": 0.0, "norm_likes_real": 0.0, "photo": "https://yt3.ggpht.com/ytc/AIdro_n6lFk9lgS2EiOodqJC3QZ3DaJQekHDG6i-QPx8VmlYPaM=s88-c-k-c0x00ffffff-no-rj", "author": "@TheGman559", "slot": 0}, {"start": 107, "end": 109, "reading time": 2.0, "text": "The 2 random surfer dudes 💀", "reward": 1.3092223861086074, "correlation": "0.32730559652715185", "corr_A": "0.0", "corr_V": "0.33", "likes": 0.0, "norm_likes": 0.0, "norm_likes_real": 0.0, "photo": "https://yt3.ggpht.com/z9x6O7ejAwI91JvGSVC5N-c2hshoRito7AxqcyV_cc8k90TZjd69uweQHEwXdLqmtDBXAAF6Bw=s88-c-k-c0x00ffffff-no-rj", "author": "@biganimetiddiees9810", "slot": 0}, {"start": 109, "end": 110, "reading time": 1.0, "text": "Thank you", "reward": 1.2731535735799415, "correlation": "0.6365767867899708", "corr_A": "0.65", "corr_V": "0.03", "likes": 0.0, "norm_likes": 0.0, "norm_likes_real": 0.0, "photo": "https://yt3.ggpht.com/ytc/AIdro_nmr7F4VKLzW31ko-3x0ym59GD7Wu3SWBYmTnViT5WlOA=s88-c-k-c0x00ffffff-no-rj", "author": "@mooneysunny4125", "slot": 0}, {"start": 110, "end": 111, "reading time": 1.0, "text": "Wow 🤣🤣😂☠", "reward": 1.1794681584153164, "correlation": "0.30812178455209305", "corr_A": "0.3", "corr_V": "0.09", "likes": 4.0, "norm_likes": 0.5632245893111304, "norm_likes_real": 0.5632245893111304, "photo": "https://yt3.ggpht.com/ytc/AIdro_l-WDsw4LtzICi-7i6jrIYXRB6KWtLuDU90B1pQX1MqhL4=s88-c-k-c0x00ffffff-no-rj", "author": "@paulcharles2457", "slot": 0}, {"start": 111, "end": 113, "reading time": 2.0, "text": "The dance 🔥🔥🔥🔥🔥🔥", "reward": 1.7076294886662986, "correlation": "0.42690737216657465", "corr_A": "0.18", "corr_V": "0.4", "likes": 0.0, "norm_likes": 0.0, "norm_likes_real": 0.0, "photo": "https://yt3.ggpht.com/llPiBZBvDVagDL3HNXvNNx1R_a4beWLCTxq-aYaBZLPwPi75QBytyu7H-yT08d2WCa8tQjE2DQ=s88-c-k-c0x00ffffff-no-rj", "author": "@millesrobloxshorts6972", "slot": 0}, {"start": 113, "end": 119, "reading time": 6.0, "text": "The “listening while scrolling down the comments” crew.  p.s remble next up!", "reward": 8.993381240132635, "correlation": "0.313391318276769", "corr_A": "0.22", "corr_V": "0.23", "likes": 30.0, "norm_likes": 0.8721142368019011, "norm_likes_real": 0.8721142368019011, "photo": "https://yt3.ggpht.com/ytc/AIdro_lYTVg_mv-pagjy1GNUXC6o57ytRJC0iIFaVQvzEi25xw=s88-c-k-c0x00ffffff-no-rj", "author": "@OhDrewzy", "slot": 0}, {"start": 119, "end": 124, "reading time": 5.0, "text": "Lmao nobody gonna notice the surfer boys hitting that fighting dance", "reward": 5.988944642867546, "correlation": "0.31728216963118944", "corr_A": "0.0", "corr_V": "0.32", "likes": 4.0, "norm_likes": 0.5632245893111304, "norm_likes_real": 0.5632245893111304, "photo": "https://yt3.ggpht.com/ytc/AIdro_lQcLwnaCmaYmTUaKXmnOCd3uvVjgEo9v-N_84rMfg_Y5w=s88-c-k-c0x00ffffff-no-rj", "author": "@YoohPhuck", "slot": 0}];
+
+    // 요소 참조
+    var video=null, commentsContainer=null, commentsOverlay=null, likesOverlay=null;
+    var playPauseBtn=null, playIcon=null, pauseIcon=null;
+    var progressContainer=null, progressBar=null;
+    var timeDisplay=null;
+
+    var isDragging=false;
+
+    document.addEventListener('DOMContentLoaded', function(){
+      video = document.getElementById('video-player');
+      commentsContainer = document.getElementById('comments-container');
+      commentsOverlay = document.getElementById('comments-overlay');
+      likesOverlay = document.getElementById('likes-overlay');
+      playPauseBtn = document.getElementById('play-pause-btn');
+      playIcon = document.getElementById('play-icon');
+      pauseIcon = document.getElementById('pause-icon');
+      progressContainer = document.getElementById('progress-container');
+      progressBar = document.getElementById('progress-bar');
+      timeDisplay = document.getElementById('time-display');
+
+      // start 기준 정렬
+      optimalComments.sort((a,b)=>a.start-b.start);
+
+      // 이벤트 바인딩
+      video.addEventListener('timeupdate', onTimeUpdate);
+      video.addEventListener('loadedmetadata', ()=>{ updateTimeDisplay(); recalcOverlayByComments(); });
+      video.addEventListener('play', updatePlayPauseButton);
+      video.addEventListener('pause', updatePlayPauseButton);
+
+      playPauseBtn.addEventListener('click', togglePlayPause);
+      progressContainer.addEventListener('click', seekVideo);
+      progressContainer.addEventListener('mousedown', startDrag);
+      document.addEventListener('mousemove', doDrag);
+      document.addEventListener('mouseup', endDrag);
+
+      window.addEventListener('resize', recalcOverlayByComments);
+
+      // 초기 상태
+      updatePlayPauseButton();
+    });
+
+    function togglePlayPause(){ if(video.paused) video.play(); else video.pause(); }
+    function updatePlayPauseButton(){
+      if(video.paused){ playIcon.style.display='block'; pauseIcon.style.display='none'; }
+      else { playIcon.style.display='none'; pauseIcon.style.display='block'; }
+    }
+
+    function updateTimeDisplay(){
+      if(!video.duration) return;
+      const cur = formatTime(video.currentTime);
+      const tot = formatTime(video.duration);
+      timeDisplay.textContent = `${cur} / ${tot}`;
+    }
+
+    function onTimeUpdate(){
+      const t = video.currentTime;
+      // 진행바
+      if(video.duration){ progressBar.style.width = ((t/video.duration)*100) + '%'; }
+      updateTimeDisplay();
+
+      // 댓글 표시/제거
+      optimalComments.forEach(function(cmt, idx){
+        var el = document.getElementById('comment-'+idx);
+        if(cmt.start <= t && t < cmt.end){
+          if(!el) addLiveComment(cmt, idx);
+        } else if(el && t >= cmt.end){
+          // 페이드 아웃 후 제거, likes도 함께 제거
+          el.style.opacity = '0';
+          var likeEl = document.getElementById('like-'+idx);
+          if(likeEl) likeEl.style.opacity = '0';
+          setTimeout(()=>{
+            if(el && el.parentNode) el.remove();
+            if(likeEl && likeEl.parentNode) likeEl.remove();
+            recalcOverlayByComments();
+          }, 300);
+        }
+      });
+      // 위치 동기화
+      syncLikesPositions();
+    }
+
+    function startDrag(e){ isDragging=true; e.preventDefault(); updateVideoTime(e); }
+    function doDrag(e){ if(!isDragging) return; e.preventDefault(); updateVideoTime(e); }
+    function endDrag(){ isDragging=false; }
+    function seekVideo(e){ if(e.type==='click'){ setTimeout(()=>{ if(!isDragging) updateVideoTime(e); },10); } }
+    function updateVideoTime(e){
+      const rect = progressContainer.getBoundingClientRect();
+      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left)/rect.width));
+      video.currentTime = pos * video.duration;
+    }
+
+    function addLiveComment(cmt, idx){
+      var div = document.createElement('div');
+      div.className = 'live-comment';
+      div.id = 'comment-' + idx;
+
+      var user = cmt.author || cmt.user || getRandomName();
+      var txt = cmt.text || '';
+      var likes = (cmt.likes !== undefined) ? cmt.likes : 0;
+      var profileColor = getRandomColor();
+      var photo = cmt.photo;
+
+      div.innerHTML = `
+        <div class="comment-content">
+          <div class="text-content">
+            <div class="user-info">
+              ${photo ? `<img class="profile-photo" src="${photo}" alt="Profile" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />` : ''}
+              <div class="profile-icon" style="background-color:${profileColor}; display:${photo ? 'none' : 'block'};"></div>
+              <span class="username">${user}</span>
+            </div>
+            <span class="comment-text">${txt}</span>
+          </div>
+        </div>`;
+
+      // 등장 애니메이션 기본값
+      div.style.bottom = '10px';
+      div.style.opacity = '0';
+      commentsContainer.appendChild(div);
+      // 좋아요/하트는 별도 오버레이 레이어에 렌더링(마스크 비적용)
+      var like = document.createElement('div');
+      like.className = 'like-item';
+      like.id = 'like-' + idx;
+      like.style.bottom = '10px';
+      like.style.opacity = '0';
+      like.innerHTML = `
+        <svg class="heart-icon" viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <span class="likes-number">${formatLikes(likes)}</span>`;
+      likesOverlay.appendChild(like);
+
+      // 생성 직후 위치/여백 계산을 먼저 수행해 점프 방지
+      placeLikeForComment(div, like);
+      reserveTextSpace(div, like);
+
+      setTimeout(()=>{ div.style.opacity='1'; like.style.opacity='1'; recalcOverlayByComments(); }, 50);
+    }
+
+    // ===== A 스타일: 댓글 길이에 따라 오버레이 높이와 마스크 가변 =====
+    const OVERLAY_PADDING = 15; // 하단 여백
+    const OVERLAY_MIN = 68;     // 최소 높이
+    const OVERLAY_MAX_RATIO = 0.55; // 비디오 높이 대비 최대 비율
+    const USERINFO_EXTRA = 16;  // user-info 라인 여유치
+
+    function clampOverlayHeight(px){
+      const vc = document.querySelector('.video-container');
+      const vh = vc?.getBoundingClientRect().height || 0;
+      const maxH = vh ? Math.floor(vh * OVERLAY_MAX_RATIO) : 260;
+      return Math.max(OVERLAY_MIN, Math.min(px, maxH));
+    }
+
+    function recalcOverlayByComments(){
+      const visibles = Array.from(commentsContainer.querySelectorAll('.live-comment'));
+      if(visibles.length === 0){
+        const h = clampOverlayHeight(OVERLAY_MIN);
+        commentsOverlay.style.setProperty('--overlay-h', h + 'px');
+        commentsContainer.style.setProperty('--mask-stop', '35%');
+        return;
+      }
+
+      let maxCardH = 0;
+      visibles.forEach(el=>{ const r = el.getBoundingClientRect(); maxCardH = Math.max(maxCardH, r.height); });
+
+      const desired = clampOverlayHeight(Math.ceil(maxCardH + OVERLAY_PADDING + USERINFO_EXTRA));
+      commentsOverlay.style.setProperty('--overlay-h', desired + 'px');
+
+      let maskStop = 45;
+      if(desired > 120) maskStop = 55;
+      if(desired > 160) maskStop = 65;
+      if(desired > 200) maskStop = 72;
+      commentsContainer.style.setProperty('--mask-stop', maskStop + '%');
+      // 좋아요 위치 재계산
+      syncLikesPositions();
+    }
+    
+    function syncLikesPositions(){
+      if(!commentsOverlay || !commentsContainer || !likesOverlay) return;
+      const overlayRect = commentsOverlay.getBoundingClientRect();
+      const comments = Array.from(commentsContainer.querySelectorAll('.live-comment'));
+      comments.forEach(el=>{
+        const id = el.id || '';
+        const idx = id.split('-')[1];
+        if(idx === undefined) return;
+        const likeEl = document.getElementById('like-'+idx);
+        if(!likeEl) return;
+        placeLikeForComment(el, likeEl, overlayRect);
+        likeEl.style.opacity = getComputedStyle(el).opacity;
+        reserveTextSpace(el, likeEl);
+      });
+    }
+    
+    function placeLikeForComment(commentEl, likeEl, overlayRectOpt){
+      if(!commentsOverlay) return;
+      const overlayRect = overlayRectOpt || commentsOverlay.getBoundingClientRect();
+      const userInfo = commentEl.querySelector('.user-info');
+      const targetRect = (userInfo ? userInfo.getBoundingClientRect() : commentEl.getBoundingClientRect());
+      const likeH = Math.round(likeEl.getBoundingClientRect().height || 0);
+      const bottomPx = Math.max(0, Math.round(overlayRect.bottom - targetRect.top - likeH));
+      likeEl.style.bottom = bottomPx + 'px';
+    }
+    
+    function reserveTextSpace(commentEl, likeEl){
+      const textContainer = commentEl.querySelector('.text-content') || commentEl;
+      const likeRect = likeEl.getBoundingClientRect();
+      const reserve = Math.max(28, Math.round(likeRect.width) + 8);
+      textContainer.style.paddingRight = reserve + 'px';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,509 @@
+#######################################
+Video ID: wFKBN3MGUGI
+Total Comments: 42
+Query Filter: <none>
+#######################################
+=======================================
+Start-End: 1 ~ 7
+Reward: 11.653929098634084
+Likes: 109 || 0.8952852651425479 
+Correlation:
+  Overall: 0.5235181256482331
+  Audio: 0.0 | 
+  Video: 0.52 | The video begins with a black screen. The scene then transitions to a stage with a cityscape background, featuring tall buildings and palm trees. A man dressed in a white shirt and beige pants, holding a microphone, walks from the right side of the stage towards the left. The stage is illuminated with yellow lights, and the man continues to walk steadily across the stage.
+Text:
+  [[And you know what? good on Howie for having some respect and actually standing to applaud this man! Other judges are way to prissy]]
+=======================================
+
+=======================================
+Start-End: 7 ~ 9
+Reward: 3.8214259979256817
+Likes: 0 || 0.0 
+Correlation:
+  Overall: 0.9553564994814204
+  Audio: 0.94 | Hi y'all, hi y'all, hello, hi.
+  Video: 0.17 | An elderly man stands on a stage with a blue, geometric background, holding a microphone in his right hand. He begins speaking while looking forward. He then raises his left hand and waves. After waving, he starts clapping his hands.
+Text:
+  [[Hi y’all, hi y’all]]
+=======================================
+
+=======================================
+Start-End: 9 ~ 14
+Reward: 9.850979935675424
+Likes: 1900 || 0.9776929154016274 
+Correlation:
+  Overall: 0.4962515358667286
+  Audio: 0.17 | Hi y'all, hi y'all, hello, hi.
+  Video: 0.47 | The scene is set in a large, ornate theater with a high ceiling and intricate architectural details. The stage is decorated with a large screen displaying the 'America's Got Talent' logo, and the names of the judges are illuminated above the screen. A woman stands on the stage, initially with her hand raised, then she lowers her hand and turns to face the audience. The audience is seated and appears to be watching the woman attentively. The judges' table is visible on the left side of the stage, with two judges seated and observing the woman.
+Text:
+  [[This is the best thing happened in American got talent....🤘]]
+=======================================
+
+=======================================
+Start-End: 14 ~ 17
+Reward: 5.506323368026253
+Likes: 0 || 0.0 
+Correlation:
+  Overall: 0.9177205613377089
+  Audio: 0.92 | Where are you from, John?
+  Video: 0.06 | A man is standing on a brightly lit stage with a large, illuminated 'X' in the background, holding a microphone in his right hand. He is wearing a white shirt with a small logo on the left chest, beige pants, and white sneakers. The man begins to speak, and as he continues, he gradually leans his body to the right.
+Text:
+  [[I'm from Broomfield co, small world]]
+=======================================
+
+=======================================
+Start-End: 17 ~ 18
+Reward: 1.8672410797993675
+Likes: 29 || 0.799241562109564 
+Correlation:
+  Overall: 0.5339997588449017
+  Audio: 0.53 | I'm from Broomfield, Colorado.
+  Video: 0.05 | An elderly man is standing on a stage with a blue, geometric background, holding a microphone in his right hand. He is wearing a white shirt with a cartoon character embroidered on the left side of his chest and brown pants. The man is speaking into the microphone, and his facial expression changes slightly as he talks.
+Text:
+  [[RIP John]]
+=======================================
+
+=======================================
+Start-End: 18 ~ 24
+Reward: 11.318209665005131
+Likes: 11000 || 0.9940924622820979 
+Correlation:
+  Overall: 0.44613790760937866
+  Audio: 0.16 | And John, if you don't mind me asking, how old are you?
+  Video: 0.42 | A man is seated at a table with two large orange cups labeled 'Dunkin' Donuts' in front of him, and a red button is placed on the table. He holds a microphone with his right hand and begins to speak. As he continues speaking, he moves his hand from the microphone to his face, touching his cheek and mouth. The man then looks up while still holding his hand near his face. The background shows an audience watching the man.
+Text:
+  [[Half the audience; "omg wtf that poor deluded old man" The other half; FLOOOOOOOOOOOOOOOR]]
+=======================================
+
+=======================================
+Start-End: 24 ~ 30
+Reward: 11.306551822806036
+Likes: 1000 || 0.9674296624547418 
+Correlation:
+  Overall: 0.4584978206731321
+  Audio: 0.0 | 
+  Video: 0.46 | A man in a light-colored suit and a woman in a dark off-shoulder top stand side by side in front of a backdrop featuring a cityscape with palm trees and buildings. The woman looks at the man and smiles, then turns her head to look forward. The man continues to look forward throughout the sequence.
+Text:
+  [[Every single person in the crowd who immediately stood up and started cheering is living their best life. I'm singing with you buddy, sing on.]]
+=======================================
+
+=======================================
+Start-End: 30 ~ 36
+Reward: 11.166350740350984
+Likes: 436 || 0.9486393044638053 
+Correlation:
+  Overall: 0.45620957613067936
+  Audio: 0.41 | Yes, I retired about 15 years ago.
+  Video: 0.2 | Four judges are seated at a table with a large 'XXX' logo in front of them, and they are laughing and interacting with each other. The camera then shifts to a man standing on a stage with a vibrant, geometric background, holding a microphone and speaking.
+Text:
+  [[Me: ''Oh look at that,sweet old man,coming to sing karaoke." Also me: "OH fucking hell yeah buddy! SING IT!! You go grandpa!!!"]]
+=======================================
+
+=======================================
+Start-End: 36 ~ 41
+Reward: 9.9190053383864
+Likes: 713 || 0.960642098793283 
+Correlation:
+  Overall: 0.5115794844419984
+  Audio: 0.51 | The most recent one was aerospace engineering.
+  Video: 0.05 | An elderly man is standing on a stage with a blue, geometric background, holding a microphone in his right hand. He is wearing a white shirt with a small cartoon character embroidered on the left side of his chest and a number '28' on the left side of his shirt. The man appears to be speaking into the microphone throughout the sequence.
+Text:
+  [[Aerospace engineering navy pilot metalhead. REsS foking PECT!]]
+=======================================
+
+=======================================
+Start-End: 41 ~ 47
+Reward: 11.89282036349354
+Likes: 2000 || 0.9783874900516676 
+Correlation:
+  Overall: 0.5018746185986278
+  Audio: 0.49 | Yes, I was blessed to be the program manager for the co-star instrument that repaired the
+  Video: 0.12 | A man is seated at a table with two Dunkin' Donuts cups in front of him, one with a straw and the other without. He has his hand resting on his chin and appears to be in deep thought. The man then opens his eyes and begins to speak. As he continues speaking, he starts to move his hand away from his chin. The background shows an audience seated and watching the man.
+Text:
+  [[Holy smokes. This man helped repair the Hubble telescope and ROCKS SO HARD!]]
+=======================================
+
+=======================================
+Start-End: 47 ~ 53
+Reward: 14.327829187891489
+Likes: 2600 || 0.9816903894622098 
+Correlation:
+  Overall: 0.703140570926519
+  Audio: 0.69 | Yes, I was blessed to be the program manager for the co-star instrument that repaired the
+  Video: 0.12 | An elderly man is standing on a stage with a blue, geometric background, holding a microphone in his right hand. He is wearing a white shirt with a cartoon character embroidered on the left side of his chest and brown pants. The man appears to be speaking into the microphone throughout the sequence.
+Text:
+  [[Fuck the Hubble telescope. He just needs to look in a mirror to see the biggest star of them all 😂]]
+=======================================
+
+=======================================
+Start-End: 53 ~ 56
+Reward: 6.020816766845117
+Likes: 1200 || 0.970665323904473 
+Correlation:
+  Overall: 0.5181367991886162
+  Audio: 0.52 | Did you go to space?
+  Video: 0.03 | A bald man is standing on a stage with a blue geometric background, holding a microphone in his right hand. He is wearing a white shirt with a number tag '4328' and a cartoon character embroidered on the left side of his chest. The man speaks into the microphone while looking to his left. After speaking, he turns his head to face forward.
+Text:
+  [[Space trips with this guy must be fun]]
+=======================================
+
+=======================================
+Start-End: 56 ~ 59
+Reward: 5.818265586931506
+Likes: 6400 || 0.990382999832674 
+Correlation:
+  Overall: 0.47451943123891394
+  Audio: 0.47 | Did you go to space?
+  Video: 0.01 | A man is seated at a table with two orange cups labeled 'Dunkin' Donuts' in front of him, holding a piece of paper in his left hand and a microphone in his right hand. He reads from the paper while occasionally moving his right hand. The man then turns his head to the right and begins to speak into the microphone. The background shows an audience seated and watching the man.
+Text:
+  [[I bet that dude was a badass pilot]]
+=======================================
+
+=======================================
+Start-End: 59 ~ 64
+Reward: 9.881416803786022
+Likes: 11000 || 0.9940924622820979 
+Correlation:
+  Overall: 0.4910954492375532
+  Audio: 0.36 | I was a Navy pilot that was far enough into space.
+  Video: 0.33 | An elderly man is standing on a stage with a blue, illuminated background, holding a microphone in his right hand. He is wearing a white shirt with a small cartoon character embroidered on the left side of his chest. The man appears to be speaking into the microphone, as his mouth is open in several frames. After speaking, he smiles, showing a sense of satisfaction or amusement.
+Text:
+  [[82 years old… Rocket scientist… Navy Pilot… Karaoke Star… Legend.]]
+=======================================
+
+=======================================
+Start-End: 64 ~ 70
+Reward: 11.44609795195184
+Likes: 1900 || 0.9776929154016274 
+Correlation:
+  Overall: 0.464995038295173
+  Audio: 0.19 | After everything you've done, why have you decided to come on the show this year?
+  Video: 0.43 | In a grand, well-lit auditorium with multiple levels of seating, a man stands on a polished stage facing a panel of judges seated at a table. The audience is visible in the background, filling the seats and watching the performance attentively. The man on stage is dressed in light-colored clothing and appears to be performing or presenting something to the judges and audience. The lighting in the auditorium is warm and bright, highlighting the man on stage and the judges' table.
+Text:
+  [[This is a man who has lived his life to the fullest. From job to retirement to showing the world a 80 year old can still rock]]
+=======================================
+
+=======================================
+Start-End: 70 ~ 75
+Reward: 8.908897091559917
+Likes: 72 || 0.8713280338203722 
+Correlation:
+  Overall: 0.45522569224580556
+  Audio: 0.36 | Well this would be probably the high point of my life and my many careers.
+  Video: 0.28 | An elderly man, dressed in a white shirt with a cartoon character embroidered on the left side, is holding a black microphone and speaking on a stage with a blue, geometric background.
+Text:
+  [[I want to be this guy when I get 82 + Years..... rock on grandpa!!!!!]]
+=======================================
+
+=======================================
+Start-End: 75 ~ 78
+Reward: 5.219239704839617
+Likes: 81 || 0.878612550804472 
+Correlation:
+  Overall: 0.4305670087377002
+  Audio: 0.43 | Well this would be probably the high point of my life and my many careers.
+  Video: 0.0 | A woman in a white outfit sits at a table with her arms crossed, looking at a man in a black outfit who is holding a piece of paper and a pen. The man turns his head to look at the woman, who continues to look at him. The man then puts the pen in his mouth while still holding the paper. The woman turns her head to look forward. Both have two red cups with straws in front of them, and there are red buttons on the table.
+Text:
+  [[Thats what I wanna be when I grow up!!!!]]
+=======================================
+
+=======================================
+Start-End: 78 ~ 83
+Reward: 10.141806384123427
+Likes: 283 || 0.9355478230276376 
+Correlation:
+  Overall: 0.5464067268985238
+  Audio: 0.53 | Well this would be probably the high point of my life and my many careers.
+  Video: 0.13 | A large group of people are seated closely together, clapping their hands enthusiastically. The audience members are smiling and appear to be enjoying the event. The background is filled with more people, all engaged in the same activity, creating a lively and supportive atmosphere.
+Text:
+  [[3/4 of the audience/jury has no clue what the Hubble telescope is]]
+=======================================
+
+=======================================
+Start-End: 83 ~ 84
+Reward: 2.53558101140303
+Likes: 13 || 0.704398763564741 
+Correlation:
+  Overall: 0.9155911239191445
+  Audio: 0.92 | So without putting words into your mouth, we're sort of more important than the Hubble Telescope.
+  Video: 0.0 | A man is seated at a table with two orange cups labeled 'Dunkin' Donuts' in front of him, holding a piece of paper in his left hand and gesturing with his right hand while speaking. He continues to read from the paper, occasionally moving his right hand. The man then looks up from the paper and directs his gaze forward.
+Text:
+  [[Yes]]
+=======================================
+
+=======================================
+Start-End: 84 ~ 85
+Reward: 1.551248609371432
+Likes: 47 || 0.8413132681160005 
+Correlation:
+  Overall: 0.3549676706277157
+  Audio: 0.36 | Yes.
+  Video: 0.0 | A bald man is standing on a stage with a blue, geometric background, holding a microphone in his right hand. He is wearing a white shirt with a cartoon character embroidered on the left side of his chest. The man appears to be speaking or singing into the microphone, as his mouth is slightly open and his head is tilted slightly to the side.
+Text:
+  [[My hero]]
+=======================================
+
+=======================================
+Start-End: 85 ~ 91
+Reward: 10.063554189840891
+Likes: 419 || 0.9475423392194577 
+Correlation:
+  Overall: 0.3648583462103454
+  Audio: 0.13 | Thank you.
+  Video: 0.34 | A bald man is standing on a stage with a blue, geometric background, holding a microphone in his right hand. He is wearing a white shirt with a cartoon character embroidered on the left side of his chest. The man appears to be speaking or singing into the microphone, as his mouth is slightly open and his head is tilted slightly to the side.
+Text:
+  [[I feel like this is a story of a man who accomplished so many timeless and great things in life, made a great deal of money, and made it to the top of what is societaly considered to be the ultimate successful life. But in his wise old age he looks into the eyes of the young audience in the darkened room, almost every face 50 years younger than him. He has seen the great times and the bad times, the rain and the sunshine, year after year. He surpasses the laughers and the mockers and knows that for a fact deep down. He's on a whole other level of enlightenment that they might not ever achieve, and they have not a clue that they have just been givien one of the greatest gifts of all time. The perspective of life from someone who's seen the other side. Someone who's experienced it all and has come to a realization that everything shouldn't be taken so seriously in life. He confidently conveys through his jovial smile, "THIS, my young friends is what life is about. Don't be fooled."]]
+=======================================
+
+=======================================
+Start-End: 91 ~ 97
+Reward: 11.2863726541328
+Likes: 310 || 0.9385329313743922 
+Correlation:
+  Overall: 0.47126458882387057
+  Audio: 0.0 | 
+  Video: 0.47 | The stage is set for 'America's Got Talent' with a host standing in the center, gesturing with his hand. The background features a large screen displaying the show's logo and the names of the judges: Simon, Heidi, Mel B, and Howie. The host continues to gesture as the judges' panel in front of the stage remains seated. The host then lowers his hand and stands still, facing the audience.
+Text:
+  [[He should have said "this is a low point of my life being on this corporate piece of shit show were you judge talent and where your judges dont know dick about judging talent :D"]]
+=======================================
+
+=======================================
+Start-End: 97 ~ 99
+Reward: 5.6688042554999685
+Likes: 105 || 0.8933112018837978 
+Correlation:
+  Overall: 0.9705454629330933
+  Audio: 0.97 | Let the bodies hit the floor.
+  Video: 0.08 | A man is seated at a table with two drinks labeled 'Dunkin' Donuts' in front of him, holding a piece of paper with both hands. He then lowers the paper and raises his right hand to his chin, resting his fingers on his chin. The background shows an audience seated and watching the man.
+Text:
+  [[Let the bodies  HIT THE FLOOR]]
+=======================================
+
+=======================================
+Start-End: 99 ~ 103
+Reward: 9.917925431399102
+Likes: 1000 || 0.9674296624547418 
+Correlation:
+  Overall: 0.7560258476975169
+  Audio: 0.75 | Let the bodies hit the floor.
+  Video: 0.1 | A man stands on a brightly lit stage with a geometric, illuminated background, holding a microphone in his right hand. He is wearing a white polo shirt with a small logo on the left chest, beige pants, and white shoes. The man begins to bend forward slightly while speaking into the microphone. Subtitles appear on the screen, identifying him as 'John Hetlinger, 82, Broomfield, CO.' The man continues to bend forward, looking down and speaking into the microphone.
+Text:
+  [[The bodies have hit the floor, and they can't get up.]]
+=======================================
+
+=======================================
+Start-End: 103 ~ 109
+Reward: 13.924333178465492
+Likes: 1200 || 0.970665323904473 
+Correlation:
+  Overall: 0.6750284362532212
+  Audio: 0.64 | Let the bodies hit the floor.
+  Video: 0.21 | A man and a woman are seated at a table with microphones and red buttons in front of them, and drinks with 'TNT' logos on the table. The man, dressed in black, has his hand on his face and is looking forward. The woman, wearing an orange top, is also looking forward. The audience in the background is clapping and appears to be excited. The man starts to smile and then turns his head to the right to look at the woman. The woman also turns her head to the left to look at the man.
+Text:
+  [[Goddamnit grandpa why haven't you taken your pills  Let the bodies hit the floor  Let the bodies hit the floor  Let the bodies hit the floor  Grandpa what are you doing ?   Let the bodies hit the-    Grandpa don't you finish that-    FLOOOOOOOOOOOOOOOOOOR      ._.]]
+=======================================
+
+=======================================
+Start-End: 109 ~ 110
+Reward: 1.5423503110627015
+Likes: 3 || 0.40531466472388855 
+Correlation:
+  Overall: 0.5685178231694065
+  Audio: 0.57 | Yeah!
+  Video: 0.02 | A man is seated at a table with two Dunkin' Donuts cups in front of him, holding his hand to his ear as if listening intently. The audience behind him begins to stand up and applaud. The man then turns his head to look towards the camera and smiles.
+Text:
+  [[yup]]
+=======================================
+
+=======================================
+Start-End: 110 ~ 114
+Reward: 7.264358834940065
+Likes: 206 || 0.9240891277076302 
+Correlation:
+  Overall: 0.446000290513693
+  Audio: 0.07 | Yeah!
+  Video: 0.44 | A man is seated at a table with two Dunkin' Donuts cups in front of him, holding his hand to his ear as if listening intently. The audience behind him begins to stand up and applaud. The man then turns his head to look towards the camera and smiles.
+Text:
+  [[He had the audience on their feet immediately.]]
+=======================================
+
+=======================================
+Start-End: 114 ~ 118
+Reward: 7.496241647501974
+Likes: 295 || 0.9369240477717735 
+Correlation:
+  Overall: 0.46856818205186
+  Audio: 0.0 | 
+  Video: 0.47 | A woman with long blonde hair, dressed in a white blazer, sits with her arms crossed in front of a microphone, with two Dunkin' Donuts cups on the table beside her. The background shows an audience clapping. The camera then shifts to a woman in the audience who is clapping and speaking, with her hands raised in a gesture.
+Text:
+  [[Props to the judges for not hitting a single X.]]
+=======================================
+
+=======================================
+Start-End: 118 ~ 123
+Reward: 9.136940251509603
+Likes: 32 || 0.8086084158373491 
+Correlation:
+  Overall: 0.5093898172322858
+  Audio: 0.1 | Beaten, why for?
+  Video: 0.5 | The video shows a stage set for 'America's Got Talent' with a large screen displaying the show's logo and four judges' names: Simon, Heidi, Mel B, and Howie. The stage is illuminated with bright lights, and a performer is standing in the center, facing the judges and the audience. The audience is seated and appears to be watching the performance attentively. The judges are seated at a table in front of the stage, with their backs to the camera. The camera gradually zooms in on the performer, focusing on their presence on the stage.
+Text:
+  [[This is why there should be a question mark after ‘America’s got talent’]]
+=======================================
+
+=======================================
+Start-End: 123 ~ 125
+Reward: 3.6525298974468767
+Likes: 0 || 0.0 
+Correlation:
+  Overall: 0.9131324743617192
+  Audio: 0.91 | Can't take much more
+  Video: 0.04 | A woman in the audience is clapping her hands while sitting among other people. She then turns her head to the right and places both hands on her cheeks. After a moment, she turns her head back to face forward, still holding her cheeks.
+Text:
+  [[Can't take much more!]]
+=======================================
+
+=======================================
+Start-End: 125 ~ 131
+Reward: 10.681095379641755
+Likes: 700 || 0.9602410978009562 
+Correlation:
+  Overall: 0.40997073273633483
+  Audio: 0.18 | Can't take much more
+  Video: 0.37 | A bald man in a white shirt is holding a microphone and speaking on a stage with a blue, geometric background. He raises his left hand while continuing to speak. The man then turns his head to face the camera, maintaining his grip on the microphone.
+Text:
+  [[This shit is actually incredible. About 50 percent of the crowd was judging hardcore but holy shit its honestly really impressive that hes screaming like that. Why have I not seen this until now?]]
+=======================================
+
+=======================================
+Start-End: 131 ~ 137
+Reward: 15.749004911416291
+Likes: 365 || 0.9435742365105473 
+Correlation:
+  Overall: 0.8406299576960838
+  Audio: 0.84 | nothing wrong with me, nothing wrong with me, nothing wrong with me, nothing wrong with me
+  Video: 0.05 | The video takes place in a large, ornate theater with a stage set up for a talent show, featuring a backdrop with the names 'Simon,' 'Heidi,' 'Mel B,' and 'Howie' displayed prominently. A person dressed in white is standing on a red star-shaped platform in the center of the stage, extending their hand towards the audience. The audience is seated and appears to be watching the performance attentively. The judges' table is positioned in front of the stage, with four judges seated, observing the performance. The stage is illuminated with bright lights, and the background includes a cityscape design with tall buildings.
+Text:
+  [['Nothing wrong with me... Nothing wrong with me... Nothing wrong with me...'  Sure, man.]]
+=======================================
+
+=======================================
+Start-End: 137 ~ 141
+Reward: 9.39926552437274
+Likes: 295 || 0.9369240477717735 
+Correlation:
+  Overall: 0.7064461666607057
+  Audio: 0.69 | nothing wrong with me, nothing wrong with me, nothing wrong with me, nothing wrong with me
+  Video: 0.15 | In a large, ornate theater filled with a full audience, a man stands on a well-lit stage facing the crowd. The man, dressed in light-colored clothing, raises his right hand and begins to turn his body slightly to the right. The audience, seated in multiple levels, watches attentively as the man continues his gesture. The man completes his turn, now facing more to the right, while the audience remains engaged and the stage lights illuminate the scene.
+Text:
+  [[NOTHING'S WRONG WITH HIM NOTHING'S WRONG WITH HIM]]
+=======================================
+
+=======================================
+Start-End: 141 ~ 143
+Reward: 4.572968730328796
+Likes: 16 || 0.7324601125120462 
+Correlation:
+  Overall: 0.7770121263261758
+  Audio: 0.78 | something's got to give, something's got to give, something's got to give
+  Video: 0.06 | A man is standing on a stage with a vibrant, geometric blue and purple background, holding a microphone in his right hand. He raises his left hand while speaking, then gradually lowers it. The man continues to speak and begins to move to his right, taking several steps.
+Text:
+  [[SOMETHINGS GOT TO GIVE!]]
+=======================================
+
+=======================================
+Start-End: 143 ~ 147
+Reward: 6.998206414357161
+Likes: 580 || 0.9559384367611589 
+Correlation:
+  Overall: 0.39680658341406566
+  Audio: 0.12 | something's got to give, something's got to give, something's got to give
+  Video: 0.38 | An elderly man, dressed in a white shirt, is holding a microphone and speaking on a stage with a blue, illuminated background. He gestures with his right hand while speaking, moving it up and down and occasionally raising it. The man continues to speak energetically, moving his body and gesturing with his left hand. He then opens his mouth wide, appearing to shout or express something loudly.
+Text:
+  [[He isn’t just an old man. He’s a old man legend.]]
+=======================================
+
+=======================================
+Start-End: 147 ~ 153
+Reward: 13.195928021450204
+Likes: 87 || 0.8828399637138882 
+Correlation:
+  Overall: 0.6582406865972397
+  Audio: 0.56 | Let the bodies hit the floor.
+  Video: 0.35 | The stage is set for 'America's Got Talent' with a host standing in the center, holding a microphone. The background features a large star with the names of the judges: Simon, Heidi, Mel B, and Howie, and the show's logo is prominently displayed. The host is dressed in a white outfit and is positioned on a red star-shaped platform. The camera gradually zooms in on the host as he begins to speak.
+Text:
+  [[If this guy would've had a heart attack on stage... Let the body hit the floor]]
+=======================================
+
+=======================================
+Start-End: 153 ~ 156
+Reward: 6.977948026684348
+Likes: 99 || 0.8901334862538235 
+Correlation:
+  Overall: 0.7179245946538129
+  Audio: 0.66 | Let the bodies hit the floor.
+  Video: 0.28 | An elderly man, dressed in a white shirt, is holding a microphone and speaking on a stage with a blue, illuminated background. He gestures with his hand while speaking, then opens his mouth wide as if to shout. The man turns his head to the right while continuing to hold the microphone.
+Text:
+  [[Let the bodies hit the.... FLOOOOOOOOOOOOR!]]
+=======================================
+
+=======================================
+Start-End: 156 ~ 162
+Reward: 13.09666218911881
+Likes: 1000 || 0.9674296624547418 
+Correlation:
+  Overall: 0.60767368453253
+  Audio: 0.59 | Let the bodies hit the floor.
+  Video: 0.14 | A woman in a white blazer is seated at a table with a microphone in front of her and two cups labeled 'Dunkin' Donuts' on either side. She holds a pen in her hands and looks straight ahead. She then turns her head to the right.
+Text:
+  [[Grandma: "Help, I've fallen and I can't get up!!" Grandpa (hopping out of the recliner): "LET THE BODIES HIT THE FLOOR!!! LET THE BODIES HIT THE FLOOR!!!"]]
+=======================================
+
+=======================================
+Start-End: 162 ~ 166
+Reward: 8.680688729206096
+Likes: 4 || 0.4812200601833815 
+Correlation:
+  Overall: 0.8444760610590714
+  Audio: 0.85 | Let the bodies hit the floor.
+  Video: 0.01 | An elderly man, dressed in a white shirt, is holding a microphone and singing on a stage with a blue, geometric background. He moves slightly while singing, and at one point, raises his left hand. After a few moments, he lowers the microphone and his mouth, appearing to finish his performance.
+Text:
+  [[Let the bodies hit the floor indeed my friend]]
+=======================================
+
+=======================================
+Start-End: 166 ~ 172
+Reward: 12.012010346765758
+Likes: 184 || 0.9195848969697442 
+Correlation:
+  Overall: 0.5412084137456076
+  Audio: 0.0 | 
+  Video: 0.54 | An elderly man, dressed in a white shirt, is holding a microphone and singing on a stage with a blue, geometric background. He moves slightly while singing, and at one point, raises his left hand. After a few moments, he lowers the microphone and his mouth, appearing to finish his performance.
+Text:
+  [[82 years old and he knows the tempo of the song and when to start singing after the drum stick counting. This is talent!]]
+=======================================
+
+=======================================
+Start-End: 172 ~ 175
+Reward: 5.333109373291381
+Likes: 268 || 0.9337019693854195 
+Correlation:
+  Overall: 0.4220005775225204
+  Audio: 0.0 | 
+  Video: 0.42 | The video shows a large audience in a theater, clapping and cheering for a performance on stage. The stage is set up for 'America's Got Talent,' with a large screen displaying the show's logo and the names of the judges: Simon, Heidi, Mel B, and Howie. The audience is standing and applauding, showing their appreciation for the performance. The lighting on the stage is bright, and the background features a cityscape design with lights. The hashtag #AGT and the NBC logo are visible in the bottom right corner of the screen.
+Text:
+  [[I love the audience’s reaction]]
+=======================================
+
+=======================================
+Start-End: 175 ~ 179
+Reward: 6.7980880994886
+Likes: 104 || 0.8928003483448087 
+Correlation:
+  Overall: 0.40336083826367064
+  Audio: 0.0 | 
+  Video: 0.4 | A man stands on a stage in a large, ornate theater filled with a cheering audience. He takes a few steps forward, facing the audience. The man then stops and stands still, looking out at the audience. The lights in the theater begin to dim gradually. The screen eventually fades to black.
+Text:
+  [[the audience is so overly dramatic its annoying]]
+=======================================
+

@@ -1,0 +1,653 @@
+#######################################
+Video ID: RQmqcaS5LIM
+Total Comments: 54
+Query Filter: <none>
+#######################################
+=======================================
+Start-End: 0 ~ 6
+Reward: 12.786345564842689
+Likes: 483 || 0.9616455936736217 
+Correlation:
+  Overall: 0.5847060002334132
+  Audio: 0.59 | It resulted, as a matter of fact, in Brown assaulting his wife
+  Video: 0.0 | A man in a green suit and striped tie walks forward in an outdoor setting with a house and trees in the background. Another man in a gray suit and green shirt follows behind him. The man in the gray suit raises his hand and waves while continuing to walk. He then lowers his hand and continues walking towards the man in the green suit. The man in the green suit continues walking towards a group of people standing near a vehicle.
+Text:
+  [[News: "James Brown assaulting his wife with a lead pipe and firing a gun at a car that she was in" James Brown: "Living in America!"]]
+=======================================
+
+=======================================
+Start-End: 6 ~ 12
+Reward: 11.607148497644706
+Likes: 790 || 0.9722448542020797 
+Correlation:
+  Overall: 0.4811399477026857
+  Audio: 0.47 | with a lead pipe and firing a gun at a car that she was in.
+  Video: 0.09 | A man in a green suit and striped tie walks forward in an outdoor setting with a house and trees in the background. Another man in a gray suit and green shirt follows behind him. The man in the gray suit raises his hand and waves while continuing to walk. He then lowers his hand and continues walking towards the man in the green suit. The man in the green suit continues walking towards a group of people standing near a vehicle.
+Text:
+  [[He was assaulting he's wife with a lead pipe and firing a gun in the garage.. James what do you say all about that? This is the man's world! 😆😆😆]]
+=======================================
+
+=======================================
+Start-End: 12 ~ 18
+Reward: 12.758880330275467
+Likes: 35 || 0.83266124204204 
+Correlation:
+  Overall: 0.6469094065019357
+  Audio: 0.62 | He was released yesterday on $15,000 bond.
+  Video: 0.18 | A man with dark hair and wearing sunglasses walks briskly through a parking lot, passing by several vehicles and buildings. He continues walking towards a group of people, including another man in a suit. The scene then transitions to the man sitting in front of a background with multiple screens, where he begins to speak and gestures with his hand.
+Text:
+  [[Interviewer: "He joined us from Atlanta to discuss the charges"  James: "I FEEL GOOD"]]
+=======================================
+
+=======================================
+Start-End: 18 ~ 24
+Reward: 13.805334512478225
+Likes: 6300 || 0.9971344722147129 
+Correlation:
+  Overall: 0.6518773065991624
+  Audio: 0.6 | How did all of this trouble begin?
+  Video: 0.25 | A man with dark hair and wearing sunglasses walks briskly through a parking lot, passing by several vehicles and buildings. He continues walking towards a group of people, including another man in a suit. The scene then transitions to the man sitting in front of a background with multiple screens, where he begins to speak and gestures with his hand.
+Text:
+  [["How did all this trouble begin?" "Living In America." Sounds about right. Lol.]]
+=======================================
+
+=======================================
+Start-End: 24 ~ 27
+Reward: 6.737888186034475
+Likes: 23 || 0.7920722056833054 
+Correlation:
+  Overall: 0.7269452614974263
+  Audio: 0.73 | Nothing wrong?
+  Video: 0.06 | The video begins with a blurred transition showing a woman in Los Angeles and a man in Atlanta, with the date April 4, 1988, displayed in the top right corner. The woman, seated in front of the Hollywood sign, and the man, wearing a light-colored suit and yellow glasses, are shown in separate frames labeled 'Los Angeles' and 'Atlanta' respectively. Both individuals are engaged in conversation, with the woman occasionally looking down and the man speaking animatedly. The background remains consistent, with the woman in front of the Hollywood sign and the man in a studio setting.
+Text:
+  [[...... There's nothin' wrong...]]
+=======================================
+
+=======================================
+Start-End: 27 ~ 29
+Reward: 3.710971874956149
+Likes: 2 || 0.29002058176102813 
+Correlation:
+  Overall: 0.7827326778585232
+  Audio: 0.78 | Nothing wrong at all?
+  Video: 0.0 | The video begins with a blurred transition showing a woman in Los Angeles and a man in Atlanta, with the date April 4, 1988, displayed in the top right corner. The woman, seated in front of the Hollywood sign, and the man, wearing a light-colored suit and yellow glasses, are shown in separate frames labeled 'Los Angeles' and 'Atlanta' respectively. Both individuals are engaged in conversation, with the woman occasionally looking down and the man speaking animatedly. The background remains consistent, with the woman in front of the Hollywood sign and the man in a studio setting.
+Text:
+  [[Your out on bond? No imn not]]
+=======================================
+
+=======================================
+Start-End: 29 ~ 32
+Reward: 5.512045573488194
+Likes: 234 || 0.9405844027179302 
+Correlation:
+  Overall: 0.44838206088906724
+  Audio: 0.42 | You're not in any difficulty, but you're out on bond?
+  Video: 0.17 | The video begins with a blurred transition showing a woman in Los Angeles and a man in Atlanta, with the date April 4, 1988, displayed in the top right corner. The woman, seated in front of the Hollywood sign, and the man, wearing a light-colored suit and yellow glasses, are shown in separate frames labeled 'Los Angeles' and 'Atlanta' respectively. Both individuals are engaged in conversation, with the woman occasionally looking down and the man speaking animatedly. The background remains consistent, with the woman in front of the Hollywood sign and the man in a studio setting.
+Text:
+  [[" I aint out on bond, I'm out on LOVE" 😂]]
+=======================================
+
+=======================================
+Start-End: 32 ~ 37
+Reward: 10.133551271497875
+Likes: 4 || 0.49687248109697707 
+Correlation:
+  Overall: 0.7649188866012991
+  Audio: 0.76 | Have all the charges been dropped?
+  Video: 0.05 | The video begins with a blurred transition showing a woman in Los Angeles and a man in Atlanta, with the date April 4, 1988, displayed in the top right corner. The woman, seated in front of the Hollywood sign, and the man, wearing a light-colored suit and yellow glasses, are shown in separate frames labeled 'Los Angeles' and 'Atlanta' respectively. Both individuals are engaged in conversation, with the woman occasionally looking down and the man speaking animatedly. The background remains consistent, with the woman in front of the Hollywood sign and the man in a studio setting.
+Text:
+  [[Have all the charges been dropped?  “Yes I’m out on Love” 😂😂😂😂]]
+=======================================
+
+=======================================
+Start-End: 37 ~ 39
+Reward: 4.63717737446751
+Likes: 68 || 0.8820871383740254 
+Correlation:
+  Overall: 0.7182507744298647
+  Audio: 0.72 | Well, are you out on love or out of love?
+  Video: 0.04 | The video begins with a blurred transition showing a woman in Los Angeles and a man in Atlanta, with the date April 4, 1988, displayed in the top right corner. The woman, seated in front of the Hollywood sign, and the man, wearing a light-colored suit and yellow glasses, are shown in separate frames labeled 'Los Angeles' and 'Atlanta' respectively. Both individuals are engaged in conversation, with the woman occasionally looking down and the man speaking animatedly. The background remains consistent, with the woman in front of the Hollywood sign and the man in a studio setting.
+Text:
+  [[I'm out on love 😂😭😂😭😭]]
+=======================================
+
+=======================================
+Start-End: 39 ~ 42
+Reward: 6.5978036955974275
+Likes: 139 || 0.920128676529478 
+Correlation:
+  Overall: 0.6395696110014988
+  Audio: 0.63 | Well, are you out on love or out of love?
+  Video: 0.11 | The video begins with a blurred transition showing a woman in Los Angeles and a man in Atlanta, with the date April 4, 1988, displayed in the top right corner. The woman, seated in front of the Hollywood sign, and the man, wearing a light-colored suit and yellow glasses, are shown in separate frames labeled 'Los Angeles' and 'Atlanta' respectively. Both individuals are engaged in conversation, with the woman occasionally looking down and the man speaking animatedly. The background remains consistent, with the woman in front of the Hollywood sign and the man in a studio setting.
+Text:
+  [[This NEVER gets old. I'm out on love.]]
+=======================================
+
+=======================================
+Start-End: 42 ~ 45
+Reward: 7.413548483983931
+Likes: 21 || 0.7821278453405188 
+Correlation:
+  Overall: 0.8445274913270625
+  Audio: 0.84 | I don't love.
+  Video: 0.05 | The video begins with a blurred transition showing a woman in Los Angeles and a man in Atlanta, with the date April 4, 1988, displayed in the top right corner. The woman, seated in front of the Hollywood sign, and the man, wearing a light-colored suit and yellow glasses, are shown in separate frames labeled 'Los Angeles' and 'Atlanta' respectively. Both individuals are engaged in conversation, with the woman occasionally looking down and the man speaking animatedly. The background remains consistent, with the woman in front of the Hollywood sign and the man in a studio setting.
+Text:
+  [[Alone from night to night you'll find me 🤣💀]]
+=======================================
+
+=======================================
+Start-End: 45 ~ 51
+Reward: 11.338806134926813
+Likes: 85 || 0.8954114417566387 
+Correlation:
+  Overall: 0.49719479036558173
+  Audio: 0.46 | Alone from night to night, you'll find me.
+  Video: 0.2 | The video begins with a blurred transition showing a woman in Los Angeles and a man in Atlanta, with the date April 4, 1988, displayed in the top right corner. The woman, seated in front of the Hollywood sign, and the man, wearing a light-colored suit and yellow glasses, are shown in separate frames labeled 'Los Angeles' and 'Atlanta' respectively. Both individuals are engaged in conversation, with the woman occasionally looking down and the man speaking animatedly. The background remains consistent, with the woman in front of the Hollywood sign and the man in a studio setting.
+Text:
+  [[Interviewer: "I hear you're already starting divorce proceedings, does that mean you're now eligible?"  James: "I'm not... yeah I'm eligible, I'm single, I wanna mingle!"  💀💀💀💀]]
+=======================================
+
+=======================================
+Start-End: 51 ~ 56
+Reward: 12.361748808847821
+Likes: 260 || 0.9441273627964654 
+Correlation:
+  Overall: 0.7641111994865494
+  Audio: 0.75 | Are the two of you going to be able to work this out?
+  Video: 0.14 | The video begins with a blurred transition showing a woman in Los Angeles and a man in Atlanta, with the date April 4, 1988, displayed in the top right corner. The woman, seated in front of the Hollywood sign, and the man, wearing a light-colored suit and yellow glasses, are shown in separate frames labeled 'Los Angeles' and 'Atlanta' respectively. Both individuals are engaged in conversation, with the woman occasionally looking down and the man speaking animatedly. The background remains consistent, with the woman in front of the Hollywood sign and the man in a studio setting.
+Text:
+  [[That's exactly it. That. Is. Exactly. It.   Let's talk about some music!]]
+=======================================
+
+=======================================
+Start-End: 56 ~ 62
+Reward: 11.934523278668358
+Likes: 33 || 0.8274610094854546 
+Correlation:
+  Overall: 0.5808131018129692
+  Audio: 0.56 | No, it's all over.
+  Video: 0.16 | The video begins with a blurred transition showing a woman in Los Angeles and a man in Atlanta, with the date April 4, 1988, displayed in the top right corner. The woman, seated in front of the Hollywood sign, and the man, wearing a light-colored suit and yellow glasses, are shown in separate frames labeled 'Los Angeles' and 'Atlanta' respectively. Both individuals are engaged in conversation, with the woman occasionally looking down and the man speaking animatedly. The background remains consistent, with the woman in front of the Hollywood sign and the man in a studio setting.
+Text:
+  [[Interviewer: Tell us what you’re going to be doing on your next tour   JB: HELLO TED!!!!!]]
+=======================================
+
+=======================================
+Start-End: 62 ~ 64
+Reward: 3.9432569740059753
+Likes: 0 || 0.0 
+Correlation:
+  Overall: 0.9858142435014938
+  Audio: 0.98 | And where are you going?
+  Video: 0.13 | The video begins with a blurred transition showing a woman in Los Angeles and a man in Atlanta, with the date April 4, 1988, displayed in the top right corner. The woman, seated in front of the Hollywood sign, and the man, wearing a light-colored suit and yellow glasses, are shown in separate frames labeled 'Los Angeles' and 'Atlanta' respectively. Both individuals are engaged in conversation, with the woman occasionally looking down and the man speaking animatedly. The background remains consistent, with the woman in front of the Hollywood sign and the man in a studio setting.
+Text:
+  [[Rio de janeiro and São Paulo]]
+=======================================
+
+=======================================
+Start-End: 64 ~ 66
+Reward: 3.877943538901008
+Likes: 0 || 0.0 
+Correlation:
+  Overall: 0.969485884725252
+  Audio: 0.96 | Rio de Janeiro and São Paulo.
+  Video: 0.13 | The video begins with a blurred transition showing a woman in Los Angeles and a man in Atlanta, with the date April 4, 1988, displayed in the top right corner. The woman, seated in front of the Hollywood sign, and the man, wearing a light-colored suit and yellow glasses, are shown in separate frames labeled 'Los Angeles' and 'Atlanta' respectively. Both individuals are engaged in conversation, with the woman occasionally looking down and the man speaking animatedly. The background remains consistent, with the woman in front of the Hollywood sign and the man in a studio setting.
+Text:
+  [[Rio di Janeiro and SAN paulo]]
+=======================================
+
+=======================================
+Start-End: 66 ~ 70
+Reward: 7.328730162276308
+Likes: 102 || 0.9052719598742334 
+Correlation:
+  Overall: 0.4634552903474218
+  Audio: 0.46 | Brazil.
+  Video: 0.04 | The video begins with a blurred transition showing a woman in Los Angeles and a man in Atlanta, with the date April 4, 1988, displayed in the top right corner. The woman, seated in front of the Hollywood sign, and the man, wearing a light-colored suit and yellow glasses, are shown in separate frames labeled 'Los Angeles' and 'Atlanta' respectively. Both individuals are engaged in conversation, with the woman occasionally looking down and the man speaking animatedly. The background remains consistent, with the woman in front of the Hollywood sign and the man in a studio setting.
+Text:
+  [["Don't leave us James, you stay right there." 🤣]]
+=======================================
+
+=======================================
+Start-End: 70 ~ 74
+Reward: 10.232444725623356
+Likes: 41 || 0.8459269549003895 
+Correlation:
+  Overall: 0.8560921132527248
+  Audio: 0.86 | Aren't you concerned about that?
+  Video: 0.0 | The video begins with a blurred transition showing a woman in Los Angeles and a man in Atlanta, with the date April 4, 1988, displayed in the top right corner. The woman, seated in front of the Hollywood sign, and the man, wearing a light-colored suit and yellow glasses, are shown in separate frames labeled 'Los Angeles' and 'Atlanta' respectively. Both individuals are engaged in conversation, with the woman occasionally looking down and the man speaking animatedly. The background remains consistent, with the woman in front of the Hollywood sign and the man in a studio setting.
+Text:
+  [[I concerned, because there is nothing wrong lol]]
+=======================================
+
+=======================================
+Start-End: 74 ~ 78
+Reward: 9.289696527580354
+Likes: 335 || 0.9519403940179327 
+Correlation:
+  Overall: 0.6852418689385777
+  Audio: 0.68 | No, I'm concerned because there's nothing wrong.
+  Video: 0.09 | The video shows a man wearing a gray suit with a blue collared shirt and a patterned scarf, speaking while slightly moving his head. The background consists of a dimly lit room with multiple screens displaying blue visuals. The date 'April 4, 1988' is displayed in the top right corner of the screen, and the CNN logo is visible in the bottom right corner.
+Text:
+  [["I'm concerned cause thiers nothing wrong" 😂😂😂]]
+=======================================
+
+=======================================
+Start-End: 78 ~ 84
+Reward: 14.208588047144836
+Likes: 73 || 0.8864819826280496 
+Correlation:
+  Overall: 0.7408080126147116
+  Audio: 0.74 | And what are you going to say to your fans when they ask you some questions about it?
+  Video: 0.08 | The video shows a man wearing a gray suit with a blue collared shirt and a patterned scarf, speaking while slightly moving his head. The background consists of a dimly lit room with multiple screens displaying blue visuals. The date 'April 4, 1988' is displayed in the top right corner of the screen, and the CNN logo is visible in the bottom right corner.
+Text:
+  [[What are you gonna say to your fans when they ask you some questions about it?  I'M GONNA SAY I FEEL GOOOOOOOOOOOOOOD!!!!!!!!!!!]]
+=======================================
+
+=======================================
+Start-End: 84 ~ 86
+Reward: 5.279299580298495
+Likes: 16 || 0.7496313082948992 
+Correlation:
+  Overall: 0.9450092409271743
+  Audio: 0.94 | Papa's got a brand new bag.
+  Video: 0.06 | The video shows a split-screen broadcast from April 4, 1988, with the left side displaying a woman in Los Angeles and the right side showing a man in Atlanta. The woman, wearing a light blue top, is speaking and smiling. The man, dressed in a light-colored suit and yellow sunglasses, is also speaking and occasionally turns his head to look at the woman. The background on the left side shows a cityscape with a prominent sign, while the right side shows an indoor studio setting.
+Text:
+  [[Papa's got a brand new bag!]]
+=======================================
+
+=======================================
+Start-End: 86 ~ 91
+Reward: 10.898409633620997
+Likes: 43 || 0.8497238551109604 
+Correlation:
+  Overall: 0.6649790358066194
+  Audio: 0.65 | It's a man's world.
+  Video: 0.15 | A man wearing a gray suit with a blue shirt and a scarf around his neck is seen speaking while looking to his right. He then stands up, adjusts his position, and sits back down. The man continues to speak while looking forward. The background shows a studio setting with multiple screens displaying various images.
+Text:
+  [["This is a MANS World!!"   'Yes, thank you for reminding us of that']]
+=======================================
+
+=======================================
+Start-End: 91 ~ 97
+Reward: 11.460065277024219
+Likes: 311 || 0.9497479804697753 
+Correlation:
+  Overall: 0.48013144951713055
+  Audio: 0.42 | That's very interesting.
+  Video: 0.23 | A man wearing a gray suit with a blue shirt and a scarf around his neck is seen speaking while looking to his right. He then stands up, adjusts his position, and sits back down. The man continues to speak while looking forward. The background shows a studio setting with multiple screens displaying various images.
+Text:
+  [[Interviewer: "It sounds to me like you're not troubled by this at all" James: "This is a maaaan's world!"   Dark.]]
+=======================================
+
+=======================================
+Start-End: 97 ~ 102
+Reward: 8.44515344334644
+Likes: 84 || 0.89474059500551 
+Correlation:
+  Overall: 0.39714504683188895
+  Audio: 0.21 | Well, tell us a little bit about what you're going to be doing on this tour.
+  Video: 0.34 | The video shows a split-screen broadcast from April 4, 1988, with the left side displaying a woman in Los Angeles and the right side showing a man in Atlanta. The woman, initially looking down, raises her head and begins speaking. The man, wearing a light-colored suit and yellow-tinted glasses, also starts speaking and occasionally turns his head. The background on the left side shows the Hollywood sign, while the right side shows an indoor studio setting.
+Text:
+  [[This is the greatest interview of all time. LIVIN IN AMERICA! JAM!]]
+=======================================
+
+=======================================
+Start-End: 102 ~ 105
+Reward: 5.81105440977225
+Likes: 1200 || 0.9794539206779445 
+Correlation:
+  Overall: 0.4787821079564028
+  Audio: 0.48 | What are you going to be doing on this tour?
+  Video: 0.02 | The video shows a split-screen broadcast from April 4, 1988, with the left side displaying a woman in Los Angeles and the right side showing a man in Atlanta. The woman, initially looking down, raises her head and begins speaking. The man, wearing a light-colored suit and yellow-tinted glasses, also starts speaking and occasionally turns his head. The background on the left side shows the Hollywood sign, while the right side shows an indoor studio setting.
+Text:
+  [[Papas snorted an whole new bag]]
+=======================================
+
+=======================================
+Start-End: 105 ~ 107
+Reward: 3.7448530612664865
+Likes: 2 || 0.29002058176102813 
+Correlation:
+  Overall: 0.7912029744361075
+  Audio: 0.79 | I live in America.
+  Video: 0.1 | The video shows a split-screen broadcast from April 4, 1988, with the left side displaying a woman in Los Angeles and the right side showing a man in Atlanta. The woman, initially looking down, raises her head and begins speaking. The man, wearing a light-colored suit and yellow-tinted glasses, also starts speaking and occasionally turns his head. The background on the left side shows the Hollywood sign, while the right side shows an indoor studio setting.
+Text:
+  [[Sex Machineeeee]]
+=======================================
+
+=======================================
+Start-End: 107 ~ 110
+Reward: 6.4289783023835545
+Likes: 53 || 0.8653878421424718 
+Correlation:
+  Overall: 0.6388024626593566
+  Audio: 0.61 | Sex machine, get up off of that thing.
+  Video: 0.2 | The man, dressed in a gray suit with a blue shirt and a patterned scarf, is in a studio setting with multiple screens in the background. He begins speaking while looking to his left. He then turns his head to face the camera directly. As he continues to speak, he gradually starts smiling.
+Text:
+  [[I look good, I smell good, I FEEL GOOD]]
+=======================================
+
+=======================================
+Start-End: 110 ~ 113
+Reward: 5.541279668260492
+Likes: 50 || 0.8611819233171083 
+Correlation:
+  Overall: 0.4929556497181944
+  Audio: 0.47 | Jam.
+  Video: 0.16 | The man, dressed in a gray suit with a blue shirt and a patterned scarf, is in a studio setting with multiple screens in the background. He begins speaking while looking to his left. He then turns his head to face the camera directly. As he continues to speak, he gradually starts smiling.
+Text:
+  [["Hello TED!" I almost died. "JAM!" lmao]]
+=======================================
+
+=======================================
+Start-End: 113 ~ 117
+Reward: 7.637616203668589
+Likes: 4000 || 0.9936123218865254 
+Correlation:
+  Overall: 0.45789586451531095
+  Audio: 0.46 | Now, I understand that you haven't already.
+  Video: 0.01 | The man, dressed in a gray suit with a blue shirt and a patterned scarf, is in a studio setting with multiple screens in the background. He begins speaking while looking to his left. He then turns his head to face the camera directly. As he continues to speak, he gradually starts smiling.
+Text:
+  [[James was higher than the international space station]]
+=======================================
+
+=======================================
+Start-End: 117 ~ 122
+Reward: 8.851731742736833
+Likes: 870 || 0.9740409965228757 
+Correlation:
+  Overall: 0.3981526760122454
+  Audio: 0.02 | I understand you already have started divorce proceedings.
+  Video: 0.4 | The video begins with a blurred image that gradually becomes clear, revealing a split-screen broadcast from Los Angeles and Atlanta on April 4, 1988. The woman on the left, from Los Angeles, is speaking while the man on the right, from Atlanta, listens. The man then starts laughing and gestures with his hand, turning his head to the right.
+Text:
+  [[I bet the cameraman was laughing his ass off recording James Brown]]
+=======================================
+
+=======================================
+Start-End: 122 ~ 127
+Reward: 10.78724021122158
+Likes: 160 || 0.9261760110984905 
+Correlation:
+  Overall: 0.6156360155729127
+  Audio: 0.57 | I'm single.
+  Video: 0.23 | The man, dressed in a gray suit with a blue shirt and a patterned scarf, turns his head to face the camera. He then uses his right hand to adjust his hair while speaking. Afterward, he turns his head to the left and right, continuing to speak. He repeats the action of adjusting his hair with his right hand. Finally, he looks directly at the camera and smiles. The background shows a studio setting with multiple screens displaying blue visuals.
+Text:
+  [[I’m single and I wanna mingle 😂  Best celebrity interview ever]]
+=======================================
+
+=======================================
+Start-End: 127 ~ 129
+Reward: 3.013390468766251
+Likes: 36 || 0.8350986221299161 
+Correlation:
+  Overall: 0.3357983061266047
+  Audio: 0.34 | Now, the women love you when you get out there.
+  Video: 0.0 | The man, dressed in a gray suit with a blue shirt and a patterned scarf, turns his head to face the camera. He then uses his right hand to adjust his hair while speaking. Afterward, he turns his head to the left and right, continuing to speak. He repeats the action of adjusting his hair with his right hand. Finally, he looks directly at the camera and smiles. The background shows a studio setting with multiple screens displaying blue visuals.
+Text:
+  [[Yeah that's tragic]]
+=======================================
+
+=======================================
+Start-End: 129 ~ 135
+Reward: 12.107337173380724
+Likes: 24 || 0.7965752150944605 
+Correlation:
+  Overall: 0.6106571569011635
+  Audio: 0.6 | What did you say?
+  Video: 0.13 | The man, dressed in a gray suit with a blue shirt and a patterned scarf, turns his head to face the camera. He then uses his right hand to adjust his hair while speaking. Afterward, he turns his head to the left and right, continuing to speak. He repeats the action of adjusting his hair with his right hand. Finally, he looks directly at the camera and smiles. The background shows a studio setting with multiple screens displaying blue visuals.
+Text:
+  [["The women love you when you get out there, why is that?" "What'd you say" "The women love you when you get out there" "Why is that ladies" "Idk im asking you" Lmao]]
+=======================================
+
+=======================================
+Start-End: 135 ~ 136
+Reward: 1.9974579009099378
+Likes: 0 || 0.0 
+Correlation:
+  Overall: 0.9987289504549689
+  Audio: 1.0 | Well, I'm asking you.
+  Video: 0.02 | The man, dressed in a gray suit with a blue shirt and a patterned scarf, turns his head to face the camera. He then uses his right hand to adjust his hair while speaking. Afterward, he turns his head to the left and right, continuing to speak. He repeats the action of adjusting his hair with his right hand. Finally, he looks directly at the camera and smiles. The background shows a studio setting with multiple screens displaying blue visuals.
+Text:
+  [[Huh?]]
+=======================================
+
+=======================================
+Start-End: 136 ~ 141
+Reward: 11.004562201868797
+Likes: 14 || 0.7320260124132649 
+Correlation:
+  Overall: 0.7344432139802473
+  Audio: 0.73 | Huh?
+  Video: 0.1 | The man, dressed in a gray suit with a blue shirt and a patterned scarf, turns his head to face the camera. He then uses his right hand to adjust his hair while speaking. Afterward, he turns his head to the left and right, continuing to speak. He repeats the action of adjusting his hair with his right hand. Finally, he looks directly at the camera and smiles. The background shows a studio setting with multiple screens displaying blue visuals.
+Text:
+  [[Cause I look good, I smell good, I feel good and make love good!! XD]]
+=======================================
+
+=======================================
+Start-End: 141 ~ 143
+Reward: 5.191756543754029
+Likes: 42 || 0.8478590267081088 
+Correlation:
+  Overall: 0.8740096225844529
+  Audio: 0.87 | And you sing good.
+  Video: 0.07 | The man, dressed in a gray suit with a blue shirt and a patterned scarf, turns his head to face the camera. He then uses his right hand to adjust his hair while speaking. Afterward, he turns his head to the left and right, continuing to speak. He repeats the action of adjusting his hair with his right hand. Finally, he looks directly at the camera and smiles. The background shows a studio setting with multiple screens displaying blue visuals.
+Text:
+  [[And make love good 😂😂😂]]
+=======================================
+
+=======================================
+Start-End: 143 ~ 147
+Reward: 6.715169684331158
+Likes: 931 || 0.9752532609886887 
+Correlation:
+  Overall: 0.3517695800470505
+  Audio: 0.1 | Oh.
+  Video: 0.34 | The man, dressed in a gray suit with a blue shirt and a patterned scarf, turns his head to face the camera. He then uses his right hand to adjust his hair while speaking. Afterward, he turns his head to the left and right, continuing to speak. He repeats the action of adjusting his hair with his right hand. Finally, he looks directly at the camera and smiles. The background shows a studio setting with multiple screens displaying blue visuals.
+Text:
+  [[Not bizarre, he's genius. He controlled the interview.]]
+=======================================
+
+=======================================
+Start-End: 147 ~ 151
+Reward: 6.959887959447929
+Likes: 1200 || 0.9794539206779445 
+Correlation:
+  Overall: 0.38025903459201893
+  Audio: 0.23 | We don't have to ask anybody else.
+  Video: 0.3 | The man, dressed in a gray suit with a blue shirt and a patterned scarf, turns his head to face the camera. He then uses his right hand to adjust his hair while speaking. Afterward, he turns his head to the left and right, continuing to speak. He repeats the action of adjusting his hair with his right hand. Finally, he looks directly at the camera and smiles. The background shows a studio setting with multiple screens displaying blue visuals.
+Text:
+  [[This interview was sponsored by Pablo Escobar]]
+=======================================
+
+=======================================
+Start-End: 151 ~ 155
+Reward: 8.590627861967011
+Likes: 27 || 0.8085609329400497 
+Correlation:
+  Overall: 0.6695480162758516
+  Audio: 0.65 | Now, you're involved in publishing a gospel magazine.
+  Video: 0.16 | The video shows a split-screen broadcast with a woman in Los Angeles and a man in Atlanta. The woman, wearing a light blue top, initially looks down and then raises her head to speak. The man, dressed in a light-colored suit and yellow glasses, opens his mouth wide and then begins to speak. The background includes the Hollywood sign for the woman and an indoor studio setting for the man. The date 'April 4, 1988' is displayed in the top right corner, and the 'CNN' logo is visible in the bottom right corner.
+Text:
+  [[Perfect timing on bringing up the gospel magazine]]
+=======================================
+
+=======================================
+Start-End: 155 ~ 158
+Reward: 6.8278212358632135
+Likes: 35 || 0.83266124204204 
+Correlation:
+  Overall: 0.7216395849561823
+  Audio: 0.72 | Tell us a little bit about that.
+  Video: 0.07 | The video shows a split-screen broadcast with a woman in Los Angeles and a man in Atlanta. The woman, wearing a light blue top, initially looks down and then raises her head to speak. The man, dressed in a light-colored suit and yellow glasses, opens his mouth wide and then begins to speak. The background includes the Hollywood sign for the woman and an indoor studio setting for the man. The date 'April 4, 1988' is displayed in the top right corner, and the 'CNN' logo is visible in the bottom right corner.
+Text:
+  [[Second coming.  What a commercial😂]]
+=======================================
+
+=======================================
+Start-End: 158 ~ 164
+Reward: 11.089816522269357
+Likes: 528 || 0.963757756440587 
+Correlation:
+  Overall: 0.44227249863548623
+  Audio: 0.13 | It's out of Augusta, Georgia, the ankle.
+  Video: 0.42 | The video begins with a split-screen showing two news anchors, one in Los Angeles and one in Atlanta, with the date April 4, 1988, displayed in the top right corner. The screen then focuses on a man wearing a gray suit with a blue collar and a patterned shirt, who is speaking directly to the camera. The man continues to speak, and the background shows a studio setting with multiple screens. The video concludes with the split-screen returning, showing the two news anchors again.
+Text:
+  [[someone give that news anchor an award for being able to keep the interview  going....."every once in a while we forget" we got that straight from the source" just classic, had me laughing so much my sides hurt]]
+=======================================
+
+=======================================
+Start-End: 164 ~ 169
+Reward: 11.411087964274454
+Likes: 362 || 0.9541434092778176 
+Correlation:
+  Overall: 0.6640370917885366
+  Audio: 0.62 | Joseph P. Young is the editor.
+  Video: 0.24 | The video begins with a split-screen showing two news anchors, one in Los Angeles and one in Atlanta, with the date April 4, 1988, displayed in the top right corner. The screen then focuses on a man wearing a gray suit with a blue collar and a patterned shirt, who is speaking directly to the camera. The man continues to speak, and the background shows a studio setting with multiple screens. The video concludes with the split-screen returning, showing the two news anchors again.
+Text:
+  [[This interview is one of the main reasons why James Brown is the G.O.A.T.]]
+=======================================
+
+=======================================
+Start-End: 169 ~ 175
+Reward: 12.05356497735384
+Likes: 80 || 0.8919336409246278 
+Correlation:
+  Overall: 0.5584969276505061
+  Audio: 0.53 | The second coming.
+  Video: 0.18 | The video begins with a split-screen showing two news anchors, one in Los Angeles and one in Atlanta, with the date April 4, 1988, displayed in the top right corner. The screen then focuses on a man wearing a gray suit with a blue collar and a patterned shirt, who is speaking directly to the camera. The man continues to speak, and the background shows a studio setting with multiple screens. The video concludes with the split-screen returning, showing the two news anchors again.
+Text:
+  [[Eyes as wide as dinner plates:  "Um, uh we got the pope, and uh, we got the Wil..the Williasmsr..brothers....."]]
+=======================================
+
+=======================================
+Start-End: 175 ~ 179
+Reward: 8.085559768629913
+Likes: 223 || 0.9389036906680751 
+Correlation:
+  Overall: 0.5412431257447017
+  Audio: 0.49 | And I believe the Williams brothers.
+  Video: 0.23 | The video begins with a split-screen showing two news anchors, one in Los Angeles and one in Atlanta, with the date April 4, 1988, displayed in the top right corner. The screen then focuses on a man wearing a gray suit with a blue collar and a patterned shirt, who is speaking directly to the camera. The man continues to speak, and the background shows a studio setting with multiple screens. The video concludes with the split-screen returning, showing the two news anchors again.
+Text:
+  [[Micheal Jackson and Prince's biggest idol ...]]
+=======================================
+
+=======================================
+Start-End: 179 ~ 185
+Reward: 10.888789029114028
+Likes: 2600 || 0.9894687243299988 
+Correlation:
+  Overall: 0.41266472359450296
+  Audio: 0.34 | And next week we're going to have Reverend Alashop,
+  Video: 0.23 | The video begins with a split-screen showing two news anchors, one in Los Angeles and one in Atlanta, with the date April 4, 1988, displayed in the top right corner. The screen then focuses on a man wearing a gray suit with a blue collar and a patterned shirt, who is speaking directly to the camera. The man continues to speak, and the background shows a studio setting with multiple screens. The video concludes with the split-screen returning, showing the two news anchors again.
+Text:
+  [[He got himself together  REAL QUICK when they asked him about that gospel magazine lolol]]
+=======================================
+
+=======================================
+Start-End: 185 ~ 191
+Reward: 15.310038911751871
+Likes: 194 || 0.9338125274447494 
+Correlation:
+  Overall: 0.808930312256948
+  Audio: 0.78 | And we'll be doing a lot of good things.
+  Video: 0.2 | The video begins with a split-screen showing two news anchors, one in Los Angeles and one in Atlanta, with the date April 4, 1988, displayed in the top right corner. The screen then focuses on a man wearing a gray suit with a blue collar and a patterned shirt, who is speaking directly to the camera. The man continues to speak, and the background shows a studio setting with multiple screens. The video concludes with the split-screen returning, showing the two news anchors again.
+Text:
+  [[Until it got to "hopefully we'll get Brother Ted Turner on the cover", that is! 😂😁]]
+=======================================
+
+=======================================
+Start-End: 191 ~ 197
+Reward: 12.104741463500861
+Likes: 138 || 0.9198070158309649 
+Correlation:
+  Overall: 0.548824947376256
+  Audio: 0.47 | Ted, what are you at?
+  Video: 0.29 | The video begins with a split-screen showing two news anchors, one in Los Angeles and one in Atlanta, with the date April 4, 1988, displayed in the top right corner. The screen then focuses on a man wearing a gray suit with a blue collar and a patterned shirt, who is speaking directly to the camera. The man continues to speak, and the background shows a studio setting with multiple screens. The video concludes with the split-screen returning, showing the two news anchors again.
+Text:
+  [[If I'm having a bad day or feel depressed I can watch this interview and instantly feel better. Thanks James Brown. You were truly awesome and most definitely one of a kind.]]
+=======================================
+
+=======================================
+Start-End: 197 ~ 200
+Reward: 5.1967613611502586
+Likes: 541 || 0.9643187118196633 
+Correlation:
+  Overall: 0.38396753761521135
+  Audio: 0.13 | I've got you.
+  Video: 0.36 | The video shows a split-screen broadcast from April 4, 1988, with the left side displaying a woman in Los Angeles and the right side showing a man in Atlanta. The woman, initially looking down, gradually raises her head and begins speaking. The man, wearing a light-colored suit and yellow-tinted glasses, also starts speaking. Both individuals continue their conversation, with the woman smiling towards the end.
+Text:
+  [[1988: A man's world 2018: A trans world 😕]]
+=======================================
+
+=======================================
+Start-End: 200 ~ 206
+Reward: 10.839194854405996
+Likes: 2100 || 0.9870683163017195 
+Correlation:
+  Overall: 0.4097320797163066
+  Audio: 0.23 | about the
+  Video: 0.34 | The video shows a split-screen broadcast from April 4, 1988, with the left side displaying a woman in Los Angeles and the right side showing a man in Atlanta. The woman, initially looking down, gradually raises her head and begins speaking. The man, wearing a light-colored suit and yellow-tinted glasses, also starts speaking. Both individuals continue their conversation, with the woman smiling towards the end.
+Text:
+  [[Reporter: How did all of this trouble begin?  James Brown: Living in America ... Ain't that the truth]]
+=======================================
+
+=======================================
+Start-End: 206 ~ 207
+Reward: 2.515864986224832
+Likes: 7 || 0.6197219969979613 
+Correlation:
+  Overall: 0.9480714946134355
+  Audio: 0.95 | I love you. I love America. I love everybody.
+  Video: 0.07 | The video begins with a split-screen showing two people, one in Los Angeles and one in Atlanta, with the date April 4, 1988, displayed in the top right corner. The screen then transitions to a man wearing a gray suit with a blue collar and a patterned scarf, who is speaking directly to the camera. The background is a studio setting with multiple screens displaying blue visuals.
+Text:
+  [[I FEEL GOOD]]
+=======================================
+
+=======================================
+Start-End: 207 ~ 209
+Reward: 3.781735666778462
+Likes: 3800 || 0.9931633534145589 
+Correlation:
+  Overall: 0.44885223998733603
+  Audio: 0.44 | I feel good.
+  Video: 0.07 | The video begins with a split-screen showing two people, one in Los Angeles and one in Atlanta, with the date April 4, 1988, displayed in the top right corner. The screen then transitions to a man wearing a gray suit with a blue collar and a patterned scarf, who is speaking directly to the camera. The background is a studio setting with multiple screens displaying blue visuals.
+Text:
+  [[I wanna be that happy.]]
+=======================================
+
+=======================================
+Start-End: 209 ~ 215
+Reward: 11.702557127326251
+Likes: 1800 || 0.9851737073457829 
+Correlation:
+  Overall: 0.4826262402709628
+  Audio: 0.48 | It sounds to me as though you're not troubled by any of this at all.
+  Video: 0.0 | 
+Text:
+  [["It sounds to me you're not troubled by any of this." "This is a maaaaaan's world!"  LMAO]]
+=======================================
+
+=======================================
+Start-End: 215 ~ 218
+Reward: 6.274397987524738
+Likes: 4 || 0.49687248109697707 
+Correlation:
+  Overall: 0.7972967573723012
+  Audio: 0.8 | Thanks for reminding us of that.
+  Video: 0.0 | 
+Text:
+  [["Every once in a while we forget" 😳😆]]
+=======================================
+
+=======================================
+Start-End: 218 ~ 224
+Reward: 11.153186338282877
+Likes: 282 || 0.9467371608657799 
+Correlation:
+  Overall: 0.45606361442401655
+  Audio: 0.46 | But we remembered again.
+  Video: 0.0 | 
+Text:
+  [[Yes, but I love the bit at the end... "Thank you for reminding us of that....every now and then we almost forget..." LOL!!]]
+=======================================
+

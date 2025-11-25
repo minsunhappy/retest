@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>REMBLE - "TED TALK" (OFFICIAL MUSIC VIDEO)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* 기본 스타일 */
+    :root {
+      --bg: #ffffff;
+      --video-bg: #000;
+      --accent: #ff0000;
+      --text: #fff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background-color: #fff; /* 흰색 배경 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .video-title {
+      width: 800px;
+      margin-top: 40px;
+      margin-bottom: 5px;
+      text-align: left;
+      font-size: 20px;
+      font-weight: 600;
+      color: #000;
+      padding: 0;
+      line-height: 1.4;
+    }
+
+    .video-container {
+      width: 800px;
+      margin-top: 20px;
+      position: relative;
+      background-color: #000;
+      overflow: hidden;
+      border-radius: 20px; /* 유튜브 느낌의 둥근 모서리 */
+      transition: all 0.3s ease;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 12px; /* 비디오 둥근 모서리 */
+    }
+
+    /* 기본 비디오 컨트롤 완전히 숨기기 */
+    video::-webkit-media-controls-panel { display: none !important; }
+    video::-webkit-media-controls-play-button { display: none !important; }
+    video::-webkit-media-controls-start-playback-button { display: none !important; }
+    video::-moz-media-controls { display: none !important; }
+    video::--ms-media-controls { display: none !important; }
+
+    /* 커스텀 비디오 컨트롤 */
+    .custom-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.8);
+      padding: 4px 15px 4px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 4;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .video-container:hover .custom-controls { opacity: 1; }
+
+    .progress-container {
+      width: 100%;
+      height: 3px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      margin-bottom: 6px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #ff0000;
+      border-radius: 3px;
+      width: 0%;
+      position: relative;
+      transition: width 0.1s ease;
+    }
+
+    .progress-handle {
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background: #ff0000;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .progress-container:hover .progress-handle { opacity: 1; }
+
+    .controls-bottom {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .control-button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 3px;
+      transition: background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .control-button:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    .control-button svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    .time-display {
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* 단무쿠 댓글 */
+    .danmaku-comment {
+      position: absolute;
+      color: white;
+      font-size: 18px;
+      font-weight: normal;
+      white-space: nowrap;
+      z-index: 10;
+      pointer-events: none;
+      text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+    }
+
+    .comment-text {
+      font-size: 18px;
+      color: white;
+      font-weight: normal;
+    }
+
+
+  </style>
+</head>
+  <body>
+    <!-- 제목을 영상 위에 배치 -->
+    <div class="video-container" id="video-container">
+    <video id="video-player" preload="metadata">
+      <!-- 템플릿 엔진이 주입하거나 아래 src로 대체하세요 -->
+      <source src="../video/biG3iUCrHaQ.mp4" type="video/mp4" />
+      브라우저가 video 태그를 지원하지 않습니다.
+    </video>
+
+    <!-- 커스텀 비디오 컨트롤 -->
+    <div class="custom-controls">
+      <div class="progress-container" id="progress-container" aria-label="progress">
+        <div class="progress-bar" id="progress-bar">
+          <div class="progress-handle"></div>
+        </div>
+      </div>
+      <div class="controls-bottom">
+        <button class="control-button" id="play-pause-btn" aria-label="play/pause">
+          <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="pause-icon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <div class="time-display" id="time-display">0:00 / 0:00</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== 유틸 =====
+    function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
+    function formatTime(sec){ const m = Math.floor(sec/60); const s = Math.floor(sec%60).toString().padStart(2,'0'); return m + ':' + s; }
+    
+    // 문자열을 해시값으로 변환 (일관된 랜덤 위치 생성용)
+    function hashString(str) {
+      let hash = 0;
+      if (str.length === 0) return hash;
+      for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // 32bit 정수로 변환
+      }
+      return Math.abs(hash);
+    }
+
+    // 서버에서 주입되는 단무쿠 댓글 리스트 예: [{ start: 1.2, text: "하이" }, ...]
+    // 템플릿이 없다면 아래 fallback 사용
+    var danmakuComments = (typeof [{"start": 0, "text": "Talk", "correlation": 0.6202421736707809}, {"start": 2, "text": "A TED TALK WITH A MURDEROUS RHYME SCHEME! 🚀", "correlation": 0.9837519523389912}, {"start": 5, "text": "WEEZY OUTTA HERE", "correlation": 0.4931588902451753}, {"start": 7, "text": "he way ahead of his time", "correlation": 0.33844707492401926}, {"start": 10, "text": "Don’t Cry No More Momma", "correlation": 0.8586869223544686}, {"start": 11, "text": "Here look it’s a 10 piece", "correlation": 0.4681618089940549}, {"start": 12, "text": "\"I just want flawless diamonds caucasian like white people\" DAWG THIS NIGGA IS FLOWING", "correlation": 0.6568414715504918}, {"start": 13, "text": "I just want flawless diamonds, Caucasian, like white people!", "correlation": 0.810484241137244}, {"start": 15, "text": "Send him 223s and watch him go fight demons 😈🤷🏾‍♂️", "correlation": 0.5468472315623635}, {"start": 20, "text": "2021 is the year i see a million", "correlation": 0.964786518474673}, {"start": 21, "text": "It's 2025", "correlation": 0.5687289754674373}, {"start": 23, "text": "I might just have some kids to play with my brothers children", "correlation": 0.9483059627629801}, {"start": 24, "text": "I might just have some babies to play with my brothers children lol sick asf", "correlation": 0.7250677997622755}, {"start": 26, "text": "I know its just a bar. But please dont sign major. They will shelf your ass! You are God’s soldier. No demon.", "correlation": 0.4015927336099134}, {"start": 27, "text": "I was with you until you Said what's independent????...nigga everything....", "correlation": 0.7281230290115972}, {"start": 28, "text": "Cuzzo the co defendant part hit frfr🤦🏾‍♂️", "correlation": 0.386878338355561}, {"start": 29, "text": "Remember when I wasn’t anything but a Co defendant 😞", "correlation": 0.8949881789150815}, {"start": 30, "text": "“Remember when I wasn’t anything but a co defendant” felt that 😔", "correlation": 0.7874209243624369}, {"start": 31, "text": "They're so specific", "correlation": 0.3830373384754882}, {"start": 34, "text": "Ever since that draco   Cosigned-it flows with rivers", "correlation": 0.7748553950771218}, {"start": 36, "text": "Michael Phelps in unison with controlled swimmers", "correlation": 1.0}, {"start": 42, "text": "I seen people at parties Rob the coldest Strippers 🔥🔥", "correlation": 0.7002698035235754}, {"start": 43, "text": "Hold up wait a minute Y’all thought I was finished!?? 🔥🔥🔥🔥🔥🔥👿", "correlation": 0.7442041192297135}, {"start": 44, "text": "This you", "correlation": 0.3263663525437968}, {"start": 45, "text": "\"Killen any opp and anyone hes with\"", "correlation": 0.5697730809756973}, {"start": 47, "text": "\"rearrange the fitted\" 🧢 🥶", "correlation": 0.5970903367516214}, {"start": 48, "text": "A bakery of biscuits, K's and pistols wit extensions, We're not exchanging mittens🔥🔥🔥🔥", "correlation": 0.7253097321954359}, {"start": 50, "text": "bars", "correlation": 0.32579743694631286}, {"start": 51, "text": "We are not exchanging mittens", "correlation": 0.43009463469480397}, {"start": 52, "text": "\"You're about to experience floyd Mayweather with good penmanship\" on foe he goin", "correlation": 0.6581283186004342}, {"start": 53, "text": "Lmao nobody gonna notice the surfer boys hitting that fighting dance", "correlation": 0.5050520637380521}, {"start": 54, "text": "@Westblader  Floyd Mayweather is illiterate lmao", "correlation": 0.41094579935977554}, {"start": 55, "text": "Double entandras mixed with glocks its ridiculous 😭😭😭", "correlation": 0.3585129019305948}, {"start": 56, "text": "Fades at the beach 😂", "correlation": 0.38605879339346777}, {"start": 57, "text": "on't cry no more momma, here look, it's a ten piece I just want flawless diamonds, Caucasion like white people Send him .223's and watch him go fight demons Always keep an extra gleek, for the times that you might need it Two thousand twenty one is the year that I see a million I might just have some kids to play with my brother's children I might just sign a deal with the major, what's independent? Remember when I wasn't anything but a co-defendant Folks yelling out, \"it's Remble, \" their so specific Ever since that Drakeo cosign he flows with rivers Michael Phelps in unison with controlled swimmers I seen people robbed at parties, the coldest strippers But hold on wait a minute, y'all thought I was finished? Killin' any opp and plus the ones that's hangin' with em' Rearrange a fitted, a bakery of biscuits K's and pistols with extensions, we are not exchanging mittens You're about to witness Floyd Mayweather with good penmanship Double entendres mixed with Glocks, it's ridiculous If I get a Grammy, I'm Kanye West, I'll take a piss on it I had a problem, then bought a chop, and put a stick on it He had a problem, I put my Glock away and spit on him Killing is common, it's just so sad his kids depend on him We seen his chain and it was just swinging like a pendulum I'm snatching his chain, and I'm scaring people out their Timberlands Stipped him for everything, then we men in black, just memories The way we just did him, his friends will wonder what he did to me We really have everything, from the cash to the artilleries My opps turn to fans, it's like they don't even plan on killing me It's Remble, thanks for having me People may attack you, criticize you, or ignore you They can crumple you up with their words Spit you out, or even walk all over you But remember, whatever they do or say You will always keep your value", "correlation": 0.4540493644210055}, {"start": 58, "text": "“If I get Grammy I’m Kanye west I’ll take a piss on it”…..", "correlation": 0.9029720239482992}, {"start": 60, "text": "I had a problem got a chop and put a stick on it", "correlation": 0.9033257915336992}, {"start": 63, "text": "What he say... He had a problem... I put my Glock away an SPIT ON HIM..", "correlation": 0.6527804026721317}, {"start": 65, "text": "Killing is common it's just so sad his kids depend on him.", "correlation": 0.9774145075312077}, {"start": 66, "text": "The surfurs that are dancing with them 🤣🤣🤣", "correlation": 0.5056342989784183}, {"start": 67, "text": "no one talking about random surfers at 1:07", "correlation": 0.3805882560508136}, {"start": 68, "text": "I’m just trying to figure out what the beat did to him", "correlation": 0.4113539639072656}, {"start": 71, "text": "my nigga snappin on the beach", "correlation": 0.4866338671673008}, {"start": 73, "text": "We men in black we memories fuckkkkkkkking guyyyyy", "correlation": 0.5066705854716465}, {"start": 74, "text": "Stripped him for everything then we men in blacked his memories 😳", "correlation": 0.861809963821752}, {"start": 76, "text": "The way we just did him his friends wondering what he did to me 🤣🤣", "correlation": 0.755797758327091}, {"start": 77, "text": "1:17 you all are African Americans and… mark but we rockin with mark cause marks rockin with us 😂😂😂", "correlation": 0.3087489031635652}, {"start": 78, "text": "“We really have everything from the cash to the artillery”🔥🔥🔥", "correlation": 0.6057331549884071}, {"start": 81, "text": "My opps turns to fans it's like they don't even plan on killing me", "correlation": 0.6070267925893801}, {"start": 83, "text": "“My ops turned a fan like they don’t even plan on killing me” over your head boy sheeeeeesh", "correlation": 0.48078501728388545}, {"start": 84, "text": "Rumble in my top 5🔥", "correlation": 0.5151161360657693}, {"start": 90, "text": "He doesn't diss opps, he articulately in a soft spoken manner and verbally annihilate his adversaries", "correlation": 0.3843583097340893}, {"start": 100, "text": "ALWAYS KNOW YOUR WORTH 🥇", "correlation": 0.549222800423142}, {"start": 109, "text": "Salute", "correlation": 0.3474752330127806}, {"start": 110, "text": "Thank you", "correlation": 0.6449950336137891}, {"start": 111, "text": "Who are the white boys that join in the video that's shit had me dead like where did they come from😂?", "correlation": 0.3593716018150069}, {"start": 120, "text": "Damn thought this was another gta music video", "correlation": 0.31890000146230646}] !== 'undefined' ? [{"start": 0, "text": "Talk", "correlation": 0.6202421736707809}, {"start": 2, "text": "A TED TALK WITH A MURDEROUS RHYME SCHEME! 🚀", "correlation": 0.9837519523389912}, {"start": 5, "text": "WEEZY OUTTA HERE", "correlation": 0.4931588902451753}, {"start": 7, "text": "he way ahead of his time", "correlation": 0.33844707492401926}, {"start": 10, "text": "Don’t Cry No More Momma", "correlation": 0.8586869223544686}, {"start": 11, "text": "Here look it’s a 10 piece", "correlation": 0.4681618089940549}, {"start": 12, "text": "\"I just want flawless diamonds caucasian like white people\" DAWG THIS NIGGA IS FLOWING", "correlation": 0.6568414715504918}, {"start": 13, "text": "I just want flawless diamonds, Caucasian, like white people!", "correlation": 0.810484241137244}, {"start": 15, "text": "Send him 223s and watch him go fight demons 😈🤷🏾‍♂️", "correlation": 0.5468472315623635}, {"start": 20, "text": "2021 is the year i see a million", "correlation": 0.964786518474673}, {"start": 21, "text": "It's 2025", "correlation": 0.5687289754674373}, {"start": 23, "text": "I might just have some kids to play with my brothers children", "correlation": 0.9483059627629801}, {"start": 24, "text": "I might just have some babies to play with my brothers children lol sick asf", "correlation": 0.7250677997622755}, {"start": 26, "text": "I know its just a bar. But please dont sign major. They will shelf your ass! You are God’s soldier. No demon.", "correlation": 0.4015927336099134}, {"start": 27, "text": "I was with you until you Said what's independent????...nigga everything....", "correlation": 0.7281230290115972}, {"start": 28, "text": "Cuzzo the co defendant part hit frfr🤦🏾‍♂️", "correlation": 0.386878338355561}, {"start": 29, "text": "Remember when I wasn’t anything but a Co defendant 😞", "correlation": 0.8949881789150815}, {"start": 30, "text": "“Remember when I wasn’t anything but a co defendant” felt that 😔", "correlation": 0.7874209243624369}, {"start": 31, "text": "They're so specific", "correlation": 0.3830373384754882}, {"start": 34, "text": "Ever since that draco   Cosigned-it flows with rivers", "correlation": 0.7748553950771218}, {"start": 36, "text": "Michael Phelps in unison with controlled swimmers", "correlation": 1.0}, {"start": 42, "text": "I seen people at parties Rob the coldest Strippers 🔥🔥", "correlation": 0.7002698035235754}, {"start": 43, "text": "Hold up wait a minute Y’all thought I was finished!?? 🔥🔥🔥🔥🔥🔥👿", "correlation": 0.7442041192297135}, {"start": 44, "text": "This you", "correlation": 0.3263663525437968}, {"start": 45, "text": "\"Killen any opp and anyone hes with\"", "correlation": 0.5697730809756973}, {"start": 47, "text": "\"rearrange the fitted\" 🧢 🥶", "correlation": 0.5970903367516214}, {"start": 48, "text": "A bakery of biscuits, K's and pistols wit extensions, We're not exchanging mittens🔥🔥🔥🔥", "correlation": 0.7253097321954359}, {"start": 50, "text": "bars", "correlation": 0.32579743694631286}, {"start": 51, "text": "We are not exchanging mittens", "correlation": 0.43009463469480397}, {"start": 52, "text": "\"You're about to experience floyd Mayweather with good penmanship\" on foe he goin", "correlation": 0.6581283186004342}, {"start": 53, "text": "Lmao nobody gonna notice the surfer boys hitting that fighting dance", "correlation": 0.5050520637380521}, {"start": 54, "text": "@Westblader  Floyd Mayweather is illiterate lmao", "correlation": 0.41094579935977554}, {"start": 55, "text": "Double entandras mixed with glocks its ridiculous 😭😭😭", "correlation": 0.3585129019305948}, {"start": 56, "text": "Fades at the beach 😂", "correlation": 0.38605879339346777}, {"start": 57, "text": "on't cry no more momma, here look, it's a ten piece I just want flawless diamonds, Caucasion like white people Send him .223's and watch him go fight demons Always keep an extra gleek, for the times that you might need it Two thousand twenty one is the year that I see a million I might just have some kids to play with my brother's children I might just sign a deal with the major, what's independent? Remember when I wasn't anything but a co-defendant Folks yelling out, \"it's Remble, \" their so specific Ever since that Drakeo cosign he flows with rivers Michael Phelps in unison with controlled swimmers I seen people robbed at parties, the coldest strippers But hold on wait a minute, y'all thought I was finished? Killin' any opp and plus the ones that's hangin' with em' Rearrange a fitted, a bakery of biscuits K's and pistols with extensions, we are not exchanging mittens You're about to witness Floyd Mayweather with good penmanship Double entendres mixed with Glocks, it's ridiculous If I get a Grammy, I'm Kanye West, I'll take a piss on it I had a problem, then bought a chop, and put a stick on it He had a problem, I put my Glock away and spit on him Killing is common, it's just so sad his kids depend on him We seen his chain and it was just swinging like a pendulum I'm snatching his chain, and I'm scaring people out their Timberlands Stipped him for everything, then we men in black, just memories The way we just did him, his friends will wonder what he did to me We really have everything, from the cash to the artilleries My opps turn to fans, it's like they don't even plan on killing me It's Remble, thanks for having me People may attack you, criticize you, or ignore you They can crumple you up with their words Spit you out, or even walk all over you But remember, whatever they do or say You will always keep your value", "correlation": 0.4540493644210055}, {"start": 58, "text": "“If I get Grammy I’m Kanye west I’ll take a piss on it”…..", "correlation": 0.9029720239482992}, {"start": 60, "text": "I had a problem got a chop and put a stick on it", "correlation": 0.9033257915336992}, {"start": 63, "text": "What he say... He had a problem... I put my Glock away an SPIT ON HIM..", "correlation": 0.6527804026721317}, {"start": 65, "text": "Killing is common it's just so sad his kids depend on him.", "correlation": 0.9774145075312077}, {"start": 66, "text": "The surfurs that are dancing with them 🤣🤣🤣", "correlation": 0.5056342989784183}, {"start": 67, "text": "no one talking about random surfers at 1:07", "correlation": 0.3805882560508136}, {"start": 68, "text": "I’m just trying to figure out what the beat did to him", "correlation": 0.4113539639072656}, {"start": 71, "text": "my nigga snappin on the beach", "correlation": 0.4866338671673008}, {"start": 73, "text": "We men in black we memories fuckkkkkkkking guyyyyy", "correlation": 0.5066705854716465}, {"start": 74, "text": "Stripped him for everything then we men in blacked his memories 😳", "correlation": 0.861809963821752}, {"start": 76, "text": "The way we just did him his friends wondering what he did to me 🤣🤣", "correlation": 0.755797758327091}, {"start": 77, "text": "1:17 you all are African Americans and… mark but we rockin with mark cause marks rockin with us 😂😂😂", "correlation": 0.3087489031635652}, {"start": 78, "text": "“We really have everything from the cash to the artillery”🔥🔥🔥", "correlation": 0.6057331549884071}, {"start": 81, "text": "My opps turns to fans it's like they don't even plan on killing me", "correlation": 0.6070267925893801}, {"start": 83, "text": "“My ops turned a fan like they don’t even plan on killing me” over your head boy sheeeeeesh", "correlation": 0.48078501728388545}, {"start": 84, "text": "Rumble in my top 5🔥", "correlation": 0.5151161360657693}, {"start": 90, "text": "He doesn't diss opps, he articulately in a soft spoken manner and verbally annihilate his adversaries", "correlation": 0.3843583097340893}, {"start": 100, "text": "ALWAYS KNOW YOUR WORTH 🥇", "correlation": 0.549222800423142}, {"start": 109, "text": "Salute", "correlation": 0.3474752330127806}, {"start": 110, "text": "Thank you", "correlation": 0.6449950336137891}, {"start": 111, "text": "Who are the white boys that join in the video that's shit had me dead like where did they come from😂?", "correlation": 0.3593716018150069}, {"start": 120, "text": "Damn thought this was another gta music video", "correlation": 0.31890000146230646}] : null);
+    if(!Array.isArray(danmakuComments)){
+      danmakuComments = [
+        { start: 0.5, text: "첫 댓글!" },
+        { start: 1.5, text: "오른쪽에서 등장합니다" },
+        { start: 3.0, text: "왼쪽으로 사라져요" },
+        { start: 5.0, text: "시킹해도 잘 동작" },
+      ];
+    }
+
+    // ===== 요소 참조 / 전역 상태 =====
+    var video = null;
+    var videoContainer = null;
+    var playPauseBtn = null, playIcon = null, pauseIcon = null;
+    var progressContainer = null, progressBar = null;
+    var timeDisplay = null;
+
+    var isDragging = false;          // 진행바 드래그
+    var activeDanmaku = new Map();   // idx -> { element, currentX, width, y, speed }
+    var animationId = null;
+    var isPaused = false;            // 비디오 정지 동기화
+    var lastRafTime = 0;             // requestAnimationFrame 시간
+    var lastVideoTime = 0;           // 직전 timeupdate의 비디오 시간 (시킹 대비)
+    
+    // danmaku one 전용: 다음에 표시할 댓글 인덱스
+    var nextCommentIndex = 0;
+    var displayedComments = new Set();  // 이미 표시된 댓글 인덱스 추적
+    
+    // 댓글별 고유 속도 계산 함수 (픽셀 단위로 네 개 중 하나)
+    function getDanmakuSpeed(commentText) {
+      const textHash = hashString(commentText || '');
+      const speedOptions = [-140, -180, -220, -260]; // px/s (음수=왼쪽)
+      return speedOptions[textHash % speedOptions.length];
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      video = document.getElementById('video-player');
+      videoContainer = document.getElementById('video-container');
+      playPauseBtn = document.getElementById('play-pause-btn');
+      playIcon = document.getElementById('play-icon');
+      pauseIcon = document.getElementById('pause-icon');
+      progressContainer = document.getElementById('progress-container');
+      progressBar = document.getElementById('progress-bar');
+      timeDisplay = document.getElementById('time-display');
+
+      // start 기준 정렬
+      danmakuComments.sort((a,b) => a.start - b.start);
+
+      // 이벤트 바인딩
+      video.addEventListener('timeupdate', onTimeUpdate);
+      video.addEventListener('loadedmetadata', updateTimeDisplay);
+      video.addEventListener('play', () => { updatePlayPauseButton(); lastVideoTime = video.currentTime || 0; resumeAllDanmaku(); });
+      video.addEventListener('pause', () => { updatePlayPauseButton(); pauseAllDanmaku(); });
+      video.addEventListener('seeking', resetDanmakuForSeek);
+
+      playPauseBtn.addEventListener('click', togglePlayPause);
+      progressContainer.addEventListener('mousedown', startDrag);
+      document.addEventListener('mousemove', doDrag);
+      document.addEventListener('mouseup', endDrag);
+      progressContainer.addEventListener('click', (e)=>{ if(!isDragging) seekVideo(e); });
+
+      // 리사이즈 시 현재 떠있는 단무쿠 위치/퇴장 판정 보정
+      window.addEventListener('resize', () => {
+        // 큰 레이아웃 변화에서는 간단히 리셋
+        resetDanmakuForSeek();
+      });
+
+      // 초기 상태
+      updatePlayPauseButton();
+    });
+
+    function togglePlayPause(){ if(video.paused) video.play(); else video.pause(); }
+
+    function updatePlayPauseButton(){
+      if(!video) return;
+      if(video.paused){
+        playIcon.style.display='block';
+        pauseIcon.style.display='none';
+      } else {
+        playIcon.style.display='none';
+        pauseIcon.style.display='block';
+      }
+    }
+
+    function updateTimeDisplay(){
+      if(!video || !video.duration) return;
+      const cur = formatTime(video.currentTime || 0);
+      const tot = formatTime(video.duration);
+      timeDisplay.textContent = cur + ' / ' + tot;
+    }
+
+    function onTimeUpdate(){
+      if(!video) return;
+      const t = video.currentTime || 0;
+
+      // 진행바
+      if(video.duration){
+        progressBar.style.width = ((t / video.duration) * 100) + '%';
+      }
+      updateTimeDisplay();
+
+      // danmaku one: 첫 번째 댓글만 onTimeUpdate에서 표시 (활성 댓글이 없고 첫 번째 댓글일 때만)
+      // 이후 댓글들은 updateDanmakuPositions에서 이전 댓글이 완전히 사라진 후에만 표시됨
+      if(activeDanmaku.size === 0 && nextCommentIndex === 0 && !displayedComments.has(0) && nextCommentIndex < danmakuComments.length){
+        const firstComment = danmakuComments[0];
+        if(firstComment && t >= firstComment.start){
+          addDanmakuComment(firstComment, 0);
+          displayedComments.add(0);
+          nextCommentIndex = 1;
+          if (!animationId) startAnimationLoop();
+        }
+      }
+
+      lastVideoTime = t;
+    }
+
+    // ===== 진행바 제어 =====
+    function startDrag(e){ isDragging = true; e.preventDefault(); updateVideoTime(e); }
+    function doDrag(e){ if(!isDragging) return; e.preventDefault(); updateVideoTime(e); }
+    function endDrag(){ if(!isDragging) return; isDragging = false; }
+    function seekVideo(e){ updateVideoTime(e); }
+
+    function updateVideoTime(e){
+      const rect = progressContainer.getBoundingClientRect();
+      const pos = clamp((e.clientX - rect.left)/rect.width, 0, 1);
+      if (video.duration) {
+        video.currentTime = pos * video.duration;
+        // 시킹 처리: 떠있는 단무쿠 초기화 & 타임 마커 갱신
+        resetDanmakuForSeek();
+      }
+    }
+
+    // ===== 단무쿠 생성 / 애니메이션 =====
+    function addDanmakuComment(cmt, idx){
+      const div = document.createElement('div');
+      div.className = 'danmaku-comment';
+      div.id = 'danmaku-' + idx;
+
+      const txt = (cmt.text ?? '') + '';
+      div.innerHTML = '<div class="comment-text"></div>';
+      div.querySelector('.comment-text').textContent = txt; // XSS 안전
+
+      // 세로 위치: 댓글 텍스트 기반 결정적 위치 (하단 여백 10px)
+      const containerRect = videoContainer.getBoundingClientRect();
+      // 댓글 텍스트를 해시값으로 변환하여 일관된 위치 생성
+      const textHash = hashString(cmt.text || '');
+      const maxHeight = containerRect.height - 20; // 하단 10px 여백
+      const randomY = textHash % maxHeight; // 상단부터 시작
+
+      // 먼저 붙여서 실제 너비를 잰다
+      div.style.top = randomY + 'px';
+      div.style.left = '0px';
+      div.style.transform = 'translateX(0px)';
+      div.style.transition = 'none';
+      videoContainer.appendChild(div);
+
+      const elWidth = div.getBoundingClientRect().width;
+
+      // 시작 X: 컨테이너 오른쪽 바깥
+      const startX = containerRect.width; // +10 버퍼
+      div.style.transform = `translateX(${startX}px)`;
+
+      // 댓글별 고유 속도 계산
+      const danmakuSpeed = getDanmakuSpeed(cmt.text);
+
+      // 상태 저장
+      activeDanmaku.set(idx, {
+        element: div,
+        currentX: startX,
+        width: elWidth,
+        y: randomY,
+        speed: danmakuSpeed
+      });
+
+      // 애니메이션 루프 가동
+      if (!animationId) startAnimationLoop();
+    }
+
+    function startAnimationLoop() {
+      function animate(ts) {
+        if (!lastRafTime) lastRafTime = ts;
+        const deltaTime = (ts - lastRafTime) / 1000; // 초
+        lastRafTime = ts;
+
+        if (!isPaused) {
+          updateDanmakuPositions(deltaTime);
+        }
+
+        // 루프 유지: 활성 단무쿠가 없고 비디오도 일시정지면 멈출 수 있음
+        if (activeDanmaku.size === 0 && video?.paused) {
+          animationId = null;
+          lastRafTime = 0;
+          return; // 루프 종료
+        }
+        animationId = requestAnimationFrame(animate);
+      }
+      if (!animationId) animationId = requestAnimationFrame(animate);
+    }
+
+    function updateDanmakuPositions(deltaTime) {
+      // 각 댓글별 고유 속도로 왼쪽 이동
+      var commentJustDisappeared = false;
+      
+      activeDanmaku.forEach((danmaku, idx) => {
+        if (!danmaku || !danmaku.element) return;
+        danmaku.currentX += danmaku.speed * deltaTime;
+
+        // 완전 퇴장: 요소의 오른쪽 끝이 화면 왼쪽 밖으로 나가면 제거
+        if (danmaku.currentX + danmaku.width < 0) {
+          danmaku.element.parentNode?.removeChild(danmaku.element);
+          activeDanmaku.delete(idx);
+          commentJustDisappeared = true;
+        } else {
+          danmaku.element.style.transform = `translateX(${danmaku.currentX}px)`;
+        }
+      });
+      
+      // danmaku one: 댓글이 완전히 사라진 직후, 그 시점 이후의 댓글 중 가장 가까운 댓글 표시
+      if (commentJustDisappeared && activeDanmaku.size === 0) {
+        const t = video?.currentTime || 0;
+        
+        // 현재 시간 이후의 댓글 중 가장 가까운 댓글 찾기 (아직 표시되지 않은 댓글만)
+        var nextComment = null;
+        var nextCommentIdx = -1;
+        
+        for (let i = 0; i < danmakuComments.length; i++) {
+          // 아직 표시되지 않았고, 시작 시간이 현재 시간 이후인 댓글 찾기
+          if (!displayedComments.has(i) && danmakuComments[i].start >= t) {
+            nextComment = danmakuComments[i];
+            nextCommentIdx = i;
+            break;
+          }
+        }
+        
+        // 찾은 댓글이 있으면 표시
+        if (nextComment && nextCommentIdx >= 0) {
+          addDanmakuComment(nextComment, nextCommentIdx);
+          displayedComments.add(nextCommentIdx);
+          nextCommentIndex = nextCommentIdx + 1;
+        }
+      }
+    }
+
+    // ===== 시킹/재생 동기화 =====
+    function pauseAllDanmaku() { isPaused = true; }
+    function resumeAllDanmaku() { isPaused = false; if (!animationId) startAnimationLoop(); }
+
+    function resetDanmakuForSeek(){
+      // 떠있던 것들 제거
+      activeDanmaku.forEach((d)=>{ d.element?.parentNode?.removeChild(d.element); });
+      activeDanmaku.clear();
+      // 다음 프레임 기준으로 새로 트리거
+      lastVideoTime = video?.currentTime || 0;
+      // 애니메이션 타임라인 초기화
+      lastRafTime = 0;
+      // danmaku one: 다음 댓글 인덱스 재계산 (현재 시간 이후의 첫 번째 댓글 찾기)
+      displayedComments.clear();  // 시킹 시 표시된 댓글 추적 초기화
+      nextCommentIndex = 0;
+      for(let i = 0; i < danmakuComments.length; i++){
+        if(danmakuComments[i].start > lastVideoTime){
+          nextCommentIndex = i;
+          break;
+        }
+      }
+    }
+  </script>
+</body>
+</html>
