@@ -35,12 +35,16 @@
         }
 
         .instruction {
-            font-size: 16px;
+            font-size: 19px;
+            font-weight: 700;
             margin-bottom: 30px;
-            padding: 15px;
+            padding: 18px;
             background-color: #e8f4f8;
             border-left: 4px solid #3498db;
-            border-radius: 4px;
+            border-radius: 8px;
+            text-align: center;
+            color: #0f3f66;
+            line-height: 1.6;
         }
 
         .interface-description {
@@ -108,7 +112,7 @@
 
         .question-title {
             font-size: 16px;
-            font-weight: bold;
+            font-weight: normal;
             margin-bottom: 15px;
             color: #333;
         }
@@ -183,7 +187,7 @@
             cursor: pointer;
             transition: all 0.3s;
             font-size: 14px;
-            font-weight: bold;
+            font-weight: normal;
             color: #666;
             margin-bottom: 3px;
             margin-left: -1px;
@@ -278,7 +282,7 @@
         </div>
 
         <div class="instruction">
-            다음 인터페이스에서 영상이 재생되는 동안 댓글을 함께 읽어주세요.
+            다음 인터페이스에서 영상이 재생되는 동안 <strong>댓글을 함께</strong> 읽어주세요.
         </div>
 
         <div class="interface-description" id="interfaceDescription"></div>
@@ -358,7 +362,7 @@
 
                 const title = document.createElement('div');
                 title.className = 'question-title';
-                title.innerHTML = `<strong><span style="font-size:16px;">${question.text}</span></strong>`;
+                title.innerHTML = question.text;
 
                 const scaleContainer = document.createElement('div');
                 scaleContainer.className = 'scale-container';

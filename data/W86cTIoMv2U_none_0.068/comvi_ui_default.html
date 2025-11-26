@@ -35,6 +35,7 @@
       overflow: hidden;
       border-radius: 20px; /* 유튜브 느낌의 둥근 모서리 */
       transition: all 0.3s ease;
+      margin-bottom: 0;
     }
 
     video {
@@ -149,7 +150,7 @@
       height: var(--overlay-h);
       pointer-events: none;
       z-index: 2;
-      background: linear-gradient(to top, rgba(0,0,0,0.80), rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.2) 90%,  rgba(0,0,0,0));
+      background: linear-gradient(to top, rgba(0,0,0,0.80), rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.2) 80%,  rgba(0,0,0,0));
       overflow: hidden;
       transition: bottom 0.3s ease, height 0.15s ease;
     }
@@ -167,8 +168,8 @@
       mask-image: linear-gradient(to top, black var(--mask-stop), transparent 100%);
     }
 
-    /* 좋아요/하트를 별도 레이어로 분리하여 마스크 영향 제거 */
-    .likes-overlay {
+    /* 댓글 텍스트, 프로필, 좋아요를 별도 레이어로 분리하여 마스크 영향 제거 */
+    .comments-text-overlay {
       position: absolute;
       top: 0;
       left: 0;
@@ -206,33 +207,36 @@
 
     .user-info { display: flex; align-items: center; gap: 4px; margin-bottom: 2px; }
 
-    .username { font-weight: normal; font-size: 24px; }
+    .username { font-weight: normal; font-size: 14px; opacity: 1; -webkit-mask-image: none !important; mask-image: none !important; }
 
     .comment-text {
-      font-size: 34px;
+      font-size: 18px;
       white-space: normal;
       word-break: break-word;
       overflow-wrap: anywhere;
       flex: 1;
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
     }
 
-    .profile-icon { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; }
-    .profile-photo { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; }
+    .profile-icon { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; opacity: 1; -webkit-mask-image: none !important; mask-image: none !important; }
+    .profile-photo { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; opacity: 1; -webkit-mask-image: none !important; mask-image: none !important; }
 
     .likes { display: flex; flex-direction: column; align-items: center; align-self: flex-start; gap: 2px; margin-left: 8px;}
 
     .heart-icon { 
-      width: 28px; 
-      height: 28px; 
-      fill: #ff0000; 
+      width: 20px; 
+      height: 20px; 
+      fill: #ff0040; 
       opacity: 1;
       -webkit-mask-image: none !important;
       mask-image: none !important;
     }
 
     .likes-number { 
-      color: #ff0000; 
-      font-size: 26px; 
+      color: #ff0040; 
+      font-size: 14px; 
+      font-weight: 600;
       opacity: 1;
       -webkit-mask-image: none !important;
       mask-image: none !important;
@@ -241,10 +245,9 @@
 </head>
   <body>
     <!-- 제목을 영상 위에 배치 -->
-    <div class="video-title">World's smallest cat 🐈- BBC</div>
     <div class="video-container">
     <video id="video-player">
-      <source src="../video/W86cTIoMv2U.mp4" type="video/mp4" />
+      <source src="../../video/W86cTIoMv2U.mp4" type="video/mp4" />
       브라우저가 video 태그를 지원하지 않습니다.
     </video>
 
@@ -267,17 +270,20 @@
     <!-- 댓글 오버레이 (A 스타일: 높이/마스크 동적) -->
     <div class="comments-overlay" id="comments-overlay">
       <div class="comments-container" id="comments-container"></div>
-      <div class="likes-overlay" id="likes-overlay"></div>
+      <div class="comments-text-overlay" id="comments-text-overlay"></div>
     </div>
   </div>
 
+  <script id="optimal-comments-data" type="application/json">
+    [{"start": 0, "end": 2, "reading time": 2.0, "text": "You noobs it's a hologram.", "reward": 2.8759748423987457, "correlation": "0.3033178499156952", "corr_A": "0.0", "corr_V": "0.36", "likes": 30.0, "norm_likes": 0.8313517213679825, "norm_likes_real": 0.8313517213679825, "photo": "https://yt3.ggpht.com/ytc/AIdro_m170x3H16YVqo7LAxX3GE1aAF6zxIS10WntTZk2bh6YPk=s88-c-k-c0x00ffffff-no-rj", "author": "@tracepillar8382", "slot": 0}, {"start": 2, "end": 4, "reading time": 2.0, "text": "Just a more kitteny kitten.", "reward": 3.555495563885319, "correlation": "0.41777225635651344", "corr_A": "0.0", "corr_V": "0.49", "likes": 225.0, "norm_likes": 0.9422032692296326, "norm_likes_real": 0.9422032692296326, "photo": "https://yt3.ggpht.com/ytc/AIdro_kktt7416VmhgzcMCnqpcre-ZR-INnAPmLOA8X0FoqmxGg=s88-c-k-c0x00ffffff-no-rj", "author": "@cyancyborg1477", "slot": 0}, {"start": 4, "end": 7, "reading time": 3.0, "text": "World's smallest Beautiful Baby Cat.", "reward": 7.215531945815281, "correlation": "0.7884316172221467", "corr_A": "0.85", "corr_V": "0.39", "likes": 29.0, "norm_likes": 0.8283140808274668, "norm_likes_real": 0.8283140808274668, "photo": "https://yt3.ggpht.com/ytc/AIdro_k0Vfb2ux71pLQrfP5Q8_NCflN5Kazenm3YvQA2tNM=s88-c-k-c0x00ffffff-no-rj", "author": "@bergamotblonde", "slot": 0}, {"start": 7, "end": 11, "reading time": 4.0, "text": "World's smallest cat, more like world's cutest cat.", "reward": 10.074720478297309, "correlation": "0.7698862730993852", "corr_A": "0.82", "corr_V": "0.39", "likes": 1400.0, "norm_likes": 0.978907573375557, "norm_likes_real": 0.978907573375557, "photo": "https://yt3.ggpht.com/ytc/AIdro_mtBJVbwzM-ArNkWWvP-jKduCegfRKinJE3eNSmgac4Y7Y=s88-c-k-c0x00ffffff-no-rj", "author": "@tremendous1163", "slot": 0}, {"start": 11, "end": 17, "reading time": 6.0, "text": "If this is how small an adult rusty spotted cat is, imagine a newborn one-", "reward": 15.275065934300505, "correlation": "0.7780026803635782", "corr_A": "0.69", "corr_V": "0.61", "likes": 4800.0, "norm_likes": 0.9898389616562612, "norm_likes_real": 0.9898389616562612, "photo": "https://yt3.ggpht.com/ytc/AIdro_kIyspN_lp_DtHPCtJlgz-JcHMRY2qbs4q2kqKE5NihcgA=s88-c-k-c0x00ffffff-no-rj", "author": "@floraleclipse6160", "slot": 0}, {"start": 17, "end": 23, "reading time": 6.0, "text": "He may look like a kitten   Cat:*proceeds to meow the tiniest meow*  Everyone else: Are you sure about that", "reward": 15.550141937801243, "correlation": "0.8087985076347035", "corr_A": "0.78", "corr_V": "0.56", "likes": 973.0, "norm_likes": 0.974093307697467, "norm_likes_real": 0.974093307697467, "photo": "https://yt3.ggpht.com/OH-wgPPl1WGPjpZqsSPS747DEPzc-yog5UAs3599gt1guIeA0X1IdfBbYjJKci2lh6qRF0zGRQ=s88-c-k-c0x00ffffff-no-rj", "author": "@thattinykoala", "slot": 0}, {"start": 23, "end": 28, "reading time": 5.0, "text": "Speaker: he'd still fit in the palm of your hand. Me: looks at my palm", "reward": 11.333890869482651, "correlation": "0.6407551167543063", "corr_A": "0.76", "corr_V": "0.05", "likes": 2600.0, "norm_likes": 0.9852679403879181, "norm_likes_real": 0.9852679403879181, "photo": "https://yt3.ggpht.com/zCYbuNJFlgGaDCiPQZudrdhnVzEY1EMSWEipit-F3p_NztXH9qwYZgAw5-7_u2RSJ2n_SFO5Mmo=s88-c-k-c0x00ffffff-no-rj", "author": "@xadezkreator", "slot": 0}, {"start": 28, "end": 34, "reading time": 6.0, "text": "Narrator: But this little male is very nearly fully grown The little cat: *exits from under a leaf*", "reward": 14.663120635215115, "correlation": "0.7247009931169385", "corr_A": "0.68", "corr_V": "0.53", "likes": 12000.0, "norm_likes": 0.9944514529686421, "norm_likes_real": 0.9944514529686421, "photo": "https://yt3.ggpht.com/ytc/AIdro_loPhDuemtI-YH1OZ82REj63Ym-Mls96OH2Ojw5S5IOuw=s88-c-k-c0x00ffffff-no-rj", "author": "@francesco6835", "slot": 0}, {"start": 34, "end": 40, "reading time": 6.0, "text": "\"he'll soon be setting off on a solitary life, fending entirely for him self\" Can relate", "reward": 13.935421831916688, "correlation": "0.6722853959469031", "corr_A": "0.79", "corr_V": "0.1", "likes": 1300.0, "norm_likes": 0.977999513425642, "norm_likes_real": 0.977999513425642, "photo": "https://yt3.ggpht.com/ytc/AIdro_kdTxYe0q9fdUHi4a5LMLIMAvUtJneVJKwSkOZ70hdL7g=s88-c-k-c0x00ffffff-no-rj", "author": "@legokangaroo5010", "slot": 0}, {"start": 40, "end": 46, "reading time": 6.0, "text": "This cat is so polite, it didn’t disturb the leaf and just gently jumped over it.", "reward": 11.06555373226299, "correlation": "0.42949550749462345", "corr_A": "0.0", "corr_V": "0.51", "likes": 2600.0, "norm_likes": 0.9852679403879181, "norm_likes_real": 0.9852679403879181, "photo": "https://yt3.ggpht.com/A2pkG3t2ZouJfFX_n66wdDbnLPCB4SPA_JnE1I-NSNyx6e0E7-cILKahQFbSWIJ3NgYyTmopvw=s88-c-k-c0x00ffffff-no-rj", "author": "@brown_chicken", "slot": 0}, {"start": 46, "end": 50, "reading time": 4.0, "text": "what he lacks in size... he makes up for... in cuteness", "reward": 8.743021641527701, "correlation": "0.596989368527244", "corr_A": "0.7", "corr_V": "0.06", "likes": 6700.0, "norm_likes": 0.9917766733274372, "norm_likes_real": 0.9917766733274372, "photo": "https://yt3.ggpht.com/ytc/AIdro_lWYj0tMIpnz0iFSwm1RvQMJ6ToiwiVF89eTsaVABzSNtjN=s88-c-k-c0x00ffffff-no-rj", "author": "@gwyneththeobald2736", "slot": 0}, {"start": 50, "end": 56, "reading time": 6.0, "text": "\"what he lacks in size, he makes up in daring \"  puts paw gently in the water  Extremely daring 💕💕😩", "reward": 12.738970370756856, "correlation": "0.5665964805257899", "corr_A": "0.44", "corr_V": "0.51", "likes": 4900.0, "norm_likes": 0.9899687674078962, "norm_likes_real": 0.9899687674078962, "photo": "https://yt3.ggpht.com/qaDstUlSN4yZJ-8_M3cu6ZxlLyrWziBmYYx5AQ5aZ5DXIqY2PEYTCuW1wUfzKM5YNWN8YDuLEQ=s88-c-k-c0x00ffffff-no-rj", "author": "@comicsandanimation5531", "slot": 0}, {"start": 56, "end": 61, "reading time": 5.0, "text": "Narrator: they are daring Tiny cat: waddles through a tiny puddle", "reward": 8.814207415241038, "correlation": "0.3919669548363252", "corr_A": "0.0", "corr_V": "0.46", "likes": 1400.0, "norm_likes": 0.978907573375557, "norm_likes_real": 0.978907573375557, "photo": "https://yt3.ggpht.com/vB9SZwbFXi1-jyinW-f4DYP-3mNITT2mHA82Va5Y_81NfCpENaUh24pESx-Zp7x1QBmYfmvPhVE=s88-c-k-c0x00ffffff-no-rj", "author": "@joshyookphotography", "slot": 0}, {"start": 61, "end": 67, "reading time": 6.0, "text": "\"What he lacks in size he makes up for in daring\" touches water, instantly pulls paw back", "reward": 11.157492929974136, "correlation": "0.43892168497645784", "corr_A": "0.0", "corr_V": "0.52", "likes": 1800.0, "norm_likes": 0.9817387850427737, "norm_likes_real": 0.9817387850427737, "photo": "https://yt3.ggpht.com/ytc/AIdro_ki8h8-XQeN_pIYmXPo6xWggze7kwRYAbchJF6sY3Y=s88-c-k-c0x00ffffff-no-rj", "author": "@Ithilwen22", "slot": 0}, {"start": 67, "end": 73, "reading time": 6.0, "text": "Young cats are curious...that's how they learn about the world  P A R K O U R", "reward": 14.265314644638384, "correlation": "0.7407382434434561", "corr_A": "0.87", "corr_V": "0.13", "likes": 75.0, "norm_likes": 0.8960759538861516, "norm_likes_real": 0.8960759538861516, "photo": "https://yt3.ggpht.com/ruVazuTZN92Xox6Hs-xyVygppqjt29ubu-azXumNNjjwaGYx-4bT_-tf6uDYeibYKT520dauUA=s88-c-k-c0x00ffffff-no-rj", "author": "@Madam2034", "slot": 0}, {"start": 73, "end": 77, "reading time": 4.0, "text": "\"It's how they learn about the world.\"  Cat: big jump", "reward": 8.209126832408387, "correlation": "0.534266808584909", "corr_A": "0.59", "corr_V": "0.23", "likes": 2200.0, "norm_likes": 0.9837480909322786, "norm_likes_real": 0.9837480909322786, "photo": "https://yt3.ggpht.com/ytc/AIdro_nx131Wgo7-TdCmI4RYULJ6HGXlKCk6Tmf5oO-QTaNts8c=s88-c-k-c0x00ffffff-no-rj", "author": "@spoop4967", "slot": 0}, {"start": 77, "end": 78, "reading time": 1.0, "text": "It is Animated", "reward": 1.1226419205825318, "correlation": "0.34314778442434873", "corr_A": "0.0", "corr_V": "0.41", "likes": 3.0, "norm_likes": 0.4363463517338342, "norm_likes_real": 0.4363463517338342, "photo": "https://yt3.ggpht.com/ytc/AIdro_kIV24dHwX539XhRaPjCga76wgUZF6PKWHOOu8kYfSVVO0=s88-c-k-c0x00ffffff-no-rj", "author": "@MoarPower", "slot": 0}, {"start": 78, "end": 82, "reading time": 4.0, "text": "“Even if it can get them into trouble”  “MEEEOWWWW”", "reward": 8.510406649812055, "correlation": "0.5776352861430386", "corr_A": "0.68", "corr_V": "0.06", "likes": 865.0, "norm_likes": 0.9723310901669365, "norm_likes_real": 0.9723310901669365, "photo": "https://yt3.ggpht.com/ytc/AIdro_mcgT7v2hdsQvC0DtWeZuBPhbShlf-a_JFO3Wuujrddjg=s88-c-k-c0x00ffffff-no-rj", "author": "@toxic10g77", "slot": 0}, {"start": 82, "end": 88, "reading time": 6.0, "text": "I wonder how much of this is set up. Are the leaves placed there to make the cat look smaller. Is it just another fake session like the Polar Bear den footage, or the fake tree houses of native peoples that have been exposed. I struggle to believe BBC footage these days because they have been caught out in so many cheats.", "reward": 11.024472802131669, "correlation": "0.4532936188736346", "corr_A": "0.0", "corr_V": "0.54", "likes": 161.0, "norm_likes": 0.930824895941342, "norm_likes_real": 0.930824895941342, "photo": "https://yt3.ggpht.com/ytc/AIdro_k6cz_D7v3Xg7KJb2qnBC1ciHff1kIPcfuuxS2MYod-Xw=s88-c-k-c0x00ffffff-no-rj", "author": "@TheRealMythril", "slot": 0}, {"start": 88, "end": 93, "reading time": 5.0, "text": "\"Straight away he puts his super senses through their paces\" Act cute", "reward": 11.198471423646856, "correlation": "0.6707390441251159", "corr_A": "0.78", "corr_V": "0.15", "likes": 78.0, "norm_likes": 0.8982161964791396, "norm_likes_real": 0.8982161964791396, "photo": "https://yt3.ggpht.com/HqKL7xhHe_AVbrns__uQSBjaw5dM9SN6uB20G1KUvF-hXxNfi2j_ddFodTWlBJK80WM266x8Kg=s88-c-k-c0x00ffffff-no-rj", "author": "@Sari-ie2kd", "slot": 0}, {"start": 93, "end": 96, "reading time": 3.0, "text": "Video title : world's biggest leaves", "reward": 5.092631484489576, "correlation": "0.3554061082283428", "corr_A": "0.0", "corr_V": "0.42", "likes": 3100.0, "norm_likes": 0.9867316117065065, "norm_likes_real": 0.9867316117065065, "photo": "https://yt3.ggpht.com/6-yMf6KZiD0DEWoySuVdKFlBuNK266jXujPfQT_Ap0jMgwvkR_nZAw1x8WP54gLp9f5hkQP6=s88-c-k-c0x00ffffff-no-rj", "author": "@LaalBaigStudios", "slot": 0}, {"start": 96, "end": 101, "reading time": 5.0, "text": "Plot twist: The cat is normal size this is just a gigantic forest.", "reward": 9.770696889260522, "correlation": "0.4846082440218575", "corr_A": "0.0", "corr_V": "0.57", "likes": 2500.0, "norm_likes": 0.9849228898083893, "norm_likes_real": 0.9849228898083893, "photo": "https://yt3.ggpht.com/ytc/AIdro_n-eFnDZ8rRq5uoqzeSKjKAsMwuCq3cnKJ9JANYjM_nxg=s88-c-k-c0x00ffffff-no-rj", "author": "@MrTaunus007", "slot": 0}, {"start": 101, "end": 106, "reading time": 5.0, "text": "“His eyes are 6 times more powerful than our own”  I feel blind now", "reward": 12.103200959381532, "correlation": "0.7296524730443672", "corr_A": "0.85", "corr_V": "0.12", "likes": 472.0, "norm_likes": 0.9613352457875719, "norm_likes_real": 0.9613352457875719, "photo": "https://yt3.ggpht.com/T4MKVdllqZjNE_wdvlLHTtzRKnHA9ppHBk3cvYGzzQvbLHeoE9wHnk8hnQmA8MuYaNAnkS_u2A=s88-c-k-c0x00ffffff-no-rj", "author": "@Hxpnoticghost", "slot": 0}, {"start": 106, "end": 109, "reading time": 3.0, "text": "\"He may look like a kitten\" Cat: M A E W", "reward": 6.082057810546903, "correlation": "0.5174634130006508", "corr_A": "0.29", "corr_V": "0.54", "likes": 7600.0, "norm_likes": 0.9924257775143327, "norm_likes_real": 0.9924257775143327, "photo": "https://yt3.ggpht.com/ytc/AIdro_limOMP9ISS-kBdfMhG3t4X8A_wVoTkQh5I5eWB0N8=s88-c-k-c0x00ffffff-no-rj", "author": "@annageerdsema4047", "slot": 0}, {"start": 109, "end": 115, "reading time": 6.0, "text": "\"....and sensitive to the slightest movements\" And you never wondered why the video ended right then n there.", "reward": 12.90547478753017, "correlation": "0.6226238083455634", "corr_A": "0.71", "corr_V": "0.2", "likes": 90.0, "norm_likes": 0.905664847897235, "norm_likes_real": 0.905664847897235, "photo": "https://yt3.ggpht.com/WoyAjjiEme9fRTXgd2z6AF_xThVM3B-qA6NWQrGcaXwEQCdUEbFjFk4slqXEhZYXn3Wdxh_EPCA=s88-c-k-c0x00ffffff-no-rj", "author": "@awayfrom234........", "slot": 0}]
+  </script>
   <script>
     // 숫자 포맷: 1k 단위
     function formatLikes(n){
       if(n < 1000) return n.toString();
       let f = (n/1000).toFixed(1);
       if(f.endsWith('.0')) f = f.slice(0,-2);
-      return f + 'k';
+      return f + 'K';
     }
 
     // mm:ss
@@ -300,10 +306,39 @@
     }
 
     // 서버에서 주입되는 최적 댓글 리스트
-    var optimalComments = [{"start": 0, "end": 2, "reading time": 2.0, "text": "You noobs it's a hologram.", "reward": 2.8759748423987457, "correlation": "0.3033178499156952", "corr_A": "0.0", "corr_V": "0.36", "likes": 30.0, "norm_likes": 0.8313517213679825, "norm_likes_real": 0.8313517213679825, "photo": "https://yt3.ggpht.com/ytc/AIdro_m170x3H16YVqo7LAxX3GE1aAF6zxIS10WntTZk2bh6YPk=s88-c-k-c0x00ffffff-no-rj", "author": "@tracepillar8382", "slot": 0}, {"start": 2, "end": 4, "reading time": 2.0, "text": "Just a more kitteny kitten.", "reward": 3.555495563885319, "correlation": "0.41777225635651344", "corr_A": "0.0", "corr_V": "0.49", "likes": 225.0, "norm_likes": 0.9422032692296326, "norm_likes_real": 0.9422032692296326, "photo": "https://yt3.ggpht.com/ytc/AIdro_kktt7416VmhgzcMCnqpcre-ZR-INnAPmLOA8X0FoqmxGg=s88-c-k-c0x00ffffff-no-rj", "author": "@cyancyborg1477", "slot": 0}, {"start": 4, "end": 7, "reading time": 3.0, "text": "World's smallest Beautiful Baby Cat.", "reward": 7.215531945815281, "correlation": "0.7884316172221467", "corr_A": "0.85", "corr_V": "0.39", "likes": 29.0, "norm_likes": 0.8283140808274668, "norm_likes_real": 0.8283140808274668, "photo": "https://yt3.ggpht.com/ytc/AIdro_k0Vfb2ux71pLQrfP5Q8_NCflN5Kazenm3YvQA2tNM=s88-c-k-c0x00ffffff-no-rj", "author": "@bergamotblonde", "slot": 0}, {"start": 7, "end": 11, "reading time": 4.0, "text": "World's smallest cat, more like world's cutest cat.", "reward": 10.074720478297309, "correlation": "0.7698862730993852", "corr_A": "0.82", "corr_V": "0.39", "likes": 1400.0, "norm_likes": 0.978907573375557, "norm_likes_real": 0.978907573375557, "photo": "https://yt3.ggpht.com/ytc/AIdro_mtBJVbwzM-ArNkWWvP-jKduCegfRKinJE3eNSmgac4Y7Y=s88-c-k-c0x00ffffff-no-rj", "author": "@tremendous1163", "slot": 0}, {"start": 11, "end": 17, "reading time": 6.0, "text": "If this is how small an adult rusty spotted cat is, imagine a newborn one-", "reward": 15.275065934300505, "correlation": "0.7780026803635782", "corr_A": "0.69", "corr_V": "0.61", "likes": 4800.0, "norm_likes": 0.9898389616562612, "norm_likes_real": 0.9898389616562612, "photo": "https://yt3.ggpht.com/ytc/AIdro_kIyspN_lp_DtHPCtJlgz-JcHMRY2qbs4q2kqKE5NihcgA=s88-c-k-c0x00ffffff-no-rj", "author": "@floraleclipse6160", "slot": 0}, {"start": 17, "end": 23, "reading time": 6.0, "text": "He may look like a kitten   Cat:*proceeds to meow the tiniest meow*  Everyone else: Are you sure about that", "reward": 15.550141937801243, "correlation": "0.8087985076347035", "corr_A": "0.78", "corr_V": "0.56", "likes": 973.0, "norm_likes": 0.974093307697467, "norm_likes_real": 0.974093307697467, "photo": "https://yt3.ggpht.com/OH-wgPPl1WGPjpZqsSPS747DEPzc-yog5UAs3599gt1guIeA0X1IdfBbYjJKci2lh6qRF0zGRQ=s88-c-k-c0x00ffffff-no-rj", "author": "@thattinykoala", "slot": 0}, {"start": 23, "end": 28, "reading time": 5.0, "text": "Speaker: he'd still fit in the palm of your hand. Me: looks at my palm", "reward": 11.333890869482651, "correlation": "0.6407551167543063", "corr_A": "0.76", "corr_V": "0.05", "likes": 2600.0, "norm_likes": 0.9852679403879181, "norm_likes_real": 0.9852679403879181, "photo": "https://yt3.ggpht.com/zCYbuNJFlgGaDCiPQZudrdhnVzEY1EMSWEipit-F3p_NztXH9qwYZgAw5-7_u2RSJ2n_SFO5Mmo=s88-c-k-c0x00ffffff-no-rj", "author": "@xadezkreator", "slot": 0}, {"start": 28, "end": 34, "reading time": 6.0, "text": "Narrator: But this little male is very nearly fully grown The little cat: *exits from under a leaf*", "reward": 14.663120635215115, "correlation": "0.7247009931169385", "corr_A": "0.68", "corr_V": "0.53", "likes": 12000.0, "norm_likes": 0.9944514529686421, "norm_likes_real": 0.9944514529686421, "photo": "https://yt3.ggpht.com/ytc/AIdro_loPhDuemtI-YH1OZ82REj63Ym-Mls96OH2Ojw5S5IOuw=s88-c-k-c0x00ffffff-no-rj", "author": "@francesco6835", "slot": 0}, {"start": 34, "end": 40, "reading time": 6.0, "text": "\"he'll soon be setting off on a solitary life, fending entirely for him self\" Can relate", "reward": 13.935421831916688, "correlation": "0.6722853959469031", "corr_A": "0.79", "corr_V": "0.1", "likes": 1300.0, "norm_likes": 0.977999513425642, "norm_likes_real": 0.977999513425642, "photo": "https://yt3.ggpht.com/ytc/AIdro_kdTxYe0q9fdUHi4a5LMLIMAvUtJneVJKwSkOZ70hdL7g=s88-c-k-c0x00ffffff-no-rj", "author": "@legokangaroo5010", "slot": 0}, {"start": 40, "end": 46, "reading time": 6.0, "text": "This cat is so polite, it didn’t disturb the leaf and just gently jumped over it.", "reward": 11.06555373226299, "correlation": "0.42949550749462345", "corr_A": "0.0", "corr_V": "0.51", "likes": 2600.0, "norm_likes": 0.9852679403879181, "norm_likes_real": 0.9852679403879181, "photo": "https://yt3.ggpht.com/A2pkG3t2ZouJfFX_n66wdDbnLPCB4SPA_JnE1I-NSNyx6e0E7-cILKahQFbSWIJ3NgYyTmopvw=s88-c-k-c0x00ffffff-no-rj", "author": "@brown_chicken", "slot": 0}, {"start": 46, "end": 50, "reading time": 4.0, "text": "what he lacks in size... he makes up for... in cuteness", "reward": 8.743021641527701, "correlation": "0.596989368527244", "corr_A": "0.7", "corr_V": "0.06", "likes": 6700.0, "norm_likes": 0.9917766733274372, "norm_likes_real": 0.9917766733274372, "photo": "https://yt3.ggpht.com/ytc/AIdro_lWYj0tMIpnz0iFSwm1RvQMJ6ToiwiVF89eTsaVABzSNtjN=s88-c-k-c0x00ffffff-no-rj", "author": "@gwyneththeobald2736", "slot": 0}, {"start": 50, "end": 56, "reading time": 6.0, "text": "\"what he lacks in size, he makes up in daring \"  puts paw gently in the water  Extremely daring 💕💕😩", "reward": 12.738970370756856, "correlation": "0.5665964805257899", "corr_A": "0.44", "corr_V": "0.51", "likes": 4900.0, "norm_likes": 0.9899687674078962, "norm_likes_real": 0.9899687674078962, "photo": "https://yt3.ggpht.com/qaDstUlSN4yZJ-8_M3cu6ZxlLyrWziBmYYx5AQ5aZ5DXIqY2PEYTCuW1wUfzKM5YNWN8YDuLEQ=s88-c-k-c0x00ffffff-no-rj", "author": "@comicsandanimation5531", "slot": 0}, {"start": 56, "end": 61, "reading time": 5.0, "text": "Narrator: they are daring Tiny cat: waddles through a tiny puddle", "reward": 8.814207415241038, "correlation": "0.3919669548363252", "corr_A": "0.0", "corr_V": "0.46", "likes": 1400.0, "norm_likes": 0.978907573375557, "norm_likes_real": 0.978907573375557, "photo": "https://yt3.ggpht.com/vB9SZwbFXi1-jyinW-f4DYP-3mNITT2mHA82Va5Y_81NfCpENaUh24pESx-Zp7x1QBmYfmvPhVE=s88-c-k-c0x00ffffff-no-rj", "author": "@joshyookphotography", "slot": 0}, {"start": 61, "end": 67, "reading time": 6.0, "text": "\"What he lacks in size he makes up for in daring\" touches water, instantly pulls paw back", "reward": 11.157492929974136, "correlation": "0.43892168497645784", "corr_A": "0.0", "corr_V": "0.52", "likes": 1800.0, "norm_likes": 0.9817387850427737, "norm_likes_real": 0.9817387850427737, "photo": "https://yt3.ggpht.com/ytc/AIdro_ki8h8-XQeN_pIYmXPo6xWggze7kwRYAbchJF6sY3Y=s88-c-k-c0x00ffffff-no-rj", "author": "@Ithilwen22", "slot": 0}, {"start": 67, "end": 73, "reading time": 6.0, "text": "Young cats are curious...that's how they learn about the world  P A R K O U R", "reward": 14.265314644638384, "correlation": "0.7407382434434561", "corr_A": "0.87", "corr_V": "0.13", "likes": 75.0, "norm_likes": 0.8960759538861516, "norm_likes_real": 0.8960759538861516, "photo": "https://yt3.ggpht.com/ruVazuTZN92Xox6Hs-xyVygppqjt29ubu-azXumNNjjwaGYx-4bT_-tf6uDYeibYKT520dauUA=s88-c-k-c0x00ffffff-no-rj", "author": "@Madam2034", "slot": 0}, {"start": 73, "end": 77, "reading time": 4.0, "text": "\"It's how they learn about the world.\"  Cat: big jump", "reward": 8.209126832408387, "correlation": "0.534266808584909", "corr_A": "0.59", "corr_V": "0.23", "likes": 2200.0, "norm_likes": 0.9837480909322786, "norm_likes_real": 0.9837480909322786, "photo": "https://yt3.ggpht.com/ytc/AIdro_nx131Wgo7-TdCmI4RYULJ6HGXlKCk6Tmf5oO-QTaNts8c=s88-c-k-c0x00ffffff-no-rj", "author": "@spoop4967", "slot": 0}, {"start": 77, "end": 78, "reading time": 1.0, "text": "It is Animated", "reward": 1.1226419205825318, "correlation": "0.34314778442434873", "corr_A": "0.0", "corr_V": "0.41", "likes": 3.0, "norm_likes": 0.4363463517338342, "norm_likes_real": 0.4363463517338342, "photo": "https://yt3.ggpht.com/ytc/AIdro_kIV24dHwX539XhRaPjCga76wgUZF6PKWHOOu8kYfSVVO0=s88-c-k-c0x00ffffff-no-rj", "author": "@MoarPower", "slot": 0}, {"start": 78, "end": 82, "reading time": 4.0, "text": "“Even if it can get them into trouble”  “MEEEOWWWW”", "reward": 8.510406649812055, "correlation": "0.5776352861430386", "corr_A": "0.68", "corr_V": "0.06", "likes": 865.0, "norm_likes": 0.9723310901669365, "norm_likes_real": 0.9723310901669365, "photo": "https://yt3.ggpht.com/ytc/AIdro_mcgT7v2hdsQvC0DtWeZuBPhbShlf-a_JFO3Wuujrddjg=s88-c-k-c0x00ffffff-no-rj", "author": "@toxic10g77", "slot": 0}, {"start": 82, "end": 88, "reading time": 6.0, "text": "I wonder how much of this is set up. Are the leaves placed there to make the cat look smaller. Is it just another fake session like the Polar Bear den footage, or the fake tree houses of native peoples that have been exposed. I struggle to believe BBC footage these days because they have been caught out in so many cheats.", "reward": 11.024472802131669, "correlation": "0.4532936188736346", "corr_A": "0.0", "corr_V": "0.54", "likes": 161.0, "norm_likes": 0.930824895941342, "norm_likes_real": 0.930824895941342, "photo": "https://yt3.ggpht.com/ytc/AIdro_k6cz_D7v3Xg7KJb2qnBC1ciHff1kIPcfuuxS2MYod-Xw=s88-c-k-c0x00ffffff-no-rj", "author": "@TheRealMythril", "slot": 0}, {"start": 88, "end": 93, "reading time": 5.0, "text": "\"Straight away he puts his super senses through their paces\" Act cute", "reward": 11.198471423646856, "correlation": "0.6707390441251159", "corr_A": "0.78", "corr_V": "0.15", "likes": 78.0, "norm_likes": 0.8982161964791396, "norm_likes_real": 0.8982161964791396, "photo": "https://yt3.ggpht.com/HqKL7xhHe_AVbrns__uQSBjaw5dM9SN6uB20G1KUvF-hXxNfi2j_ddFodTWlBJK80WM266x8Kg=s88-c-k-c0x00ffffff-no-rj", "author": "@Sari-ie2kd", "slot": 0}, {"start": 93, "end": 96, "reading time": 3.0, "text": "Video title : world's biggest leaves", "reward": 5.092631484489576, "correlation": "0.3554061082283428", "corr_A": "0.0", "corr_V": "0.42", "likes": 3100.0, "norm_likes": 0.9867316117065065, "norm_likes_real": 0.9867316117065065, "photo": "https://yt3.ggpht.com/6-yMf6KZiD0DEWoySuVdKFlBuNK266jXujPfQT_Ap0jMgwvkR_nZAw1x8WP54gLp9f5hkQP6=s88-c-k-c0x00ffffff-no-rj", "author": "@LaalBaigStudios", "slot": 0}, {"start": 96, "end": 101, "reading time": 5.0, "text": "Plot twist: The cat is normal size this is just a gigantic forest.", "reward": 9.770696889260522, "correlation": "0.4846082440218575", "corr_A": "0.0", "corr_V": "0.57", "likes": 2500.0, "norm_likes": 0.9849228898083893, "norm_likes_real": 0.9849228898083893, "photo": "https://yt3.ggpht.com/ytc/AIdro_n-eFnDZ8rRq5uoqzeSKjKAsMwuCq3cnKJ9JANYjM_nxg=s88-c-k-c0x00ffffff-no-rj", "author": "@MrTaunus007", "slot": 0}, {"start": 101, "end": 106, "reading time": 5.0, "text": "“His eyes are 6 times more powerful than our own”  I feel blind now", "reward": 12.103200959381532, "correlation": "0.7296524730443672", "corr_A": "0.85", "corr_V": "0.12", "likes": 472.0, "norm_likes": 0.9613352457875719, "norm_likes_real": 0.9613352457875719, "photo": "https://yt3.ggpht.com/T4MKVdllqZjNE_wdvlLHTtzRKnHA9ppHBk3cvYGzzQvbLHeoE9wHnk8hnQmA8MuYaNAnkS_u2A=s88-c-k-c0x00ffffff-no-rj", "author": "@Hxpnoticghost", "slot": 0}, {"start": 106, "end": 109, "reading time": 3.0, "text": "\"He may look like a kitten\" Cat: M A E W", "reward": 6.082057810546903, "correlation": "0.5174634130006508", "corr_A": "0.29", "corr_V": "0.54", "likes": 7600.0, "norm_likes": 0.9924257775143327, "norm_likes_real": 0.9924257775143327, "photo": "https://yt3.ggpht.com/ytc/AIdro_limOMP9ISS-kBdfMhG3t4X8A_wVoTkQh5I5eWB0N8=s88-c-k-c0x00ffffff-no-rj", "author": "@annageerdsema4047", "slot": 0}, {"start": 109, "end": 115, "reading time": 6.0, "text": "\"....and sensitive to the slightest movements\" And you never wondered why the video ended right then n there.", "reward": 12.90547478753017, "correlation": "0.6226238083455634", "corr_A": "0.71", "corr_V": "0.2", "likes": 90.0, "norm_likes": 0.905664847897235, "norm_likes_real": 0.905664847897235, "photo": "https://yt3.ggpht.com/WoyAjjiEme9fRTXgd2z6AF_xThVM3B-qA6NWQrGcaXwEQCdUEbFjFk4slqXEhZYXn3Wdxh_EPCA=s88-c-k-c0x00ffffff-no-rj", "author": "@awayfrom234........", "slot": 0}];
+    var optimalComments = [];
+    (function hydrateOptimalComments(){
+      var dataNode = document.getElementById('optimal-comments-data');
+      if(!dataNode){
+        return;
+      }
+      try{
+        var rawText = dataNode.textContent || dataNode.innerText || '[]';
+        optimalComments = JSON.parse(rawText);
+      }catch(err){
+        console.warn('Failed to parse optimal comments JSON', err);
+        optimalComments = [];
+      }
+    })();
+    optimalComments = optimalComments || [];
+    optimalComments.forEach(function(item){
+      if(typeof item.slot !== 'number' || isNaN(item.slot)){
+        item.slot = 0;
+      }
+    });
+    var totalSlots = optimalComments.reduce(function(acc, cur){
+      var slotIdx = (typeof cur.slot === 'number' && !isNaN(cur.slot)) ? cur.slot : 0;
+      return Math.max(acc, slotIdx + 1);
+    }, 1);
+    const SLOT_BASE_OFFSET = 12;
+    const SLOT_GAP = 12;
+    const SLOT_MIN_HEIGHT = 48;
+    const SLOT_DEFAULT_HEIGHT = 64;
+    var slotHeights = new Array(totalSlots).fill(SLOT_DEFAULT_HEIGHT);
+    var slotRegistry = {};
 
     // 요소 참조
-    var video=null, commentsContainer=null, commentsOverlay=null, likesOverlay=null;
+    var video=null, commentsContainer=null, commentsOverlay=null, commentsTextOverlay=null, videoContainerEl=null;
     var playPauseBtn=null, playIcon=null, pauseIcon=null;
     var progressContainer=null, progressBar=null;
     var timeDisplay=null;
@@ -314,13 +349,14 @@
       video = document.getElementById('video-player');
       commentsContainer = document.getElementById('comments-container');
       commentsOverlay = document.getElementById('comments-overlay');
-      likesOverlay = document.getElementById('likes-overlay');
+      commentsTextOverlay = document.getElementById('comments-text-overlay');
       playPauseBtn = document.getElementById('play-pause-btn');
       playIcon = document.getElementById('play-icon');
       pauseIcon = document.getElementById('pause-icon');
       progressContainer = document.getElementById('progress-container');
       progressBar = document.getElementById('progress-bar');
       timeDisplay = document.getElementById('time-display');
+      videoContainerEl = document.querySelector('.video-container');
 
       // start 기준 정렬
       optimalComments.sort((a,b)=>a.start-b.start);
@@ -341,6 +377,7 @@
 
       // 초기 상태
       updatePlayPauseButton();
+      updateStackReserve();
     });
 
     function togglePlayPause(){ if(video.paused) video.play(); else video.pause(); }
@@ -365,16 +402,21 @@
       // 댓글 표시/제거
       optimalComments.forEach(function(cmt, idx){
         var el = document.getElementById('comment-'+idx);
+        var textEl = document.getElementById('comment-text-'+idx);
         if(cmt.start <= t && t < cmt.end){
           if(!el) addLiveComment(cmt, idx);
         } else if(el && t >= cmt.end){
-          // 페이드 아웃 후 제거, likes도 함께 제거
+          var slotIdx = parseInt(el.dataset.slot || '0', 10);
+          // 페이드 아웃 후 제거, 텍스트와 likes도 함께 제거
           el.style.opacity = '0';
+          if(textEl) textEl.style.opacity = '0';
           var likeEl = document.getElementById('like-'+idx);
           if(likeEl) likeEl.style.opacity = '0';
           setTimeout(()=>{
             if(el && el.parentNode) el.remove();
+            if(textEl && textEl.parentNode) textEl.remove();
             if(likeEl && likeEl.parentNode) likeEl.remove();
+            releaseSlotElement(slotIdx, idx);
             recalcOverlayByComments();
           }, 300);
         }
@@ -394,9 +436,24 @@
     }
 
     function addLiveComment(cmt, idx){
+      var slotIdx = (typeof cmt.slot === 'number' && !isNaN(cmt.slot)) ? cmt.slot : 0;
+      var initialBottom = computeSlotOffset(slotIdx);
+
+      // 마스크가 적용되는 기본 댓글 컨테이너 (투명한 플레이스홀더)
       var div = document.createElement('div');
       div.className = 'live-comment';
       div.id = 'comment-' + idx;
+      div.dataset.slot = slotIdx;
+      div.style.bottom = initialBottom + 'px';
+      div.style.opacity = '0';
+      div.style.height = '60px'; // 텍스트 높이 예상값
+      commentsContainer.appendChild(div);
+
+      // 텍스트와 프로필을 별도 레이어에 렌더링 (마스크 영향 없음)
+      var textDiv = document.createElement('div');
+      textDiv.className = 'live-comment';
+      textDiv.id = 'comment-text-' + idx;
+      textDiv.dataset.slot = slotIdx;
 
       var user = cmt.author || cmt.user || getRandomName();
       var txt = cmt.text || '';
@@ -404,7 +461,7 @@
       var profileColor = getRandomColor();
       var photo = cmt.photo;
 
-      div.innerHTML = `
+      textDiv.innerHTML = `
         <div class="comment-content">
           <div class="text-content">
             <div class="user-info">
@@ -416,34 +473,41 @@
           </div>
         </div>`;
 
-      // 등장 애니메이션 기본값
-      div.style.bottom = '10px';
-      div.style.opacity = '0';
-      commentsContainer.appendChild(div);
-      // 좋아요/하트는 별도 오버레이 레이어에 렌더링(마스크 비적용)
+      textDiv.style.bottom = initialBottom + 'px';
+      textDiv.style.opacity = '0';
+      commentsTextOverlay.appendChild(textDiv);
+
+      // 좋아요/하트도 같은 레이어에 렌더링(마스크 비적용)
       var like = document.createElement('div');
       like.className = 'like-item';
       like.id = 'like-' + idx;
-      like.style.bottom = '10px';
+      like.dataset.slot = slotIdx;
+      like.style.bottom = initialBottom + 'px';
       like.style.opacity = '0';
       like.innerHTML = `
         <svg class="heart-icon" viewBox="0 0 24 24">
           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
         </svg>
         <span class="likes-number">${formatLikes(likes)}</span>`;
-      likesOverlay.appendChild(like);
+      commentsTextOverlay.appendChild(like);
 
       // 생성 직후 위치/여백 계산을 먼저 수행해 점프 방지
-      placeLikeForComment(div, like);
-      reserveTextSpace(div, like);
+      placeLikeForComment(textDiv, like);
+      reserveTextSpace(textDiv, like);
 
-      setTimeout(()=>{ div.style.opacity='1'; like.style.opacity='1'; recalcOverlayByComments(); }, 50);
+      requestAnimationFrame(()=>{
+        registerSlotElement(slotIdx, idx, div, textDiv, like);
+        div.style.opacity='1';
+        textDiv.style.opacity='1';
+        like.style.opacity='1';
+        recalcOverlayByComments();
+      });
     }
 
     // ===== A 스타일: 댓글 길이에 따라 오버레이 높이와 마스크 가변 =====
     const OVERLAY_PADDING = 15; // 하단 여백
     const OVERLAY_MIN = 68;     // 최소 높이
-    const OVERLAY_MAX_RATIO = 0.55; // 비디오 높이 대비 최대 비율
+    const OVERLAY_MAX_RATIO = 1; // 비디오 높이 대비 최대 비율
     const USERINFO_EXTRA = 16;  // user-info 라인 여유치
 
     function clampOverlayHeight(px){
@@ -454,18 +518,25 @@
     }
 
     function recalcOverlayByComments(){
-      const visibles = Array.from(commentsContainer.querySelectorAll('.live-comment'));
-      if(visibles.length === 0){
+      if(!commentsTextOverlay || !commentsOverlay) return;
+      updateSlotPositions();
+      const allComments = Array.from(commentsTextOverlay.querySelectorAll('.live-comment'));
+      if(allComments.length === 0){
         const h = clampOverlayHeight(OVERLAY_MIN);
         commentsOverlay.style.setProperty('--overlay-h', h + 'px');
         commentsContainer.style.setProperty('--mask-stop', '35%');
         return;
       }
 
-      let maxCardH = 0;
-      visibles.forEach(el=>{ const r = el.getBoundingClientRect(); maxCardH = Math.max(maxCardH, r.height); });
+      const overlayRect = commentsOverlay.getBoundingClientRect();
+      let maxDistance = 0;
+      allComments.forEach(el=>{
+        const rect = el.getBoundingClientRect();
+        const distance = overlayRect.bottom - rect.top;
+        maxDistance = Math.max(maxDistance, Math.ceil(distance));
+      });
 
-      const desired = clampOverlayHeight(Math.ceil(maxCardH + OVERLAY_PADDING + USERINFO_EXTRA));
+      const desired = clampOverlayHeight(Math.ceil(maxDistance + OVERLAY_PADDING));
       commentsOverlay.style.setProperty('--overlay-h', desired + 'px');
 
       let maskStop = 45;
@@ -478,12 +549,13 @@
     }
     
     function syncLikesPositions(){
-      if(!commentsOverlay || !commentsContainer || !likesOverlay) return;
+      updateSlotPositions();
+      if(!commentsOverlay || !commentsTextOverlay) return;
       const overlayRect = commentsOverlay.getBoundingClientRect();
-      const comments = Array.from(commentsContainer.querySelectorAll('.live-comment'));
+      const comments = Array.from(commentsTextOverlay.querySelectorAll('.live-comment'));
       comments.forEach(el=>{
         const id = el.id || '';
-        const idx = id.split('-')[1];
+        const idx = id.split('-')[2]; // 'comment-text-0' -> '0'
         if(idx === undefined) return;
         const likeEl = document.getElementById('like-'+idx);
         if(!likeEl) return;
@@ -508,6 +580,76 @@
       const likeRect = likeEl.getBoundingClientRect();
       const reserve = Math.max(28, Math.round(likeRect.width) + 8);
       textContainer.style.paddingRight = reserve + 'px';
+    }
+
+    function getSlotHeight(slotIdx){
+      if(slotIdx < 0 || slotIdx >= slotHeights.length){
+        return SLOT_DEFAULT_HEIGHT;
+      }
+      return slotHeights[slotIdx] || SLOT_DEFAULT_HEIGHT;
+    }
+
+    function computeSlotOffset(slotIdx){
+      let offset = SLOT_BASE_OFFSET;
+      for(let i=0; i<slotIdx; i++){
+        offset += (getSlotHeight(i) + SLOT_GAP);
+      }
+      return offset;
+    }
+
+    function updateSlotPositions(){
+      Object.keys(slotRegistry).forEach(function(key){
+        const slotIdx = parseInt(key, 10);
+        if(Number.isNaN(slotIdx)) return;
+        const entry = slotRegistry[slotIdx];
+        if(!entry) return;
+        const offset = computeSlotOffset(slotIdx);
+        const targets = [entry.placeholder, entry.text, entry.like];
+        targets.forEach(function(el){
+          if(el){ el.style.bottom = offset + 'px'; }
+        });
+        placeLikeForComment(entry.text, entry.like);
+        reserveTextSpace(entry.text, entry.like);
+      });
+    }
+
+    function updateStackReserve(){
+      if(!videoContainerEl) return;
+      let extra = 0;
+      for(let i=1; i<totalSlots; i++){
+        extra += getSlotHeight(i) + SLOT_GAP;
+      }
+      const reserve = Math.max(40, Math.round(extra + 20));
+      videoContainerEl.style.setProperty('--slot-stack-reserve', reserve + 'px');
+    }
+
+    function registerSlotElement(slotIdx, commentId, placeholderEl, textEl, likeEl){
+      if(slotIdx >= slotHeights.length){
+        const diff = slotIdx - slotHeights.length + 1;
+        for(let i=0; i<diff; i++){ slotHeights.push(SLOT_DEFAULT_HEIGHT); }
+      }
+      const measuredHeight = Math.max(
+        SLOT_MIN_HEIGHT,
+        Math.round(textEl.getBoundingClientRect().height || SLOT_DEFAULT_HEIGHT)
+      );
+      slotHeights[slotIdx] = measuredHeight;
+      slotRegistry[slotIdx] = {
+        idx: commentId,
+        placeholder: placeholderEl,
+        text: textEl,
+        like: likeEl
+      };
+      updateSlotPositions();
+      updateStackReserve();
+    }
+
+    function releaseSlotElement(slotIdx, commentId){
+      const entry = slotRegistry[slotIdx];
+      if(!entry || entry.idx !== commentId) return;
+      delete slotRegistry[slotIdx];
+      slotHeights[slotIdx] = SLOT_DEFAULT_HEIGHT;
+      updateSlotPositions();
+      updateStackReserve();
     }
   </script>
 </body>

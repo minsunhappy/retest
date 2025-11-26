@@ -14,13 +14,13 @@ function generateQuestionsHTML(questionsData) {
     questionsData.forEach((question, index) => {
         html += `
         <div class="question-group" style="margin-bottom: 30px; padding: 15px; background-color: white; border-radius: 4px;">
-            <div class="question-title" style="font-size: 16px; font-weight: bold; margin-bottom: 15px;">
-                <strong><span style="font-size:16px;">${question.text}</span></strong>
+            <div class="question-title" style="font-size: 16px; font-weight: normal; margin-bottom: 15px;">
+                ${question.text}
             </div>
             <div class="scale-container" style="margin: 15px 0;">
                 <div class="scale-labels" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                    <span style="font-size: 12px; color: #666;">${question.scaleLeft}</span>
-                    <span style="font-size: 12px; color: #666;">${question.scaleRight}</span>
+                    <span style="font-size: 12px; font-weight: bold; color: #666;">${question.scaleLeft}</span>
+                    <span style="font-size: 12px; font-weight: bold; color: #666;">${question.scaleRight}</span>
                 </div>
                 <div class="scale-options" style="display: flex; justify-content: space-between; gap: 5px;">
         `;
@@ -29,7 +29,7 @@ function generateQuestionsHTML(questionsData) {
             html += `
                     <div class="scale-option" style="flex: 1;">
                         <input type="radio" name="question-${index}" id="q${index}-opt${i}" value="${i}" required style="display: none;">
-                        <label for="q${index}-opt${i}" style="display: block; padding: 10px; text-align: center; background-color: #fff; border: 2px solid #ddd; border-radius: 4px; cursor: pointer; font-size: 18px; font-weight: bold; transition: all 0.3s;">${i}</label>
+                        <label for="q${index}-opt${i}" style="display: block; padding: 10px; text-align: center; background-color: #fff; border: 2px solid #ddd; border-radius: 4px; cursor: pointer; font-size: 18px; font-weight: normal; transition: all 0.3s;">${i}</label>
                     </div>
             `;
         }

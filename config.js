@@ -26,6 +26,39 @@ const CONFIG = {
     numData: 5
 };
 
+const INTERFACE_ORDER = ['C', 'D', 'D1', 'Y', 'Y1'];
+const FAIR_DATA_PERMUTATIONS = [
+    [0, 1, 2, 3, 4],
+    [1, 2, 3, 4, 0],
+    [2, 3, 4, 0, 1],
+    [3, 4, 0, 1, 2],
+    [4, 0, 1, 2, 3]
+];
+const FAIR_PAIR_STORAGE_KEY = 'fairPairScheduleIndex';
+
+function getNextFairPermutationIndex(length) {
+    if (!length || length <= 0) {
+        return 0;
+    }
+    if (typeof localStorage === 'undefined') {
+        return 0;
+    }
+    const stored = parseInt(localStorage.getItem(FAIR_PAIR_STORAGE_KEY), 10);
+    const current = Number.isInteger(stored) && stored >= 0 ? stored % length : 0;
+    const next = (current + 1) % length;
+    localStorage.setItem(FAIR_PAIR_STORAGE_KEY, next.toString());
+    return current;
+}
+
+function shuffleArray(items) {
+    const arr = [...items];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
 // data_folders.json에서 폴더 목록 로드
 async function loadDataFolders() {
     // 이미 설정되어 있으면 그대로 사용
@@ -54,7 +87,7 @@ async function loadDataFolders() {
 // 인터페이스-데이터 쌍 생성 함수
 // 모든 인터페이스를 경험하고, 데이터는 중복되지 않도록 함
 async function generateInterfaceDataPairs() {
-    const interfaces = ['C', 'D', 'D1', 'Y', 'Y1'];
+    const interfaces = [...INTERFACE_ORDER];
     
     // 데이터 폴더 이름 로드
     const dataFolders = await loadDataFolders();
@@ -64,21 +97,29 @@ async function generateInterfaceDataPairs() {
         throw new Error('데이터 폴더가 부족합니다.');
     }
     
-    // 인터페이스를 랜덤하게 섞기
-    const shuffledInterfaces = [...interfaces].sort(() => Math.random() - 0.5);
-
-    // 데이터를 랜덤하게 섞기
-    const shuffledData = [...dataFolders].sort(() => Math.random() - 0.5);
-
-    // 인터페이스와 데이터를 1:1로 매핑
-    const pairs = shuffledInterfaces.map((interface, index) => ({
-        interface: interface,
-        data: shuffledData[index],
-        htmlFile: CONFIG.interfaces[interface],
-        dataPath: `${CONFIG.dataBasePath}/${shuffledData[index]}/${CONFIG.interfaces[interface]}`
-    }));
+    const normalizedData = dataFolders.slice(0, interfaces.length);
+    let permutation = null;
+    const eligiblePermutations = FAIR_DATA_PERMUTATIONS.filter(p => p.length === interfaces.length);
     
-    return pairs;
+    if (eligiblePermutations.length > 0 && typeof localStorage !== 'undefined') {
+        const scheduleIndex = getNextFairPermutationIndex(eligiblePermutations.length);
+        permutation = eligiblePermutations[scheduleIndex];
+    } else {
+        permutation = interfaces.map((_, idx) => idx);
+    }
+    
+    const pairedList = interfaces.map((interfaceId, index) => {
+        const dataIndex = permutation[index] % normalizedData.length;
+        const dataFolder = normalizedData[dataIndex];
+        return {
+            interface: interfaceId,
+            data: dataFolder,
+            htmlFile: CONFIG.interfaces[interfaceId],
+            dataPath: `${CONFIG.dataBasePath}/${dataFolder}/${CONFIG.interfaces[interfaceId]}`
+        };
+    });
+    
+    return shuffleArray(pairedList);
 }
 
 // localStorage에 저장된 매핑이 없으면 새로 생성하고 저장
@@ -232,30 +273,30 @@ function getDefaultQuestionDefinitions() {
         {
             id: 'Q1',
             title: 'Mental Demand',
-            text: '[Mental Demand] 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 과정에 정신적으로 부담을 주었나요?',
-            scaleLeft: '전혀 그렇지 않다',
-            scaleRight: '매우 그렇다'
+            text: '<strong>[Mental Demand]</strong> 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 과정에 <u><strong>정신적으로 부담</strong></u>을 주었나요?',
+            scaleLeft: '전혀 부담을 주지 않았다',
+            scaleRight: '매우 부담을 주었다'
         },
         {
             id: 'Q2',
             title: 'Physical Demand',
-            text: '[Physical Demand] 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 과정에 신체적으로 부담을 주었나요?',
-            scaleLeft: '전혀 그렇지 않다',
-            scaleRight: '매우 그렇다'
+            text: '<strong>[Physical Demand]</strong> 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 과정에 <u><strong>신체적/물리적으로 부담</strong></u>을 주었나요?',
+            scaleLeft: '전혀 신체적/물리적 부담을 주지 않았다',
+            scaleRight: '매우 신체적/물리적 부담을 주었다'
         },
         {
             id: 'Q3',
             title: 'Temporal Alignment',
-            text: '[Contextual Alignment] 이 인터페이스에서 재생 중에 제시되는 댓글이 해당 장면과 잘 어울렸나요?',
+            text: '<strong>[Contextual Alignment]</strong> 이 인터페이스에서 재생 중에 제시되는 댓글이 해당 장면과 <u><strong>잘 어울렸나요</strong></u>?',
             scaleLeft: '전혀 어울리지 않는다',
             scaleRight: '매우 잘 어울린다'
         },
         {
             id: 'Q4',
             title: 'Overall Engagement',
-            text: '[Overall Engagement] 영상 내용과 상관 없이 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 경험에 즐거움/흥미/참여감(engagement) 측면에서 만족스러웠나요?',
-            scaleLeft: '전혀 그렇지 않다',
-            scaleRight: '매우 그렇다'
+            text: '<strong>[Overall Engagement]</strong> 영상 내용과 상관 없이 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 경험에 <u><strong>즐거움/흥미/참여감(engagement) 측면에서 만족</strong></u>스러웠나요?',
+            scaleLeft: '전혀 만족스럽지 않다',
+            scaleRight: '매우 만족스럽다'
         }
     ];
 }

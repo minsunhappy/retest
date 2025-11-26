@@ -1,0 +1,53 @@
+{
+  "friedman": {
+    "Q1": {
+      "interfaces": [
+        "C",
+        "D",
+        "D1",
+        "Y",
+        "Y1"
+      ],
+      "statistic": 4.0,
+      "p_value": 0.40600584970983794,
+      "n": 1
+    },
+    "Q2": {
+      "interfaces": [
+        "C",
+        "D",
+        "D1",
+        "Y",
+        "Y1"
+      ],
+      "statistic": 4.0,
+      "p_value": 0.40600584970983794,
+      "n": 1
+    },
+    "Q3": {
+      "interfaces": [
+        "C",
+        "D",
+        "D1",
+        "Y",
+        "Y1"
+      ],
+      "statistic": 4.0,
+      "p_value": 0.40600584970983794,
+      "n": 1
+    },
+    "Q4": {
+      "interfaces": [
+        "C",
+        "D",
+        "D1",
+        "Y",
+        "Y1"
+      ],
+      "statistic": 4.0,
+      "p_value": 0.40600584970983794,
+      "n": 1
+    }
+  },
+  "pairwise_wilcoxon": {}
+}

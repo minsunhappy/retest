@@ -33,15 +33,15 @@ def resolve_video_directory():
             return candidate, rel_path
     return None, None
 
-VIDEO_DIR, VIDEO_REL_PREFIX = resolve_video_directory()
+VIDEO_DIR, _VIDEO_REL_PREFIX = resolve_video_directory()
 
 def get_source_path():
     """원본 데이터 경로를 가져옵니다"""
     # 원본 경로를 직접 지정 (config.js의 원본 경로)
     # 또는 환경변수나 사용자 입력으로 받을 수 있습니다
     original_paths = [
-        '/source/minsunkim/comment/main/12_add_customization/output/1124',
-        Path('/source/minsunkim/comment/main/12_add_customization/output/1124'),
+        '/source/minsunkim/comment/main/12_add_customization/output/1127',
+        Path('/source/minsunkim/comment/main/12_add_customization/output/1127'),
     ]
     
     # 먼저 절대 경로로 시도
@@ -83,12 +83,12 @@ def get_source_path():
     return None
 
 def update_video_paths_in_html(folder_path, folder_name):
-    """HTML 파일들에서 비디오 경로를 ../video/<VIDEO_ID>.mp4 형태로 변경"""
+    """HTML 파일들에서 비디오 경로를 데이터 폴더 기준 상대 경로로 변경"""
     import re
     
     video_id = folder_name.split('_')[0]
     
-    if not VIDEO_DIR or not VIDEO_REL_PREFIX:
+    if not VIDEO_DIR:
         print("   ⚠️  비디오 디렉토리를 찾을 수 없습니다.")
         return
     
@@ -97,8 +97,12 @@ def update_video_paths_in_html(folder_path, folder_name):
         print(f"   ⚠️  비디오 파일이 존재하지 않습니다: {video_file}")
         return
     
-    rel_prefix = VIDEO_REL_PREFIX.rstrip('/')
-    video_path = f"{rel_prefix}/{video_id}.mp4"
+    try:
+        relative_video_path = os.path.relpath(video_file, folder_path)
+    except ValueError:
+        relative_video_path = str(video_file)
+    
+    video_path = relative_video_path.replace(os.sep, '/')
     
     html_files = [
         'comvi_ui_default.html',
@@ -252,7 +256,7 @@ def main():
     
     print(f"📂 소스 경로: {source_path}")
     
-    if not VIDEO_DIR or not VIDEO_REL_PREFIX:
+    if not VIDEO_DIR:
         print("⚠️  비디오 폴더를 찾을 수 없습니다. /usertest/video 에 mp4 파일이 있는지 확인하세요.")
     
     

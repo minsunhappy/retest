@@ -160,18 +160,132 @@ def run_pairwise_wilcoxon(df: pd.DataFrame) -> dict:
     return results
 
 
-def plot_interface_scores(df: pd.DataFrame, output_dir: Path, label: str) -> None:
+def p_value_to_stars(p: float) -> str:
+    if p < 0.001:
+        return '***'
+    if p < 0.01:
+        return '**'
+    if p < 0.05:
+        return '*'
+    return ''
+
+
+def plot_interface_scores(
+    df: pd.DataFrame,
+    friedman_results: dict,
+    pairwise_results: dict,
+    output_dir: Path,
+    label: str
+) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
-    melted = df.melt(id_vars=["interface"], value_vars=QUESTION_ORDER, var_name="question", value_name="score").dropna()
-    plt.figure(figsize=(10, 6))
-    sns.barplot(data=melted, x="interface", y="score", hue="question", order=INTERFACE_ORDER, palette="Set2", ci="sd")
-    plt.ylim(0, 7)
-    plt.title(f"Average Scores by Interface ({label})")
-    plt.ylabel("Likert Score (1-7)")
-    plt.xlabel("Interface")
-    plt.legend(title="")
+    question_labels = {
+        "Q1": "Q1. Mental Demand",
+        "Q2": "Q2. Physical Demand",
+        "Q3": "Q3. Contextual Alignment",
+        "Q4": "Q4. Overall Engagement",
+    }
+    interface_labels = {
+        "C": "ComVi (C)",
+        "D": "Danmaku (D)",
+        "D1": "Danmaku One (D1)",
+        "Y": "YouTube (Y)",
+        "Y1": "YouTube One (Y1)",
+    }
+    colors = ["#266DD3", "#FF914D", "#FDC830", "#4C956C", "#B56576"]
+
+    fig, ax = plt.subplots(figsize=(13, 6))
+    total_participants = df["participant_id"].nunique()
+    x = np.arange(len(QUESTION_ORDER))
+    bar_width = 0.16
+    offsets = np.linspace(-(len(INTERFACE_ORDER) - 1) / 2, (len(INTERFACE_ORDER) - 1) / 2, len(INTERFACE_ORDER)) * bar_width
+
+    bar_centers = {question: {} for question in QUESTION_ORDER}
+
+    for idx, (interface, color) in enumerate(zip(INTERFACE_ORDER, colors)):
+        subset = df[df["interface"] == interface]
+        if subset.empty:
+            continue
+        means = [subset[q].mean() for q in QUESTION_ORDER]
+        sems = [subset[q].sem() for q in QUESTION_ORDER]
+        positions = x + offsets[idx]
+        bars = ax.bar(
+            positions,
+            means,
+            width=bar_width,
+            color=color,
+            alpha=0.85,
+            yerr=sems,
+            capsize=4,
+            label=interface_labels.get(interface, interface),
+            edgecolor="white",
+            linewidth=0.8,
+        )
+        for px, mean in zip(positions, means):
+            if pd.notna(mean):
+                ax.text(px, mean + 0.05, f"{mean:.2f}", ha="center", va="bottom", fontsize=9)
+        for question, pos, mean, sem in zip(QUESTION_ORDER, positions, means, sems):
+            if pd.notna(mean):
+                bar_centers[question][interface] = {
+                    "x": pos,
+                    "height": mean + (sem if pd.notna(sem) else 0)
+                }
+
+    ax.set_xticks(x)
+    ax.set_xticklabels([question_labels[q] for q in QUESTION_ORDER], fontsize=11)
+    ax.set_ylim(1, 7.2)
+    ax.set_yticks(range(1, 8))
+    ax.set_ylabel("7-point Likert scale", fontsize=12)
+    ax.grid(axis="y", linestyle="--", alpha=0.3)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.set_title(f"Interface comparison by question ({label})", fontsize=14, pad=12)
+    ax.legend(ncol=3, fontsize=10)
+
+    # annotate N
+    ax.text(
+        0.02,
+        1.02,
+        f"N = {total_participants}",
+        transform=ax.transAxes,
+        fontsize=11,
+        ha="left",
+        va="bottom",
+        bbox=dict(facecolor="white", alpha=0.8, edgecolor="none")
+    )
+
+    # significance markers per question
+    for question in QUESTION_ORDER:
+        entries = pairwise_results.get(question, [])
+        if not entries:
+            continue
+
+        max_height = max(
+            (bar_centers[question][iface]["height"] for iface in bar_centers[question]),
+            default=0
+        )
+        offset_step = 0.18
+        level = 0
+        for entry in entries:
+            if not entry.get("reject_null"):
+                continue
+            iface_a = entry["interface_a"]
+            iface_b = entry["interface_b"]
+            data_a = bar_centers[question].get(iface_a)
+            data_b = bar_centers[question].get(iface_b)
+            if not data_a or not data_b:
+                continue
+
+            x1 = data_a["x"]
+            x2 = data_b["x"]
+            y = max_height + 0.15 + level * offset_step
+            ax.plot([x1, x1, x2, x2], [y - 0.03, y, y, y - 0.03], color="black", linewidth=1)
+            stars = p_value_to_stars(entry.get("p_value_holm", entry.get("p_value", 1)))
+            if stars:
+                ax.text((x1 + x2) / 2, y + 0.02, stars, ha="center", va="bottom", fontsize=11)
+            level += 1
+
     plt.tight_layout()
-    plt.savefig(output_dir / f"{label}_barplot.png", dpi=200)
+    plt.savefig(output_dir / f"{label}_barplot.jpg", dpi=200, bbox_inches="tight", format="jpg")
     plt.close()
 
 
@@ -200,7 +314,7 @@ def analyze_group(df: pd.DataFrame, label: str, output_dir: Path) -> None:
             indent=2,
         )
 
-    plot_interface_scores(df, dest, label)
+    plot_interface_scores(df, friedman_results, pairwise_results, dest, label)
     df.to_csv(dest / f"{label}_raw_long.csv", index=False)
     print(f"[INFO] {label} 분석 결과를 {dest}에 저장했습니다.")
 
@@ -208,7 +322,7 @@ def analyze_group(df: pd.DataFrame, label: str, output_dir: Path) -> None:
 def main():
     parser = argparse.ArgumentParser(description="Supabase 설문 응답 분석")
     parser.add_argument("--supabase-url", default=os.environ.get("SUPABASE_URL"), help="Supabase 프로젝트 URL")
-    parser.add_argument("--service-key", default="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFyb2Nob3d5a3lubWRoeWlrY2pkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwODM4ODAsImV4cCI6MjA3OTY1OTg4MH0.pdnjDMltF0kmSFOKiJL5wJIYTwtFLZWdaRUTUxhvaf4", help="Supabase service key")
+    parser.add_argument("--service-key", default=os.environ.get("SUPABASE_SERVICE_KEY"), help="Supabase service key")
     parser.add_argument("--table", default="survey_responses", help="조회할 테이블 이름")
     parser.add_argument("--limit", type=int, default=None, help="조회할 레코드 수 제한")
     parser.add_argument("--output-dir", default="supabase_analysis", help="결과 저장 폴더")
