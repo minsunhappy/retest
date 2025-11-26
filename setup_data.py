@@ -8,6 +8,7 @@ import os
 import shutil
 import json
 from pathlib import Path
+from fnmatch import fnmatch
 
 # 현재 스크립트의 디렉토리
 SCRIPT_DIR = Path(__file__).parent
@@ -20,6 +21,7 @@ VIDEO_DIR_CANDIDATES = [
 ]
 
 DEFAULT_DATASET_COUNT = 5
+SKIP_FILE_PATTERNS = ['comment_corr.json']
 
 def resolve_video_directory():
     """비디오 파일이 위치한 디렉토리와 retest 기준 상대 경로를 반환"""
@@ -150,6 +152,25 @@ def update_video_paths_in_html(folder_path, folder_name):
     if updated_count > 0:
         print(f"   ✅ {updated_count}개 HTML 파일의 비디오 경로 업데이트 완료")
 
+def remove_unwanted_files(folder_path):
+    """Remove files that should not be included in the dataset."""
+    if not SKIP_FILE_PATTERNS:
+        return
+    removed = 0
+    for root, _, files in os.walk(folder_path):
+        for file_name in files:
+            if any(fnmatch(file_name, pattern) for pattern in SKIP_FILE_PATTERNS):
+                file_path = Path(root) / file_name
+                try:
+                    file_path.unlink()
+                    removed += 1
+                    rel = file_path.relative_to(folder_path)
+                    print(f"   🧾 불필요 파일 제거: {rel}")
+                except FileNotFoundError:
+                    continue
+    if removed > 0:
+        print(f"   ✅ {removed}개 파일을 제외했습니다.")
+
 def copy_data_folders(source_path, target_dir, folder_names):
     """소스 경로의 폴더들을 타겟 디렉토리로 복사 (폴더명을 유지)"""
     target_dir.mkdir(parents=True, exist_ok=True)
@@ -179,9 +200,17 @@ def copy_data_folders(source_path, target_dir, folder_names):
                 shutil.rmtree(target_folder)
             
             print(f"📁 복사 중: {source_folder} -> {target_folder}")
-            shutil.copytree(source_folder, target_folder)
+            if SKIP_FILE_PATTERNS:
+                shutil.copytree(
+                    source_folder,
+                    target_folder,
+                    ignore=shutil.ignore_patterns(*SKIP_FILE_PATTERNS)
+                )
+            else:
+                shutil.copytree(source_folder, target_folder)
             
             update_video_paths_in_html(target_folder, folder_name)
+            remove_unwanted_files(target_folder)
             
             copied_folders.append(folder_name)
             print(f"✅ 복사 완료: {folder_name}")
@@ -332,6 +361,7 @@ def update_video_paths_only():
     for folder_path in folder_paths:
         print(f"📁 {folder_path.name} 폴더 처리 중...")
         update_video_paths_in_html(folder_path, folder_path.name)
+        remove_unwanted_files(folder_path)
         updated_folders.append(folder_path.name)
     
     print()
