@@ -27,7 +27,7 @@
 
 ## 질문 4: Overall Engagement
 **질문 텍스트:**
-<strong>[Overall Engagement]</strong> 영상 내용과 상관 없이 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 경험에 <u><strong>즐거움/흥미/참여감 (engagement) 측면에서 만족</strong></u>스러웠나요?
+<strong>[Overall Engagement]</strong> <span style="color: red; font-weight: bold; text-decoration: underline;">영상 자체의 재미와 내용과는 별개로</span> 이 인터페이스에서 댓글을 제시하는 방식이 영상 시청 경험에 <u><strong>즐거움/흥미/참여감 (engagement) 측면에서 만족</strong></u>스러웠나요?
 
 **척도:**
 - 1: 전혀 만족스럽지 않다
