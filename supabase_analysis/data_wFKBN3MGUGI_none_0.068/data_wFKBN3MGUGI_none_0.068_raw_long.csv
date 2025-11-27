@@ -1,4 +1,4 @@
-participant_id,name,age,gender,interface,data_folder,html_file,Q1,Q2,Q3,Q4,preferred_interface,preferred_reason,created_at
+participant_id,name,age,gender,interface,data_folder,html_file,Q1,Q2,Q3,Q4,preferred_interface,preferred_reason,created_at,pairing_index,pairing_number
 44f05781-6e50-4014-af66-bdc306937c66,,,,Y1,wFKBN3MGUGI_none_0.068,youtube_ui_one.html,2,5,3,6,Y,"각 인터페이스가 마음에 안들었던 점을 함께 기재하면 좋을 것 같아서 해당 부분도 추가하겠습니다.
 
 <가장 마음에 든 인터페이스>
@@ -8,5 +8,10 @@ D. 가장 익숙한 방식. 유튜브에서 실제로 볼 때 이렇게 함. 본
 A. 하나씩 나오는 것 자체는 산만하지 않아서 좋았지만, 영상과 싱크가 완벽하게 맞지 않으면 오히려 영상의 재미를 반감시키는 부분이 있음, 하단의 자막이 계속 바뀌어서 영상 집중도가 떨어짐.
 B. 예전에 일본에서 유행했던 방식인 것 같은데, 도저히 영상에 집중할 수가 없음. 영상 내용 뿐만 아니라 댓글 내용도 인지가 전혀 안됨.
 C. A의 단점 + 영상 가운데에 있어서 더 낮아진 집중도. 자막이 거슬릴 때도 있음.
-E. 한번에 여러 개를 스키밍 할 수 없고, 코멘트를 보기위해서 지속적으로 신경써서 행위를 해야하는 게 부담스러움. 또한 한번에 댓글이 넘어가면 다시 조정해야 하는 과정이 번거로움.",2025-11-27T11:20:46.481+00:00
-1172b571-b3bc-44d2-90eb-07246e3ee5c5,,,,Y1,wFKBN3MGUGI_none_0.068,youtube_ui_one.html,1,1,6,5,Y,읽은 후에 곱씹어보고 싶은 댓글들을 사용자의 선호도에 맞추어 천천히 볼 수 있어서 좋았다.,2025-11-27T12:22:09.842+00:00
+E. 한번에 여러 개를 스키밍 할 수 없고, 코멘트를 보기위해서 지속적으로 신경써서 행위를 해야하는 게 부담스러움. 또한 한번에 댓글이 넘어가면 다시 조정해야 하는 과정이 번거로움.",2025-11-27T11:20:46.481+00:00,,
+1172b571-b3bc-44d2-90eb-07246e3ee5c5,,,,Y1,wFKBN3MGUGI_none_0.068,youtube_ui_one.html,1,1,6,5,Y,읽은 후에 곱씹어보고 싶은 댓글들을 사용자의 선호도에 맞추어 천천히 볼 수 있어서 좋았다.,2025-11-27T12:22:09.842+00:00,,
+bb667562-25c9-4867-b261-19d69c749520,,,,D1,wFKBN3MGUGI_none_0.068,danmaku_ui_one_default.html,2,2,2,2,C,ll,2025-11-27T13:13:37.997+00:00,,
+21ff657a-e67b-4b86-8aa6-985cbaba71de,,,,D1,wFKBN3MGUGI_none_0.068,danmaku_ui_one_default.html,4,4,4,4,D,ㅇㅇ,2025-11-27T13:46:23.308+00:00,,
+b3276a54-959d-4e4d-b2c8-09af5d8d011d,,,,D1,wFKBN3MGUGI_none_0.068,danmaku_ui_one_default.html,4,4,4,4,C,d,2025-11-27T13:58:27.805+00:00,,
+98a7576f-3309-493a-9341-4589d12905fc,,,,D,wFKBN3MGUGI_none_0.068,danmaku_ui_default.html,2,2,2,2,C,,2025-11-27T14:01:02.52+00:00,,
+eb56b846-d5d8-4739-923b-100ddeeb241d,,,,Y1,wFKBN3MGUGI_none_0.068,youtube_ui_one.html,2,2,2,2,D,ㅇ,2025-11-27T14:07:22.957+00:00,0.0,1.0

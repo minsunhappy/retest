@@ -18,7 +18,7 @@
 
 ## 질문 3: Temporal Alignment
 **질문 텍스트:**
-<strong>[Contextual Alignment]</strong> 이 인터페이스에서 재생 중에 제시되는 <span style="color: red; font-weight: bold; text-decoration: underline;">각 댓글이</span> <u><strong>해당 시점에서 보고 있는 장면과 내용적/의미적으로 잘 어울렸나요</strong></u>?
+<strong>[Contextual Alignment]</strong> 이 인터페이스에서 재생 중에 제시되는 <span style="color: red; font-weight: bold; text-decoration: underline;">각 댓글</span>이 <u><strong>해당 시점에서 보고 있는 장면과 내용적/의미적으로 잘 어울렸나요</strong></u>?
 
 **척도:**
 - 1: 전혀 어울리지 않는다

@@ -8,9 +8,9 @@
         "Y",
         "Y1"
       ],
-      "statistic": 7.5675675675675675,
-      "p_value": 0.1087664926615437,
-      "n": 2
+      "statistic": 2.8613138686131214,
+      "p_value": 0.5812958926188083,
+      "n": 7
     },
     "Q2": {
       "interfaces": [
@@ -20,9 +20,9 @@
         "Y",
         "Y1"
       ],
-      "statistic": 6.105263157894742,
-      "p_value": 0.19142386212012336,
-      "n": 2
+      "statistic": 3.3623188405797126,
+      "p_value": 0.499119316890269,
+      "n": 7
     },
     "Q3": {
       "interfaces": [
@@ -32,9 +32,9 @@
         "Y",
         "Y1"
       ],
-      "statistic": 4.105263157894743,
-      "p_value": 0.3919474330416321,
-      "n": 2
+      "statistic": 4.028985507246366,
+      "p_value": 0.4020973005347498,
+      "n": 7
     },
     "Q4": {
       "interfaces": [
@@ -44,10 +44,379 @@
         "Y",
         "Y1"
       ],
-      "statistic": 7.15789473684211,
-      "p_value": 0.12777578523024388,
-      "n": 2
+      "statistic": 7.768115942028972,
+      "p_value": 0.10045137039463639,
+      "n": 7
     }
   },
-  "pairwise_wilcoxon": {}
+  "pairwise_wilcoxon": {
+    "Q1": [
+      {
+        "interface_a": "C",
+        "interface_b": "D",
+        "statistic": 7.0,
+        "p_value": 0.328125,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "C",
+        "interface_b": "D1",
+        "statistic": 6.5,
+        "p_value": 0.28125,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "C",
+        "interface_b": "Y",
+        "statistic": 13.0,
+        "p_value": 0.9375,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "C",
+        "interface_b": "Y1",
+        "statistic": 6.5,
+        "p_value": 0.53125,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D",
+        "interface_b": "D1",
+        "statistic": 10.0,
+        "p_value": 1.0,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D",
+        "interface_b": "Y",
+        "statistic": 10.0,
+        "p_value": 0.578125,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D",
+        "interface_b": "Y1",
+        "statistic": 12.0,
+        "p_value": 0.828125,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D1",
+        "interface_b": "Y",
+        "statistic": 10.0,
+        "p_value": 0.578125,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D1",
+        "interface_b": "Y1",
+        "statistic": 10.0,
+        "p_value": 0.59375,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "Y",
+        "interface_b": "Y1",
+        "statistic": 5.5,
+        "p_value": 0.40625,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      }
+    ],
+    "Q2": [
+      {
+        "interface_a": "C",
+        "interface_b": "D",
+        "statistic": 6.5,
+        "p_value": 0.265625,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "C",
+        "interface_b": "D1",
+        "statistic": 4.5,
+        "p_value": 0.28125,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "C",
+        "interface_b": "Y",
+        "statistic": 9.5,
+        "p_value": 0.5625,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "C",
+        "interface_b": "Y1",
+        "statistic": 4.0,
+        "p_value": 0.109375,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D",
+        "interface_b": "D1",
+        "statistic": 13.5,
+        "p_value": 0.953125,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D",
+        "interface_b": "Y",
+        "statistic": 10.5,
+        "p_value": 0.671875,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D",
+        "interface_b": "Y1",
+        "statistic": 12.0,
+        "p_value": 0.84375,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D1",
+        "interface_b": "Y",
+        "statistic": 10.0,
+        "p_value": 0.5625,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D1",
+        "interface_b": "Y1",
+        "statistic": 7.0,
+        "p_value": 0.21875,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "Y",
+        "interface_b": "Y1",
+        "statistic": 4.0,
+        "p_value": 0.25,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      }
+    ],
+    "Q3": [
+      {
+        "interface_a": "C",
+        "interface_b": "D",
+        "statistic": 10.5,
+        "p_value": 0.671875,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "C",
+        "interface_b": "D1",
+        "statistic": 11.0,
+        "p_value": 0.71875,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "C",
+        "interface_b": "Y",
+        "statistic": 7.5,
+        "p_value": 0.375,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "C",
+        "interface_b": "Y1",
+        "statistic": 8.5,
+        "p_value": 0.46875,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D",
+        "interface_b": "D1",
+        "statistic": 7.0,
+        "p_value": 0.296875,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D",
+        "interface_b": "Y",
+        "statistic": 5.0,
+        "p_value": 0.1875,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D",
+        "interface_b": "Y1",
+        "statistic": 5.0,
+        "p_value": 0.1875,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D1",
+        "interface_b": "Y",
+        "statistic": 9.0,
+        "p_value": 0.90625,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D1",
+        "interface_b": "Y1",
+        "statistic": 7.0,
+        "p_value": 0.28125,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "Y",
+        "interface_b": "Y1",
+        "statistic": 9.0,
+        "p_value": 0.875,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      }
+    ],
+    "Q4": [
+      {
+        "interface_a": "C",
+        "interface_b": "D",
+        "statistic": 8.5,
+        "p_value": 0.421875,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "C",
+        "interface_b": "D1",
+        "statistic": 12.5,
+        "p_value": 0.890625,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "C",
+        "interface_b": "Y",
+        "statistic": 5.5,
+        "p_value": 0.171875,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "C",
+        "interface_b": "Y1",
+        "statistic": 5.0,
+        "p_value": 0.1875,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D",
+        "interface_b": "D1",
+        "statistic": 6.0,
+        "p_value": 0.34375,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D",
+        "interface_b": "Y",
+        "statistic": 5.0,
+        "p_value": 0.1875,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D",
+        "interface_b": "Y1",
+        "statistic": 3.0,
+        "p_value": 0.09375,
+        "p_value_holm": 0.84375,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D1",
+        "interface_b": "Y",
+        "statistic": 7.5,
+        "p_value": 0.328125,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "D1",
+        "interface_b": "Y1",
+        "statistic": 0.0,
+        "p_value": 0.015625,
+        "p_value_holm": 0.15625,
+        "reject_null": false,
+        "n": 7
+      },
+      {
+        "interface_a": "Y",
+        "interface_b": "Y1",
+        "statistic": 8.0,
+        "p_value": 0.75,
+        "p_value_holm": 1.0,
+        "reject_null": false,
+        "n": 7
+      }
+    ]
+  }
 }

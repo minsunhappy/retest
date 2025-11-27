@@ -28,11 +28,18 @@ const CONFIG = {
 
 const INTERFACE_ORDER = ['C', 'D', 'D1', 'Y', 'Y1'];
 const FAIR_DATA_PERMUTATIONS = [
+    // step = 1 (기존 순환)
     [0, 1, 2, 3, 4],
     [1, 2, 3, 4, 0],
     [2, 3, 4, 0, 1],
     [3, 4, 0, 1, 2],
-    [4, 0, 1, 2, 3]
+    [4, 0, 1, 2, 3],
+    // step = 2 (상대적 순서를 바꿔 5개 추가)
+    [0, 2, 4, 1, 3],
+    [1, 3, 0, 2, 4],
+    [2, 4, 1, 3, 0],
+    [3, 0, 2, 4, 1],
+    [4, 1, 3, 0, 2]
 ];
 const FAIR_PAIR_STORAGE_KEY = 'fairPairScheduleIndex';
 const PAIRING_INDEX_STORAGE_KEY = 'pairingPermutationIndex';
