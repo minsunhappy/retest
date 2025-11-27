@@ -18,7 +18,7 @@
 
 ## 질문 3: Temporal Alignment
 **질문 텍스트:**
-<strong>[Contextual Alignment]</strong> 이 인터페이스에서 재생 중에 제시되는 댓글이 해당 장면과 <u><strong>잘 어울렸나요</strong></u>?
+<strong>[Contextual Alignment]</strong> 이 인터페이스에서 재생 중에 제시되는 댓글이 해당 장면과 <u><strong>의미/내용적으로 잘 어울렸나요</strong></u>?
 
 **척도:**
 - 1: 전혀 어울리지 않는다
