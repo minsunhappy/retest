@@ -54,8 +54,15 @@ def flatten_question_scores(records: list[dict]) -> pd.DataFrame:
         participant = rec.get("participant") or {}
         participant_key = rec.get("id") or f"{participant.get('name','unknown')}_{rec.get('created_at','')}"
         scores = rec.get("question_scores") or {}
+        pairing_meta = scores.get("_pairing_info") or {}
+        pairing_index = pairing_meta.get("permutation_index")
+        pairing_number = pairing_meta.get("permutation_number")
 
         for interface_code, payload in scores.items():
+            if interface_code.startswith("_"):
+                continue
+            if interface_code not in INTERFACE_ORDER:
+                continue
             if not payload:
                 continue
             score_dict = payload.get("scores") or {}
@@ -75,6 +82,8 @@ def flatten_question_scores(records: list[dict]) -> pd.DataFrame:
                     "preferred_interface": rec.get("preferred_interface"),
                     "preferred_reason": rec.get("preferred_reason"),
                     "created_at": rec.get("created_at"),
+                    "pairing_index": pairing_index,
+                    "pairing_number": pairing_number,
                 }
             )
 

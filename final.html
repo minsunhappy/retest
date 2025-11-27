@@ -441,6 +441,18 @@
                 });
             });
 
+            const pairingIndex = getStoredPairingIndex();
+            const pairingNumber = Number.isInteger(pairingIndex) ? pairingIndex + 1 : null;
+            scoreMap._pairing_info = {
+                permutation_index: pairingIndex,
+                permutation_number: pairingNumber,
+                sequence: (sequence || []).map(pair => ({
+                    interface: pair?.interface || '',
+                    dataFolder: pair?.data || '',
+                    htmlFile: pair?.htmlFile || ''
+                }))
+            };
+
             return scoreMap;
         }
 
