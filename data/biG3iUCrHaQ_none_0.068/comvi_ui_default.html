@@ -76,7 +76,8 @@
       border-radius: 3px;
       margin-bottom: 6px;
       position: relative;
-      cursor: pointer;
+      cursor: default;
+      pointer-events: none;
     }
 
     /* 진행 바 */
@@ -340,10 +341,8 @@
     // 요소 참조
     var video=null, commentsContainer=null, commentsOverlay=null, commentsTextOverlay=null, videoContainerEl=null;
     var playPauseBtn=null, playIcon=null, pauseIcon=null;
-    var progressContainer=null, progressBar=null;
+    var progressBar=null;
     var timeDisplay=null;
-
-    var isDragging=false;
 
     document.addEventListener('DOMContentLoaded', function(){
       video = document.getElementById('video-player');
@@ -353,7 +352,6 @@
       playPauseBtn = document.getElementById('play-pause-btn');
       playIcon = document.getElementById('play-icon');
       pauseIcon = document.getElementById('pause-icon');
-      progressContainer = document.getElementById('progress-container');
       progressBar = document.getElementById('progress-bar');
       timeDisplay = document.getElementById('time-display');
       videoContainerEl = document.querySelector('.video-container');
@@ -366,12 +364,9 @@
       video.addEventListener('loadedmetadata', ()=>{ updateTimeDisplay(); recalcOverlayByComments(); });
       video.addEventListener('play', updatePlayPauseButton);
       video.addEventListener('pause', updatePlayPauseButton);
+      video.addEventListener('ended', updatePlayPauseButton);
 
       playPauseBtn.addEventListener('click', togglePlayPause);
-      progressContainer.addEventListener('click', seekVideo);
-      progressContainer.addEventListener('mousedown', startDrag);
-      document.addEventListener('mousemove', doDrag);
-      document.addEventListener('mouseup', endDrag);
 
       window.addEventListener('resize', recalcOverlayByComments);
 
@@ -380,7 +375,13 @@
       updateStackReserve();
     });
 
-    function togglePlayPause(){ if(video.paused) video.play(); else video.pause(); }
+    function togglePlayPause(){
+      if(video.paused){ 
+        video.play(); 
+      } else { 
+        video.pause(); 
+      }
+    }
     function updatePlayPauseButton(){
       if(video.paused){ playIcon.style.display='block'; pauseIcon.style.display='none'; }
       else { playIcon.style.display='none'; pauseIcon.style.display='block'; }
@@ -423,16 +424,6 @@
       });
       // 위치 동기화
       syncLikesPositions();
-    }
-
-    function startDrag(e){ isDragging=true; e.preventDefault(); updateVideoTime(e); }
-    function doDrag(e){ if(!isDragging) return; e.preventDefault(); updateVideoTime(e); }
-    function endDrag(){ isDragging=false; }
-    function seekVideo(e){ if(e.type==='click'){ setTimeout(()=>{ if(!isDragging) updateVideoTime(e); },10); } }
-    function updateVideoTime(e){
-      const rect = progressContainer.getBoundingClientRect();
-      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left)/rect.width));
-      video.currentTime = pos * video.duration;
     }
 
     function addLiveComment(cmt, idx){

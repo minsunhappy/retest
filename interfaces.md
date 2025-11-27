@@ -3,7 +3,7 @@
 ## Interface C
 **Title:** 인터페이스 A
 **Media:** preview/C.MP4
-**Description:** 영상 <strong>하단</strong>에 자동으로 댓글이 표시됩니다.
+**Description:** 영상 하단에 <span style="color: red; font-weight: bold; text-decoration: underline;">자동으로</span> 댓글이 표시됩니다.
 
 ## Interface D
 **Title:** 인터페이스 B
