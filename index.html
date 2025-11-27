@@ -32,6 +32,19 @@
             margin-bottom: 20px;
             color: #333;
         }
+        
+        .page-title {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .test-number-label {
+            font-size: 28px;
+            font-weight: 700;
+            color: #3498db;
+        }
 
         h2 {
             font-size: 19px;
@@ -164,7 +177,10 @@
 <body>
     <script src="loading.js"></script>
     <div class="container">
-        <h1>비디오 시청 중 댓글 읽기 지원 연구 – 테스트 A</h1>
+        <h1 class="page-title">
+            비디오 시청 중 댓글 읽기 지원 연구 – 테스트
+            <span id="testNumberLabel" class="test-number-label">준비중</span>
+        </h1>
         
         <p><span style="font-size:16px;">안녕하세요, 연구에 참여해 주셔서 감사합니다.<br>
         본 연구는 <strong>비디오 시청 중 댓글 읽기 경험</strong>을 지원하는 인터페이스를 평가하기 위한 사용자 테스트입니다.</span></p>
@@ -223,9 +239,23 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="config.js"></script>
     <script>
         const interfaceList = document.getElementById('interfaceList');
+        const TEST_NUMBER_PLACEHOLDER = '준비중';
+        const testNumberLabelEl = document.getElementById('testNumberLabel');
+
+        function updateTestNumberLabel() {
+            if (!testNumberLabelEl) {
+                return;
+            }
+            const number = getPairingDisplayNumber();
+            testNumberLabelEl.textContent = Number.isInteger(number) ? number : TEST_NUMBER_PLACEHOLDER;
+        }
+
+        updateTestNumberLabel();
+
         function createInterfaceMediaElement(mediaPath) {
             if (!mediaPath) {
                 return null;
@@ -373,27 +403,45 @@
         genderInput.addEventListener('input', validateForm);
 
         // 폼 제출 처리
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
+            if (!validateForm()) {
+                return;
+            }
+            if (nextBtn) {
+                nextBtn.disabled = true;
+            }
+            const loader = window.PageLoader || null;
             
-            if (validateForm()) {
-                // 참가자 정보를 localStorage에 저장
+            try {
                 const participantData = {
                     name: nameInput.value.trim(),
-                    age: parseInt(ageInput.value),
+                    age: parseInt(ageInput.value, 10),
                     gender: genderInput.value.trim(),
                     timestamp: new Date().toISOString()
                 };
                 
                 localStorage.setItem('participantData', JSON.stringify(participantData));
                 
-                // 테스트 단계 초기화
                 localStorage.setItem('currentTestStep', '0');
                 localStorage.removeItem('testResults');
                 localStorage.removeItem('interfaceDataPairs');
-                
-                // 다음 페이지로 이동
+                storePairingIndex(null);
+
+                loader?.setMessage?.('테스트 번호를 배정하는 중입니다...');
+                loader?.show?.();
+
+                await getOrCreateInterfaceDataPairs();
+                updateTestNumberLabel();
                 window.location.href = 'test.html';
+            } catch (error) {
+                console.error('테스트 번호 배정 실패:', error);
+                alert('테스트 번호를 배정하는 중 오류가 발생했습니다. 네트워크 상태를 확인한 뒤 다시 시도해주세요.');
+            } finally {
+                loader?.hide?.();
+                if (nextBtn) {
+                    nextBtn.disabled = false;
+                }
             }
         });
 

@@ -35,6 +35,45 @@ const FAIR_DATA_PERMUTATIONS = [
     [4, 0, 1, 2, 3]
 ];
 const FAIR_PAIR_STORAGE_KEY = 'fairPairScheduleIndex';
+const PAIRING_INDEX_STORAGE_KEY = 'pairingPermutationIndex';
+const SUPABASE_PAIRING = Object.freeze({
+    url: 'https://qrochowykynmdhyikcjd.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFyb2Nob3d5a3lubWRoeWlrY2pkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwODM4ODAsImV4cCI6MjA3OTY1OTg4MH0.pdnjDMltF0kmSFOKiJL5wJIYTwtFLZWdaRUTUxhvaf4'
+});
+const pairingSupabaseClient = window.supabase?.createClient(
+    SUPABASE_PAIRING.url,
+    SUPABASE_PAIRING.anonKey
+);
+
+function storePairingIndex(value) {
+    if (typeof localStorage === 'undefined') {
+        return;
+    }
+    if (Number.isInteger(value)) {
+        localStorage.setItem(PAIRING_INDEX_STORAGE_KEY, value.toString());
+    } else {
+        localStorage.removeItem(PAIRING_INDEX_STORAGE_KEY);
+    }
+}
+
+function getStoredPairingIndex() {
+    if (typeof localStorage === 'undefined') {
+        return null;
+    }
+    const raw = localStorage.getItem(PAIRING_INDEX_STORAGE_KEY);
+    const parsed = parseInt(raw, 10);
+    return Number.isInteger(parsed) ? parsed : null;
+}
+
+function getPairingDisplayNumber() {
+    const stored = getStoredPairingIndex();
+    return Number.isInteger(stored) ? stored + 1 : null;
+}
+
+function formatPairingDisplay(fallback = '준비중') {
+    const number = getPairingDisplayNumber();
+    return Number.isInteger(number) ? number.toString() : fallback;
+}
 
 function getNextFairPermutationIndex(length) {
     if (!length || length <= 0) {
@@ -57,6 +96,27 @@ function shuffleArray(items) {
         [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
+}
+
+async function fetchGlobalPermutationIndex() {
+    if (!pairingSupabaseClient) {
+        return null;
+    }
+    try {
+        const { data, error } = await pairingSupabaseClient.rpc('next_pair_index');
+        if (error) {
+            console.warn('Supabase RPC(next_pair_index) 호출에 실패했습니다.', error);
+            return null;
+        }
+        if (typeof data !== 'number') {
+            console.warn('Supabase RPC(next_pair_index) 응답이 숫자가 아닙니다.', data);
+            return null;
+        }
+        return data;
+    } catch (error) {
+        console.warn('Supabase RPC(next_pair_index) 호출 중 오류가 발생했습니다.', error);
+        return null;
+    }
 }
 
 // data_folders.json에서 폴더 목록 로드
@@ -86,7 +146,7 @@ async function loadDataFolders() {
 
 // 인터페이스-데이터 쌍 생성 함수
 // 모든 인터페이스를 경험하고, 데이터는 중복되지 않도록 함
-async function generateInterfaceDataPairs() {
+async function generateInterfaceDataPairs(globalPermutationIndex = null) {
     const interfaces = [...INTERFACE_ORDER];
     
     // 데이터 폴더 이름 로드
@@ -100,13 +160,24 @@ async function generateInterfaceDataPairs() {
     const normalizedData = dataFolders.slice(0, interfaces.length);
     let permutation = null;
     const eligiblePermutations = FAIR_DATA_PERMUTATIONS.filter(p => p.length === interfaces.length);
+    const normalizedGlobalIndex = Number.isInteger(globalPermutationIndex) ? Math.abs(globalPermutationIndex) : null;
+    let scheduleIndex = null;
     
-    if (eligiblePermutations.length > 0 && typeof localStorage !== 'undefined') {
-        const scheduleIndex = getNextFairPermutationIndex(eligiblePermutations.length);
-        permutation = eligiblePermutations[scheduleIndex];
+    if (eligiblePermutations.length > 0) {
+        let resolvedIndex = 0;
+        if (normalizedGlobalIndex !== null) {
+            resolvedIndex = normalizedGlobalIndex % eligiblePermutations.length;
+        } else if (typeof localStorage !== 'undefined') {
+            resolvedIndex = getNextFairPermutationIndex(eligiblePermutations.length);
+        }
+        scheduleIndex = resolvedIndex;
+        permutation = eligiblePermutations[resolvedIndex];
     } else {
         permutation = interfaces.map((_, idx) => idx);
     }
+    
+    const appliedIndex = Number.isInteger(normalizedGlobalIndex) ? normalizedGlobalIndex : scheduleIndex;
+    storePairingIndex(appliedIndex);
     
     const pairedList = interfaces.map((interfaceId, index) => {
         const dataIndex = permutation[index] % normalizedData.length;
@@ -127,7 +198,8 @@ async function getOrCreateInterfaceDataPairs() {
     let pairs = JSON.parse(localStorage.getItem('interfaceDataPairs'));
     
     if (!pairs || pairs.length !== CONFIG.numInterfaces) {
-        pairs = await generateInterfaceDataPairs();
+        const globalIndex = await fetchGlobalPermutationIndex();
+        pairs = await generateInterfaceDataPairs(globalIndex);
         localStorage.setItem('interfaceDataPairs', JSON.stringify(pairs));
     }
     
