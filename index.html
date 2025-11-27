@@ -162,6 +162,7 @@
     </style>
 </head>
 <body>
+    <script src="loading.js"></script>
     <div class="container">
         <h1>비디오 시청 중 댓글 읽기 지원 연구 – 테스트 A</h1>
         
@@ -284,9 +285,6 @@
 
         const questionList = document.getElementById('questionList');
 
-        renderInterfaceList();
-        renderQuestionList();
-
         async function renderQuestionList() {
             if (!questionList) return;
             try {
@@ -302,6 +300,27 @@
                 questionList.innerHTML = '<li>질문 정보를 불러오지 못했습니다.</li>';
             }
         }
+
+        async function initializePageContent() {
+            const loader = window.PageLoader;
+            try {
+                loader?.setMessage?.('페이지를 준비하는 중입니다...');
+                loader?.show?.();
+                await Promise.all([
+                    renderInterfaceList(),
+                    renderQuestionList()
+                ]);
+                if (interfaceList && loader?.waitForMedia) {
+                    await loader.waitForMedia(interfaceList);
+                }
+            } catch (error) {
+                console.error('초기 컨텐츠를 불러오지 못했습니다.', error);
+            } finally {
+                loader?.hide?.();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initializePageContent);
 
         const form = document.getElementById('participantForm');
         const nameInput = document.getElementById('name');

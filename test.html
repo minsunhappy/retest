@@ -276,6 +276,7 @@
     </style>
 </head>
 <body>
+    <script src="loading.js"></script>
     <div class="container">
         <div class="progress-indicator" id="progressIndicator">
             테스트 진행 중... (1/5)
@@ -316,6 +317,7 @@
         const interfaceFrame = document.getElementById('interfaceFrame');
         const interfaceLoading = document.getElementById('interfaceLoading');
         const interfaceDescriptionEl = document.getElementById('interfaceDescription');
+        const pageLoader = window.PageLoader || null;
 
         const FRAME_MIN_HEIGHT = 720;
 
@@ -325,6 +327,18 @@
         let frameResizeObserver = null;
         let interfaceDescriptions = [];
         let interfaceDescriptionMap = {};
+
+        function showLoader(message) {
+            if (pageLoader?.show) {
+                pageLoader.show(message);
+            } else if (pageLoader?.setMessage && message) {
+                pageLoader.setMessage(message);
+            }
+        }
+
+        function hideLoader() {
+            pageLoader?.hide?.();
+        }
 
         function scrollToTopSmooth() {
             window.scrollTo({
@@ -663,18 +677,19 @@
 
             if (!pairs || pairs.length === 0) {
                 setInterfaceStatus('인터페이스 목록을 불러오지 못했습니다.\nconfig.js 설정을 확인해주세요.', true);
-                return;
+                return 'error';
             }
 
             if (currentStep >= pairs.length) {
+                showLoader('마지막 설문으로 이동합니다...');
                 window.location.href = 'final.html';
-                return;
+                return 'redirect';
             }
 
             const currentPair = pairs[currentStep];
             if (!currentPair) {
                 setInterfaceStatus('현재 단계를 불러올 수 없습니다. 페이지를 새로고침 해주세요.', true);
-                return;
+                return 'error';
             }
 
             updateInterfaceDescription(currentPair);
@@ -685,6 +700,9 @@
             try {
                 await ensureInterfaceReachable(resolvedUrl);
                 await loadInterfaceIntoFrame(resolvedUrl);
+                if (interfaceFrame && pageLoader?.waitForFrameMedia) {
+                    await pageLoader.waitForFrameMedia(interfaceFrame);
+                }
                 hideInterfaceStatus();
                 observeFrameHeight();
                 scrollToTopSmooth();
@@ -694,10 +712,11 @@
                     `인터페이스를 불러오지 못했습니다.\n경로: ${currentPair.dataPath}\n오류: ${error.message}\n\nretest 폴더에서 로컬 서버를 실행했는지 확인해주세요.`,
                     true
                 );
-                return;
+                return 'error';
             }
 
             updateProgress();
+            return 'loaded';
         }
 
         function validateForm() {
@@ -760,6 +779,8 @@
                 nextBtn.disabled = true;
             }
 
+            let redirectedToFinal = false;
+
             try {
                 if (!questionsData || questionsData.length === 0) {
                     alert('질문을 불러오지 못했습니다. 페이지를 새로고침 해주세요.');
@@ -778,23 +799,24 @@
                 currentStep += 1;
                 setCurrentTestStep(currentStep);
 
-                pairs = await getOrCreateInterfaceDataPairs();
-                if (currentStep >= pairs.length) {
-                    window.location.href = 'final.html';
+                showLoader('다음 인터페이스를 준비하는 중입니다...');
+                renderQuestions();
+                const result = await loadCurrentInterface();
+                redirectedToFinal = result === 'redirect';
+                if (redirectedToFinal) {
                     return;
                 }
-
-                renderQuestions();
-                await loadCurrentInterface();
-                scrollToTopSmooth();
             } catch (error) {
                 console.error('다음 단계로 이동 중 오류:', error);
                 alert('다음 단계로 이동하는 중 오류가 발생했습니다. 콘솔을 확인해주세요.');
             } finally {
-                if (nextBtn) {
-                    nextBtn.disabled = false;
+                if (!redirectedToFinal) {
+                    hideLoader();
+                    if (nextBtn) {
+                        nextBtn.disabled = false;
+                    }
+                    updateNavigationButtons();
                 }
-                updateNavigationButtons();
             }
         }
 
@@ -803,24 +825,37 @@
                 return;
             }
 
+            let redirected = false;
+
             try {
                 currentStep = Math.max(0, currentStep - 1);
                 setCurrentTestStep(currentStep);
+                showLoader('이전 인터페이스를 불러오는 중입니다...');
                 renderQuestions();
-                await loadCurrentInterface();
-                scrollToTopSmooth();
+                const result = await loadCurrentInterface();
+                redirected = result === 'redirect';
+                if (redirected) {
+                    return;
+                }
             } catch (error) {
                 console.error('이전 단계로 이동 중 오류:', error);
                 alert('이전 단계로 이동하는 중 오류가 발생했습니다. 콘솔을 확인해주세요.');
             } finally {
-                updateNavigationButtons();
+                if (!redirected) {
+                    hideLoader();
+                    updateNavigationButtons();
+                }
             }
         }
 
         async function init() {
             if (!requireParticipantData()) {
+                showLoader('기본 정보를 확인하는 중입니다...');
                 return;
             }
+
+            let redirected = false;
+            showLoader('테스트를 준비하는 중입니다...');
 
             try {
                 currentStep = getCurrentTestStep();
@@ -833,11 +868,18 @@
                 });
                 await loadQuestions();
                 renderQuestions();
-                await loadCurrentInterface();
-                updateNavigationButtons();
+                const result = await loadCurrentInterface();
+                redirected = result === 'redirect';
+                if (!redirected) {
+                    updateNavigationButtons();
+                }
             } catch (error) {
                 console.error('초기화 실패:', error);
                 setInterfaceStatus(`초기화 중 오류가 발생했습니다.\n${error.message}`, true);
+            } finally {
+                if (!redirected) {
+                    hideLoader();
+                }
             }
         }
 

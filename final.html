@@ -229,6 +229,7 @@
     </style>
 </head>
 <body>
+    <script src="loading.js"></script>
     <div class="container">
         <div class="nav-actions">
             <button type="button" class="btn-back" onclick="handleBack()">이전으로 돌아가기</button>
@@ -236,7 +237,7 @@
         <div id="questionSection">
             <h1>마무리 질문</h1>
             <p class="intro-text">
-                <span style="font-size:22px;"><u><strong>영상을 보면서 댓글을 읽는 데 </strong></u>가장 만족스러웠던 인터페이스를 선택해 주세요.</span>
+                <span style="font-size:22px;"><u><strong>영상을 보면서 댓글을 읽는 경험 측면에서서</strong></u>가장 만족스러웠던 인터페이스를 선택해 주세요.</span>
             </p>
 
             <form id="preferenceForm">
@@ -259,7 +260,7 @@
 
         <div class="thank-you hidden" id="thankYouMessage">
             <h2>참여해 주셔서 감사합니다!</h2>
-            <p>응답이 저장되었습니다. 추가로 궁금한 사항이 있으시면 언제든지 연락 주세요.</p>
+            <p>응답이 저장되었습니다. 추가로 궁금한 사항이 있으시면 언제든지 010-3610-8659 (김민선) 으로 연락 주세요.</p>
         </div>
     </div>
 
@@ -491,11 +492,25 @@
             showThankYouOnly();
         });
 
-        document.addEventListener('DOMContentLoaded', async () => {
-            interfaceOptions = await loadInterfaceDescriptions();
-            renderChoices();
-            await prepareBaseResult();
-        });
+        async function initializeFinalPage() {
+            const loader = window.PageLoader;
+            try {
+                loader?.setMessage?.('마무리 질문을 준비하는 중입니다...');
+                loader?.show?.();
+                interfaceOptions = await loadInterfaceDescriptions();
+                renderChoices();
+                if (choiceList && loader?.waitForMedia) {
+                    await loader.waitForMedia(choiceList);
+                }
+                await prepareBaseResult();
+            } catch (error) {
+                console.error('최종 페이지를 초기화하지 못했습니다.', error);
+            } finally {
+                loader?.hide?.();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeFinalPage);
     </script>
 </body>
 </html>

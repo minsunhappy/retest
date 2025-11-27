@@ -321,8 +321,8 @@ def analyze_group(df: pd.DataFrame, label: str, output_dir: Path) -> None:
 
 def main():
     parser = argparse.ArgumentParser(description="Supabase 설문 응답 분석")
-    parser.add_argument("--supabase-url", default=os.environ.get("SUPABASE_URL"), help="Supabase 프로젝트 URL")
-    parser.add_argument("--service-key", default=os.environ.get("SUPABASE_SERVICE_KEY"), help="Supabase service key")
+    parser.add_argument("--supabase-url", default="https://qrochowykynmdhyikcjd.supabase.co", help="Supabase 프로젝트 URL")
+    parser.add_argument("--service-key", default="sb_secret_b5KsbgIGaADZhXwwvL6tcQ_ASY9NrQZ", help="Supabase service key")
     parser.add_argument("--table", default="survey_responses", help="조회할 테이블 이름")
     parser.add_argument("--limit", type=int, default=None, help="조회할 레코드 수 제한")
     parser.add_argument("--output-dir", default="supabase_analysis", help="결과 저장 폴더")
