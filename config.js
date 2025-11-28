@@ -35,12 +35,15 @@ const FAIR_DATA_PERMUTATIONS = [
     [3, 4, 0, 1, 2],
     [4, 0, 1, 2, 3],
     // step = 2 (상대적 순서를 바꿔 5개 추가)
-    [0, 2, 4, 1, 3],
-    [1, 3, 0, 2, 4],
-    [2, 4, 1, 3, 0],
-    [3, 0, 2, 4, 1],
-    [4, 1, 3, 0, 2]
+    // [0, 2, 4, 1, 3],
+    // [1, 3, 0, 2, 4],
+    // [2, 4, 1, 3, 0],
+    // [3, 0, 2, 4, 1],
+    // [4, 1, 3, 0, 2]
 ];
+function getEligiblePermutations(length) {
+    return FAIR_DATA_PERMUTATIONS.filter(p => p.length === length);
+}
 const FAIR_PAIR_STORAGE_KEY = 'fairPairScheduleIndex';
 const PAIRING_INDEX_STORAGE_KEY = 'pairingPermutationIndex';
 const SUPABASE_PAIRING = Object.freeze({
@@ -51,6 +54,9 @@ const pairingSupabaseClient = window.supabase?.createClient(
     SUPABASE_PAIRING.url,
     SUPABASE_PAIRING.anonKey
 );
+const SURVEY_RESPONSE_TABLE = 'survey_responses';
+const PAIRING_USAGE_SELECT = 'pairing_info:question_scores->_pairing_info';
+const PAIRING_USAGE_SCAN_LIMIT = 1000;
 
 function storePairingIndex(value) {
     if (typeof localStorage === 'undefined') {
@@ -126,6 +132,121 @@ async function fetchGlobalPermutationIndex() {
     }
 }
 
+function safeParseJson(value) {
+    if (value === null || value === undefined) {
+        return null;
+    }
+    if (typeof value === 'object') {
+        return value;
+    }
+    if (typeof value !== 'string') {
+        return null;
+    }
+    try {
+        return JSON.parse(value);
+    } catch (error) {
+        console.warn('pairing info JSON 파싱에 실패했습니다.', { value, error });
+        return null;
+    }
+}
+
+function extractPairingInfo(row) {
+    if (!row || typeof row !== 'object') {
+        return null;
+    }
+    if (row.pairing_info !== undefined) {
+        return safeParseJson(row.pairing_info);
+    }
+    if (row.question_scores && typeof row.question_scores === 'object') {
+        const info = row.question_scores._pairing_info || row.question_scores.pairing_info;
+        if (info !== undefined) {
+            return safeParseJson(info);
+        }
+    }
+    const legacy =
+        row['question_scores->_pairing_info'] ||
+        row['question_scores->>_pairing_info'] ||
+        row.questionScores?._pairing_info;
+    if (legacy !== undefined) {
+        return safeParseJson(legacy);
+    }
+    return null;
+}
+
+async function fetchPairingUsageHistogram(limit = PAIRING_USAGE_SCAN_LIMIT) {
+    if (!pairingSupabaseClient) {
+        return null;
+    }
+    try {
+        const { data, error } = await pairingSupabaseClient
+            .from(SURVEY_RESPONSE_TABLE)
+            .select(PAIRING_USAGE_SELECT)
+            .limit(Math.max(1, limit));
+        if (error) {
+            console.warn('Supabase pairing histogram 조회에 실패했습니다.', error);
+            return null;
+        }
+        const histogram = new Map();
+        (data || []).forEach(row => {
+            const info = extractPairingInfo(row);
+            const idx = Number(info?.permutation_index ?? info?.permutationIndex);
+            if (Number.isInteger(idx)) {
+                histogram.set(idx, (histogram.get(idx) || 0) + 1);
+            }
+        });
+        return histogram;
+    } catch (error) {
+        console.warn('Supabase pairing histogram 조회 중 오류가 발생했습니다.', error);
+        return null;
+    }
+}
+
+function chooseLeastUsedIndex(histogram, totalSlots) {
+    if (!(histogram instanceof Map) || !Number.isInteger(totalSlots) || totalSlots <= 0) {
+        return null;
+    }
+    let minCount = Infinity;
+    const candidates = [];
+    for (let index = 0; index < totalSlots; index += 1) {
+        const count = histogram.get(index) || 0;
+        if (count < minCount) {
+            minCount = count;
+            candidates.length = 0;
+            candidates.push(index);
+        } else if (count === minCount) {
+            candidates.push(index);
+        }
+    }
+    if (candidates.length === 0) {
+        return null;
+    }
+    const randomPick = Math.floor(Math.random() * candidates.length);
+    return candidates[randomPick];
+}
+
+async function fetchLeastUsedPermutationIndex(totalSlots) {
+    if (!Number.isInteger(totalSlots) || totalSlots <= 1) {
+        return null;
+    }
+    const histogram = await fetchPairingUsageHistogram();
+    if (!histogram || histogram.size === 0) {
+        return null;
+    }
+    return chooseLeastUsedIndex(histogram, totalSlots);
+}
+
+async function resolvePermutationIndex(totalSlots) {
+    if (!Number.isInteger(totalSlots) || totalSlots <= 0) {
+        return null;
+    }
+    const leastUsed = await fetchLeastUsedPermutationIndex(totalSlots);
+    if (Number.isInteger(leastUsed)) {
+        console.info('[pairing] 최소 사용된 permutation index를 사용합니다:', leastUsed);
+        return leastUsed;
+    }
+    return fetchGlobalPermutationIndex();
+}
+
 // data_folders.json에서 폴더 목록 로드
 async function loadDataFolders() {
     // 이미 설정되어 있으면 그대로 사용
@@ -166,7 +287,7 @@ async function generateInterfaceDataPairs(globalPermutationIndex = null) {
     
     const normalizedData = dataFolders.slice(0, interfaces.length);
     let permutation = null;
-    const eligiblePermutations = FAIR_DATA_PERMUTATIONS.filter(p => p.length === interfaces.length);
+    const eligiblePermutations = getEligiblePermutations(interfaces.length);
     const normalizedGlobalIndex = Number.isInteger(globalPermutationIndex) ? Math.abs(globalPermutationIndex) : null;
     let scheduleIndex = null;
     
@@ -205,7 +326,10 @@ async function getOrCreateInterfaceDataPairs() {
     let pairs = JSON.parse(localStorage.getItem('interfaceDataPairs'));
     
     if (!pairs || pairs.length !== CONFIG.numInterfaces) {
-        const globalIndex = await fetchGlobalPermutationIndex();
+        const eligiblePermutations = getEligiblePermutations(INTERFACE_ORDER.length);
+        const globalIndex = eligiblePermutations.length > 0
+            ? await resolvePermutationIndex(eligiblePermutations.length)
+            : null;
         pairs = await generateInterfaceDataPairs(globalIndex);
         localStorage.setItem('interfaceDataPairs', JSON.stringify(pairs));
     }

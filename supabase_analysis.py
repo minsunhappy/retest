@@ -344,6 +344,13 @@ def main():
     rows = fetch_supabase_rows(args.supabase_url, args.service_key, table=args.table, limit=args.limit)
     df = flatten_question_scores(rows)
 
+    # 2025-11-27 14:31:54.837+00 이후로 수집된 데이터만 필터링
+    cutoff_time = pd.to_datetime("2025-11-20 14:31:54.837+00")
+    # cutoff_time = pd.to_datetime("2025-11-27 14:31:54.837+00")
+    df["created_at"] = pd.to_datetime(df["created_at"])
+    df = df[df["created_at"] > cutoff_time]
+    print(f"[INFO] 필터링 후 데이터 수: {len(df)} rows (cutoff: {cutoff_time})")
+
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
