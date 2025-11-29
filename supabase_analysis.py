@@ -34,6 +34,21 @@ QUESTION_ORDER = ["Q1", "Q2", "Q3", "Q4"]
 INTERFACE_ORDER = ["C", "D", "D1", "Y", "Y1"]
 
 
+def normalize_gender(value: str | None) -> str:
+    if value is None:
+        return "unknown"
+    text = str(value).strip().lower()
+    if not text:
+        return "unknown"
+    male_tokens = {"m", "male", "남", "남자", "man"}
+    female_tokens = {"f", "female", "여", "여자", "woman"}
+    if text in male_tokens:
+        return "male"
+    if text in female_tokens:
+        return "female"
+    return "other"
+
+
 def fetch_supabase_rows(url: str, service_key: str, table: str = "survey_responses", limit: int | None = None):
     headers = {
         "apikey": service_key,
@@ -53,6 +68,9 @@ def flatten_question_scores(records: list[dict]) -> pd.DataFrame:
     for rec in records:
         participant = rec.get("participant") or {}
         participant_key = rec.get("id") or f"{participant.get('name','unknown')}_{rec.get('created_at','')}"
+        name = participant.get("name") or rec.get("name")
+        age = participant.get("age") or rec.get("age")
+        gender = participant.get("gender") or rec.get("gender")
         scores = rec.get("question_scores") or {}
         pairing_meta = scores.get("_pairing_info") or {}
         pairing_index = pairing_meta.get("permutation_index")
@@ -69,9 +87,9 @@ def flatten_question_scores(records: list[dict]) -> pd.DataFrame:
             rows.append(
                 {
                     "participant_id": participant_key,
-                    "name": participant.get("name"),
-                    "age": participant.get("age"),
-                    "gender": participant.get("gender"),
+                    "name": name,
+                    "age": age,
+                    "gender": gender,
                     "interface": interface_code,
                     "data_folder": payload.get("dataFolder") or payload.get("data_folder"),
                     "html_file": payload.get("htmlFile"),
@@ -328,6 +346,140 @@ def analyze_group(df: pd.DataFrame, label: str, output_dir: Path) -> None:
     print(f"[INFO] {label} 분석 결과를 {dest}에 저장했습니다.")
 
 
+def summarize_demographics(df: pd.DataFrame) -> dict:
+    if df.empty:
+        return {
+            "total": 0,
+            "gender_counts": {"male": 0, "female": 0, "other": 0, "unknown": 0},
+            "mean_age": float("nan"),
+            "std_age": float("nan"),
+            "age_count": 0,
+        }
+    subset = (
+        df[["participant_id", "age", "gender"]]
+        .drop_duplicates(subset=["participant_id"])
+        .copy()
+    )
+    subset["gender_norm"] = subset["gender"].apply(normalize_gender)
+    gender_counts = subset["gender_norm"].value_counts().to_dict()
+    ages = pd.to_numeric(subset["age"], errors="coerce")
+    return {
+        "total": subset["participant_id"].nunique(),
+        "gender_counts": {
+            "male": int(gender_counts.get("male", 0)),
+            "female": int(gender_counts.get("female", 0)),
+            "other": int(gender_counts.get("other", 0)),
+            "unknown": int(gender_counts.get("unknown", 0)),
+        },
+        "mean_age": float(ages.mean()) if ages.notna().any() else float("nan"),
+        "std_age": float(ages.std(ddof=0)) if ages.notna().sum() > 1 else float("nan"),
+        "age_count": int(ages.notna().sum()),
+    }
+
+
+def compute_interface_usage(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty:
+        return pd.DataFrame(columns=INTERFACE_ORDER)
+    working = df.copy()
+    working["data_folder"] = working["data_folder"].fillna("unknown")
+    table = (
+        working.groupby(["data_folder", "interface"])
+        .size()
+        .unstack(fill_value=0)
+        .reindex(columns=INTERFACE_ORDER, fill_value=0)
+        .sort_index()
+    )
+    return table
+
+
+def summarize_preference(df: pd.DataFrame) -> tuple[pd.Series, int, int]:
+    if df.empty:
+        empty = pd.Series(dtype=int)
+        return empty, 0, 0
+    pref = (
+        df[["participant_id", "preferred_interface"]]
+        .drop_duplicates(subset=["participant_id"])
+        .copy()
+    )
+    pref["preferred_interface"] = (
+        pref["preferred_interface"]
+        .fillna("")
+        .astype(str)
+        .str.strip()
+        .str.upper()
+    )
+    total_participants = pref["participant_id"].nunique()
+    valid = pref[pref["preferred_interface"].isin(INTERFACE_ORDER)]
+    counts = valid["preferred_interface"].value_counts().reindex(INTERFACE_ORDER, fill_value=0)
+    recorded = int(valid.shape[0])
+    return counts, total_participants, recorded
+
+
+def format_table_lines(table: pd.DataFrame) -> list[str]:
+    if table.empty:
+        return ["데이터별 인터페이스 노출 기록이 없습니다."]
+    header = ["데이터폴더"] + INTERFACE_ORDER
+    lines = ["\t".join(header)]
+    for folder, row in table.iterrows():
+        values = [folder] + [str(int(row.get(iface, 0))) for iface in INTERFACE_ORDER]
+        lines.append("\t".join(values))
+    return lines
+
+
+def format_preference_lines(counts: pd.Series, total: int, recorded: int) -> list[str]:
+    if total == 0:
+        return ["선호 인터페이스 응답이 없습니다."]
+    lines = [
+        f"선호 인터페이스 응답 인원: {recorded} / {total}명"
+    ]
+    for iface in INTERFACE_ORDER:
+        count = int(counts.get(iface, 0))
+        pct = (count / recorded * 100) if recorded else 0.0
+        lines.append(f"- {iface}: {count}명 ({pct:.1f}%)")
+    others = recorded - int(counts.sum())
+    if others > 0:
+        pct = (others / recorded * 100) if recorded else 0.0
+        lines.append(f"- 기타 코드: {others}명 ({pct:.1f}%)")
+    missing = total - recorded
+    if missing > 0:
+        lines.append(f"- 미응답: {missing}명")
+    return lines
+
+
+def generate_overall_report(df: pd.DataFrame, dest: Path) -> None:
+    dest.mkdir(parents=True, exist_ok=True)
+    report_path = dest / "report.txt"
+    demographics = summarize_demographics(df)
+    usage_table = compute_interface_usage(df)
+    pref_counts, pref_total, pref_recorded = summarize_preference(df)
+
+    mean_age = demographics["mean_age"]
+    std_age = demographics["std_age"]
+    mean_str = f"{mean_age:.2f}" if not pd.isna(mean_age) else "N/A"
+    std_str = f"{std_age:.2f}" if not pd.isna(std_age) else "N/A"
+
+    lines = [
+        "# Overall Report",
+        "",
+        "## 인구통계 요약",
+        f"- 총 인원: {demographics['total']}명",
+        f"- 남자: {demographics['gender_counts']['male']}명",
+        f"- 여자: {demographics['gender_counts']['female']}명",
+        f"- 기타/미응답: {demographics['gender_counts']['other'] + demographics['gender_counts']['unknown']}명",
+        f"- 나이 평균: {mean_str} (N={demographics['age_count']})",
+        f"- 나이 표준편차: {std_str}",
+        "",
+        "## 데이터별 인터페이스 노출 횟수",
+        *format_table_lines(usage_table),
+        "",
+        "## 선호 인터페이스 비율",
+        *format_preference_lines(pref_counts, pref_total, pref_recorded),
+        "",
+    ]
+    report_path.write_text("\n".join(lines), encoding="utf-8")
+    print(f"[INFO] overall report를 {report_path}에 저장했습니다.")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Supabase 설문 응답 분석")
     parser.add_argument("--supabase-url", default="https://qrochowykynmdhyikcjd.supabase.co", help="Supabase 프로젝트 URL")
@@ -355,6 +507,7 @@ def main():
     output_dir.mkdir(parents=True, exist_ok=True)
 
     analyze_group(df, "overall", output_dir)
+    generate_overall_report(df, output_dir / "overall")
 
     for folder, sub_df in df.groupby("data_folder"):
         label = f"data_{folder or 'unknown'}"

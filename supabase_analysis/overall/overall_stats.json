@@ -8,9 +8,9 @@
         "Y",
         "Y1"
       ],
-      "statistic": 29.452914798206287,
-      "p_value": 6.324289128467791e-06,
-      "n": 12
+      "statistic": 34.13229571984435,
+      "p_value": 7.000542836785624e-07,
+      "n": 14
     },
     "Q2": {
       "interfaces": [
@@ -20,9 +20,9 @@
         "Y",
         "Y1"
       ],
-      "statistic": 19.196261682243,
-      "p_value": 0.0007191409442459809,
-      "n": 12
+      "statistic": 21.01612903225805,
+      "p_value": 0.00031434593827153344,
+      "n": 14
     },
     "Q3": {
       "interfaces": [
@@ -32,9 +32,9 @@
         "Y",
         "Y1"
       ],
-      "statistic": 19.63963963963963,
-      "p_value": 0.0005882019603516466,
-      "n": 12
+      "statistic": 25.64615384615382,
+      "p_value": 3.729178537698668e-05,
+      "n": 14
     },
     "Q4": {
       "interfaces": [
@@ -44,9 +44,9 @@
         "Y",
         "Y1"
       ],
-      "statistic": 16.97297297297296,
-      "p_value": 0.0019564607542733275,
-      "n": 12
+      "statistic": 22.353846153846163,
+      "p_value": 0.00017039684355180272,
+      "n": 14
     }
   },
   "pairwise_wilcoxon": {
@@ -55,91 +55,91 @@
         "interface_a": "C",
         "interface_b": "D",
         "statistic": 0.0,
-        "p_value": 0.00048828125,
-        "p_value_holm": 0.0048828125,
+        "p_value": 0.0009123455961962472,
+        "p_value_holm": 0.009123455961962472,
         "reject_null": true,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "C",
         "interface_b": "D1",
-        "statistic": 9.5,
-        "p_value": 0.0390625,
-        "p_value_holm": 0.228515625,
+        "statistic": 16.5,
+        "p_value": 0.039122635436879986,
+        "p_value_holm": 0.15649054174751995,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "C",
         "interface_b": "Y",
-        "statistic": 28.5,
-        "p_value": 0.6962890625,
-        "p_value_holm": 0.6962890625,
+        "statistic": 35.5,
+        "p_value": 0.7803317944173268,
+        "p_value_holm": 0.7803317944173268,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "C",
         "interface_b": "Y1",
         "statistic": 15.0,
-        "p_value": 0.2265625,
-        "p_value_holm": 0.6796875,
+        "p_value": 0.1964070269910797,
+        "p_value_holm": 0.5892210809732391,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "D",
         "interface_b": "D1",
         "statistic": 0.0,
-        "p_value": 0.001953125,
-        "p_value_holm": 0.013671875,
+        "p_value": 0.0020810527278621576,
+        "p_value_holm": 0.014567369095035103,
         "reject_null": true,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "D",
         "interface_b": "Y",
         "statistic": 0.0,
-        "p_value": 0.00048828125,
-        "p_value_holm": 0.0048828125,
+        "p_value": 0.0009341183274727469,
+        "p_value_holm": 0.009123455961962472,
         "reject_null": true,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "D",
         "interface_b": "Y1",
         "statistic": 0.0,
-        "p_value": 0.0009765625,
-        "p_value_holm": 0.0078125,
+        "p_value": 0.0013537037416892056,
+        "p_value_holm": 0.010829629933513645,
         "reject_null": true,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "D1",
         "interface_b": "Y",
-        "statistic": 12.5,
-        "p_value": 0.0380859375,
-        "p_value_holm": 0.228515625,
+        "statistic": 14.0,
+        "p_value": 0.025828560698326456,
+        "p_value_holm": 0.1291428034916323,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "D1",
         "interface_b": "Y1",
-        "statistic": 10.5,
-        "p_value": 0.34375,
-        "p_value_holm": 0.6875,
+        "statistic": 17.5,
+        "p_value": 0.30137709013721026,
+        "p_value_holm": 0.6027541802744205,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "Y",
         "interface_b": "Y1",
-        "statistic": 3.0,
-        "p_value": 0.046875,
-        "p_value_holm": 0.228515625,
+        "statistic": 3.5,
+        "p_value": 0.01969425478648633,
+        "p_value_holm": 0.11816552871891797,
         "reject_null": false,
-        "n": 12
+        "n": 14
       }
     ],
     "Q2": [
@@ -147,275 +147,275 @@
         "interface_a": "C",
         "interface_b": "D",
         "statistic": 0.0,
-        "p_value": 0.001953125,
-        "p_value_holm": 0.01953125,
+        "p_value": 0.003191522610518804,
+        "p_value_holm": 0.028723703494669236,
         "reject_null": true,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "C",
         "interface_b": "D1",
-        "statistic": 6.0,
-        "p_value": 0.171875,
-        "p_value_holm": 0.515625,
+        "statistic": 6.5,
+        "p_value": 0.1025786368770843,
+        "p_value_holm": 0.40948039694985533,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "C",
         "interface_b": "Y",
-        "statistic": 10.5,
-        "p_value": 0.0498046875,
-        "p_value_holm": 0.298828125,
+        "statistic": 12.5,
+        "p_value": 0.0360974699693874,
+        "p_value_holm": 0.21658481981632438,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "C",
         "interface_b": "Y1",
-        "statistic": 2.0,
-        "p_value": 0.00390625,
-        "p_value_holm": 0.03125,
+        "statistic": 3.0,
+        "p_value": 0.002703478019282868,
+        "p_value_holm": 0.027034780192828678,
         "reject_null": true,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "D",
         "interface_b": "D1",
         "statistic": 0.0,
-        "p_value": 0.001953125,
-        "p_value_holm": 0.01953125,
+        "p_value": 0.003191522610518804,
+        "p_value_holm": 0.028723703494669236,
         "reject_null": true,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "D",
         "interface_b": "Y",
-        "statistic": 9.0,
-        "p_value": 0.125,
-        "p_value_holm": 0.5,
+        "statistic": 13.5,
+        "p_value": 0.08189607938997107,
+        "p_value_holm": 0.40948039694985533,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "D",
         "interface_b": "Y1",
-        "statistic": 24.0,
-        "p_value": 0.763671875,
-        "p_value_holm": 0.763671875,
+        "statistic": 32.0,
+        "p_value": 0.5785027570198082,
+        "p_value_holm": 0.7556008762896969,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "D1",
         "interface_b": "Y",
-        "statistic": 20.5,
-        "p_value": 0.2822265625,
-        "p_value_holm": 0.564453125,
+        "statistic": 33.0,
+        "p_value": 0.3778004381448484,
+        "p_value_holm": 0.7556008762896969,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "D1",
         "interface_b": "Y1",
-        "statistic": 16.5,
-        "p_value": 0.07666015625,
-        "p_value_holm": 0.38330078125,
+        "statistic": 26.0,
+        "p_value": 0.0934084754024035,
+        "p_value_holm": 0.40948039694985533,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "Y",
         "interface_b": "Y1",
         "statistic": 0.0,
-        "p_value": 0.015625,
-        "p_value_holm": 0.109375,
+        "p_value": 0.008386320961798262,
+        "p_value_holm": 0.05870424673258783,
         "reject_null": false,
-        "n": 12
+        "n": 14
       }
     ],
     "Q3": [
       {
         "interface_a": "C",
         "interface_b": "D",
+        "statistic": 8.0,
+        "p_value": 0.008448341003831019,
+        "p_value_holm": 0.050690046022986116,
+        "reject_null": false,
+        "n": 14
+      },
+      {
+        "interface_a": "C",
+        "interface_b": "D1",
+        "statistic": 11.5,
+        "p_value": 0.027495295092963227,
+        "p_value_holm": 0.13747647546481614,
+        "reject_null": false,
+        "n": 14
+      },
+      {
+        "interface_a": "C",
+        "interface_b": "Y",
+        "statistic": 1.5,
+        "p_value": 0.0020137656481408607,
+        "p_value_holm": 0.020009050084568294,
+        "reject_null": true,
+        "n": 14
+      },
+      {
+        "interface_a": "C",
+        "interface_b": "Y1",
+        "statistic": 1.5,
+        "p_value": 0.0020009050084568293,
+        "p_value_holm": 0.020009050084568294,
+        "reject_null": true,
+        "n": 14
+      },
+      {
+        "interface_a": "D",
+        "interface_b": "D1",
+        "statistic": 7.0,
+        "p_value": 0.03532259514424425,
+        "p_value_holm": 0.141290380576977,
+        "reject_null": false,
+        "n": 14
+      },
+      {
+        "interface_a": "D",
+        "interface_b": "Y",
+        "statistic": 37.0,
+        "p_value": 0.5471860545490052,
+        "p_value_holm": 0.5471860545490052,
+        "reject_null": false,
+        "n": 14
+      },
+      {
+        "interface_a": "D",
+        "interface_b": "Y1",
+        "statistic": 23.0,
+        "p_value": 0.2057260190808181,
+        "p_value_holm": 0.4114520381616362,
+        "reject_null": false,
+        "n": 14
+      },
+      {
+        "interface_a": "D1",
+        "interface_b": "Y",
+        "statistic": 1.5,
+        "p_value": 0.004446737355735965,
+        "p_value_holm": 0.031127161490151756,
+        "reject_null": true,
+        "n": 14
+      },
+      {
+        "interface_a": "D1",
+        "interface_b": "Y1",
         "statistic": 6.5,
-        "p_value": 0.0146484375,
-        "p_value_holm": 0.087890625,
-        "reject_null": false,
-        "n": 12
-      },
-      {
-        "interface_a": "C",
-        "interface_b": "D1",
-        "statistic": 10.0,
-        "p_value": 0.08984375,
-        "p_value_holm": 0.359375,
-        "reject_null": false,
-        "n": 12
-      },
-      {
-        "interface_a": "C",
-        "interface_b": "Y",
-        "statistic": 1.5,
-        "p_value": 0.0029296875,
-        "p_value_holm": 0.029296875,
+        "p_value": 0.003732983013648674,
+        "p_value_holm": 0.02986386410918939,
         "reject_null": true,
-        "n": 12
-      },
-      {
-        "interface_a": "C",
-        "interface_b": "Y1",
-        "statistic": 1.5,
-        "p_value": 0.0029296875,
-        "p_value_holm": 0.029296875,
-        "reject_null": true,
-        "n": 12
-      },
-      {
-        "interface_a": "D",
-        "interface_b": "D1",
-        "statistic": 5.0,
-        "p_value": 0.04296875,
-        "p_value_holm": 0.21484375,
-        "reject_null": false,
-        "n": 12
-      },
-      {
-        "interface_a": "D",
-        "interface_b": "Y",
-        "statistic": 27.0,
-        "p_value": 0.658203125,
-        "p_value_holm": 1.0,
-        "reject_null": false,
-        "n": 12
-      },
-      {
-        "interface_a": "D",
-        "interface_b": "Y1",
-        "statistic": 19.5,
-        "p_value": 0.462890625,
-        "p_value_holm": 1.0,
-        "reject_null": false,
-        "n": 12
-      },
-      {
-        "interface_a": "D1",
-        "interface_b": "Y",
-        "statistic": 1.5,
-        "p_value": 0.005859375,
-        "p_value_holm": 0.046875,
-        "reject_null": true,
-        "n": 12
-      },
-      {
-        "interface_a": "D1",
-        "interface_b": "Y1",
-        "statistic": 6.0,
-        "p_value": 0.00732421875,
-        "p_value_holm": 0.05126953125,
-        "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "Y",
         "interface_b": "Y1",
-        "statistic": 9.0,
-        "p_value": 0.515625,
-        "p_value_holm": 1.0,
+        "statistic": 9.5,
+        "p_value": 0.1162482957709972,
+        "p_value_holm": 0.3487448873129916,
         "reject_null": false,
-        "n": 12
+        "n": 14
       }
     ],
     "Q4": [
       {
         "interface_a": "C",
         "interface_b": "D",
-        "statistic": 5.0,
-        "p_value": 0.00439453125,
-        "p_value_holm": 0.03955078125,
+        "statistic": 5.5,
+        "p_value": 0.0027779663405162573,
+        "p_value_holm": 0.027779663405162573,
         "reject_null": true,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "C",
         "interface_b": "D1",
         "statistic": 0.0,
-        "p_value": 0.00390625,
-        "p_value_holm": 0.0390625,
+        "p_value": 0.003191522610518804,
+        "p_value_holm": 0.028723703494669236,
         "reject_null": true,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "C",
         "interface_b": "Y",
-        "statistic": 16.5,
-        "p_value": 0.15625,
-        "p_value_holm": 0.72265625,
+        "statistic": 19.5,
+        "p_value": 0.06760090450396325,
+        "p_value_holm": 0.3380045225198163,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "C",
         "interface_b": "Y1",
-        "statistic": 9.0,
-        "p_value": 0.064453125,
-        "p_value_holm": 0.38671875,
+        "statistic": 10.0,
+        "p_value": 0.022126659922328894,
+        "p_value_holm": 0.13275995953397335,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "D",
         "interface_b": "D1",
-        "statistic": 13.5,
-        "p_value": 0.17578125,
-        "p_value_holm": 0.72265625,
+        "statistic": 17.0,
+        "p_value": 0.08151252467043998,
+        "p_value_holm": 0.3380045225198163,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "D",
         "interface_b": "Y",
-        "statistic": 8.0,
-        "p_value": 0.01318359375,
-        "p_value_holm": 0.10546875,
+        "statistic": 9.5,
+        "p_value": 0.0065907803564080915,
+        "p_value_holm": 0.05272624285126473,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "D",
         "interface_b": "Y1",
-        "statistic": 1.0,
-        "p_value": 0.03125,
-        "p_value_holm": 0.21875,
+        "statistic": 1.5,
+        "p_value": 0.012459728609350268,
+        "p_value_holm": 0.08721810026545188,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "D1",
         "interface_b": "Y",
-        "statistic": 16.0,
-        "p_value": 0.14453125,
-        "p_value_holm": 0.72265625,
+        "statistic": 22.0,
+        "p_value": 0.17606116113700843,
+        "p_value_holm": 0.35267940343700427,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "D1",
         "interface_b": "Y1",
-        "statistic": 23.5,
-        "p_value": 0.4208984375,
-        "p_value_holm": 0.72265625,
+        "statistic": 36.5,
+        "p_value": 0.5261941270345938,
+        "p_value_holm": 0.5261941270345938,
         "reject_null": false,
-        "n": 12
+        "n": 14
       },
       {
         "interface_a": "Y",
         "interface_b": "Y1",
-        "statistic": 18.0,
-        "p_value": 0.185546875,
-        "p_value_holm": 0.72265625,
+        "statistic": 20.0,
+        "p_value": 0.1175598011456681,
+        "p_value_holm": 0.35267940343700427,
         "reject_null": false,
-        "n": 12
+        "n": 14
       }
     ]
   }
